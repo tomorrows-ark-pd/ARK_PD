@@ -159,15 +159,24 @@ import com.watabou.utils.DeviceCompat;
 	}
 
 	public Badges.Badge masteryBadge() {
-        return switch (this) {
-            case WARRIOR -> Badges.Badge.MASTERY_WARRIOR;
-            case MAGE -> Badges.Badge.MASTERY_MAGE;
-            case ROGUE -> Badges.Badge.MASTERY_ROGUE;
-            case HUNTRESS -> Badges.Badge.MASTERY_HUNTRESS;
-            case ROSECAT -> Badges.Badge.MASTERY_ROSECAT;
-            case NEARL -> Badges.Badge.MASTERY_NEARL;
-            case CHEN -> Badges.Badge.MASTERY_CHEN;
-        };
+        switch (this) {
+            case WARRIOR:
+                return Badges.Badge.MASTERY_WARRIOR;
+            case MAGE:
+                return Badges.Badge.MASTERY_MAGE;
+            case ROGUE:
+                return Badges.Badge.MASTERY_ROGUE;
+            case HUNTRESS:
+                return Badges.Badge.MASTERY_HUNTRESS;
+            case ROSECAT:
+                return Badges.Badge.MASTERY_ROSECAT;
+            case NEARL:
+                return Badges.Badge.MASTERY_NEARL;
+            case CHEN:
+                return Badges.Badge.MASTERY_CHEN;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
 	private static void initWarrior( Hero hero ) {

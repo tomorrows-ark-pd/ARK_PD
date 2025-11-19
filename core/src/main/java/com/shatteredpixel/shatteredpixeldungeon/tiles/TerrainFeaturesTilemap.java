@@ -73,7 +73,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		}
 
         if (platforms.get(pos) != null){
-            return platforms.get(pos).image + 7*16;
+            return platforms.get(pos).image + 8*16;
         }
 
         if (seaTerrors.get(pos) != null) {

@@ -18,7 +18,7 @@ import java.util.List;
 public class SeaPlatform extends Platform {
 
     {
-        image = 1;
+        image = 5;
         generatorClass = LittleHandy.class;
     }
 
