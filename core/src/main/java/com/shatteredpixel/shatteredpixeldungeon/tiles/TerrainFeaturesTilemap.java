@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.LastShopLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Plant;
 import com.watabou.noosa.Image;
@@ -34,6 +35,8 @@ import com.watabou.utils.PointF;
 import com.watabou.utils.RectF;
 import com.watabou.utils.SparseArray;
 
+import java.util.List;
+
 public class TerrainFeaturesTilemap extends DungeonTilemap {
 
 	private static TerrainFeaturesTilemap instance;
@@ -41,15 +44,17 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 	private SparseArray<Plant> plants;
 	private SparseArray<Trap> traps;
     private SparseArray<Platform> platforms;
+    private SparseArray<SeaTerror> seaTerrors;
 
-	public TerrainFeaturesTilemap(SparseArray<Plant> plants, SparseArray<Trap> traps, SparseArray<Platform> platforms) {
+	public TerrainFeaturesTilemap(SparseArray<Plant> plants, SparseArray<Trap> traps, SparseArray<Platform> platforms, SparseArray<SeaTerror> seaTerrors) {
 		super(Assets.Environment.TERRAIN_FEATURES);
 
 		this.plants = plants;
 		this.traps = traps;
         this.platforms = platforms;
+        this.seaTerrors = seaTerrors;
 
-		map( Dungeon.level.map, Dungeon.level.width() );
+        map( Dungeon.level.map, Dungeon.level.width() );
 
 		instance = this;
 	}
@@ -71,12 +76,20 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
             return platforms.get(pos).image + 7*16;
         }
 
+        if (seaTerrors.get(pos) != null) {
+            return 3 + (16*8) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
+        }
+
 		int stage = (Dungeon.depth-1)/5;
 		if (stage == 6) stage = 3;
 		else stage = Math.min(stage,4);
 		if (Dungeon.depth == 21 && Dungeon.level instanceof LastShopLevel) stage--;
-		if (Dungeon.extrastage_Gavial) stage = 3; // 가비알 추가처리
-		if (Dungeon.depth >= 27 && Dungeon.depth <= 30) stage = 3; // 로도스 추가 처리
+
+		if ((Dungeon.depth >= 27 && Dungeon.depth <= 30) || Dungeon.extrastage_Gavial) {
+            stage = 3; // 가비알 / 로도스 추가처리
+        } else if (Dungeon.extrastage_Sea && Dungeon.depth >= 31) {
+            stage = 0;
+        }
 
 		if (tile == Terrain.HIGH_GRASS){
 			return 9 + 16*stage + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
@@ -87,6 +100,9 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		} else if (tile == Terrain.EMBERS) {
 			return 9 * (16*5) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
 		}
+        else if (tile == Terrain.SEA_TERROR) {
+            return 3 + (16*8) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
+        }
 
 		return -1;
 	}
@@ -137,5 +153,4 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
             }
         } );
     }
-
 }

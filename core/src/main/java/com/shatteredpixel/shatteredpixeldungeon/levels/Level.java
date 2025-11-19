@@ -52,7 +52,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Originiutant;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.YogFist;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Lens;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.FlowParticle;
@@ -65,8 +64,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Torch;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
-import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAmplified;
-import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAssassin;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfIntuition;
@@ -77,6 +74,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Door;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.HighGrass;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.ShadowCaster;
@@ -162,6 +160,7 @@ public abstract class Level implements Bundlable {
 	public SparseArray<Plant> plants;
 	public SparseArray<Trap> traps;
     public SparseArray<Platform> platforms;
+    public SparseArray<SeaTerror> seaTerrors;
 	public HashSet<CustomTilemap> customTiles;
 	public HashSet<CustomTilemap> customWalls;
 	
@@ -185,6 +184,7 @@ public abstract class Level implements Bundlable {
 	private static final String PLANTS		= "plants";
 	private static final String TRAPS       = "traps";
     private static final String PLATFORM    = "platforms";
+    private static final String SEA_TERROR  = "seaTerrors";
 	private static final String CUSTOM_TILES= "customTiles";
 	private static final String CUSTOM_WALLS= "customWalls";
 	private static final String MOBS		= "mobs";
@@ -268,6 +268,7 @@ public abstract class Level implements Bundlable {
 			plants = new SparseArray<>();
 			traps = new SparseArray<>();
             platforms = new SparseArray<>();
+            seaTerrors = new SparseArray<>();
 			customTiles = new HashSet<>();
 			customWalls = new HashSet<>();
 
@@ -339,6 +340,7 @@ public abstract class Level implements Bundlable {
 		plants = new SparseArray<>();
 		traps = new SparseArray<>();
         platforms = new SparseArray<>();
+        seaTerrors = new SparseArray<>();
 		customTiles = new HashSet<>();
 		customWalls = new HashSet<>();
 		
@@ -351,7 +353,7 @@ public abstract class Level implements Bundlable {
 		exit		= bundle.getInt( EXIT );
 
 		locked      = bundle.getBoolean( LOCKED );
-		
+
 		Collection<Bundlable> collection = bundle.getCollection( HEAPS );
 		for (Bundlable h : collection) {
 			Heap heap = (Heap)h;
@@ -375,6 +377,12 @@ public abstract class Level implements Bundlable {
         for (Bundlable p : collection) {
             Platform platform = (Platform)p;
             platforms.put( platform.pos, platform);
+        }
+
+        collection = bundle.getCollection( SEA_TERROR );
+        for (Bundlable st : collection) {
+            SeaTerror seaTerror = (SeaTerror) st;
+            seaTerrors.put( seaTerror.pos, seaTerror);
         }
 
 		collection = bundle.getCollection( CUSTOM_TILES );
@@ -444,6 +452,7 @@ public abstract class Level implements Bundlable {
 		bundle.put( PLANTS, plants.valueList() );
 		bundle.put( TRAPS, traps.valueList() );
         bundle.put( PLATFORM, platforms.valueList() );
+        bundle.put( SEA_TERROR, seaTerrors.valueList() );
 		bundle.put( CUSTOM_TILES, customTiles );
 		bundle.put( CUSTOM_WALLS, customWalls );
 		bundle.put( MOBS, mobs );
@@ -924,6 +933,19 @@ public abstract class Level implements Bundlable {
         GameScene.updateMap( pos );
     }
 
+    public SeaTerror addSeaTerror( int pos ) {
+        SeaTerror createdSeaTerror = new SeaTerror();
+        createdSeaTerror.pos = pos;
+        seaTerrors.put(pos, createdSeaTerror);
+
+        return createdSeaTerror;
+    }
+
+    public void destroySeaTerror( int pos ) {
+        seaTerrors.remove(pos);
+        GameScene.updateMap(pos);
+    }
+
 	public void disarmTrap( int pos ) {
 		set(pos, Terrain.INACTIVE_TRAP);
 		GameScene.updateMap(pos);
@@ -1097,6 +1119,16 @@ public abstract class Level implements Bundlable {
 		if (plant != null) {
 			plant.trigger();
 		}
+
+        Platform platform = platforms.get(cell);
+        if (platform != null) {
+            platform.trigger();
+        }
+
+        SeaTerror seaTerror = seaTerrors.get(cell);
+        if (seaTerror != null) {
+            seaTerror.activate();
+        }
 
 		if (hard && Blob.volumeAt(cell, Web.class) > 0){
 			blobs.get(Web.class).clear(cell);

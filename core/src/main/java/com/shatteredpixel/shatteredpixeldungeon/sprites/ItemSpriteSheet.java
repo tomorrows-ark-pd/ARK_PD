@@ -968,10 +968,6 @@ public class ItemSpriteSheet {
 		assignItemRect(ICE_BOX,   	  16, 16);
 	}
 
-    //16 free slots
-    private static final int CUSTOM_ITEMS = xy(1, 32);
-    public static final int PLATFORM_SEA = CUSTOM_ITEMS + 0;
-
 	//for smaller 8x8 icons that often accompany an item sprite
 	public static class Icons {
 

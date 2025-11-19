@@ -4,12 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Eunectes;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SeaBoss2;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SeaBoss2_Phase2_Head;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SeaBoss2_Phase2_Mid;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SeaBoss2_Phase2_Tail;
-import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -62,6 +57,7 @@ public class SeaBossLevel2 extends Level {
     private static int e = Terrain.EMPTY; // 평범한 땅
     private static int E = Terrain.EMPTY_DECO; // 빈 땅_장식
     private static int S = Terrain.STATUE; // 구조물
+    private static int T = Terrain.SEA_TERROR; // 구조물
 
 
     // 현재 이 값을 기준으로하면, 외곽부분에 벽만 둘러지고 전부 일반땅인 맵이 생성됨.
@@ -77,14 +73,14 @@ public class SeaBossLevel2 extends Level {
             W, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, W,
             W, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, W,
             W, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, S, W,
-            W, e/*169*/, e, e, e, e, e, e, e, e, e/*178*/, e, e, e, e, e, e, e, e, e,/*187*/ W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e/*199*/, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
-            W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
+            W, T/*169*/, T, T, T, T, T, T, T, T, T/*178*/, T, T, T, T, T, T, T, T, T,/*187*/ W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T/*199*/, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
+            W, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, W,
             W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
             W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
             W, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, e, W,
@@ -124,6 +120,8 @@ public class SeaBossLevel2 extends Level {
             cell += width();
         }
 
+        setBrand();
+
         entrance = 430; // 입구 위치
         exit = 31; // 출구 위치
 
@@ -135,7 +133,13 @@ public class SeaBossLevel2 extends Level {
         customTiles.add(vis);
     }
 
-
+    private void setBrand() {
+        for (int i = 168; i < 368; i++) {
+            if (map[i] == Terrain.SEA_TERROR) {
+                addSeaTerror(i);
+            }
+        }
+    }
 
     @Override
     public void occupyCell( Char ch ) {

@@ -59,7 +59,6 @@ public class Terrain {
 	public static final int WATER		    = 29;
 
 	public static final int SEA_TERROR		    = 90;
-    public static final int SEA_PLATFORM        = 91;
 	
 	public static final int PASSABLE		= 0x01;
 	public static final int LOS_BLOCKING	= 0x02;

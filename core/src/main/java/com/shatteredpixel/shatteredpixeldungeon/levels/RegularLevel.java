@@ -61,7 +61,6 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FloodingRo
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FloodingRoom2;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.GavialStanardRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SeaObjRoom;
-import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SeaTerrorRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.StandardRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.Vocan_1Room;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.Vocan_2Room;
@@ -148,8 +147,6 @@ public abstract class RegularLevel extends Level {
 				if (Dungeon.depth == 33) initRooms.add(new SEE1QuestRoom());
 				initRooms.add(new SeaObjRoom());
 				initRooms.add(new SeaObjRoom());
-				initRooms.add(new SeaTerrorRoom());
-				initRooms.add(new SeaTerrorRoom());
 			}
 		} else if (Dungeon.depth > 30) {
 			if (Dungeon.depth != 35 & Dungeon.depth != 40) {
