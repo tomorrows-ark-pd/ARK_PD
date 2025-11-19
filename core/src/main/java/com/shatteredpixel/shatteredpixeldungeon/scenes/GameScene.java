@@ -305,7 +305,7 @@ public class GameScene extends PixelScene {
 		visualGrid = new GridTileMap();
 		terrain.add( visualGrid );
 
-		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps, Dungeon.level.platforms);
+		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps, Dungeon.level.platforms, Dungeon.level.seaTerrors);
 		terrain.add(terrainFeatures);
 
 		raisedTerrain = new RaisedTerrainTilemap();
@@ -1057,7 +1057,7 @@ public class GameScene extends PixelScene {
 
     public static void createPlatform( int cell ) {
         if (scene != null) {
-            scene.terrainFeatures.growPlant( cell );
+            scene.terrainFeatures.createPlatform( cell );
         }
     }
 	

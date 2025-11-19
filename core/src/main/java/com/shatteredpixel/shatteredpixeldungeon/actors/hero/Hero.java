@@ -202,6 +202,7 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.ShadowCaster;
@@ -877,28 +878,8 @@ public class Hero extends Char {
         }
         else if (subClass == HeroSubClass.WILD) Buff.affect(this, WildMark.class);
 
-        if (Dungeon.depth > 35 && Dungeon.extrastage_Sea && Dungeon.level.map[this.pos] == Terrain.SEA_TERROR) {
-            if (buff(NervousImpairment.class) == null) {
-                Buff.affect(this, NervousImpairment.class);
-            }
-            else {
-                float nervousdamage = 2 * time;
-                buff(NervousImpairment.class).Sum(nervousdamage);
-            }
-
-            int evaporatedTiles;
-            evaporatedTiles = Random.chances(new float[]{0, 0, 0, 2, 1, 1});
-            for (int i = 0; i < evaporatedTiles; i++) {
-                if (Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY_SP
-                        || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY_DECO
-                        || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.WATER) {
-                    Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] = Terrain.SEA_TERROR;
-
-                    CellEmitter.get(pos+PathFinder.NEIGHBOURS8[i]).burst(Speck.factory(Speck.BUBBLE), 10);
-                    GameScene.updateMap( pos+PathFinder.NEIGHBOURS8[i] );
-                    Dungeon.observe();
-                }
-            }
+        if (Dungeon.depth > 35 && Dungeon.extrastage_Sea && Dungeon.level.seaTerrors.get(pos) != null) {
+            Dungeon.level.seaTerrors.get(pos).spendTime(this, time);
         }
 
         if (belongings.weapon instanceof PatriotSpear) {
