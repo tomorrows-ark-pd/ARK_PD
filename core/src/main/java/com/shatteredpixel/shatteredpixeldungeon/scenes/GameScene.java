@@ -305,7 +305,7 @@ public class GameScene extends PixelScene {
 		visualGrid = new GridTileMap();
 		terrain.add( visualGrid );
 
-		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps);
+		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps, Dungeon.level.platforms, Dungeon.level.seaTerrors);
 		terrain.add(terrainFeatures);
 
 		raisedTerrain = new RaisedTerrainTilemap();
@@ -1054,6 +1054,12 @@ public class GameScene extends PixelScene {
 			scene.terrainFeatures.growPlant( cell );
 		}
 	}
+
+    public static void createPlatform( int cell ) {
+        if (scene != null) {
+            scene.terrainFeatures.createPlatform( cell );
+        }
+    }
 	
 	//todo this doesn't account for walls right now
 	public static void discoverTile( int pos, int oldValue ) {

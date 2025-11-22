@@ -424,6 +424,8 @@ public class ItemSpriteSheet {
 	public static final int AMMO2 		= MISSILE_WEP+19;
 	public static final int LISKARM_DOLL 		= MISSILE_WEP+20;
 	public static final int HOLY_KNIFE 		= MISSILE_WEP+21;
+
+    public static final int SAINT_HAND 		= MISSILE_WEP+22;
 	public static final int EX44 		= MISSILE_WEP+30;
 	
 	static{
@@ -454,6 +456,7 @@ public class ItemSpriteSheet {
 		assignItemRect(AMMO2,      16, 16);
 		assignItemRect(LISKARM_DOLL,      16, 16);
 		assignItemRect(HOLY_KNIFE,      16, 16);
+        assignItemRect(SAINT_HAND,      16, 16);
 		assignItemRect(EX44,         24, 24);
 	}
 	
@@ -965,8 +968,6 @@ public class ItemSpriteSheet {
 		assignItemRect(ICE_BOX,   	  16, 16);
 	}
 
-	                                                                                    //16 free slots
-
 	//for smaller 8x8 icons that often accompany an item sprite
 	public static class Icons {
 
@@ -1142,9 +1143,6 @@ public class ItemSpriteSheet {
 			assignIconRect( POTION_CLEANSE,     7, 7 );
 			assignIconRect( POTION_HOLYFUROR,   5, 7 );
 		}
-
-		                                                                                //16 free slots
-
 	}
 
 }

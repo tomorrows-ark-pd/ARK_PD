@@ -59,7 +59,7 @@ public class TitleScene extends PixelScene {
 		
 		super.create();
 
-		Music.INSTANCE.play( Assets.Music.THEME, true );
+		Music.INSTANCE.play( Assets.Music.GAME6_IBERIA1, true );
 
 		uiCamera.visible = false;
 		

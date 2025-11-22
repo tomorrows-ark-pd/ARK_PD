@@ -58,8 +58,7 @@ public class Terrain {
 
 	public static final int WATER		    = 29;
 
-	public static final int SEE_TEEROR1		    = 90;
-	public static final int SEE_TEEROR2		    = 91;
+	public static final int SEA_TERROR		    = 90;
 	
 	public static final int PASSABLE		= 0x01;
 	public static final int LOS_BLOCKING	= 0x02;
@@ -91,8 +90,7 @@ public class Terrain {
 		flags[HIGH_GRASS]	= PASSABLE | LOS_BLOCKING | FLAMABLE;
 		flags[FURROWED_GRASS]= flags[HIGH_GRASS];
 
-		flags[SEE_TEEROR1]		= PASSABLE;
-		flags[SEE_TEEROR2]		= PASSABLE;
+		flags[SEA_TERROR]		= PASSABLE;
 
 		flags[SECRET_DOOR]  = flags[WALL]  | SECRET;
 		flags[SECRET_TRAP]  = flags[EMPTY] | SECRET;

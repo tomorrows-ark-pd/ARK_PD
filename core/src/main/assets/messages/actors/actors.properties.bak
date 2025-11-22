@@ -1858,8 +1858,8 @@ actors.mobs.sea_octo.desc=명흔이 나타난 지역에서 흔히 볼 수 있는
 actors.mobs.sealeef.name=심해의 열초자
 actors.mobs.sealeef.desc=명흔에서 태어난 아주 공격적인 개체. 주변 자연환경을 크게 훼손하고, 동족에 의해 개조된다.\n공격할 때마다 공격력이 상승하며, 명흔 위에서 위장 효과를 얻습니다.
 
-actors.mobs.sea_brandguider.name=심해의 인도자
-actors.mobs.sea_brandguider.desc=곧 죽어 문드러져 갈 무리에서 파생된 새로운 형태의 시테러.\n체력이 절반 이하가되면 방어력이 상승하고 자신의 위치에 명흔을 생성합니다.\n\n_침묵 가능_
+actors.mobs.netherseabrandguider.name=심해의 인도자
+actors.mobs.netherseabrandguider.desc=곧 죽어 문드러져 갈 무리에서 파생된 새로운 형태의 시테러.\n체력이 절반 이하가되면 방어력이 상승하고 자신의 위치에 명흔을 생성합니다.\n\n_침묵 가능_
 
 actors.mobs.seaboss2.name=이샤믈라,부식의 마음
 actors.mobs.seaboss2.desc=\n\n \n\n \n\n더 이상 노래 부르지 않고, 위매니를 위해 목소리를 낸다.
