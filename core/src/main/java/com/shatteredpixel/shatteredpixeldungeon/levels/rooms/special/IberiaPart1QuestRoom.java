@@ -21,21 +21,26 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special;
 
-import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.Statistics;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DemonSpawner;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Dario;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dario;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.EntranceRoom;
-import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
-import com.watabou.noosa.Tilemap;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.StandardRoom;
 import com.watabou.utils.Point;
 
-public class SEE1QuestRoom extends SpecialRoom {
+public class IberiaPart1QuestRoom extends StandardRoom {
+    @Override
+    public int minWidth() {
+        return Math.max(super.minWidth(), 5);
+    }
+
+    @Override
+    public int minHeight() {
+        return Math.max(super.minHeight(), 5);
+    }
+
 	@Override
 	public void paint(Level level) {
 
@@ -46,13 +51,11 @@ public class SEE1QuestRoom extends SpecialRoom {
 		int cx = c.x;
 		int cy = c.y;
 
-		Door door = entrance();
-		door.set(Door.Type.UNLOCKED);
+        for (Door door : connected.values()) {
+            door.set( Door.Type.REGULAR );
+        }
 
-		NPC_Dario NPC = new NPC_Dario();
-		NPC.pos = cx + cy * level.width();
-		level.mobs.add( NPC );
-
+        Dario.Quest.spawnDario(level, cx + cy * level.width());
 	}
 
 	@Override
@@ -75,46 +78,5 @@ public class SEE1QuestRoom extends SpecialRoom {
 	@Override
 	public boolean canPlaceGrass(Point p) {
 		return false;
-	}
-
-	public static class CustomFloor extends CustomTilemap {
-
-		{
-			texture = Assets.Environment.HALLS_SP;
-		}
-
-		@Override
-		public Tilemap create() {
-			Tilemap v = super.create();
-			int cell = tileX + tileY * Dungeon.level.width();
-			int[] map = Dungeon.level.map;
-			int[] data = new int[tileW*tileH];
-			for (int i = 0; i < data.length; i++){
-				if (i % tileW == 0){
-					cell = tileX + (tileY + i / tileW) * Dungeon.level.width();
-				}
-
-				if (Dungeon.level.findMob(cell) instanceof DemonSpawner){
-					data[i-1] = 5 + 4*8;
-					data[i] = 6 + 4*8;
-					data[i+1] = 7 + 4*8;
-					i++;
-					cell++;
-				} else if (map[cell] == Terrain.EMPTY_DECO) {
-					if (Statistics.amuletObtained){
-						data[i] = 31;
-					} else {
-						data[i] = 27;
-					}
-				} else {
-					data[i] = 19;
-				}
-
-				cell++;
-			}
-			v.map( data, tileW );
-			return v;
-		}
-
 	}
 }

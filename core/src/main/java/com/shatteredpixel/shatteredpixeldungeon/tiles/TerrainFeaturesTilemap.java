@@ -35,8 +35,6 @@ import com.watabou.utils.PointF;
 import com.watabou.utils.RectF;
 import com.watabou.utils.SparseArray;
 
-import java.util.List;
-
 public class TerrainFeaturesTilemap extends DungeonTilemap {
 
 	private static TerrainFeaturesTilemap instance;
@@ -77,7 +75,8 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
         }
 
         if (seaTerrors.get(pos) != null) {
-            return 3 + (16*8) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
+            int imgPos = Dungeon.extrastage_Sea && Dungeon.depth >= 40 ? 6 : 3;
+            return imgPos + (16*8) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
         }
 
 		int stage = (Dungeon.depth-1)/5;

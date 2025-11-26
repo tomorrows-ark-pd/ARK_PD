@@ -3066,9 +3066,9 @@ items.snowsants_coin.desc='스노우상트의 동전' 이야기가 한때 젊은
 items.snowsants_coin.ac_use=사용한다
 
 ※번역 필요
-items.food.nevous.name=이성회복제
-items.food.nevous.desc=섭취시 신경 손상을 50% 회복시켜주는 긴급 이성회복제. 중요한 물건이니 필요할 때만 사용하자.
-items.food.nevous.ac_drink=마신다
+items.food.sanitypotion.name=이성회복제
+items.food.sanitypotion.desc=섭취시 신경 손상을 50% 회복시켜주는 긴급 이성회복제. 중요한 물건이니 필요할 때만 사용하자.
+items.food.sanitypotion.ac_drink=마신다
 
 
 

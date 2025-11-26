@@ -8,7 +8,7 @@ import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
 
-public class Nevous extends Food {
+public class SanityPotion extends Food {
     public static final String AC_DRINK = "DRINK";
     {
         image = ItemSpriteSheet.TYLENOL;

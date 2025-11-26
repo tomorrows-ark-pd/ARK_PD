@@ -1259,10 +1259,10 @@ actors.mobs.npcs.minishopkeeper.name=텍사스
 actors.mobs.npcs.minishopkeeper.thief=네 놈에겐 안 팔아.
 actors.mobs.npcs.minishopkeeper.desc=당신을 위한 펭귄 로지스틱스의 맞춤 출장 서비스, 이름하여 뗑컨일레븐!... 라는 명목으로 자리잡은 텍사스.
 
-actors.mobs.npcs.npc_dario.name=대재판관 다리오
-actors.mobs.npcs.npc_dario.desc=사로잡힌 LANCET-2. 그녀를 구출하자.
-actors.mobs.npcs.npc_dario.help=사람 살려-
-actors.mobs.npcs.npc_dario.tnk=당신은 LANCET-2를 구출했다.
+actors.mobs.npcs.dario.name=대재판관 다리오
+actors.mobs.npcs.dario.desc=사로잡힌 LANCET-2. 그녀를 구출하자.
+actors.mobs.npcs.dario.help=사람 살려-
+actors.mobs.npcs.dario.tnk=당신은 LANCET-2를 구출했다.
 
 
 

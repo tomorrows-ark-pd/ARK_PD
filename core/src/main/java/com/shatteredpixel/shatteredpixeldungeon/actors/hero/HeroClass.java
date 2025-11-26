@@ -153,6 +153,12 @@ import com.watabou.utils.DeviceCompat;
             new Heamyo().collect();
 
             new SeaPlatform.LittleHandy().quantity(40).collect();
+
+            hero.lvl = 40;
+            hero.STR = 20;
+            hero.HP = 250;
+            hero.HT = 250;
+
         }
 
 		Dungeon.LimitedDrops.FOOD_BAG.drop();

@@ -51,7 +51,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.MagicGloemR
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.PitRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.PursuerRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.RoseRoom;
-import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SEE1QuestRoom;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.IberiaPart1QuestRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.ShopRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SpecialRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.BeachRoom;
@@ -144,7 +144,7 @@ public abstract class RegularLevel extends Level {
 			initRooms.add(new GavialStanardRoom());
 		} else if (Dungeon.extrastage_Sea) {
 			if (Dungeon.depth < 35) {
-				if (Dungeon.depth == 33) initRooms.add(new SEE1QuestRoom());
+				if (Dungeon.depth == 33) initRooms.add(new IberiaPart1QuestRoom());
 				initRooms.add(new SeaObjRoom());
 				initRooms.add(new SeaObjRoom());
 			}
