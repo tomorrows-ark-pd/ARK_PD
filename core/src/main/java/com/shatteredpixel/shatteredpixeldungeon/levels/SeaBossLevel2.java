@@ -4,7 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SeaBoss2;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Isharmla;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -148,7 +148,7 @@ public class SeaBossLevel2 extends Level {
 
 
         if (ch.pos != map[entrance] && map[exit] == Terrain.EXIT) {
-            SeaBoss2 boss = new SeaBoss2();
+            Isharmla boss = new Isharmla();
             boss.pos = 178;
             GameScene.add( boss );
             seal();

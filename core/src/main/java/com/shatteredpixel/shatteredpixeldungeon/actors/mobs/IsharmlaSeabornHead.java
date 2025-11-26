@@ -7,8 +7,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
-import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Doom;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
@@ -18,18 +16,20 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.SurfaceScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Mula_1Sprite;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 //패턴 : 미정
-public class SeaBoss2_Phase2_Head extends Mob {
+public class IsharmlaSeabornHead extends Mob {
     {
         spriteClass = Mula_1Sprite.class;
 
@@ -46,8 +46,8 @@ public class SeaBoss2_Phase2_Head extends Mob {
     }
 
     // 모든 믈라 파츠가 파괴되면 사망
-    private boolean dieChacke = false;
-    private int cooldown = 6;
+    private boolean isDead = false;
+    private int cooldown = 4;
 
     @Override
     public int damageRoll() {
@@ -62,21 +62,21 @@ public class SeaBoss2_Phase2_Head extends Mob {
 
     @Override
     public int defenseSkill(Char enemy) {
-        if (dieChacke) return INFINITE_EVASION;
+        if (isDead) return INFINITE_EVASION;
         else return 20;
     }
 
     // 사거리 6
     @Override
     protected boolean canAttack(Char enemy) {
-        return !dieChacke && this.fieldOfView[enemy.pos] && Dungeon.level.distance(this.pos, enemy.pos) <= 6;
+        return !isDead && this.fieldOfView[enemy.pos] && Dungeon.level.distance(this.pos, enemy.pos) <= 6;
     }
 
     @Override
     protected boolean act() {
         sprite.turnTo(pos, 999999);
         rooted = true;
-        if (dieChacke) {
+        if (isDead) {
             if (Dungeon.mulaCount == 3) {
                 Badges.validateVictory();
                 Badges.validateChampion(Challenges.activeChallenges());
@@ -95,67 +95,58 @@ public class SeaBoss2_Phase2_Head extends Mob {
             return super.act();
         }
 
-        if (cooldown > 0) {
-            cooldown--;
-        } else {
-            Ballistica beam = new Ballistica(this.pos, enemy.pos, Ballistica.WONT_STOP);
-            int maxDistance = Math.min(8, beam.dist);
-            int cell = beam.path.get(Math.min(beam.dist, maxDistance));
-            this.sprite.parent.add(new Beam.DeathRay(this.sprite.center(), DungeonTilemap.raisedTileCenterToWorld(cell)));
+        if (cooldown <= 0) {
+
             boolean terrainAffected = false;
+            HashSet<Char> affected = new HashSet<>();
 
-            ArrayList<Char> chars = new ArrayList<>();
+            HashSet<Integer> affectedCells = new HashSet<>();
+            int targetPos = Dungeon.hero.pos;
 
-            Blob web = Dungeon.level.blobs.get(Web.class);
-
-            int terrainPassed = 2;
-            for (int c : beam.subPath(1, maxDistance)) {
-
-                Char ch;
-                if ((ch = Actor.findChar( c )) != null) {
-
-                    //we don't want to count passed terrain after the last enemy hit. That would be a lot of bonus levels.
-                    //terrainPassed starts at 2, equivalent of rounding up when /3 for integer arithmetic.
-                    terrainPassed = terrainPassed%3;
-
-                    chars.add( ch );
+            Ballistica b = new Ballistica(pos, targetPos, Ballistica.WONT_STOP);
+            //shoot beams
+            sprite.parent.add(new Beam.DeathRay(sprite.center(), DungeonTilemap.raisedTileCenterToWorld(b.collisionPos)));
+            for (int p : b.path) {
+                Char ch = Actor.findChar(p);
+                if (ch != null && (ch.alignment != alignment || ch instanceof Bee)) {
+                    affected.add(ch);
                 }
-
-                if (Dungeon.level.solid[c]) {
-                    terrainPassed++;
-                }
-
-                if (Dungeon.level.flamable[c]) {
-
-                    Dungeon.level.destroy( c );
-                    GameScene.updateMap( c );
+                if (Dungeon.level.flamable[p]) {
+                    Dungeon.level.destroy(p);
+                    GameScene.updateMap(p);
                     terrainAffected = true;
-
                 }
 
-                Platform platform = Dungeon.level.platforms.get(c);
+                Platform platform = Dungeon.level.platforms.get(p);
                 if (platform != null) {
                     platform.destroy();
-                    GameScene.updateMap( c );
+                    GameScene.updateMap(p);
                     terrainAffected = true;
                 }
-
-                CellEmitter.center( c ).burst( PurpleParticle.BURST, Random.IntRange( 1, 2 ) );
             }
-
             if (terrainAffected) {
                 Dungeon.observe();
             }
 
             int dmg = Random.NormalIntRange(4, 36);
-            for (Char ch : chars) {
+
+            for (Char ch : affected) {
                 ch.damage(dmg, this );
-                ch.sprite.centerEmitter().burst( PurpleParticle.BURST, Random.IntRange( 1, 2 ) );
-                ch.sprite.flash();
+                if (Dungeon.level.heroFOV[pos]) {
+                    ch.sprite.flash();
+                    CellEmitter.center(pos).burst(PurpleParticle.BURST, Random.IntRange(1, 2));
+                }
+
+                if (!ch.isAlive() && ch == Dungeon.hero) {
+                    Dungeon.fail(getClass());
+                    GLog.n(Messages.get(Char.class, "kill", name()));
+                }
             }
 
-            if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) cooldown = 4;
-            else cooldown = 6;
+            if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) cooldown = 2;
+            else cooldown = 3;
+        } else {
+            cooldown --;
         }
 
         return super.act();
@@ -169,7 +160,7 @@ public class SeaBoss2_Phase2_Head extends Mob {
     @Override
     public void damage(int dmg, Object src) {
 
-        if (dieChacke) return;
+        if (isDead) return;
         
         // 믈라의 머리는 다른 부위가 파괴되지않았다면 절반의 피해를 받습니다
         if (Dungeon.mulaCount < 2) dmg/=2;
@@ -177,7 +168,7 @@ public class SeaBoss2_Phase2_Head extends Mob {
         super.damage(dmg, src);
 
         if (HP < 1) {
-            dieChacke = true;
+            isDead = true;
             Buff.affect(this, Doom.class);
             Dungeon.mulaCount++;
         }
@@ -188,18 +179,18 @@ public class SeaBoss2_Phase2_Head extends Mob {
     public void die(Object cause) { }
 
 
-    private static final String DIECHACKE_HEAD   = "dieChackeHead";
+    private static final String IS_DEAD_HEAD  = "isDeadHead";
 
     @Override
     public void storeInBundle( Bundle bundle ) {
         super.storeInBundle( bundle );
-        bundle.put( DIECHACKE_HEAD, dieChacke );
+        bundle.put( IS_DEAD_HEAD, isDead);
     }
 
     public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);
 
-        dieChacke = bundle.getBoolean(DIECHACKE_HEAD);
+        isDead = bundle.getBoolean(IS_DEAD_HEAD);
     }
     }
 

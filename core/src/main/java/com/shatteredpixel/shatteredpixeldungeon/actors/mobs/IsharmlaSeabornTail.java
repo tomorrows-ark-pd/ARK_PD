@@ -1,28 +1,17 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
 
-import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Doom;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.FlavourBuff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
-import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
-import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
-import com.shatteredpixel.shatteredpixeldungeon.scenes.SurfaceScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Mula_2Sprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Mula_3Sprite;
-import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 //패턴 : 근처에 모든 적에게 고정데미지를 입히는 스킬을 사용한다
-public class SeaBoss2_Phase2_Tail extends Mob {
+public class IsharmlaSeabornTail extends Mob {
     {
         spriteClass = Mula_3Sprite.class;
 
@@ -38,7 +27,7 @@ public class SeaBoss2_Phase2_Tail extends Mob {
     }
 
     // 모든 믈라 파츠가 파괴되면 사망
-    private boolean dieChacke = false;
+    private boolean isDead = false;
 
     private int cooldown = 3;
 
@@ -54,14 +43,14 @@ public class SeaBoss2_Phase2_Tail extends Mob {
 
     @Override
     public int defenseSkill(Char enemy) {
-        if (dieChacke) return INFINITE_EVASION;
+        if (isDead) return INFINITE_EVASION;
         else return 20;
     }
 
     // 사거리 2
     @Override
     protected boolean canAttack(Char enemy) {
-        return !dieChacke && this.fieldOfView[enemy.pos] && Dungeon.level.distance(this.pos, enemy.pos) <= 2;
+        return !isDead && this.fieldOfView[enemy.pos] && Dungeon.level.distance(this.pos, enemy.pos) <= 2;
     }
 
     @Override
@@ -70,7 +59,7 @@ public class SeaBoss2_Phase2_Tail extends Mob {
         sprite.turnTo(pos, 999999);
         rooted = true;
 
-        if (dieChacke) return super.act();
+        if (isDead) return super.act();
 
         if (cooldown > 0) cooldown--;
         else {
@@ -89,12 +78,12 @@ public class SeaBoss2_Phase2_Tail extends Mob {
     @Override
     public void damage(int dmg, Object src) {
 
-        if (dieChacke) return;
+        if (isDead) return;
 
         super.damage(dmg, src);
 
         if (HP < 1) {
-            dieChacke = true;
+            isDead = true;
             Buff.affect(this, Doom.class);
             Dungeon.mulaCount++;
 
@@ -105,18 +94,18 @@ public class SeaBoss2_Phase2_Tail extends Mob {
     public void die(Object cause) { }
 
 
-    private static final String DIECHACKE_TAIL   = "dieChackeTail";
+    private static final String IS_DEAD_TAIL   = "isDeadTail";
 
     @Override
     public void storeInBundle( Bundle bundle ) {
         super.storeInBundle( bundle );
-        bundle.put( DIECHACKE_TAIL, dieChacke );
+        bundle.put( IS_DEAD_TAIL, isDead);
     }
 
     public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);
 
-        dieChacke = bundle.getBoolean(DIECHACKE_TAIL);
+        isDead = bundle.getBoolean(IS_DEAD_TAIL);
     }
     }
 

@@ -1861,18 +1861,18 @@ actors.mobs.sealeef.desc=명흔에서 태어난 아주 공격적인 개체. 주�
 actors.mobs.netherseabrandguider.name=심해의 인도자
 actors.mobs.netherseabrandguider.desc=곧 죽어 문드러져 갈 무리에서 파생된 새로운 형태의 시테러.\n체력이 절반 이하가되면 방어력이 상승하고 자신의 위치에 명흔을 생성합니다.\n\n_침묵 가능_
 
-actors.mobs.seaboss2.name=이샤믈라,부식의 마음
+actors.mobs.isharmla.name=이샤믈라,부식의 마음
 actors.mobs.seaboss2.desc=\n\n \n\n \n\n더 이상 노래 부르지 않고, 위매니를 위해 목소리를 낸다.
 
 
-actors.mobs.seaboss2_phase2_head.name=믈라머리
-actors.mobs.seaboss2_phase2_head.desc=저는 머리 예요!
+actors.mobs.isharmlaseabornhead.name=믈라머리
+actors.mobs.isharmlaseabornhead.desc=저는 머리 예요!
 
-actors.mobs.seaboss2_phase2_mid.name=믈라가슴
-actors.mobs.seaboss2_phase2_mid.desc=빵ㅋㅋ
+actors.mobs.isharmlaseabornbody.name=믈라가슴
+actors.mobs.isharmlaseabornbody.desc=빵ㅋㅋ
 
-actors.mobs.seaboss2_phase2_tail.name=믈라꼬리
-actors.mobs.seaboss2_phase2_tail.desc=쭉ㅋㅋ
+actors.mobs.isharmlaseaborntail.name=믈라꼬리
+actors.mobs.isharmlaseaborntail.desc=쭉ㅋㅋ
 
 
 
