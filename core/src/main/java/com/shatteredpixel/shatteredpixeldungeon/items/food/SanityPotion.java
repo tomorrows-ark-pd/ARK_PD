@@ -17,13 +17,13 @@ public class SanityPotion extends Food {
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
+        actions.remove(AC_EAT);
         actions.add(AC_DRINK);
         return actions;
     }
 
     @Override
     public void execute(Hero hero, String action) {
-
         super.execute(hero, action);
 
         if (action.equals(AC_DRINK)) {
