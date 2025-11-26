@@ -28,7 +28,7 @@ public class SanityPotion extends Food {
 
         if (action.equals(AC_DRINK)) {
             if (hero.buff(NervousImpairment.class) != null) {
-                hero.buff((NervousImpairment.class)).Sum(-50);
+                hero.buff((NervousImpairment.class)).sum(-50);
             }
             this.detach(curUser.belongings.backpack);
             Sample.INSTANCE.play(Assets.Sounds.DRINK);

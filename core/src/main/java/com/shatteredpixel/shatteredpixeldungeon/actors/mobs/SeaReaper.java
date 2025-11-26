@@ -75,7 +75,7 @@ public class SeaReaper extends Mob{
                     if (ch.buff(NervousImpairment.class) == null) {
                         Buff.affect(ch, NervousImpairment.class);
                     }
-                    ch.buff(NervousImpairment.class).Sum(16);
+                    ch.buff(NervousImpairment.class).sum(16);
                 }
             }
         }

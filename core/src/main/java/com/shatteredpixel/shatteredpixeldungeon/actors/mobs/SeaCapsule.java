@@ -48,7 +48,7 @@ public class SeaCapsule extends Mob{
                 if (ch.buff(NervousImpairment.class) == null) {
                     Buff.affect(ch, NervousImpairment.class);
                 }
-                ch.buff(NervousImpairment.class).Sum(20);
+                ch.buff(NervousImpairment.class).sum(20);
             }
         }
 

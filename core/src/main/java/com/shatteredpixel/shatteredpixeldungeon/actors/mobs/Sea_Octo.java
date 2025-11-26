@@ -83,7 +83,7 @@ public class Sea_Octo extends Mob {
         if (enemy instanceof Hero || enemy instanceof DriedRose.GhostHero) {
             if (enemy.buff(NervousImpairment.class) == null) {
                 Buff.affect(enemy, NervousImpairment.class);
-            } else enemy.buff(NervousImpairment.class).Sum(ndamage);
+            } else enemy.buff(NervousImpairment.class).sum(ndamage);
         }
 
         return super.attackProc(enemy, damage);

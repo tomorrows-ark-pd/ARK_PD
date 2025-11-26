@@ -54,7 +54,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 
         map( Dungeon.level.map, Dungeon.level.width() );
 
-		instance = this;
+        instance = this;
 	}
 
 	protected int getTileVisual(int pos, int tile, boolean flat){
@@ -99,9 +99,6 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		} else if (tile == Terrain.EMBERS) {
 			return 9 * (16*5) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
 		}
-        else if (tile == Terrain.SEA_TERROR) {
-            return 3 + (16*8) + (DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
-        }
 
 		return -1;
 	}

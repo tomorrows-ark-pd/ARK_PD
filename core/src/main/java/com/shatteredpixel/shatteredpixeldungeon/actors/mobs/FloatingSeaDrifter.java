@@ -61,7 +61,7 @@ public class FloatingSeaDrifter extends Mob {
         if (enemy.buff(NervousImpairment.class) == null) {
             Buff.affect(enemy, NervousImpairment.class);
         }
-        else enemy.buff(NervousImpairment.class).Sum(10);
+        else enemy.buff(NervousImpairment.class).sum(10);
 
         return super.attackProc(enemy, damage);
     }

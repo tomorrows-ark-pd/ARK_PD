@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.effects.particles.FlameParticle;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.watabou.utils.Bundlable;
@@ -52,7 +53,8 @@ public class SeaTerror implements Bundlable {
             if (Dungeon.level.map[pos+ PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.EMPTY
                     || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.EMPTY_SP
                     || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.EMPTY_DECO
-                    || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.WATER) {
+                    || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.WATER
+                    || Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[relativeCell]] == Terrain.SEA_TERROR) {
 
                 if (Dungeon.level.seaTerrors.get(pos+PathFinder.NEIGHBOURS8[relativeCell]) != null) {
                     // skip creation if brand already exists
@@ -73,6 +75,14 @@ public class SeaTerror implements Bundlable {
         }
 	}
 
+    public void destroy() {
+        Dungeon.level.destroySeaTerror( pos );
+
+        if (Dungeon.level.heroFOV[pos]) {
+            CellEmitter.get( pos ).burst(FlameParticle.FACTORY, 6);
+        }
+    }
+
     public void spendTime( Char ch, float time ) {
         if (isCovered()) {
             return;
@@ -82,10 +92,14 @@ public class SeaTerror implements Bundlable {
             if (ch.buff(NervousImpairment.class) == null) {
                 Buff.affect(ch, NervousImpairment.class);
             }
-            else {
-                float nervousDamage = 2 * time;
-                ch.buff(NervousImpairment.class).Sum(nervousDamage);
+            float nervousDamage = 2 * time;
+
+            if (Dungeon.extrastage_Sea && Dungeon.depth >= 40) {
+                // 이샤믈라 보스전일 경우 명흔 신경손상 2배
+                nervousDamage *= 2;
             }
+
+            ch.buff(NervousImpairment.class).sum(nervousDamage);
         }
 
         if (ch instanceof Mob) {

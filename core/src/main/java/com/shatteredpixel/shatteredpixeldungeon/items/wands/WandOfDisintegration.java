@@ -32,6 +32,8 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAmplified;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -101,8 +103,22 @@ public class WandOfDisintegration extends DamageWand {
 				terrainAffected = true;
 				
 			}
-			
-			CellEmitter.center( c ).burst( PurpleParticle.BURST, Random.IntRange( 1, 2 ) );
+
+            SeaTerror seaTerror = Dungeon.level.seaTerrors.get(c);
+            if (seaTerror != null) {
+                seaTerror.destroy();
+                GameScene.updateMap( c );
+                terrainAffected = true;
+            }
+
+            Platform platform = Dungeon.level.platforms.get(c);
+            if (platform != null) {
+                platform.destroy();
+                GameScene.updateMap( c );
+                terrainAffected = true;
+            }
+
+            CellEmitter.center( c ).burst( PurpleParticle.BURST, Random.IntRange( 1, 2 ) );
 		}
 		
 		if (terrainAffected) {

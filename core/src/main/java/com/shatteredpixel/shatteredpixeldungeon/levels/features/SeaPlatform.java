@@ -56,7 +56,7 @@ public class SeaPlatform extends Platform {
             for (int n : PathFinder.NEIGHBOURS9) {
                 int c = pos + n;
                 // Generate Platform in 3x3 if it is a Nethersea Brand tile
-                if (c >= 0 && c < Dungeon.level.length() && Dungeon.level.seaTerrors.get(c) != null) {
+                if (c >= 0 && c < Dungeon.level.length() && Dungeon.level.platforms.get(c) == null && Dungeon.level.seaTerrors.get(c) != null) {
                     if (Dungeon.level.heroFOV[c]) {
                         CellEmitter.get(c).burst(SmokeParticle.FACTORY, 4);
                     }
