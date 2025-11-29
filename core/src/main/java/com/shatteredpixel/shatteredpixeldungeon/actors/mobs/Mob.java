@@ -81,7 +81,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarJournalist
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
@@ -1193,22 +1192,9 @@ public abstract class Mob extends Char {
 			}
 		}
 
-		if (Dungeon.depth > 31 && Dungeon.extrastage_Sea && Dungeon.level.map[this.pos] == Terrain.SEE_TEEROR1 || Dungeon.level.map[this.pos] == Terrain.SEE_TEEROR2) {
-			int evaporatedTiles;
-			evaporatedTiles = Random.chances(new float[]{0, 0, 0, 0, 0, 1, 2, 1, 1});
-			for (int i = 0; i < evaporatedTiles; i++) {
-				if (Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY
-						|| Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY_SP
-						|| Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.EMPTY_DECO
-						|| Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] == Terrain.WATER) {
-					if (Random.Int(2) == 0) Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] = Terrain.SEE_TEEROR1;
-					else Dungeon.level.map[pos+PathFinder.NEIGHBOURS8[i]] = Terrain.SEE_TEEROR2;
-					GameScene.updateMap( pos+PathFinder.NEIGHBOURS8[i] );
-					CellEmitter.get(pos+PathFinder.NEIGHBOURS8[i]).burst(Speck.factory(Speck.BUBBLE), 10);
-					Dungeon.observe();
-				}
-			}
-			}
+        if (Dungeon.depth > 35 && Dungeon.extrastage_Sea && Dungeon.level.seaTerrors.get(pos) != null) {
+            Dungeon.level.seaTerrors.get(pos).spendTime(this, time);
+        }
 
 		super.spend(time);
 	}

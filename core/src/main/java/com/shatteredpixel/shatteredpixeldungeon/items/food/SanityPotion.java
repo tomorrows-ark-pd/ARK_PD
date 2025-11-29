@@ -8,7 +8,7 @@ import com.watabou.noosa.audio.Sample;
 
 import java.util.ArrayList;
 
-public class Nevous extends Food {
+public class SanityPotion extends Food {
     public static final String AC_DRINK = "DRINK";
     {
         image = ItemSpriteSheet.TYLENOL;
@@ -17,18 +17,18 @@ public class Nevous extends Food {
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
+        actions.remove(AC_EAT);
         actions.add(AC_DRINK);
         return actions;
     }
 
     @Override
     public void execute(Hero hero, String action) {
-
         super.execute(hero, action);
 
         if (action.equals(AC_DRINK)) {
             if (hero.buff(NervousImpairment.class) != null) {
-                hero.buff((NervousImpairment.class)).Sum(-50);
+                hero.buff((NervousImpairment.class)).sum(-50);
             }
             this.detach(curUser.belongings.backpack);
             Sample.INSTANCE.play(Assets.Sounds.DRINK);

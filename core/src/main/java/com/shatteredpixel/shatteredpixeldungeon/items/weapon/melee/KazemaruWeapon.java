@@ -4,24 +4,16 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hallucination;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.BatSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.BeeSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.BreakerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.KazemaruSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Callback;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -69,12 +61,18 @@ public class KazemaruWeapon extends MeleeWeapon {
     }
 
     public String statsInfo() {
-        return Messages.get(this, "stats_desc", 15+buffedLvl(), 20+(buffedLvl()*5));
+        if (isIdentified()) {
+            return Messages.get(this, "stats_desc", 15+buffedLvl(), 20+(buffedLvl()*5));
+        } else {
+            return Messages.get(this, "typical_stats_desc", 15, 20);
+        }
     }
 
     @Override
     public int proc(Char attacker, Char defender, int damage) {
-        if (Random.Int(7) == 0) {
+        int procDamage = super.proc(attacker, defender, damage);
+
+        if (defender.HP > procDamage && Random.Int(7) == 0) {
             ArrayList<Integer> respawnPoints = new ArrayList<>();
 
             for (int i = 0; i < PathFinder.NEIGHBOURS8.length; i++) {
@@ -83,23 +81,21 @@ public class KazemaruWeapon extends MeleeWeapon {
                     respawnPoints.add(p);
                 }
             }
-            int spawnd = 0;
-            while (respawnPoints.size() > 0 && spawnd == 0) {
-                int index = Random.index(respawnPoints);
 
-                KazemaruSummon summon = new KazemaruSummon();
-                summon.GetWeaponLvl(buffedLvl());
-                summon.GetTarget(defender);
-                GameScene.add(summon);
-                ScrollOfTeleportation.appear(summon, respawnPoints.get(index));
-
-
-                respawnPoints.remove(index);
-                spawnd++;
-            }
+            Integer[] spawnPoints = respawnPoints.toArray(new Integer[0]);
+            int pos = Random.element(spawnPoints);
+            summonSubstitute(pos, defender.pos);
         }
 
-        return super.proc(attacker, defender, damage);
+        return procDamage;
+    }
+
+    private void summonSubstitute(int pos, int target) {
+        KazemaruSummon summon = new KazemaruSummon();
+        summon.setLevel(buffedLvl());
+        summon.setTarget(target);
+        summon.pos = pos;
+        GameScene.add(summon);
     }
 
     public static class KazemaruSummon extends Mob {
@@ -109,15 +105,15 @@ public class KazemaruWeapon extends MeleeWeapon {
             spriteClass = KazemaruSprite.class;
 
             flying = true;
-            state = WANDERING;
+            state = HUNTING;
             alignment = Alignment.ALLY;
         }
 
         @Override
         public void onAttackComplete() {
             attack( enemy );
-            next();
             die(this);
+            next();
         }
 
         @Override
@@ -164,9 +160,12 @@ public class KazemaruWeapon extends MeleeWeapon {
             return Random.NormalIntRange(maxLvl + 15, 20 + (maxLvl * 5));
         }
 
-        public void GetWeaponLvl(int wlvl) {
+        public void setLevel(int wlvl) {
             maxLvl = wlvl;
         }
-        public void GetTarget(Char t) {target = t.id();}
+
+        public void setTarget(int pos) {
+            target = pos;
+        }
     }
 }

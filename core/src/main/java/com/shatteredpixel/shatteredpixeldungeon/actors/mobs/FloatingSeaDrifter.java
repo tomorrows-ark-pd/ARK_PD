@@ -1,18 +1,15 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
-import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Light;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NervousImpairment;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dario;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Sea_DrifterSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.YomaSprite;
 import com.watabou.utils.Random;
 
 public class FloatingSeaDrifter extends Mob {
@@ -64,8 +61,14 @@ public class FloatingSeaDrifter extends Mob {
         if (enemy.buff(NervousImpairment.class) == null) {
             Buff.affect(enemy, NervousImpairment.class);
         }
-        else enemy.buff(NervousImpairment.class).Sum(10);
+        else enemy.buff(NervousImpairment.class).sum(10);
 
         return super.attackProc(enemy, damage);
+    }
+
+    @Override
+    public void die( Object cause ) {
+        super.die(cause);
+        Dario.Quest.process();
     }
 }

@@ -9,25 +9,23 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.DP27;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
-import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.shatteredpixel.shatteredpixeldungeon.ui.QuickSlotButton;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
@@ -140,15 +138,29 @@ public class W0502 extends Item {
             if ((ch = Actor.findChar( c )) != null) {
 
                 //we don't want to count passed terrain after the last enemy hit. That would be a lot of bonus levels.
-                //terrainPassed starts at 2, equivalent of rounding up when /3 for integer arithmetic.
+                //                //terrainPassed starts at 2, equivalent of rounding up when /3 for integer arithmetic.
 
-                chars.add( ch );
+                chars.add(ch);
             }
 
             if (Dungeon.level.flamable[c]) {
 
                 Dungeon.level.destroy( c );
                 GameScene.updateMap( c );
+            }
+
+            SeaTerror seaTerror = Dungeon.level.seaTerrors.get(c);
+            if (seaTerror != null) {
+                seaTerror.destroy();
+                GameScene.updateMap( c );
+                terrainAffected = true;
+            }
+
+            Platform platform = Dungeon.level.platforms.get(c);
+            if (platform != null) {
+                platform.destroy();
+                GameScene.updateMap( c );
+                terrainAffected = true;
             }
 
             if (Dungeon.level.map[c] == Terrain.WATER || Dungeon.level.map[c] == Terrain.EMPTY) {

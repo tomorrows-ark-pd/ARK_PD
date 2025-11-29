@@ -2,26 +2,20 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Camouflage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
-import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.OriginiutantSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Sea_BrandguiderSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Sea_LeefSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.NetherseaBrandguiderSprite;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public class Sea_Brandguider extends Mob {
+public class NetherseaBrandguider extends Mob {
     {
-        spriteClass = Sea_BrandguiderSprite.class;
+        spriteClass = NetherseaBrandguiderSprite.class;
 
         HP = HT = 160;
         EXP = 18;
@@ -35,7 +29,7 @@ public class Sea_Brandguider extends Mob {
         properties.add(Property.SEA);
     }
 
-    private boolean firstTEEROR = false;
+    private boolean terrorSpawned = false;
 
     @Override
     public int damageRoll() { return Random.NormalIntRange(38, 55); }
@@ -53,16 +47,19 @@ public class Sea_Brandguider extends Mob {
     protected boolean act() {
 
         //스폰시 첫 행동하면서 명흔을 깝니다.
-        if (!firstTEEROR) {
-            Level.set(this.pos, Terrain.SEE_TEEROR1);
+        if (!terrorSpawned) {
+            SeaTerror seaTerror = Dungeon.level.addSeaTerror(this.pos);
+            seaTerror.activate();
+            //Level.set(this.pos, Terrain.SEA_TERROR);
             GameScene.updateMap(this.pos);
 
-            firstTEEROR = true;
+            terrorSpawned = true;
         }
 
         if (HT /2 >= HP && this.buff(Silence.class) == null) {
             if (Dungeon.level.map[this.pos] == Terrain.EMPTY || Dungeon.level.map[this.pos] == Terrain.WATER) {
-                Dungeon.level.map[pos] = Terrain.SEE_TEEROR1;
+                Dungeon.level.addSeaTerror(this.pos);
+                //Level.set(this.pos, Terrain.SEA_TERROR);
                 CellEmitter.get(pos).burst(Speck.factory(Speck.BUBBLE), 10);
                 GameScene.updateMap( pos );
                 Dungeon.observe();
@@ -76,12 +73,12 @@ public class Sea_Brandguider extends Mob {
     @Override
     public void storeInBundle( Bundle bundle ) {
         super.storeInBundle( bundle );
-        bundle.put( VAL, firstTEEROR );
+        bundle.put( VAL, terrorSpawned);
     }
 
     @Override
     public void restoreFromBundle( Bundle bundle ) {
         super.restoreFromBundle( bundle );
-        firstTEEROR = bundle.getBoolean(VAL);
+        terrorSpawned = bundle.getBoolean(VAL);
     }
 }

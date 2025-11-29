@@ -2,24 +2,18 @@ package com.shatteredpixel.shatteredpixeldungeon.items.Skill;
 
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NervousImpairment;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
-import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
-import com.shatteredpixel.shatteredpixeldungeon.items.Pombbay;
-import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK2.Nervous;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfSunLight;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.PathFinder;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -73,9 +67,9 @@ public class SkillBook extends Item {
                                         if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
                                             if (hero.buff(NervousImpairment.class) == null) {
                                                 Buff.affect(hero, NervousImpairment.class);
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             } else {
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             }
                                         }
                                     }
@@ -95,9 +89,9 @@ public class SkillBook extends Item {
                                         if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
                                             if (hero.buff(NervousImpairment.class) == null) {
                                                 Buff.affect(hero, NervousImpairment.class);
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             } else {
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             }
                                         }
                                     }
@@ -117,9 +111,9 @@ public class SkillBook extends Item {
                                         if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
                                             if (hero.buff(NervousImpairment.class) == null) {
                                                 Buff.affect(hero, NervousImpairment.class);
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             } else {
-                                                hero.buff(NervousImpairment.class).Sum(25);
+                                                hero.buff(NervousImpairment.class).sum(25);
                                             }
                                         }
                                     }

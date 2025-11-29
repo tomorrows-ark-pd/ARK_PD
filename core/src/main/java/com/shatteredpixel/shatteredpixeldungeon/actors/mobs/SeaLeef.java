@@ -1,17 +1,10 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Camouflage;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Chill;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hex;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
-import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Bug_ASprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Sea_LeefSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Sea_RunnerSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -31,10 +24,10 @@ public class SeaLeef extends Mob {
         properties.add(Property.SEA);
     }
 
-    int dmgbouns = 0;
+    int damageBonus = 0;
 
     @Override
-    public int damageRoll() { return Random.NormalIntRange(16 + (dmgbouns / 2), 24 + dmgbouns); }
+    public int damageRoll() { return Random.NormalIntRange(16 + (damageBonus / 2), 24 + damageBonus); }
 
     @Override
     public int attackSkill( Char target ) {
@@ -52,17 +45,9 @@ public class SeaLeef extends Mob {
     }
 
     @Override
-    protected boolean act() {
-        if (Dungeon.level.map[this.pos] == Terrain.SEE_TEEROR1 || Dungeon.level.map[this.pos] == Terrain.SEE_TEEROR2) {
-            Buff.affect(this, Camouflage.class, 10f);
-        }
-        return super.act();
-    }
-
-    @Override
     public int attackProc(Char enemy, int damage) {
 
-        dmgbouns = Math.min(dmgbouns+3, 60);
+        damageBonus = Math.min(damageBonus +3, 60);
 
         return super.attackProc(enemy, damage);
     }
@@ -72,12 +57,21 @@ public class SeaLeef extends Mob {
     @Override
     public void storeInBundle(Bundle bundle) {
         super.storeInBundle(bundle);
-        bundle.put(DMG, dmgbouns);
+        bundle.put(DMG, damageBonus);
     }
 
     @Override
     public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);
-        dmgbouns = bundle.getInt(DMG);
+        damageBonus = bundle.getInt(DMG);
+    }
+
+    @Override
+    public void activateSeaTerror() {
+        if (this.buff(Camouflage.class) == null) {
+            Buff.affect(this, Camouflage.class, 1f);
+        } else if (this.buff(Camouflage.class) != null) {
+            Buff.prolong(this, Camouflage.class, 1f);
+        }
     }
 }

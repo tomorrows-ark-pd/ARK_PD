@@ -356,8 +356,7 @@ public class DungeonTileSheet {
 		directVisuals.put(Terrain.PEDESTAL,         PEDESTAL);
 		directVisuals.put(Terrain.EMPTY_SP,         FLOOR_SP);
 
-		directVisuals.put(Terrain.SEE_TEEROR1,         SEE_SP);
-		directVisuals.put(Terrain.SEE_TEEROR2,         SEE_SP);
+		directVisuals.put(Terrain.SEA_TERROR,       directVisuals.get(Terrain.EMPTY));
 
 		directVisuals.put(Terrain.SECRET_TRAP,      directVisuals.get(Terrain.EMPTY));
 		directVisuals.put(Terrain.TRAP,             directVisuals.get(Terrain.EMPTY));
@@ -418,7 +417,7 @@ public class DungeonTileSheet {
 		commonAltVisuals.put(FLAT_WALL_DECO,        FLAT_WALL_DECO_ALT);
 		commonAltVisuals.put(FLOOR_SP,              FLOOR_SP_ALT);
 		commonAltVisuals.put(FLOOR_DECO,            FLOOR_DECO_ALT);
-		commonAltVisuals.put(SEE_SP,            SEE_SP_ALT);
+		commonAltVisuals.put(SEE_SP,                SEE_SP_ALT);
 
 		commonAltVisuals.put(FLAT_BOOKSHELF,        FLAT_BOOKSHELF_ALT);
 		commonAltVisuals.put(FLAT_HIGH_GRASS,       FLAT_HIGH_GRASS_ALT);

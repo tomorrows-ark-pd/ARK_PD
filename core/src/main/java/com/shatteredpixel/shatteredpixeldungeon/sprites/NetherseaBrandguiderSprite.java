@@ -24,9 +24,9 @@ package com.shatteredpixel.shatteredpixeldungeon.sprites;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
 
-public class Sea_BrandguiderSprite extends MobSprite {
+public class NetherseaBrandguiderSprite extends MobSprite {
 
-    public Sea_BrandguiderSprite() {
+    public NetherseaBrandguiderSprite() {
         super();
 
         texture( Assets.Sprites.SEA_BRANDGUIDER );

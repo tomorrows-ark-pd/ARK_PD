@@ -13,14 +13,9 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SeaObject;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.TargetedCell;
-import com.shatteredpixel.shatteredpixeldungeon.effects.particles.BlastParticle;
-import com.shatteredpixel.shatteredpixeldungeon.items.NervousPotion;
-import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Bug_ASprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.First_talkSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.HandclapSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
@@ -77,7 +72,7 @@ public class SeaBoss1 extends Mob{
         if (enemy instanceof Hero || enemy instanceof DriedRose.GhostHero) {
             if (enemy.buff(NervousImpairment.class) == null) {
                 Buff.affect(enemy, NervousImpairment.class);
-            } else enemy.buff(NervousImpairment.class).Sum(10);
+            } else enemy.buff(NervousImpairment.class).sum(10);
         }
 
         return super.attackProc(enemy, damage);
@@ -175,7 +170,7 @@ public class SeaBoss1 extends Mob{
                     if (ch instanceof Hero || ch instanceof DriedRose.GhostHero) {
                         if (ch.buff(NervousImpairment.class) == null) {
                             Buff.affect(ch, NervousImpairment.class);
-                        } else ch.buff(NervousImpairment.class).Sum(20);
+                        } else ch.buff(NervousImpairment.class).sum(20);
                     }
 
                     if (!ch.isAlive() && ch == Dungeon.hero) {

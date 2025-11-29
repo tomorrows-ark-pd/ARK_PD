@@ -2656,6 +2656,7 @@ items.weapon.melee.chensword.desc=용문 제식 검. 상당히 오래되어 성�
 items.weapon.melee.kazemaruweapon.name=절지생화
 items.weapon.melee.kazemaruweapon.desc="아이들이 카제마루가 몇 살 연상인 귀엽고 순진한 아이라고 생각하고 있어......"
 items.weapon.melee.kazemaruweapon.stats_desc=이 검은 공격시 10%% 확률로 분신을 소환해 _%1$d-%2$d_의 피해를 입힙니다.
+items.weapon.melee.kazemaruweapon.typical_stats_desc=이 검은 공격시 10%% 확률로 분신을 소환해 일반적으로 _%1$d-%2$d_의 피해를 입힙니다.
 
 items.weapon.melee.beowulf.name=베오울프
 items.weapon.melee.beowulf.desc="자, 나를 넘어서 봐라!" \n\n 이 건랜스는 대상과 사거리가 멀어질수록 높은 범위 데미지를 입히며, 가까울 수록 데미지가 줄어듭니다.
@@ -3066,9 +3067,9 @@ items.snowsants_coin.desc='스노우상트의 동전' 이야기가 한때 젊은
 items.snowsants_coin.ac_use=사용한다
 
 ※번역 필요
-items.food.nevous.name=이성회복제
-items.food.nevous.desc=섭취시 신경 손상을 50% 회복시켜주는 긴급 이성회복제. 중요한 물건이니 필요할 때만 사용하자.
-items.food.nevous.ac_drink=마신다
+items.food.sanitypotion.name=이성회복제
+items.food.sanitypotion.desc=섭취시 신경 손상을 50% 회복시켜주는 긴급 이성회복제. 중요한 물건이니 필요할 때만 사용하자.
+items.food.sanitypotion.ac_drink=마신다
 
 
 
