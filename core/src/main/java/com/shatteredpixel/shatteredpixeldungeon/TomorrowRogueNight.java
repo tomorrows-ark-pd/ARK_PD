@@ -35,6 +35,7 @@ public class TomorrowRogueNight extends Game {
 	//versions older than v0.7.5e are no longer supported, and data from them is ignored
 	public static final int v0_5_0_b4 = 583;
     public static final int v0_5_0_b5 = 600;
+    public static final int v0_5_0 = 601;
 	
 	public TomorrowRogueNight(PlatformSupport platform ) {
 		super( sceneClass == null ? WelcomeScene.class : sceneClass, platform );
