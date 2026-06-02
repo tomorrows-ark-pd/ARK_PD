@@ -223,5 +223,6 @@ public class Longsword extends MeleeWeapon {
 		Invisibility.dispel();
 
 		if (arts <= 0) curUser.spendAndNext(1f);
+		else curUser.spendAndNext(0f);
 	}
 }
