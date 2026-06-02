@@ -56,7 +56,7 @@ public class Gamzashield extends MeleeWeapon {
 
     @Override
     public int proc(Char attacker, Char defender, int damage) {
-        SPCharge(Random.IntRange(5,5+buffedLvl()));
+        SPCharge(Random.IntRange(5, 5 + buffedLvl()));
         updateQuickslot();
         return super.proc(attacker, defender, damage);
     }
@@ -103,7 +103,7 @@ public class Gamzashield extends MeleeWeapon {
         }
         //display as percent
         if (chargeCap == 100)
-            return Messages.format("%d%%", (int)charge);
+            return Messages.format("%d%%", (int) charge);
 
 
         //otherwise, if there's no charge, return null.
@@ -200,6 +200,7 @@ public class Gamzashield extends MeleeWeapon {
         }
 
         Invisibility.dispel();
+        curUser.spendAndNext(0f);
     }
 
     private void affectTarget(Char ch) {
