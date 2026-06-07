@@ -1,80 +1,47 @@
-###blobs
+### blobs
 actors.blobs.blizzard.desc=여기에 눈보라가 휘몰아치고 있다.
-
 actors.blobs.confusiongas.desc=여기에 혼란 가스 구름이 소용돌이치고 있다.
-
 actors.blobs.electricity.desc=여기에 전기가 요란하게 튀기고 있다.
 actors.blobs.electricity.rankings_desc=감전
 actors.blobs.electricity.ondeath=당신은 감전되어 죽었다...
-
 actors.blobs.fire.desc=여기에 불이 맹렬하게 타고 있다.
-
 actors.blobs.foliage.desc=지하 정원의 어둠에 한 줄기 빛이 내리쬔다.
-
 actors.blobs.freezing.desc=여기의 공기는 유난히 추운 것 같다.
-
 actors.blobs.goowarn.desc=여기에 어두운 에너지가 도사리고 있는 것 같다!
-
 actors.blobs.inferno.desc=여기에 용암이 들끓고 있다.
-
 actors.blobs.paralyticgas.desc=여기에 마비 가스 구름이 소용돌이치고 있다.
-
 actors.blobs.smokescreen.desc=여기에 짙은 검은색 연기가 소용돌이치고 있다.
-
 actors.blobs.stenchgas.desc=여기에 악취나는 구름이 소용돌이치고 있다.
-
 actors.blobs.stormcloud.desc=여기에 자욱한 수증기가 피어오르고 있다.
-
 actors.blobs.toxicgas.desc=여기에 초록색 유독성 가스 구름이 소용돌이치고 있다.
 actors.blobs.toxicgas.rankings_desc=질식사
 actors.blobs.toxicgas.ondeath=당신은 유독 가스 때문에 죽었다...
-
 actors.blobs.corrosivegas.desc=여기에 치명적인 부식성 가스 구름이 소용돌이치고 있다.
-
 actors.blobs.healinggas.desc=여기에 생명을 회복시키는 아츠가 소용돌이치고 있다.
-
 actors.blobs.waterofawareness.procced=한 모금을 마시는 순간, 막대한 지식이 당신의 마음에 흘러들어옴을 느꼈다.
 actors.blobs.waterofawareness.desc=지식의 힘이 이 우물의 물에서 뿜어져 나오고 있다. 한 모금 마시면 자신이 착용한 모든 아이템과 현재 층의 비밀을 밝혀낼 수 있고, 현재 층에 있는 모든 아이템이 드러나게 된다.
-
 actors.blobs.waterofhealth.procced=한 모금을 마시는 순간, 당신의 모든 상처가 완전히 나았다.
 actors.blobs.waterofhealth.desc=회복의 힘이 이 우물의 물에서 뿜어져 나오고 있다. 이 물을 마시면 당신의 체력을 모두 회복하며 허기도 완전히 줄어들게 된다.
-
-actors.blobs.waterofhealth.procced=한 모금을 마시는 순간, 당신의 모든 상처가 완전히 나았다.
-actors.blobs.waterofhealth.desc=회복의 힘이 이 우물의 물에서 뿜어져 나오고 있다. 이 물을 마시면 당신의 체력을 모두 회복하며 허기도 완전히 줄어들게 된다.
-
 actors.blobs.waterofadvanceguard.procced=아이템 점검 보상으로 %d 합성옥이 지급되었다.
 actors.blobs.waterofadvanceguard.desc=아방가르드한 기운이 이 우물의 물에서 뿜어져 나오고 있다. 이 물에 아이템을 던져 넣으면 합성옥이 될 것이다.\n\n_몇몇 아이템은 합성옥이 아닌 특별한 무언가가 될 것입니다._
-
 actors.blobs.wateroftransmutation.desc=변화의 힘이 이 우물의 물에서 뿜어져 나오고 있다. 이 우물에 아이템을 던져 넣으면 다른 것으로 변하게 된다.\n\n_이거 버그 아니니까 버그제보 하지마세요_
-
 actors.blobs.web.desc=모든 것이 굵은 거미줄로 뒤덮혀 있다. 무언가가 거미줄을 건드리거나 거미줄에 던져진다면 거미줄이 끊어지지만, 그 대상은 거미줄에 걸려 꼼짝도 못 할 것이다.
-
 actors.blobs.dominion.desc=황제의 칼날이 만들어낸 이 공포스러운 공간은 우르수스의 의지를 따르지 않는 자들을 약화시킬 것입니다...
-
-
-
-###buffs
+### buffs
 actors.buffs.adrenaline.name=아드레날린
 actors.buffs.adrenaline.desc=물리적인 힘이 솟아나게 하는 아드레날린이 공격과 이동속도를 향상시켰습니다.\n\n아드레날린은 그것의 목표를 2배 빠르게 달리게 하고, 1.5배 빠르게 공격하게 합니다.\n\n아드레날린은 %s 턴 동안 지속됩니다.
-
 actors.buffs.adrenalinesurge.name=아드레날린 촉진
 actors.buffs.adrenalinesurge.desc=강력한 힘의 흐름이 느껴집니다. 아쉽게도 잠깐만 지속됩니다.\n\n힘 증가: +%d\n%s턴 후에 강화 효과가 약해집니다.
-
 actors.buffs.amok.name=광란
 actors.buffs.amok.desc=광란 효과는 대상에게 대단한 분노와 혼란 효과를 줍니다. \n\n어떤 생물체가 광란에 걸리면, 그 적과 아군 구분 없이 주변의 모든 것을 공격하게 됩니다. \n\n광란 효과는 %s턴 동안 유지됩니다.
-
 actors.buffs.arcanearmor.name=신비한 갑옷
 actors.buffs.arcanearmor.desc=얇은 보호막이 당신을 감싸며 아츠 공격으로부터의 피해를 줄여주고 있습니다.\n\n당신의 신비한 갑옷은 현재 0-%d의 아츠 피해를 막을 수 있습니다.\n\n신비한 갑옷은 %s턴 뒤에 약해집니다.
-
 actors.buffs.artifactrecharge.name=sp 충전
 actors.buffs.artifactrecharge.desc=에너지가 당신 주변을 맴돌고 있으며, 당신이 장착한 유물의 충전 속도를 상승시킵니다.\n\n모든 유물들이 평소보다 훨씬 빠른 속도로 충전됩니다. 효과는 유물마다 조금씩 다릅니다.\n\n효과가 끝나기까지  %s 턴 남았습니다.
-
 actors.buffs.barkskin.name=나무껍질
 actors.buffs.barkskin.desc=당신의 피부는 단단해져 마치 나무껍질과 같아졌습니다.\n\n단단해진 피부는 마치 효과적인 갑옷과 같아서 물리적인 공격을 더 잘 방어하게 됩니다. \n\n당신의 현재 추가 방어력은 %d입니다.\n나무껍질 효과는 %s턴 뒤에 약해집니다.
-
 actors.buffs.barrier.name=신조의 역장
 actors.buffs.barrier.desc=단단한 힘의 보호막이 모든 피해를 막아줍니다.\n\n보호막은 보호막 수치가 소진될 때 까지 모든 피해를 막아줍니다. 또한 보호막 수치는 시간이 지날 수록 천천히 사라집니다.\n\n현재 보호막 수치는 %d입니다.
-
 actors.buffs.berserk.angered=분노
 actors.buffs.berserk.berserk=격노
 actors.buffs.berserk.exhausted=탈진
@@ -85,27 +52,22 @@ actors.buffs.berserk.recovering_desc=내면의 힘에는 한계가 있는 법입
 actors.buffs.berserk.no_rages=격노 효과는 블레이즈의 기력을 영구적으로 소모시켜 격노할 때 마다 최대 체력이 감소합니다.
 actors.buffs.berserk.past_rages=격노 횟수: _%d_\n현재 최대 체력: _%d%%_
 actors.buffs.berserk.rankings_desc=격노하며 버텼으나 사망
-
 actors.buffs.bleeding.name=출혈
 actors.buffs.bleeding.ondeath=당신은 과다출혈로 죽었다...
 actors.buffs.bleeding.heromsg=당신은 피를 흘린다!
 actors.buffs.bleeding.rankings_desc=과다 출혈로 사망
 actors.buffs.bleeding.desc=상처에서 상당한 양의 피를 흘립니다.\n\n출혈은 매 턴마다 피해를 입힙니다. 매 턴 입는 피해는 출혈이 끝날 때 까지 무작위로 줄어듭니다. \n\n출혈은 현재 %d 의 피해를 입힙니다.
-
 actors.buffs.bless.name=축복
 actors.buffs.bless.desc=마치 신이 은총을 내린 것처럼 집중력이 폭발적으로 증가했습니다.\n\n축복은 정확도와 회피율을 25%%만큼 늘려, 축복받은 자를 전투에 더욱 능하게 만듭니다.\n\n축복이 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.blindness.name=실명
 actors.buffs.blindness.heromsg=당신의 눈이 멀었다!
 actors.buffs.blindness.desc=실명 상태는 대상의 주변의 모든 것을 어두운 안개처럼 보이게 합니다.\n\n실명을 당하면, 주변 한 칸 이상의 타일을 볼 수 없게 되며, 원거리 무기는 무용지물이 되며 먼 거리의 적을 볼 수 없어 놓치게 됩니다. 또한 눈이 먼 대상은 주문서나 책을 읽을 수 없습니다. \n\n실명 효과는 %s 턴 동안 지속됩니다.
-
 actors.buffs.burning.name=연소
 actors.buffs.burning.heromsg=당신에게 불이 붙었다!
 actors.buffs.burning.burnsup=%s에게 불이 붙었다!
 actors.buffs.burning.ondeath=당신은 불타 사망했다...
 actors.buffs.burning.rankings_desc=재가 되어버림
 actors.buffs.burning.desc=불이 붙는 것만큼 고통스러운 것은 거의 없습니다.\n\n불이 붙으면 물에 들어가거나 꺼질 때 까지 매 턴 지속적으로 피해를 입힙니다. 물에 들어가거나 물약을 깨트리면 끌 수 있습니다. 또한, 불이 붙은 상태에서 다른 지형이나 아이템에 불을 옮길 수도 있습니다. \n\n불이 스스로 꺼지기까지 %s 만큼 남았습니다.
-
 actors.buffs.championenemy.warn=당신은 매우 강력한 존재가 있음을 느낀다.
 actors.buffs.championenemy$blazing.name=불타는 강화 개체
 actors.buffs.championenemy$blazing.desc=불타는 강화 개체는 25% 더 많은 근접 피해를 입히고, 공격한 적을 불태울 수 있으며, 불에 면역이고, 죽을 때 주변에 불을 흩뿌립니다.
@@ -119,15 +81,12 @@ actors.buffs.championenemy$blessed.name=축복받은 강화 개체
 actors.buffs.championenemy$blessed.desc=축복받은 강화 개체는 200% 더 많은 정확성과 회피를 가집니다.
 actors.buffs.championenemy$growing.name=성장하는 강화 개체
 actors.buffs.championenemy$growing.desc=성장하는 강화 개체는 지속적으로 추가 정확성, 회피, 근접 공격력, 받는 피해량 감소를 얻습니다.\n\n현재 정확성/회피/공격력 증가량: %1$d%%\n현재 받는 피해 감소량: %2$d%%
-
 actors.buffs.charm.name=매혹
 actors.buffs.charm.heromsg=당신은 매혹에 걸렸다!
 actors.buffs.charm.desc=매혹 효과는 적들을 서로 일시적으로 사랑에 빠지게 하는 조작 아츠입니다.\n\n매혹에 걸린 대상들은 같이 매혹에 걸린 적들을 직접적으로 공격하는 것이 불가능해집니다. 하지만 다른 적을 공격하는 것은 가능합니다. 대상이 피해를 입으면 효과의 지속시간이 감소합니다.\n\n매혹 효과는 %s 턴 동안 유지됩니다.
-
 actors.buffs.chill.name=한기
 actors.buffs.chill.freezes=%s이/가 얼어붙었다!
 actors.buffs.chill.desc=완전히 얼진 않았지만, 그래도 여전히 너무 춥습니다.\n\n한기에 걸린 대상은 모든 행동을 더 느리게 수행하며, 남은 효과 시간에 비례하여 느려집니다. 최대 한기 상태는 둔화 효과에 걸린 것과 동일합니다.\n\n한기는 %1$s 턴 동안 유지되며,\n속도를 %2$s%%만큼 감소시킵니다.
-
 actors.buffs.combo.name=연속 타격
 actors.buffs.combo.combo=%d 연속 명중!
 actors.buffs.combo.bad_target=공격 범위 내에 있는 적을 공격해야 합니다.
@@ -141,78 +100,56 @@ actors.buffs.combo$combomove.crush_desc=_8 연속 타격: 으깨기_ 는 연속 
 actors.buffs.combo$combomove.crush_desc2=_8 연속 타격: 근접 섬광탄_ 은 125%의 피해를 입히고 1턴의 마비와 연속 타격*0.3턴의 실명을 부여합니다. 콤보를 1 증가시킵니다.
 actors.buffs.combo$combomove.fury_desc=_10 연속 타격: 분노 폭발_ 은 적 하나에 대해 60%의 피해량으로 연속 타격을 쌓은 수만큼 공격하며, 각 공격마다 무기에 부여된 아츠가 발동할 수 있습니다.
 actors.buffs.combo$combomove.fury_desc2=_10 연속 타격: 영거리 사격_ 은 연속 타격*40%의 사격 피해를 대상에게 입힙니다.
-
 actors.buffs.activeoriginium.name=오리지늄 자극
 actors.buffs.activeoriginium.ondeath=당신은 오리지늄의 영향으로 죽었다...
 actors.buffs.activeoriginium.heromsg=당신은 오리지늄 자극을 받았다!
 actors.buffs.activeoriginium.rankings_desc=오리지늄의 영향으로 사망
 actors.buffs.activeoriginium.desc=활성 오리지늄이 당신을 좀더 빠르게 공격 할 수 있게 만들었습니다. 공격속도가 2배로 빨라졌지만 지속적으로 체력을 잃게 됩니다. 공격을 시도할 때 마다 오리지늄 자극의 지속시간이 갱신되며, 아무것도 하지 않을 경우 몇 턴 뒤에 오리지늄 자극 효과가 사라집니다. \n\n 오리지늄 자극의 효과는 %s만큼 남아있습니다.
-
 actors.buffs.corruption.name=정신지배
 actors.buffs.corruption.desc=정신지배 아츠는 존재의 근원을 조작하여, 대상을 아군과 적대하도록 만듭니다.\n\n타락한 생물체는 자신의 동료를 공격하며, 자신의 원래 적을 무시합니다. 정신지배는 또한 걸린 대상에게 피해를 입히며, 시간이 지남에 따라 체력이 천천히 사라집니다.\n\n정신지배는 영구적으로 지속되며, 오직 죽어야만 끝이 납니다.
-
 actors.buffs.seethingburst.name=끓어오르는 투지
 actors.buffs.seethingburst.desc=블레이즈의 투지가 몸을 불태웁니다. 방어력이 3배로 상승하며, 받은 피해들을 저장한 후 버프가 끝난 뒤에 가하는 다음 공격에 더할 수 있습니다. \n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.cripple.name=불구
 actors.buffs.cripple.heromsg=당신은 불구가 되었다!
 actors.buffs.cripple.desc=다리가 잘못된 방향으로 꺾인 것 같습니다.\n\n불구 상태가 되면 이동 속도가 줄어들며, 한칸을 이동하는 데 두 턴이 들게 됩니다.\n\n불구 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.degrade.name=장비 약화
 actors.buffs.degrade.heromsg=당신의 장비가 약해진 것 같다!
 actors.buffs.degrade.desc=강력한 암흑 아츠가 당신의 장비에 깃든 강화의 주문서의 힘을 빨아들이고 있습니다! \n\n장비 약화가 적용되는 동안 강화된 장비는 제 성능을 온전히 발휘하지 못합니다. _+3 이후의 모든 강화 효율이 큰 폭으로 감소합니다._ 장비의 설명이 감소된 수치를 반영하여 표시됩니다.\n\n장비 약화는 힘 요구치, 아츠 스태프의 충전량, 투척 무기의 내구도, 그리고 유물 효과에는 영향을 주지 않습니다.\n\n장비 약화가 끝나기까지 %s턴 남았습니다. 강화의 일기장을 사용하면 장비 약화 효과를 즉시 끝낼 수 있습니다.
-
 actors.buffs.doom.name=파멸
 actors.buffs.doom.desc=온 세상이 당신이 죽기를 바라는데, 어찌 계속 살아갈 수 있을까요?\n\n파멸당한 캐릭터는 모든 피해를 두 배로 입게 됩니다.\n\n파멸은 영구적으로 지속되며, 오직 죽어야만 끝이 납니다.
-
 actors.buffs.drowsy.name=졸림
 actors.buffs.drowsy.desc=아츠의 힘이 잠을 쏟아지게 만듭니다.\n\n피해를 받거나 최대 체력을 유지함으로써 졸음에 대항할 수 있습니다.\n\n몇턴 후, 대상은 깊은 아츠의 잠 속으로 빠지게 됩니다.
-
 actors.buffs.earthimbue.name=대지와 동화함
 actors.buffs.earthimbue.desc=당신은 대지의 힘과 하나가 되었습니다!\n\n당신의 모든 물리적 공격에 땅을 일으키는 힘이 담기게 될 것이며, 일시적으로 타격한 적들을 속박시킬 것입니다.\n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.executmode.name=처형 모드
 actors.buffs.executmode.desc=처형 모드에 돌입하였습니다. 지속되는동안 회피율이 1.3배로 적용됩니다.\n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.reflowbuff.name=역류
 actors.buffs.reflowbuff.desc=역류를 발동시켰습니다. 지속되는동안 투척 무기들의 최대 피해량이 상승합니다.\n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.enhancedrings.name=향상된 반지
 actors.buffs.enhancedrings.desc=레드이 최근에 사용한 유물이 반지를 강화하고 있습니다. +1의 강화 수치가 다음 %d턴 동안 적용됩니다.
-
 actors.buffs.fireimbue.name=화염과 동화함
 actors.buffs.fireimbue.desc=당신은 불의 힘과 하나가 되었습니다!\n\n적에게 가하는 모든 물리 공격은 지속시간 동안 적들을 불타오르게 만들며, 당신은 불에 면역이 됩니다.\n\n화염과 동화함 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.foresight.name=예지
 actors.buffs.foresight.desc=당신의 감각이 향상되어, 주변 환경에 어울리지 않는 무엇이라도 금방 눈치챌 수 있습니다.\n\n예지 효과를 받는 동안 당신의 탐색 범위가 증가하며 탐색 범위 내에 들어온 모든 숨겨진 것들을 즉시 발견합니다.\n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.frost.name=빙결
 actors.buffs.frost.freezes=%s이/가 얼어붙었다!
 actors.buffs.frost.desc=빙결은 상대를 완전히 동태로 만드는 것이 아니라, 그저 얼음으로 감쌀 뿐입니다.\n\n빙결은 마비와 비슷하게 대상의 움직임을 봉쇄합니다. 하지만 대상이 피해를 입으면 얼음이 깨져 효과가 중단됩니다.\n\n빙결이 끝날 때 까지 %s 남았습니다.
-
 actors.buffs.frostimbue.name=냉기와 동화함
 actors.buffs.frostimbue.desc=당신은 차가운 힘과 하나가 되었습니다!\n\n모든 물리적 공격은 적을 점점 얼려갈 것이며, 추가적으로 당신은 추위에 면역을 가지게 됩니다.\n\n효과가 끝나기까지 %s턴 남았습니다.
-
 actors.buffs.fury.name=분노
 actors.buffs.fury.heromsg=당신은 분노에 휩싸였다!
 actors.buffs.fury.desc=당신은 화가 났습니다. 그리고 적들은 화가 난 당신에게서 도망치는게 좋을 것입니다.\n\n거대한 분노가 당신 속에서 타오르며, 당신이 가하는 물리 공격력을 50%% 증가시킵니다.\n\n분노 효과는 당신의 체력이 50%% 이하로 떨어지면 항상 발동됩니다.
-
 actors.buffs.blobimmunity.name=아츠 실드
 actors.buffs.blobimmunity.desc=정화의 아츠가 당신을 얇은 보호막으로 둘러싸, 공기 중의 모든 해로운 효과를 막아내고 있습니다.\n\n이 보호막이 유지되는 동안 모든 지역 효과를 받지 않습니다.\n\n보호막은 %s턴 동안 유지됩니다.
-
 actors.buffs.haste.name=신속
 actors.buffs.haste.desc=에너지가 당신의 근육을 따라 흐르며, 당신이 믿을 수 없는 속도로 달리는 것을 가능하게 합니다!\n\n신속 효과가 적용되는 동안 당신은 3배 빠르게 달릴 수 있지만, 다른 행동들은 보통의 속도로 수행합니다.\n\n신속 효과는 %s턴 동안 적용됩니다.
-
 actors.buffs.healing.name=치유 중
 actors.buffs.healing.desc=아츠의 치유력이 상처를 치유하고 살을 꿰매고 있습니다.\n\n치유 효과가 사라지기 전까지 매 턴마다 체력을 꾸준히 회복합니다. 매 턴마다 치유량은 조금씩 줄어들 수 있습니다.\n\n다음 턴에 %d의 체력을 회복할 것입니다.\n\n남은 총 회복량은 %d입니다.
-
 actors.buffs.hex.name=주술에 걸림
 actors.buffs.hex.heromsg=당신은 주술에 걸렸다!
 actors.buffs.hex.desc=암흑 아츠가 집중력을 빨아들여, 대상을 약간 혼란스럽게 합니다.\n\n이 주술은 정확도와 회피를 각각 20%%씩 줄여, 대상의 전투를 불리하게 만듭니다.\n\n주술이 풀리기까지 %s턴 남았습니다.
-
 actors.buffs.holdfast.name=굳건한 태세
 actors.buffs.holdfast.desc=블레이즈가 자리를 지키고 있으며, 움직이기 전까지 방어력이 0-%d만큼 증가합니다.
-
 actors.buffs.hunger.hungry=배고픔
 actors.buffs.hunger.starving=굶주림
 actors.buffs.hunger.onhungry=당신은 배가 고프다.
@@ -223,70 +160,57 @@ actors.buffs.hunger.rankings_desc=굶어 죽음
 actors.buffs.hunger.desc_intro_hungry=당신은 배가 조금 고프지만 아직 그렇게 급하지는 않습니다.
 actors.buffs.hunger.desc_intro_starving=당신은 너무 배고파서 체력이 줄어들고 있습니다.
 actors.buffs.hunger.desc=\n\n던전에서 시간을 보내는 동안 배고픔이 천천히 증가하여 결국 굶주리게 됩니다. 굶주리는 동안에는 체력이 회복되지 않고 천천히 감소합니다.\n\n식량 조절은 중요합니다! 남는 체력이 있다면 나중에 더 많은 식량을 위해 잠시 굶주리는것도 나쁘지 않은 생각 입니다. 효과적인 식량 조절로 음식을 훨씬 더 많이 절약할 수 있습니다.
-
 actors.buffs.invisibility.name=투명화
 actors.buffs.invisibility.desc=당신은 주변 환경에 완벽하게 섞여들어 보이지 않습니다.\n\n투명화 상태 동안 적들은 공격하거나 따라올 수 없습니다. 물리적 공격이나, 주문서 혹은 아츠 스태프 같은 아츠 효과를 사용하는 것은 투명화를 즉시 중단시킵니다.\n\n투명화는 %s턴 동안 지속됩니다.
-
+actors.buffs.invulnerability.name=무적
+actors.buffs.invulnerability.desc=강력한 힘이 당신을 모든 피해로부터 보호하고 있습니다.\n\n무적 상태에서는 마비와 동결에 면역이 됩니다.\n\n무적 효과는 %s턴 동안 지속됩니다.
 actors.buffs.camouflage.name=위장
 actors.buffs.camouflage.desc=위장은 투명화와 같은 효과를 내지만, 주위에 적이 있다면 해제됩니다.\n\n위장한 적은 플레이어가 발광 혹은 심안 버프를 보유했거나 인접한 상태가 아니라면 모든 피해를 절반만 받습니다.\n\n위장은 %s턴 동안 지속됩니다.
-
 actors.buffs.levitation.name=부유
 actors.buffs.levitation.desc=아츠의 힘이 당신을 공중으로 띄워 마치 무게가 없는 것 처럼 느껴집니다.\n\n공중에 뜬 상태에서는 모든 지상 효과를 무시합니다. 함정을 밟지 않으며, 불을 끄기 위해 물에 들어갈 수 없고, 식물을 밟을 수 없고, 속박당하지 않으며, 구덩이 위를 날아다닐 수 있습니다. 그러나 이 모든 일들은 부유가 끝나는 바로 그 순간부터 다시 효과를 발휘하니 주의하십시오!\n\n부유 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.lifelink.name=생명 연결
 actors.buffs.lifelink.desc=이 캐릭터의 생명력은 다른 캐릭터와 이어져 있습니다. 하나가 입은 피해는 다른 대상과 공유됩니다.\n\n한 캐릭터가 피해를 입으면, 그 피해의 절반이 생명력을 공유한 대상에게 대신 가해집니다.\n\n생명 연결은 %s 턴이 지나거나, 연결된 캐릭터가 죽으면 끝납니다.
-
 actors.buffs.light.name=발광
 actors.buffs.light.desc=가장 어두운 던전에서라도, 당신 곁에 있는 밝은 불빛은 매우 든든한 존재입니다.\n\n불빛은 어둠을 몰아 내며, 주변 환경에 구애받지 않고 시야를 더 넓혀줍니다.\n\n발광 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.lockedfloor.name=층이 잠겨있음
 actors.buffs.lockedfloor.desc=현재 층이 잠겨 있어 당신은 나갈 수 없습니다!\n\n층이 잠겨있는 동안 당신은 배고픔이 증가하지 않고 굶주림 피해를 입지 않습니다. 더하여 이 층의 보스를 물리치러 나아가지 않는 이상 재생 효과는 멈춥니다.\n\n또 층이 잠겨있는 동안 축복받지 않은 앙크로 부활한다면 해당 층을 재시작하게됩니다.\n\n잠금을 풀기 위해 이 층의 보스를 물리치십시오.
-
+actors.buffs.lostinventory.name=소지품 분실
+actors.buffs.lostinventory.desc=당신의 소지품을 잃어버렸습니다! 찾을 때까지 사용할 수 없습니다.
 actors.buffs.lancecharge.name=랜스 차징!
 actors.buffs.lancecharge.desc=현재 가속한 상태입니다!\n\n이동속도가 5배가 되었으며, 다음 공격은 3배의 피해를 줄 것입니다.\n공격한다면 이 효과는 사라집니다.
-
 actors.buffs.magicalsight.name=아츠 비전
 actors.buffs.magicalsight.desc=당신은 어떻게든 마음의 눈으로 주변을 살펴볼 수 있게 되었습니다.\n\n시야를 가리는 효과나 지형은 아츠 시야가 활성화 된 동안 시야를 가리지 않습니다.\n\n아츠 시야는 %s턴 동안 지속됩니다.
-
 actors.buffs.magicalsleep.name=한눈 팔기
 actors.buffs.magicalsleep.toohealthy=너무 건강한 당신은 수면의 욕구에 저항했다.
 actors.buffs.magicalsleep.fallasleep=당신은 깊은 잠에 빠졌다.
 actors.buffs.magicalsleep.wakeup=당신은 생기있고 건강한 기분으로 깨어났다.
 actors.buffs.magicalsleep.desc=이 캐릭터는 깊은 아츠의 수면에 빠져 자연적으로는 일어날 수 없습니다.\n\n아츠의 수면은 일반 수면과 다를 것이 없지만, 오직 피해를 입어야만 깨어날 수 있다는 것이 차이점입니다.\n\n오퍼레이터에게 걸린 아츠 숙면은 치유의 힘이 깃들어 있어, 자는 동안 체력을 빠른 속도로 회복시킵니다.
-
 actors.buffs.magicimmune.name=아츠 면역
 actors.buffs.magicimmune.desc=모든 아츠 효과가 당신에 대한 효력을 잃었으며, 당신은 이들에 아무런 영향도 받지 않게 되었습니다.\n\n이 효과가 발동되어 있는 한 당신은 저주, 장비의 아츠 효과, 아츠 스태프, 주문서 등을 포함한 모든 해롭거나 이로운 아츠에 면역이 될 것입니다.\n\n효과가 끝나기까지 %s 턴 남았습니다.
-
 actors.buffs.mindvision.name=심안
 actors.buffs.mindvision.desc=당신은 어떻게든 이 층에 있는 모든 생물체들을 마음의 눈으로 볼 수 있습니다. 익숙한 현상은 아니겠지요.\n\n심안 효과가 지속되는 동안 현재 층에 있는 모든 캐릭터들을 볼 수 있습니다. 이 효과로 보이는 생명체들 역시 시야 내의 캐릭터에게 효과가 있는 아츠 주문의 대상에 포함됩니다.\n\n심안 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.momentum.momentum=가속 중
 actors.buffs.momentum.running=프리러닝
 actors.buffs.momentum.resting=회복 중
 actors.buffs.momentum.momentum_desc=레드는 달리면서 프리러닝을 시작하기 위해 사용할 가속력을 얻습니다.\n\n가속력 하나 당 2턴의 프리러닝이 가능하며, 최대 10까지 중첩됩니다. 가속력은 레드가 멈춘 동안 빠르게 사라집니다.\n\n현재 가속력: %d.
 actors.buffs.momentum.running_desc=레드는 달리면서 가속력을 얻으며, 얻은 가속력을 소모해 프리러닝 상태에 돌입합니다.\n\n프리러닝 중의 레드는 두 배 빠른 속도로 이동하며 현재 레벨에 따른 추가 회피를 얻습니다.\n\n남은 턴: %d.
 actors.buffs.momentum.resting_desc=레드는 달리면서 프리러닝을 시작하기 위해 사용할 가속력을 얻습니다.\n\n레드는 가속력을 다시 쌓기 전 기력을 다시 회복할 시간이 필요합니다.\n\n남은 턴: %d.
-
 actors.buffs.ooze.name=산성 덩어리
 actors.buffs.ooze.heromsg=산성 덩어리가 살점을 삼킨다. 물에서 씻어내야 한다!
 actors.buffs.ooze.ondeath=당신은 녹아버렸다....
 actors.buffs.ooze.rankings_desc=산성에 의해 녹아버림
 actors.buffs.ooze.desc=이 끈적한 산성 덩어리가 당신의 살에 붙어 살을 천천히 녹이고 있습니다.\n\n이 덩어리는 일정한 시간 동안 지속적으로 피해를 입히지만, 물에 즉시 씻어낼  수 있습니다.\n\n덩어리가 떨어지기까지 %s턴 남았습니다.
-
 actors.buffs.paralysis.name=마비
 actors.buffs.paralysis.heromsg=당신은 마비되었다!
 actors.buffs.paralysis.out=마비 저항
 actors.buffs.paralysis.desc=때로는 아무것도 하지 않는 것이 최악입니다.\n\n마비는 효과가 해제될 때까지 기다리게 하여 모든 행동을 완전히 정지시킵니다. 캐릭터에 가해지는 피해의 고통은 마비에 저항할 수 있게 하여 효과가 해제될 수 있게 합니다.\n\n마비의 남은 턴: %s
-
 actors.buffs.pincushion.name=부착
 actors.buffs.pincushion.desc=당신이 던진 투척 무기가 이 캐릭터에게 꽂혔습니다. 부착된 투척 무기는 그 캐릭터가 죽고 난 후 바닥에 떨어지게 됩니다.\n\n현재 다음과 같은 아이템들이 붙어 있습니다:
-
 actors.buffs.poison.name=중독
 actors.buffs.poison.heromsg=당신은 중독되었다!
 actors.buffs.poison.ondeath=당신은 중독사하였다...
 actors.buffs.poison.rankings_desc=맹독에 중독되어 사망
 actors.buffs.poison.desc=독이 당신의 피를 타고 흘러가 내부 장기의 기능을 천천히 방해합니다.\n\n독은 매 턴마다 남은 지속시간에 비례하는 피해를 입힙니다.\n\n독 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.preparation.name=뼈찌르기
 actors.buffs.preparation.desc=프로젝트 레드는 그림자 속에서 침착하게 기다리며, 치명적인 일격을 준비합니다.
 actors.buffs.preparation.desc_dmg=다음 공격 시 _%1$d%%의 추가 피해_ 를 주며, 체력이 _%2$d%%미만_ 인 일반적인 적 또는 체력이 _%3$d%%미만_ 인 보스를 일격에 처치할 것입니다.
@@ -298,101 +222,71 @@ actors.buffs.preparation.prompt=공격할 대상을 선택\n최대 점멸 사정
 actors.buffs.preparation.no_target=공격할 대상이 없다.
 actors.buffs.preparation.out_of_reach=사정거리 바깥의 적을 공격할 수 없다.
 actors.buffs.preparation.assassinated=암살당함
-
 actors.buffs.prismaticguard.name=비활성화 프리즈마 거울상
 actors.buffs.prismaticguard.desc=당신은 현재 비활성화된 프리즈마 거울상에게 보호되고 있으며, 적이 등장하면 튀어나와 당신을 보호해 줄 것입니다!\n\n비활성화된 동안, 프리즈마 거울상은 받은 피해를 천천히 회복할 것입니다.\n\n현재 체력은 %d이며, 최대 체력은 %d입니다.
-
 actors.buffs.recharging.name=충전
 actors.buffs.recharging.desc=에너지가 당신에게 통하며 아츠 스태프와 흑요석 반지를 빠르게 충전시킵니다.\n\n이 효과는 기존의 충전 속도에 더하여, 매 턴마다 1/4의 충전량을 추가로 충전시킵니다.\n\n충전 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.revealedarea.name=드러난 구역
 actors.buffs.revealedarea.desc=던전의 일부 구역이 일시적으로 당신에게 드러났으며,  당신이 어디에 있든 볼 수 있게 됩니다.\n\n남은 턴: %s.
-
 actors.buffs.revealedchar.name=드러남
 actors.buffs.revealedchar.desc=이 대상이 오퍼레이터에게 드러났으며, 어디에 있든 보이게 됩니다.\n\n남은 턴: %s.
-
 actors.buffs.roots.name=속박
 actors.buffs.roots.heromsg=당신은 움직일 수 없다!
 actors.buffs.roots.desc=속박(아츠 속박이든 자연적 속박이든)은 당신의 발을 묶어, 그 자리에 서 있게 합니다.\n\n속박은 대상을 그 자리에 묶어 이동할 수 없게 하지만, 다른 행동은 여전히 할 수 있습니다.\n\n속박 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.scrollempower.name=주문서 강화
 actors.buffs.scrollempower.desc=아미야가 최근에 읽은 주문서의 에너지가 아츠 스태프에 힘을 전달하고 있습니다! %1$d턴 내의 다음 아츠 스태프 시전이 +%2$d의 강화 수치를 가지게 될 것입니다.
-
 actors.buffs.shadows.name=그림자 숨기
 actors.buffs.shadows.desc=당신은 주변의 그림자에 동화되어, 투명해졌으며 느린 신진대사를 가지게 되었습니다.\n\n투명화가 적용되는 동안, 적들은 당신을 공격하거나 따라올 수 없습니다. 대부분의 물리적인 공격이나 아츠 효과(주문서나 아츠 스태프 등)는 즉시 투명화를 취소합니다. 또한, 그림자에 숨는 동안에는 덜 배고파집니다.\n\n직접 그림자에서 빠져나오거나, 적이 당신에게 다가오기 전까지는 계속 그림자에 숨게될 것입니다.
-
 actors.buffs.slow.name=느려짐
 actors.buffs.slow.desc=슬로우 아츠은 목표의 시간에 영향을 주어, 다른 모든 것이 매우 빠르게 움직이는 것처럼 보이게 합니다.\n\n느려진 캐릭터는 모든 행동에 두 배의 시간이 필요합니다.\n\n느려짐 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.snipersmark.name=정조준
 actors.buffs.snipersmark.desc=그레이스롯은 그녀가 가장 최근에 공격한 대상에게 집중합니다. 그녀는 어떻게 쇠뇌가 개조되었는지에 따라 다양한 특수한 공격을 시전할 수 있습니다.\n\n과부하 개조 혹은 개조되지 않은 쇠뇌는 _스냅샷_ 을 쏘며, 적은 피해를 입히지만 발사하는 데 턴을 소모하지 않는 화살을 쏩니다.\n\n공격 속도를 위해 개조된 쇠뇌는 _아츠 화살_ 을 쏩니다. 아츠 화살은 적이 회피하거나 막아내도 무조건 불구를 부여하며, 발사하는데 1턴을 소모합니다.\n\n피해량을 위해 개조된 쇠뇌는 _저격탄_ 을 쏩니다. 이 빗나가지 않는 화살은 대상과의 거리에 따른 추가 피해를 입히며, 발사하는 데 2턴을 소모합니다.
-
 actors.buffs.soulmark.name=낙인
 actors.buffs.soulmark.desc=아미야가 해당 생물체의 영혼을 이용하고 있습니다. 대상에게 물리 피해를 입힐 때 마다 아미야의 체력을 회복하고 허기를 감소시킵니다.\n\n영혼 표식은 %s턴 동안 지속됩니다.
-
 actors.buffs.stamina.name=지구력
 actors.buffs.stamina.desc=끝없는 지구력으로 더 빠르게 움직일 수 있게 되었습니다!\n\n효과 중에는 50%% 더 빠르게 이동하지만, 다른 행동은 정상적인 속도로 실행합니다.\n\n지구력 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.vulnerable.name=취약
 actors.buffs.vulnerable.heromsg=당신은 연약해진 것 같다!
 actors.buffs.vulnerable.desc=취약 아츠은 대상이 받는 모든 물리적 피해를 33%%만큼 늘립니다. 이 효과는 갑옷에 의한 피해 경감을 계산한 다음 적용됩니다.\n\n취약 상태가 끝나기까지 %s턴 남았습니다.
-
 actors.buffs.terror.name=공포
 actors.buffs.terror.desc=공포 효과는 대상의 정신을 조작하여 주체할 수 없는 공황 상태로 몰아넣는 아츠입니다.\n\n공포에 질린 캐릭터들은 대상의 적들로부터 멀리 도망치며, 최대한 많은 벽과 문을 사이에 두려고 합니다. 하지만 고통의 충격은 이 효과를 중단시킵니다.\n\n공포 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.toxicimbue.name=맹독과 동화함
 actors.buffs.toxicimbue.desc=당신은 독성 에너지와 하나가 되었습니다!\n\n당신이 움직일 때 마다 독성 가스가 피어오를 것이며, 이 가스는 적들을 중독시키지만 당신은 효과가 끝날 때 까지 독가스와 맹독 효과에 면역이 됩니다.\n\n맹독 동화는 %s턴 동안 지속됩니다.
-
 actors.buffs.corrosion.name=부식
 actors.buffs.corrosion.heromsg=당신의 몸이 녹고 있다!
 actors.buffs.corrosion.ondeath=당신은 녹아버렸다...
 actors.buffs.corrosion.rankings_desc=산성에 의해 녹아버림
 actors.buffs.corrosion.desc=강력한 산은 살, 금속, 그리고 뼈와 같은 것들을 빠르게 녹여버립니다.\n\n대상이 계속 녹아 내림에 따라 부식 피해가 증가합니다.\n\n부식 지속 턴: %1$s.\n현재 부식 피해: %2$d.
-
 actors.buffs.vertigo.name=현기증
 actors.buffs.vertigo.desc=온 세상이 빙빙 돌아가며 일직선으로 걷는 것이 힘들 수 있습니다.\n\n현기증 효과를 받는 동안 움직이려는 캐릭터는 의도한 방향 대신 무작위 방향으로 움직이게 됩니다.\n\n현기증 효과는 %s턴 동안 지속됩니다.
-
 actors.buffs.wandempower.name=출력 강화
 actors.buffs.wandempower.desc=피해를 주는 아츠 스태프에 힘이 깃들어, 몇 번의 발사 동안 아츠의 피해량이 증가합니다.\n\n추가 피해량: %1$d.\n남은 발사 수: %2$d.
-
 actors.buffs.weakness.name=약화
 actors.buffs.weakness.heromsg=당신은 약해진 기분이 든다!
 actors.buffs.weakness.desc=모든 것이 갑작스레 훨씬 무겁게 느껴집니다.\n\n약화 아츠은 대상의 물리적 힘을 약화시켜, 기존보다 33%% 감소된 피해를 입히게 만듭니다.\n\n약화가 끝나기까지 %s턴 남았습니다.
-
 actors.buffs.wellfed.name=배부름
 actors.buffs.wellfed.desc=당신은 매우 배부르며, 만족감을 느끼고 있습니다.\n\n배부른 상태에서, 당신은 허기가 지지 않을 것이며, 일정 시간동안 추가적인 체력을 회복할 것입니다.\n\n배부름을 느끼지 않기까지 %d 턴 남았습니다.
-
 actors.buffs.silence.name=침묵
 actors.buffs.silence.heromsg=읍읍? 읍읍읍읍?!!
 actors.buffs.silence.desc=읍읍읍...\n\n대원이라면 일기장과 아츠 스태프를 사용할 수 없으며, 적이라면 특수 능력이 봉인됩니다.\n\n%s 턴 동안 지속됩니다.
-
 actors.buffs.rose_force.name=집중력
 actors.buffs.rose_force.desc=로즈몬티스는 집중 상태입니다.\n\n집중 시간 내에 가하는 방벽 투척은 더욱 강한 피해를 입힐 것입니다.\n\n집중력이 떨어질 때까지 %s 턴 남았습니다.
-
 actors.buffs.meatpower_mystery.name=이상한 고기의 힘
 actors.buffs.meatpower_mystery.desc=이 고기는 수상한 맛이 납니다!\n\n방벽 투척의 피해량이 상승하고 대상을 _침묵_ 시킵니다. \n\n고기의 힘이 떨어질 때까지 %s 턴 남았습니다.
-
 actors.buffs.meatpower_stewed.name=삶아진 고기의 힘
 actors.buffs.meatpower_stewed.desc=이 고기는 무난한 맛이 납니다!\n\n방벽 투척의 피해량과 공격 속도가 _상승_ 합니다. \n\n고기의 힘이 떨어질 때까지 %s 턴 남았습니다.
-
 actors.buffs.meatpower_frozen.name=차가운 고기의 힘
 actors.buffs.meatpower_frozen.desc=이 고기는 이가 시립니다!\n\n방벽 투척의 피해량이 상승하고 적중시 체력을 _회복_ 합니다. \n\n고기의 힘이 떨어질 때까지 %s 턴 남았습니다.
-
 actors.buffs.meatpower_chargrilled.name=구워진 고기의 힘
 actors.buffs.meatpower_chargrilled.desc=이 고기는 정석의 맛이 납니다!\n\방벽 투척의 피해량이 상승하고 대상을 _약화_ 시킵니다. \n\n고기의 힘이 떨어질 때까지 %s 턴 남았습니다.
-
 actors.buffs.twilight.name=라그나로크
 actors.buffs.twilight.desc=_"한 마리도 도망칠 수 있을 거라 생각 마라!"_\n\n거인의 힘을 사용하여 자신의 몸을 불태우고 있습니다. 지속 중 공격력이 2배로 상승하고 공격 사거리가 늘어나며, 받는 피해가 0으로 고정됩니다. 하지만 거인의 힘을 쓰는 동안 물약을 사용할 수 없습니다.\n\n거인의 힘이 사라질 때까지 %s 턴 남았습니다.
-
 actors.buffs.spikesbuff.name=가시
 actors.buffs.spikesbuff.desc=피격 시 주위 적에게 피해를 입힙니다. \n\n가시 상태가 끝날 때까지 %s 턴 남았습니다.
-
 actors.buffs.ragethrowcooldown.name=분노 투척 쿨타임
 actors.buffs.ragethrowcooldown.desc=분노 투척을 다시 사용할 수 있을 때까지 %s 턴 남았습니다.
-
 actors.buffs.radiantknight.name=빛의 기사
 actors.buffs.radiantknight.desc=빛의 힘이 당신을 감싸고있습니다. 피해량과 피해 저항이 증가하고 실명에 면역이 됩니다.\n\n빛의 기사의 힘이 끝날 때까지 %s 턴 남았습니다.
-
 actors.buffs.knightskill.name=기사도
 actors.buffs.knightskill.bad_target=공격 범위 내에 있는 적을 공격해야 합니다.
 actors.buffs.knightskill.prompt=공격할 대상을 선택
@@ -401,30 +295,30 @@ actors.buffs.knightskill$combomove.knockback_desc=_밀쳐내기_ 대상을 1칸 
 actors.buffs.knightskill$combomove.smash_desc=_강타_ 140%의 피해를 입힙니다.
 actors.buffs.knightskill$combomove.killblow_desc=_마무리 일격_ 70%의 피해를 입힙니다. 이 공격으로 적을 처치하면 턴을 소모하지않고 바로 다음 필살기를 사용할 수 있습니다,
 actors.buffs.knightskill$combomove.lightsword_desc=_빛의 검_ 신념 중첩에 비례한 피해를 입힙니다. 최대 피해로 시전시 대상을 마비시킵니다.\n피해 배율 : %1d%% / %2d%%
-
+actors.buffs.knightskill.combo_stack=신념 %d/10
+actors.buffs.knightskill.combo_max=신념이 최대에 달했습니다!
+actors.buffs.knightskill.desc_stacks=현재 신념: _%d/10_
+actors.buffs.shieldslamcounter.name=방패 기세
+actors.buffs.shieldslamcounter.desc=근접 공격을 받을 때마다 _방패 밀기_ 의 위력이 쌓입니다. 축적된 피해가 최대치의 _50%% 이상일 때_ 방패 밀기로 대상을 1칸 밀어냄과 동시에 기절시킬 수 있습니다. 빛의 기사 상태일 때 실명을 추가로 부여합니다.\n축적된 피해: %1$d/%2$d | 피해 배율: %3$d%%
+actors.buffs.shieldslamcounter.bad_target=공격 범위 내에 있는 적을 공격해야 합니다.
+actors.buffs.shieldslamcounter.prompt=방패 밀기 대상을 선택
 actors.buffs.hallucination.name=환각
 actors.buffs.hallucination.desc=이 캐릭터는 환각을 보고있습니다! 환각을 보는 동안 명중률이 35%감소하며, 공격시 낮은 확률로 자해합니다.
 actors.buffs.hallucination.ondeath=당신은 환각에 빠져 자살했다...
-
 actors.buffs.oblivion.name=망각
 actors.buffs.oblivion.desc=모든 것을 잊어가고 있습니다. 시야가 감소하고 행동 속도가 대폭 감소합니다.\n\n망각 상태에서 빠져나올 때까지 %s 턴 남았습니다.
-
 actors.buffs.windenergy.name=바람 에너지
 actors.buffs.windenergy.desc=바람의 힘이 느껴집니다. 바람 에너지가 100 이상이면 _폭풍_ 능력을 사용할 수 있습니다.\n\n현재 에너지 : %d%%
-
 actors.buffs.stomecharge.name=폭풍
 actors.buffs.stomecharge.desc=폭풍의 힘이 당신을 감싸 이동속도를 상승시킵니다. 폭풍의 힘은 그 힘이 사라질 때 주위 적들에게 강력한 피해를 입힐 것입니다.
-
 actors.buffs.heat.normal=열기
 actors.buffs.heat.overheat=과열
 actors.buffs.heat.normal_desc=블레이즈의 몸에 열기가 쌓이고 있습니다. 열기가 50%%이상이면 체력을 소모해 과열 상태에 진입할 수 있습니다.\n\n현재 열기 : %s%%
 actors.buffs.heat.overheat_desc=블레이즈의 몸이 불타오르고 있습니다. 지속되는동안 물리 피해량이 증가하며, 열기를 소모합니다. 열기가 60%% 이상이면 _불사_ 상태가 되어 죽음에 저항합니다. 불사 발동 중에는 피격시 열기가 감소합니다.\n주의 : 문명의 존속과 산크타의 내기는 불사로 못버팁니다.\n\n현재 열기 : %s%%
-
 actors.buffs.wildmark.name=야생의 기운
 actors.buffs.wildmark.desc=레드는 야생의 힘을 쌓은 후 검풍으로 방출할 수 있습니다.\n\n현재 충전량 : %d(%s%%)
 actors.buffs.wildmark.prompt=검풍을 날릴 곳을 지정해주세요.
 actors.buffs.wildmark.self_target=자신에게 검풍을 날릴 수 없습니다.
-
 actors.buffs.chencombo.name=적소 해방
 actors.buffs.chencombo.combo=%d 콤보!
 actors.buffs.chencombo.bad_target=공격 범위 내에 있는 적을 공격해야 합니다.
@@ -433,23 +327,16 @@ actors.buffs.chencombo.desc=첸은 공격을 성공할 때마다 적소에 힘�
 actors.buffs.chencombo$combomove.skill1_desc=_칼집 공격_(5): 대상을 1턴간 마비시키는 100% 피해를 입힙니다. 같은 적을 1회만 마비시킬 수 있습니다.
 actors.buffs.chencombo$combomove.skill2_desc=_발도_(10): 대상에게 100%의 피해를 입힌 후 일직선 관통 공격을 해 150%의 피해를 입힙니다.
 actors.buffs.chencombo$combomove.skill3_desc=_절영_(15): 대상에게 100%의 피해로 4번 공격합니다.
-
 actors.buffs.chenshooterbuff$tacmovecooldown.name=전술이동 쿨타임
 actors.buffs.chenshooterbuff$tacmovecooldown.desc=전술이동을 다시 사용할 수 있을 때까지 %s 턴 남았습니다.
-
 actors.buffs.closerangeshot.name=근접사격
 actors.buffs.closerangeshot.active=첸은 주위에 적이 있으면 사격의 피해량이 대폭 상승합니다.\n\n현재 상태: 활성화
 actors.buffs.closerangeshot.passive=첸은 주위에 적이 있으면 사격의 피해량이 대폭 상승합니다.\n\n현재 상태: 비활성화
-
 actors.buffs.nervousimpairment.name=신경손상
 actors.buffs.nervousimpairment.desc=신경손상이 지속되는 상태입니다. 최대치에 도달하면 큰 충격을 받게될 것입니다.\n현재 손상도 : %s%%
-
-
-
-###hero
+### hero
 actors.hero.talent.genius.title=지니어스
 actors.hero.talent.genius.desc=이 특성에 투자하면 _감정의 일기장_ 효과가 즉시 발동합니다.
-
 actors.hero.talent.hearty_meal.title=푸짐한 식사
 actors.hero.talent.hearty_meal.desc=_+1:_ 음식을 섭취할 때 체력이 50% 이하라면 _2 HP_ , 25% 이하라면 _3 HP_ 를 회복합니다.\n\n_+2:_ 음식을 섭취할 때 체력이 50% 이하라면  _3 HP_ , 25% 이하라면 _5 HP_ 를 회복합니다.
 actors.hero.talent.armsmasters_intuition.title=장인의 직감
@@ -487,7 +374,7 @@ actors.hero.talent.enhanced_combo.desc=_+1:_ 블레이즈의 연속 타격이 6 
 actors.hero.talent.tactical_shield.title=전술 방어막
 actors.hero.talent.tactical_shield.desc=_+1:_ 블레이즈의 갑옷 강화 수치당 방어력이 1 상승합니다. 최대 _4_ 까지 상승합니다.\n\n_+2:_ 블레이즈의 갑옷 강화 수치당 방어력이 1 상승합니다. 최대 _7_ 까지 상승합니다.\n\n_+3:_ 블레이즈의 갑옷 강화 수치당 방어력이 1 상승합니다. 최대 _10_ 까지 상승합니다.
 actors.hero.talent.chainsaw_extend.title=전기톱 연장
-actors.hero.talent.chainsaw_extend.desc=_+1:_ 무기 사정거리가 1 상승합니다. 무기의 힘 요구치가 _4_ 증가합니다.\n\n_+2:_ 무기 사정거리가 1 상승합니다. 무기의 힘 요구치가 _3_ 증가합니다.\n\n_+3:_ 무기 사정거리가 1 상승합니다. 무기의 힘 요구치가 _2_ 증가합니다.
+actors.hero.talent.chainsaw_extend.desc=_+1:_ 근접 무기의 사정거리가 1 상승합니다. 근접 무기의 힘 요구치가 _4_ 증가합니다.\n\n_+2:_ 근접 무기의 사정거리가 1 상승합니다. 근접 무기의 힘 요구치가 _3_ 증가합니다.\n\n_+3:_ 근접 무기의 사정거리가 1 상승합니다. 근접 무기의 힘 요구치가 _2_ 증가합니다.
 actors.hero.talent.infinite_rage.title=무한의 분노
 actors.hero.talent.infinite_rage.desc=_+1:_ 분노가 _100%_이상일 때 20%의 피해 저항을 얻습니다.\n\n_+2:_ 분노가 _80%_이상일 때 20%의 피해 저항을 얻습니다.\n\n_+3:_ 분노가 _60%_이상일 때 20%의 피해 저항을 얻습니다.\n\n_+4:_ 분노가 _40%_이상일 때 20%의 피해 저항을 얻습니다.
 actors.hero.talent.infinite_battle.title=무한의 투쟁
@@ -496,8 +383,7 @@ actors.hero.talent.sparkoflife.title=생명의 불꽃
 actors.hero.talent.sparkoflife.desc=_+1:_ 공격시 _6%_ 확률로 체력을 5%회복합니다.\n\n_+2:_ 공격시 _9%_ 확률로 체력을 5%회복합니다.\n\n_+3:_ 공격시 _12%_ 확률로 체력을 5%회복합니다.\n\n_+4:_ 공격시 _15%_ 확률로 체력을 5%회복합니다.
 actors.hero.talent.deadly_reach.title=연속격파
 actors.hero.talent.deadly_reach.desc=_+1:_ 콤보 기본 지속시간이 _1 턴_ 증가합니다.\n\n_+2:_ 콤보 기본 지속시간이 _2 턴_ 증가합니다.\n\n_+3:_ 콤보 기본 지속시간이 _3 턴_ 증가합니다.\n\n_+4:_ 콤보 기본 지속시간이 _4 턴_ 증가합니다.
-
-// 열기 블붕이
+# 열기 블붕이
 actors.hero.talent.heat_blow.title=타오르는 일격
 actors.hero.talent.heat_blow.desc=_+1:_ 열기가 50% 이상이면 물리 피해량이 _10%_ 증가합니다.\n\n_+2:_ 열기가 50% 이상이면 물리 피해량이 _15%_ 증가합니다.\n\n_+3:_ 열기가 50% 이상이면 물리 피해량이 _20%_ 증가합니다.\n\n_과열_ 상태라면 무조건 발동합니다.
 actors.hero.talent.heat_of_protection.title=인내의 불꽃
@@ -508,7 +394,6 @@ actors.hero.talent.heat_of_absorption.title=흡수의 불꽃
 actors.hero.talent.heat_of_absorption.desc=_+1:_ 과열 상태일 때 입힌 물리 피해의 _2%_ 만큼 체력을 회복합니다.\n\n_+2:_ 과열 상태일 때 입힌 물리 피해의 _3%_ 만큼 체력을 회복합니다.\n\n_+3:_ 과열 상태일 때 입힌 물리 피해의 _4%_ 만큼 체력을 회복합니다.\n\n_+4:_ 과열 상태일 때 입힌 물리 피해의 _5%_ 만큼 체력을 회복합니다.\n\n1회 공격 회복 최대치 : 10
 actors.hero.talent.redcomet.title=붉은 혜성
 actors.hero.talent.redcomet.desc=_+1:_ 열기가 70%이상일 때 이동속도가 _5%_ 증가합니다.\n\n_+2:_ 열기가 70%이상일 때 이동속도가 _10%_ 증가합니다.\n\n_+3:_ 열기가 70%이상일 때 이동속도가 _15%_ 증가합니다.\n\n_+4:_ 열기가 70%이상일 때 이동속도가 _20%_ 증가합니다.\n\n과열 상태일 땐 무조건 발동하며, 특성 효과가 5배로 적용됩니다.
-
 actors.hero.talent.empowering_meal.title=힘이 나는 식사
 actors.hero.talent.empowering_meal.desc=_+1:_ 식사 후 다음 3번의 아츠 스태프 발사에 _3 만큼의 추가 피해_ 를 줍니다.\n\n_+2:_ 식사 후 다음 3번의 아츠 스태프 발사에 _4 만큼의 추가 피해_ 를 줍니다.
 actors.hero.talent.scholars_intuition.title=사장의 권능
@@ -544,7 +429,7 @@ actors.hero.talent.soul_eater.desc=_+1:_ 영혼의 낙인이 가한 피해당 _0
 actors.hero.talent.necromancers_minions.title=환영 생성
 actors.hero.talent.necromancers_minions.desc=_+1:_ 영혼의 낙인이 걸린 적이 죽었을 때, 아미야는 _10% 확률_ 로 그 자리에 자신의 환영을 소환합니다.\n\n_+2:_ 영혼의 낙인이 걸린 적이 죽었을 때,  아미야는 _20% 확률_ 로 그 자신의 환영을 소환합니다.\n\n_+3:_ 영혼의 낙인이 걸린 적이 죽었을 때, 아미야는 _30% 확률_ 로 그 자리에 자신의 환영을 소환합니다.
 actors.hero.talent.liberation.title=해방
-actors.hero.talent.liberation.desc=_+1:_ 아미야의 흑요석 반지 최대 충전량이 _1_ 증가합니다.\n\n_+2:_ 아미야의 흑요석 반지 최대 충전량이 _2_ 증가합니다.\n\n_+3:_ 아미야의 흑요석 반지 최대 충전량이 _3_ 증가합니다.
+actors.hero.talent.liberation.desc=_+1:_ 아미야의 흑요석 반지 최대 충전량이 _1_ 증가합니다.\n\n_+2:_ 아미야의 흑요석 반지 최대 충전량이 _2_, 무기 티어가 1 증가합니다. \n\n_+3:_ 아미야의 흑요석 반지 최대 충전량이 _3_, 무기 티어가 2 증가합니다.
 actors.hero.talent.rhodes.title=구호기사단
 actors.hero.talent.rhodes.desc=_+1:_ 일기장을 읽으면 _5_ 의 신비한 갑옷을 얻습니다. 이 신비한 갑옷은 15 턴마다 감소합니다.\n\n_+2:_ 일기장을 읽으면 _10_ 의 신비한 갑옷을 얻습니다. 이 신비한 갑옷은 15 턴마다 감소합니다.\n\n_+3:_ 일기장을 읽으면 _15_ 의 신비한 갑옷을 얻습니다. 이 신비한 갑옷은 15 턴마다 감소합니다.
 actors.hero.talent.azure_fury.title=푸른 분노
@@ -555,8 +440,7 @@ actors.hero.talent.emotion.title=감정 폭발
 actors.hero.talent.emotion.desc=특성에 투자한 횟수에 비례하여 _영혼의 낙인_을 부여할 확률이 증가합니다.
 actors.hero.talent.lord.title=마왕
 actors.hero.talent.lord.desc=_+1_: 영혼의 낙인의 지속 시간이 _2 턴_ 증가합니다.\n\n_+2_: 영혼의 낙인의 지속 시간이 _4 턴_ 증가합니다.\n\n_+3_: 영혼의 낙인의 지속 시간이 _6 턴_ 증가합니다.\n\n_+4_: 영혼의 낙인의 지속 시간이 _8 턴_ 증가합니다.
-
-//아미야 3차 서브클래스
+# 아미야 3차 서브클래스
 actors.hero.talent.chimera.title=키메라
 actors.hero.talent.chimera.desc=_+1_: 아츠 스태프 피해 보너스와 받는 물리 피해 증가량이 50%에서 _60%_로 증가합니다.\n\n_+2_: 아츠 스태프 피해 보너스와 받는 물리 피해 증가량이 50%에서 _70%_로 증가합니다.\n\n_+3_: 아츠 스태프 피해 보너스와 받는 물리 피해 증가량이 50%에서 _80%_로 증가합니다.
 actors.hero.talent.restriction.title=구속
@@ -567,11 +451,9 @@ actors.hero.talent.stabilize.title=안정화
 actors.hero.talent.stabilize.desc=_+1_: 체력이 _20%_ 이하면 받는 물리 피해가 증가하지 않습니다.\n\n_+2_: 체력이 _25%_ 이하면 받는 물리 피해가 증가하지 않습니다.\n\n_+3_: 체력이 _30%_ 이하면 받는 물리 피해가 증가하지 않습니다.\n\n_+4_: 체력이 _35%_ 이하면 받는 물리 피해가 증가하지 않습니다.
 actors.hero.talent.mind_crash.title=마인드 크래시
 actors.hero.talent.mind_crash.desc=아츠 스태프 적중시 대상에게 2턴간 표식을 남깁니다.\n\n_+1_: 표식이 있는 적은 _5%_ 확률로 피해를 1.5배 받습니다.\n\n_+2_: 표식이 있는 적은 _10%_ 확률로 피해를 1.5배 받습니다.\n\n_+3_: 표식이 있는 적은 _15%_ 확률로 피해를 1.5배 받습니다.\n\n_+4_: 표식이 있는 적은 _20%_ 확률로 피해를 1.5배 받습니다.
-
 actors.hero.talent$mindcrashmark.name=표식
 actors.hero.talent$mindcrashmark.desc=확률적으로 1.5배의 피해를 받습니다.\n\n%s 턴 남았습니다.
 actors.hero.talent$mindcrashmark.cri=치명타!
-
 actors.hero.talent.cached_rations.title=은닉한 보존식
 actors.hero.talent.cached_rations.desc=_+1:_ 레드는 던전 초반에 있는 상자들에서 _4개의 벌꿀 쿠키_ 를 찾아낼 수 있습니다.\n\n_+2:_ 레드는 던전 초반에 있는 상자들에서 _6개의 벌꿀 쿠키_ 을 찾아낼 수 있습니다.
 actors.hero.talent.thiefs_intuition.title=늑대의 직감
@@ -581,7 +463,7 @@ actors.hero.talent.sucker_punch.desc=_+1:_ 적을 처음 기습할 때 _1-3 만�
 actors.hero.talent.protective_shadows.title=아츠의 그림자
 actors.hero.talent.protective_shadows.desc=_+1:_ 망토를 사용하면 _매 4턴마다_ 아츠 기록장치의 SP를 1 만큼 충전합니다.\n\n_+2:_ 망토를 사용하면 _매 2턴마다_ 아츠 기록장치의 SP를 1 만큼 충전합니다.\n\n효과 발동시 체력이 낮다면 체력이 1 회복됩니다.
 actors.hero.talent.mystical_meal.title=신비한 식사
-actors.hero.talent.mystical_meal.desc=_+1:_ 식사에 1 턴만 소모되며, 식사 시 _1.5 턴의 유물 충전 효과_ 를 얻습니다.\n\n_+2:_ 식사에 1 턴만 소모되며, 식사 시 _3 턴의 유물 충전 효과_ 를 얻습니다.\n\n이 특성으로 굼 인형을 충전할 수 없습니다.
+actors.hero.talent.mystical_meal.desc=_+1:_ 식사에 1 턴만 소모되며, 식사 시 _1.5 턴의 유물 충전 효과_ 를 얻습니다.\n\n_+2:_ 식사에 1 턴만 소모되며, 식사 시 _3 턴의 유물 충전 효과_ 를 얻습니다.\n\n굼 인형은 이 특성으로 발동한 유물 충전의 효과를 받지 않습니다.
 actors.hero.talent.tracker.title=추적자
 actors.hero.talent.tracker.desc=_+1:_ 아츠 기록장치의 스킬 혹은 사냥 능력 발동시 즉시 _1 턴의 신속_을 얻습니다. 사냥 능력으로 적 처치시 체력을 _4_ 회복합니다.\n\n_+2:_ 아츠 기록장치의 스킬 혹은 사냥 능력 발동시 즉시 _2 턴의 신속_을 얻습니다. 사냥 능력으로 적 처치시 체력을 _7_ 회복합니다.\n\n이 특성의 효과가 발동하면 즉시 자신에게 걸린 실명,불구,속박을 해제합니다.
 actors.hero.talent.wide_search.title=수색 강화
@@ -618,8 +500,7 @@ actors.hero.talent.special_operations.title=특수작전
 actors.hero.talent.special_operations.desc=_+1:_ 프리러닝의 쿨타임이 _1 턴_ 감소합니다.\n\n_+2:_ 프리러닝의 쿨타임이 _2 턴_ 감소합니다.\n\n_+3:_ 프리러닝의 쿨타임이 _3 턴_ 감소합니다.\n\n_+4:_ 프리러닝의 쿨타임이 _4 턴_ 감소합니다.
 actors.hero.talent.bloodbath_operations.title=말살작전
 actors.hero.talent.bloodbath_operations.desc=사냥 능력의 피해량이 절반이 되지만 대상을 1턴간 마비시킵니다.\n\n_+1:_사냥 능력의 쿨타임이 _100 턴_ 감소합니다.\n\n_+2:_사냥 능력의 쿨타임이 _200 턴_ 감소합니다.\n\n_+3:_사냥 능력의 쿨타임이 _300 턴_ 감소합니다.\n\n_+4:_사냥 능력의 쿨타임이 _400 턴_ 감소합니다.
-
-//레드 3차 서브클래스
+# 레드 3차 서브클래스
 actors.hero.talent.wind_scar.title=바람의 상처
 actors.hero.talent.wind_scar.desc=_+1:_ 검풍이 대상을 _0-2칸_ 밀쳐냅니다.\n\n_+1:_ 검풍이 대상을 _1-2칸_ 밀쳐냅니다.\n\n_+1:_ 검풍이 대상을 _2칸_ 밀쳐냅니다.
 actors.hero.talent.opportunist.title=기회주의자
@@ -630,10 +511,8 @@ actors.hero.talent.sword_wind_upgrade.title=검풍 강화
 actors.hero.talent.sword_wind_upgrade.desc=_+1:_ 검풍의 피해 배율이 60%에서 _66%_로 증가합니다.\n\n_+2:_ 검풍의 피해 배율이 60%에서 _69%_로 증가합니다.\n\n_+3:_ 검풍의 피해 배율이 60%에서 _72%_로 증가합니다.\n\n_+4:_ 검풍의 피해 배율이 60%에서 _75%_로 증가합니다.
 actors.hero.talent.shadow_hunter.title=그림자 사냥꾼
 actors.hero.talent.shadow_hunter.desc=_+1:_ 기습 공격시 _5%_ 확률로 검풍을 충전합니다.\n\n_+2:_ 기습 공격시 _10%_ 확률로 검풍을 충전합니다.\n\n_+3:_ 기습 공격시 _15%_ 확률로 검풍을 충전합니다.\n\n_+4:_ 기습 공격시 _20%_ 확률로 검풍을 충전합니다.
-
 actors.hero.talent$lightclockcooldown.name=경량화 망토 쿨타임
 actors.hero.talent$lightclockcooldown.desc=경량화 망토 특성 재발동까지 %s 턴 남았습니다.
-
 actors.hero.talent.natures_bounty.title=자연의 은혜
 actors.hero.talent.natures_bounty.desc=_+1:_ 던전 초반에 있는 길게 자란 풀에서 _4개의 열매_ 를 찾아낼 수 있습니다.\n\n_+2:_ 던전 초반에 있는 길게 자란 풀에서 _6개의 열매_ 를 찾아낼 수 있습니다.
 actors.hero.talent.survivalists_intuition.title=구제자의 직감
@@ -678,8 +557,7 @@ actors.hero.talent.sniping.title=저격
 actors.hero.talent.sniping.desc=_+1:_ 특수 쇠뇌 공격의 피해량이 _15%_ 상승합니다.\n\n_+2:_ 특수 쇠뇌 공격의 피해량이 _30%_ 상승합니다.\n\n_+3:_ 특수 쇠뇌 공격의 피해량이 _45%_ 상승합니다.\n\n_+3:_ 특수 쇠뇌 공격의 피해량이 _60%_ 상승합니다.
 actors.hero.talent.savior_belief.title=구제자의 신념
 actors.hero.talent.savior_belief.desc=_+1:_ 그레이스롯의 물리 공격이 속박 혹은 마비된 적에게 _15%_의 추가 피해를 입힙니다.\n\n_+2:_ 그레이스롯의 물리 공격이 속박 혹은 마비된 적에게 _30%_의 추가 피해를 입힙니다.\n\n_+3:_ 그레이스롯의 물리 공격이 속박 혹은 마비된 적에게 _45%_의 추가 피해를 입힙니다.\n\n_+4:_ 그레이스롯의 물리 공격이 속박 혹은 마비된 적에게 _60%_의 추가 피해를 입힙니다.\n\n이 특성을 찍었다면, 그레이스롯은 자신 주위에 있는 길게 자란 풀의 갯수에 비례하여 최대 25%의 피해 보너스를 얻습니다.
-
-// 폭풍 전직
+# 폭풍 전직
 actors.hero.talent.song_of_stome.title=폭풍의 노래
 actors.hero.talent.song_of_stome.desc=_+1:_ 폭풍의 피해량이 200%에서 _230%_로 증가하며, 대상을 _1칸_ 밀쳐냅니다.\n\n_+2:_ 폭풍의 피해량이 200%에서 _250%_로 증가하며, 대상을 _2칸_ 밀쳐냅니다.\n\n_+1:_ 폭풍의 피해량이 200%에서 _270%_로 증가하며, 대상을 _3칸_ 밀쳐냅니다.
 actors.hero.talent.energy_storage.title=에너지 저장
@@ -688,7 +566,6 @@ actors.hero.talent.wind_blessing.title=바람의 축복
 actors.hero.talent.wind_blessing.desc=_+1:_ 입힌 물리 피해의 _10%_만큼 바람 에너지를 충전합니다.\n\n_+2:_ 입힌 물리 피해의 _20%_만큼 바람 에너지를 충전합니다.\n\n_+3:_ 입힌 물리 피해의 _30%_만큼 바람 에너지를 충전합니다.
 actors.hero.talent.galeforce.title=질풍신뢰
 actors.hero.talent.galeforce.desc=_+1:_ 폭풍 활성화 중 회피율이 _10%_증가합니다.\n\n_+2:_ 폭풍 활성화 중 회피율이 _20%_증가합니다.\n\n_+3:_ 폭풍 활성화 중 회피율이 _30%_증가합니다.\n\n_+4:_ 폭풍 활성화 중 회피율이 _40%_증가합니다.
-
 actors.hero.talent.lightnessmeal.title=몸이 가벼운 식사
 actors.hero.talent.lightnessmeal.desc=_+1:_ 식사 시 _5턴의 부유 효과_ 를 얻습니다.\n\n_+2:_ 식사 시 _10턴의 부유 효과_ 를 얻습니다.\n\n이 특성을 찍었다면, 부유 상태일 때 섬멸전 장비를 사용하면 충전을 소모하지 않습니다.\n효과가 발동하면 부유 효과가 즉시 사라집니다.\n\n이 특성은 굼 인형으로 발동하지 않습니다.
 actors.hero.talent.smartmeals.title=똑똑한 식사
@@ -733,11 +610,9 @@ actors.hero.talent.esthesia.title=본질 의식
 actors.hero.talent.esthesia.desc=_+1:_ 방벽 투척이 _보스_ 에게 _6%_ 의 추가 피해를 줍니다.\n\n_+2:_ 방벽 투척이 _보스_ 에게 _9%_ 의 추가 피해를 줍니다.\n\n_+3:_ 방벽 투척이 _보스_ 에게 _12%_ 의 추가 피해를 줍니다.\n\n_+4:_ 방벽 투척이 _보스_ 에게 _15%_ 의 추가 피해를 줍니다.
 actors.hero.talent.speed_comabt.title=고속전투
 actors.hero.talent.speed_comabt.desc=_+1:_ 섬멸전 장비의 충전량이 1 이상이면 이동속도가 _5%_ 상승합니다.\n\n_+2:_ 섬멸전 장비의 충전량이 1 이상이면 이동속도가 _10%_ 상승합니다.\n\n_+3:_ 섬멸전 장비의 충전량이 1 이상이면 이동속도가 _15%_ 상승합니다.\n\n_+4:_ 섬멸전 장비의 충전량이 1 이상이면 이동속도가 _20%_ 상승합니다.
-
 actors.hero.talent$mywishcooldown.name=내가 원하는 세상 쿨타임
 actors.hero.talent$mywishcooldown.desc=내가 원하는 세상 재발동까지 %s 턴 남았습니다.
-
-//쪽냥이 3차 서브클래스
+# 쪽냥이 3차 서브클래스
 actors.hero.talent.oblivion.title=망각
 actors.hero.talent.oblivion.desc=_+1:_ EX-44가 파괴당할 때 _15%_ 확률로 섬멸전 장비를 충전합니다.\n\n_+2:_ EX-44가 파괴당할 때 _30%_ 확률로 섬멸전 장비를 충전합니다.\n\n_+3:_ EX-44가 파괴당할 때 _45%_ 확률로 섬멸전 장비를 충전합니다.
 actors.hero.talent.weakness_cover.title=약점 보완
@@ -746,42 +621,41 @@ actors.hero.talent.mentalamplification.title=정신 증폭
 actors.hero.talent.mentalamplification.desc=_+1:_ EX-44가 피해 감소 _10%_를 얻습니다.\n\n_+2:_ EX-44가 피해 감소 _20%_를 얻습니다.\n\n_+1:_ EX-44가 피해 감소 _30%_를 얻습니다.
 actors.hero.talent.crystallize.title=결정화
 actors.hero.talent.crystallize.desc=_+1:_ 로즈몬티스의 시야에 EX-44가 있다면 해당 EX-44의 피해량이 _10%_ 상승합니다.\n\n_+2:_ 로즈몬티스의 시야에 EX-44가 있다면 해당 EX-44의 피해량이 _15%_ 상승합니다.\n\n_+3:_ 로즈몬티스의 시야에 EX-44가 있다면 해당 EX-44의 피해량이 _20%_ 상승합니다.\n\n_+4:_ 로즈몬티스의 시야에 EX-44가 있다면 해당 EX-44의 피해량이 _25%_ 상승합니다.
-
-
 actors.hero.talent.shining_meal.title=빛이나는 식사
 actors.hero.talent.shining_meal.desc=_+1:_ 식사 시 시야 내 적들에게 _2 턴의 실명_ 을 부여합니다. 만약 감염 생물이나 살카즈라면 _6_의 피해를 입힙니다.\n\n_+2:_ 식사 시 시야 내 적들에게 _3 턴의 실명_ 을 부여합니다. 만약 감염 생물이나 살카즈라면 _9_의 피해를 입힙니다.
 actors.hero.talent.experience.title=기사의 경험
 actors.hero.talent.experience.desc=_+1:_ 갑옷을 _3배 빠르게_ 감정합니다.\n\n_+2:_ 갑옷을 _5배 빠르게_ 감정합니다. 획득시 저주 여부를 알 수 있습니다.
 actors.hero.talent.protectionoflight.title=빛의 보호
-actors.hero.talent.protectionoflight.desc=_+1:_ 이 특성에 투자하면 지금 장착하고있는 갑옷의 저주가 약화됩니다.\n\n_+2:_ 이 특성에 투자하면 지금 장착하고있는 갑옷의 저주가 제거됩니다.
+actors.hero.talent.protectionoflight.desc=_+1:_ 현재 장착 중인 갑옷의 저주를 제거합니다.\n\n_+2:_ 다음에 저주받은 장비를 장착할 때 자동으로 저주를 해제하는 효과를 1회 얻습니다. 무기, 갑옷, 반지, 유물 모두에 적용됩니다.
+actors.hero.talent$protectioninsurance.proc=빛의 보호가 장비의 저주를 해제했습니다!
 actors.hero.talent.knigts_oath.title=기사의 맹세
 actors.hero.talent.knigts_oath.desc=_+1:_ 아이템 감정시 빛의 인장을 _10%_ 충전합니다.\n\n_+2:_ 아이템 감정시 빛의 인장을 _15%_ 충전합니다.
 actors.hero.talent.combat_meal.title=식전 기도
 actors.hero.talent.combat_meal.desc=_+1:_ 식사에 1턴만 소모되며, 식사 시 빛의 인장을 _4%_ 충전합니다.\n\n_+2:_ 식사에 1턴만 소모되며, 식사 시 빛의 인장을 _7%_ 충전합니다.
 actors.hero.talent.puerlight.title=순수한 빛
-actors.hero.talent.puerlight.desc=_+1:_ 아츠 기록장치로 스킬 발동시 시야 내 적들을 _1 칸_ 밀쳐내며, _50 턴_ 동안 빛이 납니다.\n\n_+2:_ 아츠 기록장치로 스킬 발동시 시야 내 적들을 _2 칸_ 밀쳐내며, _100 턴_ 동안 빛이 납니다.
+actors.hero.talent.puerlight.desc=_+1:_ 아츠 기록장치로 스킬 발동 시 시야 내 적들을 _1 칸_ 밀쳐내고 _2 턴_ 실명시키며, _50 턴_ 동안 빛이 납니다.\n\n_+2:_ 아츠 기록장치로 스킬 발동 시 시야 내 적들을 _2 칸_ 밀쳐내고 _3 턴_ 실명시키며, _100 턴_ 동안 빛이 납니다.
 actors.hero.talent.resurgence.title=재림
-actors.hero.talent.resurgence.desc=_+1:_ 축복받은 앙크로 부활시 획득하는 체력이 _30%_, 보호막이 _50%_ 상승합니다.\n\n_+2:_ 축복받은 앙크로 부활시 획득하는 체력이 _60%_, 보호막이 _100%_ 상승합니다.\n\n또한, 발동시 빛의 기사 상태가 됩니다.
+actors.hero.talent.resurgence.desc=_+1:_ 축복받은 앙크로 부활시 획득하는 체력이 _30%_ 상승하고, 무적 지속시간이 _1턴_ 증가합니다.\n\n_+2:_ 축복받은 앙크로 부활시 획득하는 체력이 _60%_ 상승하고, 무적 지속시간이 _2턴_ 증가합니다.\n\n또한, 발동시 _빛의 기사_ 상태가 됩니다.
 actors.hero.talent.phaserush.title=난입
 actors.hero.talent.phaserush.desc=_+1:_ 빛의 기사 상태일 때 물리 공격시 빛의 인장을 _1%_ 충전합니다.\n\n_+2:_ 빛의 기사 상태일 때 물리 공격시 빛의 인장을 _2%_ 충전합니다.
 actors.hero.talent.exorcism.title=퇴마
-actors.hero.talent.exorcism.desc=_+1:_ 살카즈 대상으로 _3의 추가 피해_ 를 입히며, 받는 피해가 _1_ 감소합니다.\n\n_+2:_ 살카즈 대상으로 _5의 추가 피해_ 를 입히며, 받는 피해가 _2_ 감소합니다.
+actors.hero.talent.exorcism.desc=_+1:_ 근접 공격 시 _10%_ 확률로 대상을 3턴간 실명시킵니다.\n\n_+2:_ 근접 공격 시 _15%_ 확률로 대상을 3턴간 실명시킵니다.
 actors.hero.talent.pegasus_aura.title=페가수스의 가호
 actors.hero.talent.pegasus_aura.desc=_+1:_ 빛의 인장 사용시 최대 체력의 _5%_ 만큼 보호막을 얻습니다. 빛의 기사 상태일 때 명중률이 _10%_ 상승합니다.\n\n_+2:_ 빛의 인장 사용시 최대 체력의 _10%_ 만큼 보호막을 얻습니다. 빛의 기사 상태일 때 명중률이 _20%_ 상승합니다.\n\n_+3:_ 빛의 인장 사용시 최대 체력의 _15%_ 만큼 보호막을 얻습니다. 빛의 기사 상태일 때 명중률이 _30%_ 상승합니다.
 actors.hero.talent.radianthero.title=빛의 용사
-actors.hero.talent.radianthero.desc=체력이 50%이하일 때 공격받으면 즉시 빛의 기사 상태에 돌입합니다.\n\n_+1: 750 턴_의 쿨타임을 가집니다.\n\n_+2: 600 턴_의 쿨타임을 가집니다.\n\n_+3: 450 턴_의 쿨타임을 가집니다.
+actors.hero.talent.radianthero.desc=체력이 50% 이하일 때 공격받으면 즉시 빛의 기사 상태에 돌입합니다.\n\n_+1: 600 턴_의 쿨타임을 가집니다.\n\n_+2: 500 턴_의 쿨타임을 가집니다.\n\n_+3: 400 턴_의 쿨타임을 가집니다.
 actors.hero.talent.into_fray.title=참전
 actors.hero.talent.into_fray.desc=_+1:_ 필살기로 적 처치시 _2 턴의 신속_ 을 얻습니다.\n\n_+2:_ 필살기로 적 처치시 _3 턴의 신속_ 을 얻습니다.\n\n_+3:_ 필살기로 적 처치시 _4 턴의 신속_ 을 얻습니다.
 actors.hero.talent.blitzkrieg.title=전격전
 actors.hero.talent.blitzkrieg.desc=_+1:_ 사격 무기의 사격 피해량과 명중률이 _10%_ 상승하며, 신속 상태일 때 회피율이 _2_ 상승합니다.\n\n_+2:_ 사격 무기의 사격 피해량과 명중률이 _20%_ 상승하며, 신속 상태일 때 회피율이 _4_ 상승합니다.\n\n_+3:_ 사격 무기의 사격 피해량과 명중률이 _30%_ 상승하며, 신속 상태일 때 회피율이 _6_ 상승합니다.\n\n추가로, 사격 무기를 장착한 상태로 필살기 사용시 2턴의 신속을 얻습니다.
 actors.hero.talent.skill_mastery.title=스킬 마스터리
-actors.hero.talent.skill_mastery.desc=_+1:_ 빛의 검의 피해 배율이 _신념*30%_로 증가합니다.\n\n_+2:_ 마무리 일격으로 적 처치시 빛의 인장을 3% 충전합니다.\n\n_+3:_ 밀쳐내기가 대상을 1턴동안 침묵시킵니다.
+actors.hero.talent.skill_mastery.desc=_+1:_ 빛의 검의 피해 배율이 _신념*35%_로 증가합니다.\n\n_+2:_ 마무리 일격으로 적 처치시 빛의 인장을 3% 충전합니다.\n\n_+3:_ 밀쳐내기가 대상을 1턴동안 침묵시킵니다.
 actors.hero.talent.shield_of_light.title=빛의 방패
-actors.hero.talent.shield_of_light.desc=_+1:_ 방어력이 _1_ 증가합니다.\n\n_+2:_ 방어력이 _2_ 증가합니다.\n\n_+3:_ 방어력이 _3_ 증가합니다.\n\n체력이 50%이하거나 빛의 기사 상태일 땐 방어 상승량이 2배가 됩니다. (최대 4배)
+actors.hero.talent.shield_of_light.desc=_+1:_ 방어력이 _1_ 증가하고, 방패 밀기의 피해가 _10%_ 증가합니다.\n\n_+2:_ 방어력이 _2_ 증가하고, 방패 밀기의 피해가 _20%_ 증가합니다.\n\n_+3:_ 방어력이 _3_ 증가하고, 방패 밀기의 피해가 _30%_ 증가합니다.\n\n체력이 50%이하일 때 방어 상승량이 2배가 됩니다.
 actors.hero.talent.pegasus_wing.title=천마의 날개
 actors.hero.talent.pegasus_wing.desc=_+1:_ 피격시 _33%_ 확률로 빛의 인장을 2% 충전합니다.\n\n_+2:_ 피격시 _67%_ 확률로 빛의 인장을 2% 충전합니다.\n\n_+3:_ 피격시 _100%_ 확률로 빛의 인장을 2% 충전합니다.
 actors.hero.talent.hopelight.title=희망의 빛
-actors.hero.talent.hopelight.desc=_+1:_ 빛의 기사 상태일 때 피해 저항이 40%에서 _45%_로 증가합니다.\n\n_+2:_ 빛의 기사 상태일 때 피해 저항이 40%에서 _50%_로 증가합니다.\n\n_+3:_ 빛의 기사 상태일 때 피해 저항이 40%에서 _55%_로 증가합니다.
+actors.hero.talent.hopelight.desc=_+1:_ 빛의 기사 상태일 때 피해 저항이 30%에서 _35%_로 증가합니다.\n\n_+2:_ 빛의 기사 상태일 때 피해 저항이 30%에서 _40%_로 증가합니다.\n\n_+3:_ 빛의 기사 상태일 때 피해 저항이 30%에서 _45%_로 증가합니다.
 actors.hero.talent.grand_order.title=그랜드 오더
 actors.hero.talent.grand_order.desc=_+1:_ 보스 전투 돌입시 체력을 _20%_ 회복하며, 즉시 빛의 기사로 각성합니다.\n\n_+2:_ 보스 전투 돌입시 체력을 _40%_ 회복하며, 즉시 빛의 기사로 각성합니다.\n\n_+3:_ 보스 전투 돌입시 체력을 _60%_ 회복하며, 즉시 빛의 기사로 각성합니다.
 actors.hero.talent.knight_of_kazimierz.title=카시미어의 기사
@@ -789,29 +663,22 @@ actors.hero.talent.knight_of_kazimierz.desc=_+1:_ 빛의 기사 상태일 때 �
 actors.hero.talent.knight_body.title=기사의 육신
 actors.hero.talent.knight_body.desc=_+1:_ 최대 체력이 _10_ 증가합니다.\n\n_+2:_ 최대 체력이 _20_ 증가합니다.\n\n_+3:_ 최대 체력이 _30_ 증가합니다.\n\n_+4:_ 최대 체력이 _40_ 증가합니다.
 actors.hero.talent.quick_tactics.title=속공전술
-actors.hero.talent.quick_tactics.desc=_+1:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _6 턴_으로 증가합니다.\n\n_+2:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _7 턴_으로 증가합니다.\n\n_+3:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _8 턴_으로 증가합니다.\n\n_+3:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _9 턴_으로 증가합니다.\n\n또한, 빛의 인장 사용에 턴을 소모하지 않게됩니다.
+actors.hero.talent.quick_tactics.desc=_+1:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _6 턴_으로 증가합니다.\n\n_+2:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _7 턴_으로 증가합니다.\n\n_+3:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _8 턴_으로 증가합니다.\n\n_+4:_ 빛의 인장 사용시 획득하는 신속이 5 턴에서 _9 턴_으로 증가합니다.
 actors.hero.talent.blessed_champion.title=축복받은 용사
-actors.hero.talent.blessed_champion.desc=_+1:_ 빛의 인장 발동시 _15 턴_의 축복을 얻습니다.\n\n_+2:_ 빛의 인장 발동시 _25 턴_의 축복을 얻습니다.\n\n_+3:_ 빛의 인장 발동시 _35 턴_의 축복을 얻습니다.\n\n_+4:_ 빛의 인장 발동시 _45 턴_의 축복을 얻습니다.
-
-// 니어 3차 서브클래스
+actors.hero.talent.blessed_champion.desc=_+1:_ 빛의 인장 발동시 _15 턴_의 축복을 얻고, 방패 기세가 _10%_ 즉시 충전됩니다.\n\n_+2:_ 빛의 인장 발동시 _30 턴_의 축복을 얻고, 방패 기세가 _20%_ 즉시 충전됩니다.\n\n_+3:_ 빛의 인장 발동시 _45 턴_의 축복을 얻고, 방패 기세가 _30%_ 즉시 충전됩니다.\n\n_+4:_ 빛의 인장 발동시 _60 턴_의 축복을 얻고, 방패 기세가 _40%_ 즉시 충전됩니다.
+# 니어 3차 서브클래스
 actors.hero.talent.flash_spear.title=섬광의 창
-actors.hero.talent.flash_spear.desc=_+1:_ 실명한 적에게 공격시 _10%_의 추가 피해를 입힙니다.\n\n_+2:_ 실명한 적에게 공격시 _20%_의 추가 피해를 입힙니다.\n\n_+3:_ 실명한 적에게 공격시 _30%_의 추가 피해를 입힙니다.
+actors.hero.talent.flash_spear.desc=_+1:_ 실명한 적에게 공격시 방어와 보호막을 무시하는 _10%_의 추가 피해를 입힙니다.\n\n_+2:_ 실명한 적에게 공격시 방어와 보호막을 무시하는 _20%_의 추가 피해를 입힙니다.\n\n_+3:_ 실명한 적에게 공격시 방어와 보호막을 무시하는 _30%_의 추가 피해를 입힙니다.\n\n사격 공격은 75%의 효과만 적용됩니다.
 actors.hero.talent.knight_glory.title=기사의 영광
 actors.hero.talent.knight_glory.desc=_+1:_ 빛의 인장 발동시 시야 내 적들을 _3_ 턴간 약화시킵니다.\n\n_+2:_ 빛의 인장 발동시 시야 내 적들을 _6_ 턴간 약화시킵니다.\n\n_+3:_ 빛의 인장 발동시 시야 내 적들을 _9_ 턴간 약화시킵니다.
 actors.hero.talent.light_of_glory.title=빛의 영광
-actors.hero.talent.light_of_glory.desc=특성 레벨에 비례해 빛의 인장 충전 속도가 증가합니다.
+actors.hero.talent.light_of_glory.desc=_+1:_ 빛의 인장의 충전 속도가 5% 빨라집니다.\n\n_+2:_ 빛의 인장의 충전 속도가 10% 빨라집니다.\n\n_+3:_ 빛의 인장의 충전 속도가 15% 빨라집니다.
 actors.hero.talent.eternal_glory.title=불변의 영광
-actors.hero.talent.eternal_glory.desc=_+1:_ 물리 공격시 _10%_ 확률로 대상을 3턴간 실명시킵니다.\n\n_+2:_ 물리 공격시 _20%_ 확률로 대상을 3턴간 실명시킵니다.\n\n_+3:_ 물리 공격시 _30%_ 확률로 대상을 3턴간 실명시킵니다.\n\n_+4:_ 물리 공격시 _40%_ 확률로 대상을 3턴간 실명시킵니다.
-
-
+actors.hero.talent.eternal_glory.desc=_+1:_ 빛의 인장의 광역 피해량이 15% 증가합니다.\n\n_+2:_ 빛의 인장의 광역 피해량이 30% 증가합니다.\n\n_+3:_ 빛의 인장의 광역 피해량이 45% 증가합니다.\n\n_+4:_ 빛의 인장의 광역 피해량이 60% 증가합니다.
 actors.hero.talent$radiantherocooldown.name=빛의 용사 쿨타임
 actors.hero.talent$radiantherocooldown.desc=빛의 용사 특성의 재발동까지 %s 턴 남았습니다.
-
-
-
-//첸
-
-//1티어
+# 첸
+# 1티어
 actors.hero.talent.paring.title=패링
 actors.hero.talent.paring.desc=_+1:_ 방어력이 _1_ 증가합니다.\n\n_+2:_ 방어력이 _2_ 증가합니다.
 actors.hero.talent.police_sense.title=경찰의 직감
@@ -820,10 +687,9 @@ actors.hero.talent.continuous_cut.title=연속베기
 actors.hero.talent.continuous_cut.desc=_+1:_ 공격시 _5%_ 확률로 턴을 소모하지 않습니다.\n\n_+2:_ 공격시 _10%_ 확률로 턴을 소모하지 않습니다.
 actors.hero.talent.zantetsuken.title=참철검
 actors.hero.talent.zantetsuken.desc=_+1:_ 공격시 _10%_ 확률로 적의 방어력을 무시합니다.\n\n_+2:_ 공격시 _20%_ 확률로 적의 방어력을 무시합니다.
-
-//2티어
+# 2티어
 actors.hero.talent.latent_meal.title=잠복 식사
-actors.hero.talent.latent_meal.desc=_+1:_ 식사에 1턴만 소모되며, 식사 시 _2턴_간 투명화합니다.\n\n_+2:_ 식사에 1턴만 소모되며, 식사 시 _3턴_간 투명화합니다.\n\n_굼 인형_으론 발동할 수 없습니다.
+actors.hero.talent.latent_meal.desc=_+1:_ 식사에 1턴만 소모되며, 식사 시 _2턴_간 투명화합니다.\n\n_+2:_ 식사에 1턴만 소모되며, 식사 시 _3턴_간 투명화합니다.\n\n_굼 인형_으론 투명화가 발동하지 않습니다.
 actors.hero.talent.scolding.title=호령
 actors.hero.talent.scolding.desc=_+1:_ 체력이 50%이하일 때 피격시 시야 내 적들을 _1턴 동안_ 광란시킵니다.\n\n_+2:_ 체력이 50%이하일 때 피격시 시야 내 적들을 _2턴 동안_ 광란시킵니다.\n\n쿨타임 300턴
 actors.hero.talent.dragons_sword.title=용의 검
@@ -832,9 +698,8 @@ actors.hero.talent.gallop.title=질주
 actors.hero.talent.gallop.desc=_+1:_ 이동속도가 5% 증가합니다.\n\n_+2: 불구 면역_을 얻습니다.
 actors.hero.talent.target_focusing.title=목표 집중
 actors.hero.talent.target_focusing.desc=_+1:_ 투척 무기 및 사격이 적의 위장 효과를 _33%_확률로 무시합니다.\n\n_+2:_ 투척 무기 및 사격이 적의 위장 효과를 _67%_확률로 무시합니다.
-
-// 검투술부턴 적용 안해놔서 해야함
-//검호 
+# 검투술부턴 적용 안해놔서 해야함
+# 검호 
 actors.hero.talent.up_sp1.title=강화:칼집 공격
 actors.hero.talent.up_sp1.desc=_+1:_ 칼집 공격시 대상에게 _2턴의_ 취약을 부여합니다.\n\n_+2:_ 칼집 공격시 대상에게 _4턴의_ 취약을 부여합니다.\n\n_+3:_ 칼집 공격시 대상에게 _6턴의_ 취약을 부여합니다.
 actors.hero.talent.up_sp2.title=강화:발도
@@ -845,7 +710,6 @@ actors.hero.talent.blade_art.title=검투술
 actors.hero.talent.blade_art.desc=_+1:_ 공격시 _10%_확률로 콤보를 추가로 쌓습니다.\n\n_+2:_ 공격시 _15%_확률로 콤보를 추가로 쌓습니다.\n\n_+3:_ 공격시 _20%_확률로 콤보를 추가로 쌓습니다.
 actors.hero.talent.double_sword.title=이도류
 actors.hero.talent.double_sword.desc=_+1:_ 필살기 사용 후 다음 공격의 명중률이 _30%_ 증가합니다.\n\n_+2:_ 필살기 사용 후 다음 공격의 명중률이 _60%_ 증가합니다.\n\n_+3:_ 필살기 사용 후 다음 공격의 명중률이 _90%_ 증가합니다.
-
 actors.hero.talent.up_ex1.title=극의:칼집 공격
 actors.hero.talent.up_ex1.desc=_+1:_ 칼집 공격의 마비 부여량이 1턴에서 _1.5_턴으로 증가합니다.\n\n_+2:_ 칼집 공격의 마비 부여량이 1턴에서 _2_턴으로 증가합니다.\n\n_+3:_ 칼집 공격의 마비 부여량이 1턴에서 _2.5_턴으로 증가합니다.\n\n_+4:_ 칼집 공격의 마비 부여량이 1턴에서 _3_턴으로 증가합니다.
 actors.hero.talent.up_ex2.title=극의:발도
@@ -854,9 +718,7 @@ actors.hero.talent.up_ex3.title=극의:절영
 actors.hero.talent.up_ex3.desc=_+1:_ 절영의 추가 타격이 _110%_의 피해를 입힙니다.\n\n_+2:_ 절영의 추가 타격이 _120%_의 피해를 입힙니다.\n\n_+3:_ 절영의 추가 타격이 _130%_의 피해를 입힙니다.\n\n_+4:_ 절영의 추가 타격이 _140%_의 피해를 입힙니다.
 actors.hero.talent.awake.title=적소 각성
 actors.hero.talent.awake.desc=_+1:_ 보스가 받는 피해가 _5%_ 증가합니다.\n\n_+2:_ 보스가 받는 피해가 _10%_ 증가합니다.\n\n_+3:_ 보스가 받는 피해가 _15%_ 증가합니다.
-
-
-//산사수
+# 산사수
 actors.hero.talent.gorgeous_vacation.title=화려한 휴가
 actors.hero.talent.gorgeous_vacation.desc=_+1:_ 전술이동의 쿨타임이 20턴에서 _16턴_으로 감소합니다.\n\n_+2:_ 전술이동의 쿨타임이 20턴에서 _12턴_으로 감소합니다.\n\n_+3:_ 전술이동의 쿨타임이 20턴에서 _8턴_으로 감소합니다.
 actors.hero.talent.tac_def.title=전술 방어
@@ -867,7 +729,6 @@ actors.hero.talent.frugality.title=절약풍조
 actors.hero.talent.frugality.desc=_+1:_ 근접사격 상태라면 _15%_ 확률로 탄약을 소모하지 않습니다.\n\n_+2:_ 근접사격 상태라면 _30%_ 확률로 탄약을 소모하지 않습니다.\n\n_+3:_ 근접사격 상태라면 _45%_ 확률로 탄약을 소모하지 않습니다.
 actors.hero.talent.water_play.title=물놀이
 actors.hero.talent.water_play.desc=_+1:_ 근접사격 상태라면 사격시 _20%_ 확률로 1턴의 실명을 부여합니다.\n\n_+2:_ 근접사격 상태라면 사격시 _40%_ 확률로 1턴의 실명을 부여합니다.\n\n_+3:_ 근접사격 상태라면 사격시 _60%_ 확률로 1턴의 실명을 부여합니다.
-
 actors.hero.talent.tac_shot.title=전술 사격
 actors.hero.talent.tac_shot.desc=_+1:_ 전술이동을 사용하면 다음 사격이 대상을 _0-1칸_ 밀쳐냅니다.\n\n_+2:_ 전술이동을 사용하면 다음 사격이 대상을 _1칸_ 밀쳐냅니다.\n\n_+3:_ 전술이동을 사용하면 다음 사격이 대상을 _1-2칸_ 밀쳐냅니다.\n\n_+4:_ 전술이동을 사용하면 다음 사격이 대상을 _2칸_ 밀쳐냅니다.
 actors.hero.talent.technical.title=테크니컬
@@ -876,12 +737,10 @@ actors.hero.talent.zero_range_shot.title=영거리 사격
 actors.hero.talent.zero_range_shot.desc=_+1:_ 근접사격 피해 보너스가 50%에서 _60%_로 증가합니다.\n\n_+2:_ 근접사격 피해 보너스가 50%에서 _70%_로 증가합니다.\n\n_+3:_ 근접사격 피해 보너스가 50%에서 _80%_로 증가합니다.\n\n_+4:_ 근접사격 피해 보너스가 50%에서 _90%_로 증가합니다.\n\n대신 근접사격의 발동 범위가 감소합니다.
 actors.hero.talent.bf_rull.title=전장의 지배자
 actors.hero.talent.bf_rull.desc=_+1:_ 사격으로 적 처치시 _20%_ 확률로 1 턴의 시간 방울을 얻습니다.\n\n_+2:_ 사격으로 적 처치시 _40%_ 확률로 1 턴의 시간 방울을 얻습니다.\n\n_+3:_ 사격으로 적 처치시 _60%_ 확률로 1 턴의 시간 방울을 얻습니다.
-
- 
-
-
 actors.hero.hero.name=%s.
 actors.hero.hero.leave=%s, 어서 빨리 박사를 구출해라.
+actors.hero.hero.continue=아직 할 일이 남았다
+actors.hero.hero.exit=여정을 끝낸다
 actors.hero.hero.level_up=레벨 업!
 actors.hero.hero.new_level=레벨 업! +정확성, +회피, +5 최대 체력!
 actors.hero.hero.new_talent=+1 특성 포인트!
@@ -910,35 +769,26 @@ actors.hero.hero.dm5=강화는 강화의 일기장 으로 가능하며, 한 계�
 actors.hero.hero.dm6=가공소를 활용해보세요! 감정의 일기장과 ~의 돌 2개를 조합해 점성술의 일기장을 만들면 초반 아이템 감정에 도움이 된답니다!
 actors.hero.hero.dm7=강화의 일기장은 매우 중요하니, 초심자라면 3~4티어 이상의 끝까지 사용할 아이템에 투자하시는게 좋답니다!
 actors.hero.hero.dm8=체력이 부족할 때 주위에 적이 없다면 태양초 씨앗이나 자장가의 일기장을 활용해보세요!
-
 actors.hero.heroclass.warrior=블레이즈
 actors.hero.heroclass.warrior_desc=블레이즈는 초기 무기가 다른 대원보다 강력합니다.\n\n블레이즈는 _특별한 깃털 부적_을 다른 방어구들에 옮겨 붙일 수 있으며, 1만큼의 강화 수치를 이전할 수 있습니다.\n\n블레이즈는 다음 아이템들을 감정한 채로 시작합니다.\n- 감정의 일기장\n- 치유의 물약\n- 분노의 주문서
-
 actors.hero.heroclass.mage=아미야
 actors.hero.heroclass.mage_unlock=아미야는 아츠 스태프의 전문가이며, _특별한 흑요석 반지_ 를 가지고 시작합니다.\n\n아미야를 해금하려면 _아이템을 강화하기 위해 강화의 일기장을 사용하십시오._
 actors.hero.heroclass.mage_desc=아미야는 마탄을 발사하는 _특별한 흑요석 반지_ 를 가지고 시작합니다. 이 흑요석 반지는 아츠 스태프보다 훨씬 더 빠르게 충전되며, 최대 충전량이 1 높습니다.\n\n아미야의 흑요석 반지에 던전에서 발견한 다른 아츠 스태프를 융합할 수 있습니다. 융합한 아츠 스태프의 효과를 사용할 수 있으며, 아츠 스태프의 강화 수치를 일부 이전할 수 있습니다.\n\n아미야는 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 액체 화염의 물약\n- 강화의 주문서
-
 actors.hero.heroclass.rogue=레드
 actors.hero.heroclass.rogue_unlock=레드는 그녀의 _특별한 그림자의 망토_ 를 통한 투명화로 전투의 흐름을 조절하고 강력한 한 방을 먹일 수 있습니다.\n\n레드을 해금하려면 _한 판에서 10번의 기습 공격을 시행하십시오._
 actors.hero.heroclass.rogue_desc=레드는 언제든지 투명화가 가능한 특별한 아츠 유물인 _그림자의 망토_ 를 가지고 시작합니다. 망토는 다른 유물처럼 직접 강화가 불가능한 대신, 사용할수록 강력해집니다.\n\n레드는 더 먼 거리에 있는 숨겨진 비밀과 함정들을 감지할 수 있습니다.\n\n레드는 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 투명화의 물약\n- 아츠 지도의 주문서
-
 actors.hero.heroclass.huntress=그레이스롯
 actors.hero.heroclass.huntress_unlock=그레이스롯은 투척 무기의 숙련자로, 무한한 화살을 가진 _특별한 쇠뇌_ 를 가지고 시작합니다.\n\n그레이스롯을 해금하려면 _한 판에서 투척 무기로 적 15마리를 맞추십시오._
 actors.hero.heroclass.huntress_desc=그레이스롯은 화살을 무한히 발사할 수 있는 _특별한 쇠뇌_ 를 가지고 시작합니다. 쇠뇌는 그레이스롯의 레벨에 따라 강해지며, 증강하거나 아츠을 부여할 수 있습니다.\n\n그레이스롯은 길게 자란 풀을 짓밟지 않고 지나갈 수 있습니다.\n\n그레이스롯은 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 심안의 물약\n- 자장가의 주문서
-
 actors.hero.heroclass.rosecat=로즈몬티스
 actors.hero.heroclass.rosecat_unlock=로즈몬티스는 강력한 아츠 사용자로, _특별한 아츠 장치_를 가지고 시작합니다.\n\n로즈몬티스를 해금하려면 _음식을 25개 먹으십시오._
 actors.hero.heroclass.rosecat_desc=로즈몬티스는 _강력한 아츠 장비_를 사용해 방벽을 조종하여 적들을 제압할 수 있습니다. 이 장비는 일반적으로 충전할 수 없지만, 레벨업시 충전량이 최대치로 갱신됩니다.\n\n섬멸전 장비를 사용하면 적에게 장치를 투척하여 피해를 입힐 수 있습니다.\n\n로즈몬티스는 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 부유의 물약
-
 actors.hero.heroclass.nearl=니어
 actors.hero.heroclass.nearl_unlock=니어는 전 카시미어의 빛의 기사로, _특별한 인장_을 가지고 시작합니다.\n\n니어를 해금하려면 _적을 200명 처치하십시오._
-actors.hero.heroclass.nearl_desc=니어는 전 카시미어의 기사로, _강력한 빛의 힘_을 사용해 자신을 강화시킵니다.\n\n그녀는 빛의 인장을 사용해 빛의 기사 상태가 되어 자신의 전투력을 일시적으로 상승시킵니다.\n\n니어는 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 경험의 물약\n- 저주 해제의 일기장
-
+actors.hero.heroclass.nearl_desc=니어는 전 카시미어의 기사로, _강력한 빛의 힘_을 사용해 자신을 강화시킵니다.\n\n그녀는 _빛의 인장_을 사용해 빛의 기사 상태가 되어 자신의 전투력을 일시적으로 상승시킵니다. 빛의 인장은 사용할수록 강력해집니다.\n\n니어는 다음 아이템들을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 경험의 물약\n- 저주 해제의 일기장
 actors.hero.heroclass.chen=첸
 actors.hero.heroclass.chen_unlock=첸은 용문의 경관으로, 강력한 필살기를 사용합니다.\n\n첸을 해금하려면 _게임을 1회 클리어하십시오._
 actors.hero.heroclass.chen_desc=첸은 용문의 경관으로, 적소를 이용해 강력한 _필살기_를 사용할 수 있습니다.\n\n그녀는 5/10/15 콤보마다 필살기를 사용할 수 있습니다.\n\n첸은 다음 아이템을 감정한 채로 시작합니다:\n- 감정의 일기장\n- 힘의 물약\n- 마비 가스의 물약
-
-
 actors.hero.herosubclass.gladiator=연계 블레이즈
 actors.hero.herosubclass.gladiator_short_desc=_연계_\n콤보를 이용해 강력한 필살기를 사용합니다. 공격속도와 명중률이 중요합니다.
 actors.hero.herosubclass.gladiator_desc=_연계 전문화_ 는 근접 공격을 성공시킬 때 마다 연속 타격 중첩을 얻습니다. 연속 타격 중첩을 쌓아 고유한 필살기를 사용할 수 있습니다. 또한, 사격 무기로 근접 공격시 확률적으로 탄환을 충전합니다.
@@ -986,25 +836,20 @@ actors.hero.herosubclass.war_short_desc=_전쟁_\n방벽을 소환하여 전투�
 actors.hero.herosubclass.war_desc=_전쟁 전문화_는 방벽을 소환하여 전투에 활용합니다. 적이 없는 빈 땅에 섬멸전 장비를 사용하면 _EX-44_를 소환합니다. EX-44의 체력은 _방어구_ 강화에 비례하며, 공격력은 _섬멸전 장비_의 강화에 비례합니다.\nEX-44는 30턴 후 자동으로 회수되며, 회수될 때 섬멸전 장비를 충전시킵니다.
 actors.hero.herosubclass.knight=기사 니어
 actors.hero.herosubclass.knight_short_desc=_기사_\n빠른 기동력과 필살기를 이용해 적들을 연속해서 처치합니다.
-actors.hero.herosubclass.knight_desc=_기사 전문화_ 는 매우 공격적으로, 빛의 인장을 사용할 때 신속 상태가 되며, 일반 공격 후 필살기를 사용할 수 있습니다. 또한 신속 상태일 때 피해량이 증가합니다.
+actors.hero.herosubclass.knight_desc=_기사 전문화_ 는 근접 공격 후 연계기를 통한 공격적인 전투를 벌입니다. 빛의 인장 발동 시 신속 상태가 되며, 일반 공격 후 연계 공격을 사용하여 신념 스택을 쌓아 강력한 공격을 가할 수 있습니다. 신속 상태일 때 피해량이 증가하며, 빛의 인장 사용에 턴을 소모하지 않게됩니다.
 actors.hero.herosubclass.savior=구제자 니어
 actors.hero.herosubclass.savior_short_desc=_구제자_\n빠른 빛의 인장 충전과 강력해진 빛의 기사의 힘으로 적에게 대항합니다.
-actors.hero.herosubclass.savior_desc=_구제자 전문화_ 는 자신을 지키는데 특화되어있습니다. 빛의 기사 상태일 때 피해 증가량이 40%에서 55%로, 받는 피해 감소량이 20%에서 40%로 증가하며, 빛의 인장의 충전 속도가 증가합니다.
+actors.hero.herosubclass.savior_desc=_구제자 전문화_ 는 자신을 지키는데 특화되어 있습니다. 빛의 기사 상태일 때 피해 증가량이 30%에서 45%로, 받는 피해 감소량이 20%에서 40%로 증가하며, 빛의 인장의 충전 속도가 증가합니다. 받은 피해를 저장하여 _방패 밀기_를 사용할 수 있습니다.
 actors.hero.herosubclass.flash=섬광 니어
 actors.hero.herosubclass.flash_short_desc=_섬광_\n적을 실명시키고 자신을 강화합니다.
-actors.hero.herosubclass.flash_desc=_섬광 전문화_ 는 빛의 기사 상태의 버프 효과가 감소하지만, 빛의 인장의 충전속도가 대폭 상승하고 발동시 시야 내 적들을 실명시킵니다.
-
+actors.hero.herosubclass.flash_desc=_섬광 전문화_ 는 실명을 통한 제어에 특화되어 있습니다. 빛의 기사 상태의 버프 효과가 감소하지만, 빛의 인장 발동 시 시야 내 모든 적을 실명시키고 광역 피해를 입힙니다. 또한, 빛의 인장의 충전 속도가 대폭 증가합니다.
 actors.hero.herosubclass.swordmaster=검호 첸
 actors.hero.herosubclass.swordmaster_short_desc=_검호_\n적소의 힘을 극대화시켜 필살기를 강화합니다.
 actors.hero.herosubclass.swordmaster_desc=_검호 전문화_ 는 첸의 검술 능력을 극대화시킵니다. 필살기 사용시 무작위 버프를 얻습니다.
 actors.hero.herosubclass.spshooter=첸 더 홀룽데이
 actors.hero.herosubclass.spshooter_short_desc=_산사수_\n근접 사격에 특화됩니다.
 actors.hero.herosubclass.spshooter_desc=_산사수 전문화_ 는 주위에 적이 있으면 _근접 사격_상태가 되어 사격 피해량이 50% 증가합니다.\n\n더 이상 적소 필살기를 사용할 수 없는 대신, 사격 적중시 _전술이동_을 사용해 적중한 대상 방향으로 턴 소모없이 이동할 수 있습니다. (쿨타임 20턴)
-
-
-
-
-###npcs
+### npcs
 actors.mobs.npcs.blacksmith.name=벌컨
 actors.mobs.npcs.blacksmith.gold_1=...안녕. 마침 잘 왔어. 여기는 아직 순수한 광물들이 많거든, 내가 직접 가고싶지만 자리를 비울수 없는 노릇이라..\n 자, 이걸로 _원암 15개_ 정도만 캐 줘.\n물론 공짜로 해달라는 건 아니야, 다녀오면 네 방어구나 무기를 제련해 줄게.
 actors.mobs.npcs.blacksmith.blood_1=안녕. 마침 잘 왔어. 방금 만든 도구를 실험해보고 싶었거든. \n 이 곡괭이로 _진형파괴병_ 1명을 처치해 줘. 이런 장비로도 녀석을 쓰러트릴 수 있으면 할 수 있는 일이 많을거야.\n물론 공짜로 해달라는 건 아니야, 다녀오면 네 방어구나 무기를 제련해 줄게.
@@ -1021,7 +866,6 @@ actors.mobs.npcs.blacksmith.degraded=이거 완전 고물 아냐? 저하된건 �
 actors.mobs.npcs.blacksmith.cant_reforge=이 물건들은 제련할 수 없는 것 같은데.. 클로저도 이런건 무리일걸.
 actors.mobs.npcs.blacksmith.def_verb=방어
 actors.mobs.npcs.blacksmith.desc=미노스 출신의 대장장이. 광석병에 감염된 후 치료를 위해 로도스 아일랜드에 오게 되었으며, 로도스 아일랜드와 협의를 마친 후 로도스 아일랜드의 일원이 되었다. 평일에는 주로 다른 오퍼레이터들의 무기 유지 보수 및 제조를 담당하고 있으며, 필요시에는 직접 출동하기도 한다.
-
 actors.mobs.npcs.ghost.name=가드 오퍼레이터
 actors.mobs.npcs.ghost.rat_1=으아아..누가 좀 도와줘.. 앗, %s 씨? 다른 일행은 어떻게 되신 건가요? \n그런건가...\n 저는 에이스 팀의 가드 오퍼레이터에요. 부상을 입고 잠시 퇴각하는 중에 강한 적을 만나서 계속 도망다니고 있었습니다.\n그래서 실례지만 _산성 원석충_ 을 처치 해주시겠습니까?\n\n녀석은 옷을 녹이는 산성 점액을 갖고 있어서 여성 오퍼레이터들에게 큰 골칫덩이에요. _녀석의 주변에 생기는 산성 구름과 산성 점액을 조심하세요. 그리고 산성 공격은 물에 씻어낼 수 있습니다._
 actors.mobs.npcs.ghost.rat_2=부탁해요, 녀석을 처치해 주세요.\n\n_물 근처에서 싸우시고,산성 구름을 피해야 합니다._
@@ -1032,7 +876,6 @@ actors.mobs.npcs.ghost.crab_2=부탁해요, 녀석의 두꺼운 방호복은 제
 actors.mobs.npcs.ghost.find_me=고맙습니다! 지금 그 쪽으로 가겠습니다.
 actors.mobs.npcs.ghost.desc=파릇파릇한 로도스 신입 오퍼레이터. 아직은 약하지만 당신과 또 다시 만날 때 쯤이면 더욱 강해져있을 것이다.
 actors.mobs.npcs.ghost.stop=어어, 왜 이러시는거에요! 그만두세요!
-
 actors.mobs.npcs.imp.name=수상한 상인 캔낫
 actors.mobs.npcs.imp.golems_1=로도스 아일랜드는 기업이고 난 장사하는 사람이니까 어떻게 보면 우리는 동종업계라고도 할 수도 있지. 맞아. 친구 간에는 서로 도와야지, 안 그런가 친구?\n\n네가 없애버려야 할 건 _부랑자_들이야. 보다시피 난 여기서 작은 사업을 시작할 예정인데, 저 멍청한 거지들이 내 사업을 망치고 있거든! 저 대가리까지 원암인 녀석들과 협상하는 게 여간 쉬운 일이 아니야! *이베리아 욕설*! \n\n 그래서 말인데... 쟤네를 한 _4명 정도_만 죽여줘. 그러면 보상을 줄게.
 actors.mobs.npcs.imp.monks_1=로도스 아일랜드는 기업이고 난 장사하는 사람이니까 어떻게 보면 우리는 동종업계라고도 할 수도 있지. 맞아. 친구 간에는 서로 도와야지, 안 그런가 친구?\n\n네가 없애버려야 할 건 _숙주 병사_들이야. 보다시피 난 여기서 작은 사업을 시작할 예정인데, 저 멍청한 괴물들이 소리를 지르며 뛰어다니는 바람에 손님들이 다 도망가! 저 녀석에게 말을 걸어봤는데, 돌아오는건 고함뿐이였다고! *심해 욕설*! \n\n 그래서 말인데... 쟤네를 한 _5명 정도_만 죽여줘. 그러면 보상을 줄게.
@@ -1041,25 +884,20 @@ actors.mobs.npcs.imp.monks_2=폭주한 숙주 병사들이 떨구는 물건을 �
 actors.mobs.npcs.imp.cya=있다 보자구, %s!
 actors.mobs.npcs.imp.hey=어이, %s!
 actors.mobs.npcs.imp.desc=쓰레기를 줍는 게 아니라, 다른 사람에게 필요하지 않은 보물을 챙기는 거야.\n\n아군도 아니고 적군도 아니다. 중간에 서길 좋아하는 사람들이 있다.
-
 actors.mobs.npcs.impshopkeeper.name=수상한 상인 캔낫
 actors.mobs.npcs.impshopkeeper.greetings=굿모닝, 굿애프터눈, 그리고 굿이브닝!
 actors.mobs.npcs.impshopkeeper.thief=믿을 만한 놈인 줄 알았더니, 너랑은 절교다!
 actors.mobs.npcs.impshopkeeper.desc=도움이 필요한 게로군. 하지만 남의 도움은 공짜가 아니야.\n\n아군도 아니고 적군도 아니다. 중간에 서길 좋아하는 사람들이 있다.
-
 actors.mobs.npcs.mirrorimage.name=거울상
 actors.mobs.npcs.mirrorimage.desc=이 환영들은 당신과 닮아 있으며, 당신이 쓰는 무기와 방어구도 복제하였습니다.\n\n거울상은 자신이 가진 무기를 들고 적들을 찾아 전투를 벌이나, 당신보다 피해를 적게 입힙니다. 환영들은 투명한 상태로 생성되지만, 적들을 공격한 후에는 투명화가 풀리게 됩니다.\n\n적당한 공격 수단이 될 수 있지만, 환영은 내구력이 매우 약해 피해를 입으면 즉시 사라질 것입니다.
-
 actors.mobs.npcs.prismaticimage.name=프리즈마 거울상
 actors.mobs.npcs.prismaticimage.desc=이 빛나는 환영은 당신과 매우 유사한 외형을 띠고 있으며, 당신이 장비한 갑옷과 무기까지도 복제한 것으로 보입니다.\n\n프리즈마 거울상은 적을 탐색하는 데 온 힘을 기울이며, 향상된 방어력과 체력을 이용하여 당신을 지키기 위해 노력할 것입니다. 비록 거울상만큼의 공격력을 지니지는 않지만, 당신의 갑옷으로부터 얻는 방어력을 포함하여 더욱 향상된 내구력을 가지고 있습니다.\n\n체력이 0이 될 경우, 프리즈마 거울상은 몇 턴 후 사라지게 되며, 사라지기 전까지는 체력을 회복할 수 있습니다. 시야 내에 적이 없는 경우, 프리즈마 거울상은 그 몸을 감추고 당신의 곁을 맴돌 것입니다. 적이 나타날 때까지 말이죠.
-
 actors.mobs.npcs.ratking.name=전달자 아지무 안젤리나
 actors.mobs.npcs.ratking.not_sleeping=저, 저는 졸지 않았어요!... 아, %s 씨? 이거 받고 힘내세요!
 actors.mobs.npcs.ratking.what_is_it=잠시 지나갈게요! 빨리 정보를 전달해야...
-actors.mobs.npcs.ratking.confused= "발이 느린 메신저는, 바람에 날아가버린다"라는 말이 시라쿠사의 메신저 사이에 있을 정도니까.
+actors.mobs.npcs.ratking.confused="발이 느린 메신저는, 바람에 날아가버린다"라는 말이 시라쿠사의 메신저 사이에 있을 정도니까.
 actors.mobs.npcs.ratking.desc_festive=아지무 안젤리나. 시라쿠사에서 정보, 화물 운송 등의 공개적인 활동을 하였으며, '전달자'인 것으로 추측된다. 현재는 인턴 캐스터 오퍼레이터로서, 로도스 아일랜드에서 후방 지원, 전장 보조, 전술 협동 등의 서비스를 제공하고 있다.\n\n바쁜 날에도 특별한 날은 챙기고 싶어 한다.
 actors.mobs.npcs.ratking.desc=아지무 안젤리나. 시라쿠사에서 정보, 화물 운송 등의 공개적인 활동을 하였으며, '전달자'인 것으로 추측된다. 현재는 인턴 캐스터 오퍼레이터로서, 로도스 아일랜드에서 후방 지원, 전장 보조, 전술 협동 등의 서비스를 제공하고 있다.
-
 actors.mobs.npcs.sheep.name=우르수스 시민
 actors.mobs.npcs.sheep.baa!=으악!
 actors.mobs.npcs.sheep.baa?=꺄아악!
@@ -1067,12 +905,10 @@ actors.mobs.npcs.sheep.baa.=으아아아!
 actors.mobs.npcs.sheep.baa...=살려줘...
 actors.mobs.npcs.sheep.def_verb=!감나빗
 actors.mobs.npcs.sheep.desc=카시미어 제4 협약: 전시에 있어서의 민간인의 보호에 관한 협약. 당신은 민간인을 해칠 수 없습니다. 시민들은 가만히 있으면 도망가 사라지며, 그 동안 겁에 질려 비명만 지르고 있을 것입니다.
-
 actors.mobs.npcs.shopkeeper.name=펭귄 로지스틱스
 actors.mobs.npcs.shopkeeper.thief=도둑, 도둑이다!
 actors.mobs.npcs.shopkeeper.sell=판매할 아이템을 선택하세요
 actors.mobs.npcs.shopkeeper.desc=지하 택배 조직이라고 불리는 이 조직이 다른 택배 회사와 다른점은, 용문의 사자상같은 물품까지도 목적지까지 안전하고 정확하게 시간에 맞추어서 배송을 해준다는 것이다. 라고 광고에서는 말하고 있지만, 아직 도착하지 못한 화물들이 존재한다는것 같다. 게다가 그들과 위탁인 전부 없어졌다는 루머가 있다. 일종의 도박이지만, 계엄 상태에 놓인 지금 영업을 하고 있는 유일한 회사이다.
-
 actors.mobs.npcs.wandmaker.name=엘리트 오퍼레이터 에이스
 actors.mobs.npcs.wandmaker.intro_warrior=건강해 보여서 다행이군, 블레이즈. 큰 고양아. 부탁이 있단다.
 actors.mobs.npcs.wandmaker.intro_rogue=평소엔 켈시와 같이 다니던 네가 단독 행동을 하다니, 아, 일행이 있었던건가? 늑대 꼬맹아, 부탁이 있다.
@@ -1092,33 +928,28 @@ actors.mobs.npcs.wandmaker.reminder_berry=썩은열매 씨앗은 아직인가, %
 actors.mobs.npcs.wandmaker.def_verb=방어
 actors.mobs.npcs.wandmaker.desc=로도스 아일랜드 선임 엘리트 오퍼레이터, 그가 박사를 구출하기 위해 다시 한번 전장에 나섰다.
 actors.mobs.npcs.wandmaker.stop=하나만 가져가게, %s.
-
 actors.mobs.npcs.lens.name=이동 촬영 차량 렌즈
 actors.mobs.npcs.lens.desc=로도스의 대원이자 사진기자인 씬을 보좌하는 로봇이다. 당신을 돕기 위해 파견되었다.\n\n"씬 아가씨의 임무는 이 렌즈에게 맡겨 주세요!"
 actors.mobs.npcs.lens.t1=촬영~!
 actors.mobs.npcs.lens.t2=노출~!
 actors.mobs.npcs.lens.t3=파노라마~!
 actors.mobs.npcs.lens.t4=타임 랩스~!
-
 actors.mobs.npcs.greencat.name=닥터 켈시
 actors.mobs.npcs.greencat.desc=\n\n\n\n내 소원? 그건 너와 아미야의 소원을 지키는 것이야. 스스로의 맹세를 저버리는 일은 하지 않아. "지킨다" 의 정의에 차이는 있을 수 있지만, 나는 끝까지 여기에 서 있을 거야. 우리들은 과거를 망각할 수는 없지만, 너에게는 또 다른 미래가 기다릴테니까.
 actors.mobs.npcs.greencat.wellcom=그렇군, 작전 성공인가... 수고했다, %s.
 actors.mobs.npcs.greencat.fury=그것이 너의 선택인가.
-
-actors.mobs.npcs.weedy.name=위디, 엔지니어
-actors.mobs.npcs.weedy.desc=\n\n안녕하세요, 로도스 아일랜드 엔지니어링 팀의 위디인데요, 아직 이 주변은 공사중이라 갈 수 없어요. 아, 악수는 이쪽 장갑 낀 오른손으로 해주세요. 근처에 손소독제라도 배치해야겠어..
-actors.mobs.npcs.weedy.t1=공사중이에요. 위험하니 물러나세요!
-
+actors.mobs.npcs.greencat.ask=아직 처리해야 할 일이 남아 있나, %s? 그렇다면 박사는 내가 맡겠다.
+actors.mobs.npcs.greencat.ask_again=박사는 치료 중이다. 남은 일은 없는 건가, %s?
 actors.mobs.npcs.keeper.name=방화벽
 actors.mobs.npcs.keeper.desc=\n\n핵심 인원들만 지나갈 수 있는 문이다. 박사가 필요하다.
 actors.mobs.npcs.keeper.t1=진입이 거부됨.
-
 actors.mobs.npcs.closure.name=클로저
 actors.mobs.npcs.closure.desc=로도스 아일랜드의 고참. _클로저가 있을 때 물건을 버리고 체르노보그로 돌아간다면, 버렸던 물건은 다른 대원한테 판매될 것이다._ \n\n클릭하면 스킨을 해금할 수 있습니다.
 actors.mobs.npcs.closure.hi=이건 어때?
 actors.mobs.npcs.closure.hihi=이 스킨은 해금했어!
 actors.mobs.npcs.closure.no=이 옷은 못 입어!
 actors.mobs.npcs.closure.incomplete=이 옷은 아직 덜 만들었어!
+actors.mobs.npcs.closure.custom_seed=고정된 시드로 플레이중 해금할 수 없습니다.
 actors.mobs.npcs.closure.fail_skin1=암흑시대의 끝 배지가 필요합니다.\n위기협약 : 통합운동 을 적용하고 미니보스를 1마리도 잡지 않은 채 클리어
 actors.mobs.npcs.closure.fail_skin2=하극상 배지가 필요합니다.
 actors.mobs.npcs.closure.fail_skin3=게임을 50회 플레이해야합니다.
@@ -1127,23 +958,22 @@ actors.mobs.npcs.closure.fail_skin5=게임을 10회 플레이해야합니다.
 actors.mobs.npcs.closure.fail_skin6=아미야를 해금해야합니다.
 actors.mobs.npcs.closure.fail_skin7=행복한 결말을 봐야합니다.
 actors.mobs.npcs.closure.fail_skin8=위기 협약을 1개이상 적용하고 게임을 클리어해야합니다.
-actors.mobs.npcs.closure.fail_skin9=모든 전문화로 3번째 보스를 처치해야합니다.
+actors.mobs.npcs.closure.fail_skin9=위기 협약을 3개이상 적용하고 게임을 클리어해야합니다.
 actors.mobs.npcs.closure.fail_skin10=황제의 칼날(24층 특수 보스)를 처치해야합니다.
 actors.mobs.npcs.closure.fail_skin11=게임을 10회 플레이해야합니다.
 actors.mobs.npcs.closure.fail_skin12=엔딩 : 화람지심을 봐야합니다.
 actors.mobs.npcs.closure.fail_skin13=숙련 그레이스롯이 되어야합니다.
 actors.mobs.npcs.closure.fail_skin14=엔딩 : 대족장을 봐야합니다.
 actors.mobs.npcs.closure.fail_skin15=클로저의 회복 상자를 사용해야합니다.
+actors.mobs.npcs.closure.fail_skin16=아직도 다 못만들었대!!
+actors.mobs.npcs.closure.fail_skin17="첫 발언자"를 쓰러트려야 합니다.
 actors.mobs.npcs.closure.die=끄악~
-
 actors.mobs.npcs.skinmodel.name=신형 모델 생성기
 actors.mobs.npcs.skinmodel.desc=실물과 거의 유사한 모습에, 움직임 기능도 탑제된 홀로그램을 생성하는 기계다. \n\n클릭하면 다음 스킨을 볼 수 있습니다.
-
 actors.mobs.npcs.blackperro.name=도베르만 홀로그램
 actors.mobs.npcs.blackperro.desc=이지 모드를 활성화할 수 있습니다.
 actors.mobs.npcs.blackperro.no=훈련은 필요없을 것 같은데?
 actors.mobs.npcs.blackperro.active=이미 훈련은 시작했다.
-
 actors.mobs.npcs.prts.name=???
 actors.mobs.npcs.prts.desc=그날이 올 때까지 나는 너를 기다릴 거야. 무슨 일이 있더라도 기다릴게. 그러니 너도, 너도 꼭 나를 기다려줘.\n\n...나를 잊지 말아줘.
 actors.mobs.npcs.prts.hint1=힌트(1/18)\n\n가공소에서 _스태프 개조 키트_를 만들어 스태프(완드)를 개조할 수 있다.
@@ -1164,10 +994,8 @@ actors.mobs.npcs.prts.hint15=힌트(15/18)\n\n_어느 술사의 단검_을 무�
 actors.mobs.npcs.prts.hint16=힌트(16/18)\n\n_용살의 검_과 _그 검을 복제한 것_, 그리고 _폭군의 검_을 가공소에서 조합해 군주의 패검을 만들 수 있다.
 actors.mobs.npcs.prts.hint17=힌트(17/18)\n\n_룬석_ 을 어떤 물건과 조합하면 어떤 소녀의 동전을 얻을 수 있다.
 actors.mobs.npcs.prts.hint18=힌트(18/18)\n\n_정예 대원의 망치_를 무언가와 조합하면 어떤 정예 대원의 총을 얻을 수 있다.
-
 actors.mobs.npcs.prts_corpse.name=???
 actors.mobs.npcs.prts_corpse.desc=...과연 이 시체는 진짜인 것일까요? 그 누구도 진실을 알지 못합니다.\n\n그녀를 애도하기 위한 _꽃 한송이_가 있다면 좋을텐데...
-
 actors.mobs.npcs.ace_battle.name=에이스
 actors.mobs.npcs.ace_battle.desc=당신의 지원 요청을 받고 이곳으로 왔다.
 actors.mobs.npcs.ace_battle.summon=네 고통을, 우리도 함께 짊어지게 해다오.
@@ -1175,27 +1003,34 @@ actors.mobs.npcs.ace_battle.fail=가라. 너희의 앞길이 순탄하길 바라
 actors.mobs.npcs.ace_battle.move=이동한다.
 actors.mobs.npcs.ace_battle.target=네 명령에 따르지.
 actors.mobs.npcs.ace_battle.battlecry=네 생각대로 되진 않을 거다!
-
 actors.mobs.npcs.gavial.name=가비알
 actors.mobs.npcs.gavial.desc=로도스 아일랜드의 메딕 오퍼레이터.\n\n그녀에게 말을 걸면 추가 챕터가 _대족장의 귀환_ 로 변경됩니다.
 actors.mobs.npcs.gavial.desc_31=로도스 아일랜드의 메딕 오퍼레이터.\n\n그녀는 란셋을 찾고있습니다.
 actors.mobs.npcs.gavial.ok=좋아, 나랑 같이 가겠다는거지?
 actors.mobs.npcs.gavial.no=아, 다음에 가겠다고? 뭐 상관없지.
 actors.mobs.npcs.gavial.questhint=LANCET-2 못봤어? 분명 같이 있었을텐데.
+# *번역필요*
 
-※번역필요
+
+
+
+
 actors.mobs.npcs.npc_irene.name=아이린
 actors.mobs.npcs.npc_irene.desc=이베리아의 재판관 아이린.\n\n그녀에게 말을 걸면 추가 챕터가 _이베리아_ 로 변경됩니다.
 actors.mobs.npcs.npc_irene.ok=알겠습니다. 이베리아로 가는거죠?
 actors.mobs.npcs.npc_irene.no=그럼 다음 기회에.
-
 actors.mobs.npcs.dummy.name=훈련인형
 actors.mobs.npcs.dummy.desc=살아있는 사람이 아닌 인형이다.
-
 actors.mobs.npcs.dobermann.name=훈련교관 도베르만
-actors.mobs.npcs.dobermann.desc=로도스 아일랜드의 전술 훈련 교관. 엄격하고 깐깐하며 빈틈없는 성격이다.
-actors.mobs.npcs.dobermann.say=미안하군. 지금은 바빠.
-
+actors.mobs.npcs.dobermann.desc=로도스 아일랜드의 전술 훈련 교관. 엄격하고 깐깐하며 빈틈없는 성격이다.\n\n_퀘스트가 있는 NPC입니다._
+actors.mobs.npcs.dobermann.has_quest=의뢰받은건 아직인가?
+actors.mobs.npcs.dobermann.offer_slay_enemies=새로운 의뢰다. _직접 적 %d마리를 처치_해 주면, 보상을 주겠다고 하는군. 할수 있겠나?
+actors.mobs.npcs.dobermann.offer_ranged_kills=새로운 의뢰다. _아츠 스태프나 투척 무기로 적 %d마리를 처치_해 주면, 보상을 주겠다고 하는군. 할수 있겠나?
+actors.mobs.npcs.dobermann.offer_descend_rationless=새로운 의뢰다. _어떤 음식도 먹지 않고 새로운 층 %d개를 연속으로 탐험_해 주면, 보상을 주겠다고 하는군. 음식을 먹으면 진행도가 초기화되니 주의하게. 할수 있겠나?
+actors.mobs.npcs.dobermann.offer_open_chests=새로운 의뢰다. _상자 %d개_를 열어 주면, 보상을 주겠다고 하는군. 할수 있겠나?
+actors.mobs.npcs.dobermann.offer_collect_gold=새로운 의뢰다. _합성옥 %d개_를 모아 주면, 보상을 주겠다고 하는군. 할수 있겠나?
+actors.mobs.npcs.dobermann.accept=수락
+actors.mobs.npcs.dobermann.decline=거절
 actors.mobs.npcs.jessica.name=제시카
 actors.mobs.npcs.jessica.desc=블랙스틸의 정식 오퍼레이터. 상호 교류 프로젝트의 일환으로 로도스 아일랜드에 주재하며 수련 중이다.\n\n_퀘스트가 있는 NPC입니다._
 actors.mobs.npcs.jessica.say=아, 안녕하세요!
@@ -1203,30 +1038,23 @@ actors.mobs.npcs.jessica.quest=제시카 :\n\n아, 안녕하세요! 저기 혹�
 actors.mobs.npcs.jessica.result=제시카 :\n\n가, 감사합니다! 이걸 받아주세요.\n_합성옥 800개_ 에요.
 actors.mobs.npcs.jessica.quest2=제시카 :\n\n아, 안녕하세요! 저기 혹시... _염국 훈제고기_가 있으신가요? 한 번 먹어보고 싶어가지고... 가져다주시면 좋은 걸 드릴게요.
 actors.mobs.npcs.jessica.result2=제시카 :\n\n가, 감사합니다! 여기 _제가 사용하던 총기 액세서리_ 와 _합성옥 900개_ 에요. 받아주세요.
-
 actors.mobs.npcs.frostleaf.name=프로스트리프
 actors.mobs.npcs.frostleaf.desc=배신자가 아니다.\n\n_퀘스트가 있는 NPC입니다._
 actors.mobs.npcs.frostleaf.say=응?
 actors.mobs.npcs.frostleaf.quest=프로스트리프 :\n\n아, 마침 잘됐네. _차가운 숨결 용액_ 이란 물건 알아? 어떤 물건인지 궁금해서 말이야... 혹시 가져다 줄 수 있어?
 actors.mobs.npcs.frostleaf.result=프로스트리프 :\n\n정말 가져다줄 줄은 몰랐는데. 사례는... 그렇지, _내 힘이 담겨있는 스태프_ 정도면 될까?
-
 actors.mobs.npcs.weedy.name=위디
 actors.mobs.npcs.weedy.desc=이베리아 출신의 생체 공학자이자 로도스 아일랜드 생명 공학 연구소의 소장이며 클로저의 유능한 부하. 상당한 결벽증을 갖고있다.
 actors.mobs.npcs.weedy.say=죄송합니다. 여기 앞은 공사중이에요.
-
 actors.mobs.npcs.firewall.name=방화벽
 actors.mobs.npcs.firewall.desc=출입하려면 상급 권한이 필요할 것 같다. 독타를 구출해오자.
-
 actors.mobs.npcs.npc_pilot.name=조종사
 actors.mobs.npcs.npc_pilot.desc=당신을 어디론가 데려다줄 것이다.\n31층 이후의 추가 챕터를 진행할 수 있습니다. _이동하면 되돌아올 수 없습니다._
-
 actors.mobs.npcs.npc_phantom.name=팬텀
 actors.mobs.npcs.npc_phantom.desc=와! 로그라이크 주인공!\n\n_퀘스트가 있는 NPC입니다._
 actors.mobs.npcs.npc_phantom.result=아아, 미스 크리스틴. 그녀는 네가 마음에 들었나보군. 그녀를 보호해준 것에 감사한다. 이걸 사례로 주도록하지.
-
 actors.mobs.npcs.npc_phantomshadow.name=팬텀?
 actors.mobs.npcs.npc_phantomshadow.desc=애옹
-
 actors.mobs.npcs.npc_astesia.name=아스테시아
 actors.mobs.npcs.npc_astesia.desc=별점 볼래?
 actors.mobs.npcs.npc_astesia.no_weapon=안녕, %s. 지금 한가해? 만약 괜찮다면, 네 무기를 잠깐만 봐도 괜찮을까? 별점을 통해 너의 무기에 엮인 비밀을 알려줄 수 있을 것 같거든.\n\n...근데 무기는 어딨어? 작전 수행 중 아니야?
@@ -1235,18 +1063,29 @@ actors.mobs.npcs.npc_astesia.setbouns_1=안녕, %1$s. 지금 한가해? 만약 �
 actors.mobs.npcs.npc_astesia.setbouns_2=안녕, %1$s. 지금 한가해? 만약 괜찮다면, 네 무기를 잠깐만 봐도 괜찮을까? 별점을 통해 너의 무기에 엮인 비밀을 알려줄 수 있을 것 같거든.\n\n...네 무기에 엮여있는 비밀은... 꽤 많네. _%2$s_, _%3$s_ 를 같이 사용한다면 네 무기에 특별한 일이 일어날거야. 내가 보증할게.
 actors.mobs.npcs.npc_astesia.setbouns_3=안녕, %1$s. 지금 한가해? 만약 괜찮다면, 네 무기를 잠깐만 봐도 괜찮을까? 별점을 통해 너의 무기에 엮인 비밀을 알려줄 수 있을 것 같거든.\n\n...우와, 엄청 많이 엮여있네. _%2$s_, _%3$s_, 그리고 _%4$s_를 같이 사용하면 네 무기의 특별한 비밀이 밝혀질 수 있을 것 같아.
 
+actors.mobs.npcs.npc_mage.name=캐스터 오퍼레이터
+actors.mobs.npcs.npc_mage.desc=로도스 예비 대원. 아직 이곳이 익숙하지 않은 당신에게 알려 줄 것이 있을것이다.\n\n_퀘스트가 있는 NPC입니다._
+actors.mobs.npcs.npc_mage.say=안녕하세요. 음, 아직 로도스 내부가 공사중이라 길을 잃으시는 분들이 계셔서 안내요원으로 배정받았어요. \n일단 로도스 밖으로 나가는 길은.. 오른쪽 끝의 계단으로 내려가서, 중앙 복도 제일 왼쪽으로 나가면 돼요. 이 세계는 꼭 _계단_ 타일이 아니더라도 층을 오르내릴 수 있는 부분이 있어요. 의심되는 곳이 있으면 해당 타일 위에서 한번 더 터치를 해보세요.아, 그리고 가벼운 퀘스트를 하나 드릴게요.
+actors.mobs.npcs.npc_mage.quest=캐스터 오퍼레이터 :\n\n 로도스 함선 _외부_에 예비 가드 오퍼레이터가 있을거에요. _머리띠를 한 은발 늑대귀_ 대원이니까, 다른 분이랑 헷갈리시면 안돼요! 그 친구한테 가서 말을 걸어보세요. 다음 퀘스트를 줄거에요. 
+actors.mobs.npcs.npc_mage.quest2=캐스터 오퍼레이터 :\n\n 로도스 함선 _내부_ 중앙 복도 오른쪽으로 가면 상점 구역이 있을거에요. 가서 클로저 씨에게 말을 걸어보세요.
+actors.mobs.npcs.npc_mage.quest3=캐스터 오퍼레이터 :\n\n 로도스 함선 _내부_ 중앙 복도 오른쪽으로 가면 상점 구역이 있을거에요. 상점 구역 우측 상단의 퓨어스트림 씨에게 말을 걸어보세요.
+
+actors.mobs.npcs.npc_guard.name=예비 가드 오퍼레이터
+actors.mobs.npcs.npc_guard.desc=로도스 예비 대원. 아직 이곳이 익숙하지 않은 당신에게 알려 줄 것이 있을것이다.\n\n_퀘스트가 있는 NPC입니다._
+actors.mobs.npcs.npc_guard.say=안녕하세요. 캐스터 씨가 보내서 오신거죠? \n잘 오셨어요. 퀘스트는 이런 식으로 진행하면 돼요. 특정 대상에게 말을 걸거나, 요청한 물건을 가져다 주거나.. 특정 대상을 처치하는 등, 여러가지가 있답니다. 이번에는 상점의 배달 드론을 이용한 퀘스트를 시작해볼게요. 의심되는 곳이 있으면 해당 타일 위에서 한번 더 터치를 해보세요.아, 그리고 가벼운 퀘스트를 하나 드릴게요.
+
+
+
 actors.mobs.npcs.ceylon.name=실론
 actors.mobs.npcs.ceylon.hey=으으... 어쩌면 좋을까요..
 actors.mobs.npcs.ceylon.cya=나중에 뵙겠습니다, 로도스 여러분.
 actors.mobs.npcs.ceylon.desc=\n\n \n\n이 물 맛이 아니야!
 actors.mobs.npcs.ceylon.water=홍차가 없는 일상은 일상이라고 부를 수 없어요. 제 홍찻잎을 가져간 사람들은 _보병_, _일개미_, _특공대원_ 이라고 불리던데... 부탁드리겠습니다. 저에게는 홍차가 필요해요.
 actors.mobs.npcs.ceylon.quest=안녕하세요, 저는 실론. 빅토리아 국립대학 출신이고 전공은 오리지니움이에요. 당신들은... 로도스 아일랜드의 분들이신가요? 그렇다면 죄송하지만 부탁을 드려도 괜찮을까요? 제가 켈시 선생님의 소개로 로도스 아일랜드에 실습을 하러갈 예정인데... 이곳의 용병들에게서 도망치다가 그만 홍찻잎과 물병을 잃어버리고 말았답니다. 괜찮으시다면 제 물병과 홍찻잎을 되찾아주실 수 있을까요? 홍찻잎은 8개 정도면 된답니다.
-
 actors.mobs.npcs.lancet2.name=LANCET-2
 actors.mobs.npcs.lancet2.desc=사로잡힌 LANCET-2. 그녀를 구출하자.
 actors.mobs.npcs.lancet2.help=로봇 살려-
 actors.mobs.npcs.lancet2.thank=당신은 LANCET-2를 구출했다.
-
 actors.mobs.npcs.npc_gglow.name=골든글로우
 actors.mobs.npcs.npc_gglow.desc=드디어 왔어... 안녕하세요, 박사님. 새로 오퍼레이터로 부임한 골든글로우입니다.
 actors.mobs.npcs.npc_gglow.free1=드디어..!
@@ -1254,105 +1093,91 @@ actors.mobs.npcs.npc_gglow.free2=안녕하세요!
 actors.mobs.npcs.npc_gglow.free3=드디어 왔어...!
 actors.mobs.npcs.npc_gglow.free4=자유다!
 actors.mobs.npcs.npc_gglow.free5=나는 살아있어, *심한 말*들아!
-
 actors.mobs.npcs.minishopkeeper.name=텍사스
 actors.mobs.npcs.minishopkeeper.thief=네 놈에겐 안 팔아.
 actors.mobs.npcs.minishopkeeper.desc=당신을 위한 펭귄 로지스틱스의 맞춤 출장 서비스, 이름하여 뗑컨일레븐!... 라는 명목으로 자리잡은 텍사스.
-
 actors.mobs.npcs.dario.name=대재판관 다리오
-actors.mobs.npcs.dario.desc=사로잡힌 LANCET-2. 그녀를 구출하자.
-actors.mobs.npcs.dario.help=사람 살려-
-actors.mobs.npcs.dario.tnk=당신은 LANCET-2를 구출했다.
-
-
-
-
-###miniboss
-
+actors.mobs.npcs.dario.desc=긴 전투로 인해 지친 기색이 역력하다.
+actors.mobs.npcs.dario.intro_warrior=블레이즈… 자네라면 믿을 수 있겠군.
+actors.mobs.npcs.dario.intro_rogue=레드. 이 혼란 속에서 자네롤 만날줄은 몰랐군.
+actors.mobs.npcs.dario.intro_mage=아미야. 자네의 판단력이 지금 필요하네.
+actors.mobs.npcs.dario.intro_huntress=그레이스롯. 지원을 부탁해도 되겠나?
+actors.mobs.npcs.dario.intro_rosecat=로즈마리… 이 상황에서도 와줘서 고맙네.
+actors.mobs.npcs.dario.intro_nearl=니어. 자네가 와줬군.
+actors.mobs.npcs.dario.intro_chen=첸. 자네의 힘이 필요하네.
+actors.mobs.npcs.dario.intro=\n\n이곳을 벗어나고 싶지만, 해사들의 수가 너무 많군. 자네의 도움이 필요하네. 준비가 되면 다시 말을 걸어주게.
+actors.mobs.npcs.dario.start=해사들이 접근 중이군. 전투 준비를 해주게.
+actors.mobs.npcs.dario.reminder=아직 적들이 계속 몰려오고 있네. 방심하지 말게.
+actors.mobs.npcs.dario.almost=이제 얼마 남지 않았네. 조금만 더 버텨보세.
+actors.mobs.npcs.dario.complete=이 정도면 충분히 정리된 것 같군. 정말 수고 많았네.
+actors.mobs.npcs.dario.thank=내겐 필요 없는 물품들이네. 자네에게 도움이 되면 좋겠군.
+actors.mobs.npcs.dario.reward=확인
+actors.mobs.npcs.dario.success=당신은 다리오를 무사히 구출했다.
+actors.mobs.npcs.dario.announce=근처에 아무도 없는가-
+actors.mobs.npcs.dario.die=크윽…
+### miniboss
 actors.mobs.miniboss.sentinel.name=살카즈 보초
 actors.mobs.miniboss.sentinel.desc=부대 전체의 정찰을 담당하며, 순찰과 경비 임무를 주로 맡는 살카즈 용병. _대원에게 직접적인 공격_을 받았을 때 층 내의 모든 적들에게 경고를 보내 버프를 부여하고 자신의 위치로 불러온다.\n\n_미니보스_ : 처치하지 않으면 다음 층 보스와 탈룰라가 강화됩니다!
 actors.mobs.miniboss.sentinel.hit=살카즈 보초가 이 층 내의 모든 적들에게 경고를 보냈다!
 actors.mobs.miniboss.sentinel.die=살카즈 저주술사와 탈룰라의 힘이 약해지는 것이 느껴졌다.
-
 actors.mobs.miniboss.centurion.name=살카즈 백부장
 actors.mobs.miniboss.centurion.desc=리유니온의 간부이자 살카즈의 용병. 살카즈의 용병을 일부 선동하여 정면 돌파를 시도한다.\n주기적으로 살카즈 용병을 불러온다.\n\n_미니보스_ : 처치하지 않으면 다음 층 보스와 탈룰라가 강화됩니다!
 actors.mobs.miniboss.centurion.tep=소환된 살카즈 용병이 이 층의 다른 곳으로 전이하였다!
 actors.mobs.miniboss.centurion.die=W와 탈룰라의 힘이 약해지는 것이 느껴졌다.
 actors.mobs.miniboss.centurion$centurionminion.name=무명의 살카즈 용병
 actors.mobs.miniboss.centurion$centurionminion.desc=이 살카즈 용병은 백부장의 부름을 받고 소환되었습니다. 만약 백부장이 이상한 곳에 소환을 시도한다면, 용병은 전이 아츠를 사용해 이 층의 다른 곳에서 나타날 것입니다.
-
 actors.mobs.miniboss.bloodmagister.name=블러드 위치
 actors.mobs.miniboss.bloodmagister.desc=현대 오리지늄 아츠보다 더욱 무서운 윈터위습 족의 고대 마법을 연구하는 현지인. 엄청난 전투력을 가졌기에 _정면으로 싸우는 것은 위험_ 하지만, 힘의 부작용으로 _전투에 돌입하는 순간 빠르게 체력을 잃게될 것_입니다.\n\n_미니보스_ : 처치하지 않으면 다음 층 보스와 탈룰라가 강화됩니다!
 actors.mobs.miniboss.bloodmagister.die=머드락과 탈룰라의 힘이 약해지는 것이 느껴졌다.
 actors.mobs.miniboss.bloodmagister$rage.name=폭주
 actors.mobs.miniboss.bloodmagister$rage.desc=폭주했습니다! 이 상태에선 엄청난 전투력을 지니지만, 서서히 체력을 잃게될 것입니다.\n\n_이 효과는 위치가 죽을 때까지 지속됩니다._
-
 actors.mobs.miniboss.faust.name=파우스트
 actors.mobs.miniboss.faust.desc=리유니온 간부, 스나이퍼 신분으로 리유니온에 가담하고 있으며, 보통 메피스토와 함께 행동하고 있다.\n원거리 공격을 가하며, 제자리에서 움직이지 않고 연속으로 _4회의 공격_을 가하면 _끔찍한 위력의_ 강화 화살을 발사할 것입니다.\n\n_미니보스_ : 처치하지 않으면 다음 층 보스와 탈룰라가 강화됩니다!
 actors.mobs.miniboss.faust.die=메피스토와 탈룰라의 힘이 약해지는 것이 느껴졌다.
-
-
-
-###mobs
+### mobs
 actors.mobs.acidic.name=스나이퍼 리더
 actors.mobs.acidic.desc=살카즈의 용병. 살카즈 스나이퍼보다 작전 능력이 뛰어나다. 그들은 무조건 근접전을 피하며, 산성 원석충의 체엑을 묻힌 화살을 발사한다. 거대한 몸집은 사격 능력에 전혀 영향을 주지 않았다. 오히려 다른 사람들 보다 강한 육체를 활용하여, 더 막강한 위력의 원거리 무기를 사용할 수 운용할 수 있게 되었고, 그만큼 쓰러뜨리기가 더욱 어려워졌다.
-
 actors.mobs.albino.name=원석충·α
 actors.mobs.albino.desc=야생의 감염 생물, 일반 원석충보다 위험도가 높은 종이다. 이런 저지능 생물은 적의 캐스터에게 조종당할 가능성이 있으며, 인공설비에 침입하여 무리지어 공격한다. 뾰족한 뿔은 대상에게 출혈을 일으킨다.
-
 actors.mobs.armoredstatue.name=껴입은 고프닉
 actors.mobs.armoredstatue.desc=덕로드가 고용한 우르수스 경비. 힘은 장사지만 머리가 둔하다. 주로 덕로드의 짐꾼 노릇을 한다. _그는 당신이 선제공격을 하지 않는 이상 공격해오지 않을 것이다._\n\n고프닉이 입고있는 방어구 덕분에 높은 방호력을 보유하고 있는 것처럼 보이며, 쓰러트리기 매우 힘들 것 같습니다.\n\n고프닉 쓰러트릴 경우, _%1$s_와 _%2$s_ 을/를 드랍합니다.
-
 actors.mobs.airbornesoldier.name=공수부대병
 actors.mobs.airbornesoldier.desc=리유니온의 특수 근거리 전투원. 장비는 상당히 허술하지만 원리는 간단해 쉽게 방어가 취약한 지점에 기습을 감행하기 용이하다. \n\n이들은 보유한 장비를 이용해 대원에게 눈 깜짝할 사이에 접근할 수 있습니다.
-
 actors.mobs.bandit.name=유령 리더
 actors.mobs.bandit.desc=엔지니어링에 뛰어난 리유니온 맴버로, 어느 정도 훈련을 받았으며 비교적 많은 방어구를 구비하고 있어, 일반적인 오퍼레이터로는 이들을 단숨에 제압하기 어렵다. 민첩한 기동 능력으로 인해 아군 유닛이 저지할 수 없으며, 다양한 방법으로 목표에 침투하여 기계 설비를 파괴한다.
-
 actors.mobs.bat.name=진형파괴병
 actors.mobs.bat.desc=훈련을 쌓은 적의 돌격병. 이동속도는 일반 유닛보다 약간 높지만, 적의 체력을 흡수하는 능력을 갖고 있어 방어선이 제대로 갖춰지기도 전에 무너뜨리기도 한다. 이러한 특징으로 인해, 본 돌격병은 진형파괴병이라 불리게 되었다.
-
 actors.mobs.bee.name=황금 벌
 actors.mobs.bee.desc_honey=황금 벌들은 작은 몸집에도 불구하고 그들의 집을 맹렬하게 지키려고 합니다. 이 녀석은 진정되었으며, 당신을 따라가고 싶어하는 것처럼 보입니다.
 actors.mobs.bee.desc=황금 벌들은 작은 몸집에도 불구하고 그들의 집을 맹렬하게 지키려고 합니다. 이 녀석은 매우 화가 나 있는 상태이니, 가까이 다가가지 않는 것이 좋겠습니다.
-
 actors.mobs.brute.name=리벤저
 actors.mobs.brute.enraged=복수
 actors.mobs.brute.def_verb=방어
 actors.mobs.brute.desc=특수한 공격 수단을 사용하는 신원불명의 전투원. 특수 제작된 무기를 사용하여 공격하며, 교전 중 공격 방법을 바꾸는 특성 때문에 저지하기가 까다롭다.
 actors.mobs.brute$bruterage.name=복수심
 actors.mobs.brute$bruterage.desc=리벤저는 죽어가고 있지만, 그는 죽음의 문턱에서 그의 동료들이 속삭이는 것을 들었습니다. "네가 죽으면, 다른 동포들도 로도스에게 무참하게 죽어나갈 거야. 쓰러지지 마!" \n\n시간이 흐르거나 피해를 받는 등의 이유로 리벤저에게 둘러진 보호막이 모두 사라진다면 리벤저는 결국 죽을 것입니다. 그러나 보호막이 남아있는 동안 가하는 피해가 엄청나게 증가하므로 주의하십시오!\n\n리벤저에게 아직 %d의 보호막이 남아있습니다.
-
 actors.mobs.causticslime.name=기동 방패병 리더
 actors.mobs.causticslime.desc=리유니온의 근거리 전투원. 기동방패병보다 작전 능력이 뛰어나다. 노획하거나 불법 루트를 통해 입수한 복장과 무기, 그리고 군에서 쓰던 방패를 장비하고 있다. \n\n단단한 갑옷으로 인해, 한 번에 _6을 넘는 피해_ 를 주기는 어렵습니다. 공격시 확률적으로 산성을 부여합니다.
-
 actors.mobs.hound.name=흉폭한 사냥개
 actors.mobs.hound.desc=리유니온의 기술정찰부대가 조종하는 생물. 몸에는 모 브랜드의 감시제어설비가 장착되어 있다. 우수한 은폐성과 행동속도는 아군의 방어를 쉽게 뚫어 막대한 피해를 입힐 수 있으니 주의해야 한다.
-
 actors.mobs.crystalmimic.name=특수 매복 병사
 actors.mobs.crystalmimic.ate=특수 매복 병사가 당신의 %s를 빼앗았다!
 actors.mobs.crystalmimic.escaped=특수 매복 병사가 탈출했다!
 actors.mobs.crystalmimic.desc=특별한 훈련을 받은 교활한 이 병사들은 보급 물자로 위장해있습니다. 일반적인 매복 병사와는 다르게 대원의 물건을 훔칠 수 있으며, 물건을 훔치면 빠르게 달아나려고합니다. _이들은 최대한 전투를 피하려하며_, 검에 특별한 아츠가 있어 상대를 전이시킬 수 있습니다. 
-
 actors.mobs.cannot.name=분노한 상인 캔낫
 actors.mobs.cannot.desc=이 도둑놈!!!
-
 actors.mobs.demonspawner.name=살카즈 제단
 actors.mobs.demonspawner.on_death=제단이 파괴되면서, 이곳에 있는 살카즈의 기운이 감소한 것 같다.
 actors.mobs.demonspawner.desc=살카즈의 힘으로 만들어진 이 제단은 특별한 힘을 지니고 있습니다. 이 제단은 자체적인 전투 능력은 없지만, 주기적으로 살카즈 도병들을 불러들입니다.\n\n_이 제단들은 탈룰라의 의지와 연결되어있는 것 같습니다. 파괴한다면 탈룰라의 힘을 약화시킬 수 있을 것 같습니다._
-
 actors.mobs.dm100.name=아츠마스터 A1
 actors.mobs.dm100.zap_kill=번개 아츠로 인해 인해 사망했다...
 actors.mobs.dm100.desc=적이 조종하는 드론으로, 어떤 아츠 교육 경진대회용의 드론을 개조하여 만들어졌다. 모듈화 설계로 인해, 아츠 마스터 A1은 장비한 아츠 무기에서 원거리 아츠 공격을 할 수 있으니 각별히 주의해야 한다. 자료에 따르면, 탑재된 아츠 무기는 더 많은 양의 마법 대미지를 막아주는 역할도 겸한다고 한다.\n\n_침묵 가능_
-
 actors.mobs.dm200.name=머드락의 거대 석상
 actors.mobs.dm200.vent=거대 석상이 돌을 던졌다!
 actors.mobs.dm200.desc=머드락의 오리지늄 아츠 피조물. 의식이 없으며, 머드락 본인의 조종이 필요하다. 둔하고 느리지만, 극도로 높은 물리 대미지와 HP로 인해 격퇴하기 어렵다.\n\n그들의 가장 큰 약점은 거대해진 크기로, 이 때문에 던전의 조그만 통로나 문을 지나갈 수 없습니다.
-
 actors.mobs.dm201.name=길 잃은 석상
 actors.mobs.dm201.vent=길 잃은 석상이 돌을 던졌다!
 actors.mobs.dm201.desc=라이타니엔에 있는 어느 고탑의 늙은 캐스터가 만든 실험용 피조물. 이 거대 석상은 본래 '하인' 역할을 하도록 만들어진 것이지만, '누구'를 모셔야 할지 알려주는 것을 깜빡했다고 한다..\n\n시에스타 흑요석으로 만들어진 이 거대한 골렘은 경이로운 내구성을 갖게 됐지만, 너무 무거운 탓에 움직일 수 없게 됐습니다. 하지만 그의 환영은 당신을 일격에 으깨버릴 만큼 위협적입니다.
-
 actors.mobs.olddm300.name=머드락
 actors.mobs.olddm300.notice=무단 침입자 감지.
 actors.mobs.olddm300.defeated=임무 실패. 장비를 정지합니다.
@@ -1360,7 +1185,6 @@ actors.mobs.olddm300.repair=머드락은 스스로를 수리했다!
 actors.mobs.olddm300.def_verb=방어
 actors.mobs.olddm300.rankings_desc=머드락에게 박살남
 actors.mobs.olddm300.desc=이 기계는 몇세기 전 드워프들에 의해 만들어졌습니다. 그 후, 드워프들은 이 기계들을 골렘, 정령, 심지어는 악마들로 대신했습니다. 결국 그들의 문명은 쇠퇴하고 말았습니다. 머드락과 같은 계열의 기계들은 주로 건설과 채굴 작업에 사용되지만, 필요에 따라 거점 방어도 가능합니다.
-
 actors.mobs.newdm300.name=머드락
 actors.mobs.newdm300.damageup=공격력 상승!
 actors.mobs.newdm300.final=더러운 대지의 핏줄
@@ -1379,7 +1203,6 @@ actors.mobs.newdm300.defeated=난...이 곳의 감염자들을 구하러 온 것
 actors.mobs.newdm300.desc=연령 미상, 성별 불명, 이력 불명, 라이타니엔에서 황야를 유랑하는 감염자 조직의 우두머리다. 과거 리유니온의 일원으로 활약했던 머드락이 지금 전장에 다시 나오게 된 건, 대체 무슨 이유 때문일까?
 actors.mobs.newdm300.desc_supercharged=머드락이 아츠를 가득 충전했습니다. 이 상태에서는 피해를 입지 않으며 두 배의 속도로 움직입니다! 게다가 망치의 위력 또한 _벽을 뚫고 나갈 정도로 증가_ 했습니다만, 벽을 파는 중에는 훨씬 느려질 것입니다.\n\n최대로 충전된 머드락은 직접 공격하는 것은 소용이 없습니다. 하지만 _지역 어딘가에 전력을 공급하는 것_ 이 있을 것입니다. 그것을 파괴하면 충전이 약해질 것입니다.
 actors.mobs.newdm300$fallingrocks.desc=돌멩이들이 천장에서 떨어지고 있다. 머지 않아 천장이 무너질 것 같다!
-
 actors.mobs.dwarfking.name=메피스토
 actors.mobs.dwarfking.notice=동포들이여, 이제 출발하자. 우리의 시대를 맞이하러!!
 actors.mobs.dwarfking.lifelink_1=너희들의 정수가 필요해, 가축들아!
@@ -1397,7 +1220,6 @@ actors.mobs.dwarfking.desc=리유니온 간부, 메딕 신분으로 리유니온
 actors.mobs.dwarfking$dkghoul.rankings_desc=메피스토의 가축이 됨
 actors.mobs.dwarfking$dkmonk.rankings_desc=메피스토의 가축이 됨
 actors.mobs.dwarfking$dkwarlock.rankings_desc=메피스토의 가축이 됨
-
 actors.mobs.elemental$fireelemental.name=드론 플레임
 actors.mobs.elemental$fireelemental.desc=적이 조종하는 드론으로, 추가 아머를 장착하여 더욱 파괴하기 어려워졌다. 프로토 타입이 그래픽 엔진 스튜디오에서 설계되었다고 전해지는 '플레임'은 특수 장치를 통해 공격 대상에게 고온의 열기를 발사 할 수 있는데, 공격당한 대상은 화상을 입게 되어, 전투에 불리한 영향을 미치게 된다.
 actors.mobs.elemental$newbornfireelemental.name=랩터 프로토타입
@@ -1408,33 +1230,24 @@ actors.mobs.elemental$shockelemental.name=드론 스파크
 actors.mobs.elemental$shockelemental.desc=적이 조종하는 드론으로, 추가 아머를 장착하여 더욱 파괴하기 어려워졌다. 프로토 타입이 그래픽 엔진 스튜디오에서 설계되었다고 전해지는 '스파크'는 특수 장치를 통해 공격 대상에게 고압의 전기를 발사 할 수 있는데, 공격당한 대상은 일시적으로 실명하게 되어, 전투에 불리한 영향을 미치게 된다. 또한 물 위에 있을때 더 큰 피해를 입힌다.
 actors.mobs.elemental$chaoselemental.name=랩터
 actors.mobs.elemental$chaoselemental.desc=적이 조종하는 드론. 모 우주 슈팅 게임의 팬이 외관을 제작한 관게로 '랩터'라 불리고 있다. 고속 사격이 가능한 소형 기관총과 원거리 아츠 리시버가 탑재되어 있는 것으로 미뤄보아 가까운 곳에 숨어있는 캐스터가 조종하고 있는 것으로 보인다. 우수한 은폐성과 공격성은 작전 중인 오퍼레이터에게 큰 위협이 될 것이다.
-
 actors.mobs.eye.name=아츠마스터 A2
 actors.mobs.eye.deathgaze_kill=아츠 광선에 몸이 관통됐다...
 actors.mobs.eye.desc=적이 조종하는 드론으로, 비행 보조 모듈을 일부 제거하여 비행속도를 희생하는 대신 더 큰 아츠 무기를 장착했기에, 원거리 마법 대미지에 각별히 주의해야 한다. 자료에 따르면, 탑재된 아츠 무기는 더 많은 양의 마법 대미지를 막아주는 역할도 겸한다고 한다.\n\n_침묵 가능_
-
 actors.mobs.fanatic.name=무뢰한
 actors.mobs.fanatic.desc=손에 든 거대한 해머로 막강한 파괴력을 뽐내는 전투원이다.
-
 actors.mobs.fetidslug.name=산성 원석충
 actors.mobs.fetidslug.desc=야생의 감염 생물. 부식성의 분비액으로 작전 인원의 방호설비를 부식시킬 수 있다. 이런 저지능 생물은 적의 캐스터에게 조종당할 가능성이 있으며, 인공설비에 침입하여 무리지어 공격한다.\n\n이 원석충은 산성 구름을 발생시킵니다. 가까이 있을 수록 강력해지는 것 같습니다.\n\n산성 체엑이 이 벌레의 몸에서 흘러내립니다. 바닥을 녹일 정도로 강력하지만 물에는 녹는 것 같습니다.
-
 actors.mobs.ghoul.name=숙주 병사
 actors.mobs.ghoul.desc=의식불명 상태로 몸을 조종당하고 있는 병사. 이런 생물이 전장 위를 돌아다닌다는 건 직접 겪어보지 않는 이상은 상상하기 어려운 일이리라.\n\n _하나의  숙주병사가 쓰러지면, 다른 숙주병사가 주변이 있는 한 계속해서 몇 턴 후에 부활할 것입니다._
-
 actors.mobs.gnoll.name=리유니온 보병
 actors.mobs.gnoll.desc=리유니온의 초급 근거리 전투원. 노획하거나 불법 루트를 통해 입수한 복장과 무기를 장비하고 있으며, 자신의 신분과 행동이 노출되지 않도록 통일된 복장과 가면을 착용하고 있다.
-
 actors.mobs.gnolltrickster.name=리유니온 저격수
 actors.mobs.gnolltrickster.desc=리유니온의 초급 원거리 전투원. 노획하거나 불법 루트를 통해 입수한 복장과 무기를 장비하고 있으며, 자신의 신분과 행동이 노출되지 않도록 통일된 복장과 가면을 착용하고 있다.
-
 actors.mobs.goldenmimic.name=상급 매복 병사
 actors.mobs.goldenmimic.desc=훈련받은 이 리유니온 병사는 일반적인 매복 병사보다 뛰어납니다.\n\n이들은 보급 물자로 위장해있으며, 일반적인 매복 리유니온 병사보다 강합니다. 대신 그만큼 좋은 물자를 지니고 있습니다.
-
 actors.mobs.golem.name=숙주 부랑자
 actors.mobs.golem.def_verb=방어
 actors.mobs.golem.desc=의식불명 상태로 몸을 조종당하고 있는 부랑자. 몸 군데군데에 오리지늄 결정이 솟아난 이런 생물이 전장 위를 돌아다닌다는 건 직접 겪어보지 않는 이상은 상상하기 어려운 일이리라.\n\n부랑자들은 더욱 강해졌지만, 거대하게 자라난 결정들이 좁은 통로를 지나갈 수 없게 만들었다. 메피스토는 이를 보완하기 위해 그들에게 새로운 아츠 능력을 부여했습니다. 그들은 순간이동을 통해 방을 오갈 수 있으며, 사거리 밖에 있는 적을 그들에게 순간이동시킬 수 있습니다.
-
 actors.mobs.goo.name=살카즈 저주술사
 actors.mobs.goo.notice=네 녀석에게 죽어간 우리 동포의 한을 지금 갚겠다.
 actors.mobs.goo.defeated=나는, 돌아, 올, 것이다.
@@ -1444,18 +1257,15 @@ actors.mobs.goo.enraged=분노
 actors.mobs.goo.gluuurp=죽어라!
 actors.mobs.goo.rankings_desc=저주술사에게 저지당함
 actors.mobs.goo.desc=아츠 사용 시 지팡이가 아니라, 오리지늄에 침식된 몸을 편리한 아츠 리시버로 활용하는 살카즈 용병. 대기 중일 땐 공격을 하지 않지만, 전투 상태에 돌입하면 잔혹하게 자신의 몸에서 힘을 짜내 생명을 빼앗는다.
-
 actors.mobs.reuniondefender.name=중기갑병
 actors.mobs.reuniondefender.noticed=중기갑병이 거대한 방패로 당신의 하찮은 공격을 막아냈다.
 actors.mobs.reuniondefender.blocked=방어
 actors.mobs.reuniondefender.def_verb=방어
 actors.mobs.reuniondefender.desc=리유니온의 근거리 전투원. 무거운 전신 방어구를 장비하였고, 숙련된 전투 능력을 갖추고 있어 쓰러뜨리기가 매우 어렵다. 과거 정규 훈련을 받았던 전투원으로 추측되니 주의하도록 하자.
-
 actors.mobs.guard.name=살카즈 캐스터
 actors.mobs.guard.scorpion=도망갈 수 없다!
 actors.mobs.guard.def_verb=방어
 actors.mobs.guard.desc=살카즈의 용병. 복잡한 아츠를 사용하여 공격해오니 주의하도록 하자.\n\n그들은 신비한 아츠를 사용해 당신을 포박하고 끌고옵니다.
-
 actors.mobs.king.name=메피스토
 actors.mobs.king.notice=무엄하도다!
 actors.mobs.king.defeated=네 따위 %s이/가 어떻게 날 죽인 거지? 짐은... 불멸일... 텐데...
@@ -1467,95 +1277,74 @@ actors.mobs.king$undead.name=언데드 드워프
 actors.mobs.king$undead.def_verb=방어
 actors.mobs.king$undead.rankings_desc=드워프의 제왕에게 무릎 꿇음
 actors.mobs.king$undead.desc=드워프 제왕에게 일으켜진 이 언데드 드워프들은, 한때 왕국의 신하들이었습니다. 엄청난 양의 수염이 자라난 해골처럼 생겼습니다.
-
 actors.mobs.mimic.name=매복 병사
 actors.mobs.mimic.reveal=이 상자는 매복이다!
 actors.mobs.mimic.hidden_hint=이 상자에서 무언가 불길함이 느껴진다... 가까이 다가가 상자를 열려고 하는 것은 결코 좋은 생각이 아닐 것이다.
 actors.mobs.mimic.desc=매복한 리유니온 병사는 보급이 필요한 대원들을 기습하는 작전을 수행합니다. 이들은 특별한 훈련을 받았기에 상당히 강한 편입니다. \n\n하지만 그 만큼 장비가 뛰어나기에, 쓰러트린다면 더욱 많은 보급을 받을 수 있을 것입니다.
-
 actors.mobs.necromancer.name=기술 정찰병
 actors.mobs.necromancer.desc=이리유니온의 엔지니어 전투원. 갖고 있는 설비를 사용하여 범위내의 오퍼레이터와 설비 배치 상황을 정찰한다. 우선적으로 제압하도록 하자.\n\n기술 정찰병들은 자신이 만들어낸 폭탄새를 불러내고 폭탄새를 강화시켜 싸웁니다. 기술 정찰병이 쓰러지면 그가 불러낸 폭탄새도 같이 사라집니다.
 actors.mobs.necromancer$necroskeleton.name=기술 정찰병의 폭탄새
 actors.mobs.necromancer$necroskeleton.desc=이 폭탄새는 기술 정찰병이 불러낸 드론입니다. 일반적인 폭탄새들과 동일하지만, 기술 정찰병이 쓰러지면 그가 불러낸 폭탄새도 같이 사라집니다.
-
 actors.mobs.mob.died=멀리서 무언가 죽는 소리를 들었다.
 actors.mobs.mob.rage=#$%^
 actors.mobs.mob.exp=%+d경험치
 actors.mobs.mob.rankings_desc=%s에 의해 사망
-
 actors.mobs.monk.name=숙주 병사(폭주)
 actors.mobs.monk.def_verb=방어
 actors.mobs.monk.parried=막음
 actors.mobs.monk.desc=숙주 병사는 이성을 잃은 대신 얻은 강력한 힘으로 특별한 무기 없이 오직 맨손 전투만 고집하며, 그들이 집중한 상태가 되면 그들을 향한 다음 공격을 튕겨낼 수 있으며, 이는 필중 공격에도 예외없이 적용됩니다. 그들은 움직이는 동안은 더 빠르게, 움직이지 않고 싸울 때는 더 느리게 집중력을 쌓습니다.
 actors.mobs.monk$focus.name=집중
 actors.mobs.monk$focus.desc=점점 미쳐가고 있는 적군 병사. 지속적으로 생명을 잃어가고 있다. 감염이 이미 골수에까지 퍼졌으며, 이성을 잃은 대신 막강한 공격 능력을 얻었다. 어떻게 이런 생물이 전장에 존재할 수 있는지, 상상이 잘 가지 않는다.
-
 actors.mobs.piranha.name=촉수
 actors.mobs.piranha.desc=이 촉수는 원래 지하 물웅덩이에 살던 종은 아니었습니다. 이 녀석들은 이베리아에서 수입해온 일종의 "보안장치"입니다.
-
 actors.mobs.pylon.name=축음기
 actors.mobs.pylon.desc_inactive=축음기는 이 구역의 기계들에게 전력을 안정적으로 공급하기 위해 세워졌습니다.\n\n현재 축음기는 비활성화되어 피해를 입지 않습니다.
 actors.mobs.pylon.desc_active=축음기는 이 구역의 기계들에게 전력을 안정적으로 공급하기 위해 세워졌습니다. 현재 머드락의 아츠에 침식되어 머드락에게 힘을 주는 것 같습니다!\n\n충전된 축음기는 피해를 입을 수 있지만, 시계 방향으로 전기를 방출할 것입니다. 또한 축음기는 무거운 금속으로 만들어져 있어 강력한 피해에 저항할 수 있습니다.
-
 actors.mobs.slug.name=원석충
 actors.mobs.slug.desc=야생의 감염 생물. 이런 저지능 생물은 적의 캐스터에게 조종당할 가능성이 있으며, 인공설비에 침입하여 무리지어 공격한다.
-
 actors.mobs.ripperdemon.name=살카즈 도병
 actors.mobs.ripperdemon.leap=살카즈 도병이 도약하려고 한다!
 actors.mobs.ripperdemon.desc=살카즈 용병. 오랜 세월에 계속된 전쟁은 이들을 만신창이로 만들었지만, 지금도 고용주의 명령을 완수하기 위해 계속해서 싸우고 있다.\n\n살카즈 도병은 그리 위협적인 존재는 아니지만, 민첩하고 위험한 존재입니다. 그들은 목표에 신속하게 접근하여 당신의 목을 취할 것입니다.
-
 actors.mobs.rotheart.name=타락한 심장
 actors.mobs.rotheart.desc=본래에 이 곳에는 부패 심장이라 불리는 식물이 있었다. 하지만─
-
 actors.mobs.rotlasher.name=원시의 바다
 actors.mobs.rotlasher.desc=이곳에 존재해서는 안되는 생물. 이들은 움직이지 않는다. 아직은.
 actors.mobs.rotlasher$waiting.status=이 %s 은/는 가만히 있습니다.
-
 actors.mobs.scorpio.name=살카즈 스나이퍼
 actors.mobs.scorpio.desc=살카즈의 용병. 거대한 몸집은 사격 능력에 전혀 영향을 주지 않았다. 오히려 다른 사람들보다 강한 육체를 활용하여, 더 막강한 위력의 원거리 무기를 운용할 수 있게 되었고, 그만큼 쓰러뜨리기가 더욱 어려워졌다.
-
 actors.mobs.senior.name=숙주 리더(폭주)
 actors.mobs.senior.desc=완전히 이성을 잃어버린 적군 병사. 지속적으로 생명을 잃어가고 있다. 감염이 이미 골수에까지 퍼졌으며, 일반적인 폭주한 숙주들보다 더 강한 공격 욕구를 가지고 있다. 어떻게 이런 생물이 전장에 존재할 수 있는지, 상상이 잘 가지 않는다.
-
 actors.mobs.shaman.name=특수전 캐스터
 actors.mobs.shaman.bolt_kill=당신은 아츠 화살에 의해 사망했다...
 actors.mobs.shaman.desc=리유니온의 캐스터. 일반적인 캐스터에 비해 각각 다양한 아츠를 사용할 수 있다는 특징이 있다.
 actors.mobs.shaman$redshaman.spell_desc=이 특수전 캐스터는 붉은색 로브를 쓰고 있으며, 일시적으로 _당신의 공격 능력을 저하시키는_ 아츠을 사용할 것입니다.\n\n_침묵 가능_
 actors.mobs.shaman$blueshaman.spell_desc=이 특수전 캐스터는 파란색 로브를 쓰고 있으며, 일시적으로 _당신이 받는 피해를 늘리는_ 아츠을 사용할 것입니다.\n\n_침묵 가능_
 actors.mobs.shaman$purpleshaman.spell_desc=이 특수전 캐스터는 보라색 로브를 쓰고 있으며, 일시적으로 _당신의 정확성과 회피를 낮추는_ 아츠을 사용할 것입니다.\n\n_침묵 가능_
-
 actors.mobs.armoredbrute.name=어벤저
 actors.mobs.armoredbrute.desc=특수한 공격 수단을 사용하는 신원불명의 전투원. 리벤져보다 더 예사롭지 않은 실력을 갖고 있다. 특수 제작된 무기를 사용하여 공격하며, 교전 중 공격 방법을 바꾸는 특성 때문에 저지하기가 까다로우니, 조심하도록 하자.
-
 actors.mobs.skeleton.name=폭탄새
+actors.mobs.skeleton.about_to_explode=드론이 곧 폭탄을 투하하려고 한다!
 actors.mobs.skeleton.explo_kill=당신은 드론의 폭발물에 의해 사망했다..
 actors.mobs.skeleton.def_verb=회피
 actors.mobs.skeleton.desc=적이 조종하는 드론으로, 어떤 환상의 동물에게서 영감을 받아 설계되었다고 한다. 비행속도는 비교적 느리지만 폭탄이 탑재되어 있어 자신이 격파될때 폭탄을 투하하고 범위 물리 대미지를 준다.
-
 actors.mobs.slime.name=기동 방패병
 actors.mobs.slime.def_verb=방어
 actors.mobs.slime.desc=리유니온의 근거리 전투원. 노획하거나 불법 루트를 통해 입수한 방어구와 무기를 장비하고 있어 장비가 더욱 완전해졌고, 정식 훈련을 받은 전투원에 가까운 실력을 갖고 있어, 평범한 전술로는 상대하기가 어려워졌다.\n\n단단한 갑옷으로 인해, 한 번에 _6을 넘는 피해_ 를 주기는 어렵습니다.
-
 actors.mobs.snake.name=새싹 원석충
 actors.mobs.snake.hint=새싹 원석충에게 조사 버튼을 사용하여 어떻게 반격할 수 있는지에 대해 배워 보세요.
 actors.mobs.snake.desc=야생의 감염 생물, 일반 원석충보다 위험도가 낮은 종이다. 이런 저지능 생물은 적의 캐스터에게 조종당할 가능성이 있으며, 인공설비에 침입하여 무리지어 공격한다. 각종 열매의 씨앗이 이 원석충과 함께 자라난다.\n\n새싹 원석충의 시야 바깥에서 공격하면 한 번의 기습 공격을 가합니다. 문 너머로 새싹 원석충을 유인한 뒤 _새싹 원석충이 문을 넘어온 순간에 공격_ 하는 것도 좋은 방법입니다.
 actors.mobs.snake.noticed=새싹 원석충은 당신의 어설픈 공격을 회피했다.
-
 actors.mobs.explodslug_n.name=고에너지 원석충
 actors.mobs.explodslug_n.desc=야생의 감염 생물. 복부에 대량의 오리지늄과 동화되어 불안정한 상태인 관계로 사망 시 폭발이 발생할 수 있다. 이런 저지능 생물은 적의 캐스터에게 조종당할 가능성이 있으며, 인공설비에 침입하여 무리지어 공격한다.\n\n_침묵 가능_
-
 actors.mobs.statue.name=고프닉
 actors.mobs.statue.def_verb=방어
 actors.mobs.statue.desc=덕로드가 고용한 우르수스 경비. 힘은 장사지만 머리가 둔하다. 주로 덕로드의 짐꾼 노릇을 한다._그는 당신이 선제공격을 하지 않는 이상 공격해오지 않을 것이다._\n\n고프닉을 쓰러트릴 경우, _%s_ 을/를 드랍합니다.
-
 actors.mobs.succubus.name=살카즈 랜서
 actors.mobs.succubus.desc=장창을 사용하여 돌격하는 특수훈련을 받은 살카즈 용병. 돌진 속도가 빠를수록 방어선에 주는 위협은 더 커질 것이다.\n\n이들은 대원을 발견하면 가속 상태에 돌입합니다. 가속 상태일 땐 공격력이 상승하며, 이동할 때마다 추가 공격력과 명중률, 이동속도를 얻습니다. 공격시 가속 상태가 해제됩니다.
 actors.mobs.succubus$acceleration.name=가속
 actors.mobs.succubus$acceleration.desc=살카즈 랜서가 가속 상태에 돌입했다. 이 살카즈 랜서가 충분한 가속을 쌓는다면 큰 위험에 처할 것이다.
-
 actors.mobs.swarm.name=요마 MK.1
 actors.mobs.swarm.desc=적이 조종하는 드론. 내부에선 '요마'라고 불리고 있다. 원거리 조종이 가능한 아츠 리시버가 탑재된 것으로 미뤄보아 가까운 곳에 숨어있는 캐스터가 조종하고 있는 것으로 보인다. 방어력이 높은 오퍼레이터에겐 큰 대미지를 줄 수는 없겠지만, 그렇지 않은 오퍼레이터에겐 여전히 위협적인 존재다.\n\n 아츠 공격이 아닌 일반 공격은 요마를 둘로 분열시킬 것 입니다.
-
 actors.mobs.newtengu.name=W
 actors.mobs.newtengu.notice_gotcha=오랜만이네, %s!
 actors.mobs.newtengu.interesting=너, 좀 재밌는걸?
@@ -1563,24 +1352,19 @@ actors.mobs.newtengu.notice_have=도망칠 생각 하지마, %s!
 actors.mobs.newtengu.defeated=좋아. 즐거웠어! 나중에 또 봐~
 actors.mobs.newtengu.rankings_desc=W에게 살해당함
 actors.mobs.newtengu.desc=감염자를 구제한다고? 카즈델에 사는 살카즈 대부분이 감염자야. 거기에, 여러 압력이나 모순을 떠 앉고 있지. 구체적으로 어디까지 구제해줄 수 있는데? 한 명의 살카즈도 지키지 못한 켈시와 당신이 어쩔 생각인 걸까?
-
 actors.mobs.newtengu$bombability$bombblob.desc=엄청나게 가열된 연기 구름이 피어오르고 있습니다. 조심하십시오, 곧 폭발할 것입니다!
 actors.mobs.newtengu$bombability$bombitem.name=지뢰
 actors.mobs.newtengu$bombability$bombitem.cant_pickup=이 녀석은 바닥에 들러붙어 있다. 옮길 수 없다!
 actors.mobs.newtengu$bombability$bombitem.desc=W가 여기에 기묘한 외형의 연막탄을 던졌으며, 지금 뜨겁고 자욱한 연기가 피어오르고 있다. 연막탄이 폭발 직전에 초읽기를 하듯 째깍거리는 소음을 내고 있다!\n\n폭탄이 땅에 단단히 고정되어 있기 때문에, 당신은 이 폭탄을 주울 수 없다.
-
 actors.mobs.newtengu$fireability$fireblob.desc=W가 여기에 김이 모락모락 나는 고운 가루를 던졌으며, 곧 불이 붙을 것이다!
-
 actors.mobs.newtengu$shockerability$shockerblob.desc=이곳에 전기 에너지가 차오르고 있으며, 누구라도 이 타일에 올라서면 그 다음 턴에 감전될 것이다!
 actors.mobs.newtengu$shockerability$shockeritem.name=전기충격기
 actors.mobs.newtengu$shockerability$shockeritem.cant_pickup=너무 많은 전기를 방출하고 있어, 집을 수 없다!
 actors.mobs.newtengu$shockerability$shockeritem.desc=W가 여기에 전기를 내뿜는 기계를 던졌다. 이 기계는 주변에 계속하여 전기를 뿜어내지만, 다행히도 이는 예측 가능한 패턴에 따라 실행되는 것으로 보인다.\n\n기계 주변으로 계속하여 전류가 흐르고 있기 때문에, 이걸 주울 방법은 없다.
-
 actors.mobs.newtengu$wmine$bombblob.desc=뭔가 수상한 연기 구름이 피어오르고 있습니다.
 actors.mobs.newtengu$wmine$bombitem.name=특수 지뢰
 actors.mobs.newtengu$wmine$bombitem.cant_pickup=이 녀석은 바닥에 들러붙어 있다. 옮길 수 없다!
 actors.mobs.newtengu$wmine$bombitem.desc=W가 도망치면서 설치한 이 지뢰는 다른 지뢰들과 다르게, 주위에 W를 제외한 누군가가 감지되었을 때 더욱 빠르게 타이머가 돌아갑니다.\n\n특이한 방식으로 만들어진 이 지뢰는 일반적인 지뢰보다 늦게 터지며, _의외로 위력이 낮은 대신 대상을 실명시킬 것입니다!_
-
 actors.mobs.oldtengu.name=W
 actors.mobs.oldtengu.notice_gotcha=오랫만이네, %s!
 actors.mobs.oldtengu.interesting=너, 좀 재밌는걸?
@@ -1588,24 +1372,19 @@ actors.mobs.oldtengu.notice_have=도망칠 생각 하지마, %s!
 actors.mobs.oldtengu.defeated=좋아. 즐거웠어! 나중에 또 봐~
 actors.mobs.oldtengu.rankings_desc=W에게 살해당함
 actors.mobs.oldtengu.desc=감염자를 구제한다고? 카즈델에 사는 살카즈 대부분이 감염자야. 거기에, 여러 압력이나 모순을 떠 앉고 있지. 구체적으로 어디까지 구제해줄 수 있는데? 한 명의 살카즈도 지키지 못한 켈시와 당신이 어쩔 생각인 걸까?
-
 actors.mobs.thief.name=유령
 actors.mobs.thief.bye=지나가용~
 actors.mobs.thief.stole=유령이 당신에게서 %s을/를 훔쳤다!
 actors.mobs.thief.carries=\n\n저 유령은 _%s_ 을/를 들고 있습니다. 분명 누군가에서 훔친 것입니다.
 actors.mobs.thief.escapes=유령이 당신의 %s을/를 들고 지나가용했다!
 actors.mobs.thief.desc=엔지니어링에 뛰어난 리유니온 맴버로, 무기를 거의 휴대하고 있지 않다. 민첩한 기동 능력으로 인해 아군 유닛이 저지할 수 없으며, 다양한 방법으로 목표에 침투하여 기계 설비를 파괴한다.\n\n유령들은 직접 싸우기보다는 물건을 훔쳐서 달아나려고 합니다. 그들을 시야에서 놓치지 마십시오. 아니면 도둑맞은 아이템을 다신 볼 수 없을지도 모릅니다.
-
 actors.mobs.warlock.name=숙주 투척병
 actors.mobs.warlock.bolt_kill=당신은 몸에 무언가가 꽂힌 채로 죽었다..
 actors.mobs.warlock.desc=점점 미쳐가고 있는 적군 투척병. 지속적으로 생명을 잃어가고 있다. 미친 듯이 주변의 모든 것을 목표에게 던진다. 어떻게 이런 생물이 전장에 존재할 수 있는지, 상상이 잘 가지 않는다.\n\n_침묵 가능_
-
 actors.mobs.wraith_donut.name=영혼의 환영
 actors.mobs.wraith_donut.desc=아미야가 적을 쓰러트리며 나온 영혼을 자신의 모습으로 만들어낸 환영. 구체적인 형체가 없어 일반적인 공격으로 명중시키기 매우 어렵다.
-
 actors.mobs.wraith.name=럴커
 actors.mobs.wraith.desc=리유니온의 특수 전투원. 행동이 민첩하고 잘 발견되지 않아 일반적인 공격으론 피해를 주기 어려우나, 단 한번의 공격으로 나가떨어질 만큼 연약하다.
-
 actors.mobs.yog.name=탈룰라
 actors.mobs.yog.notice=결론을 내리기 전에 본인 목숨부터 지켜야 할 거다.
 actors.mobs.yog.defeated=...
@@ -1620,7 +1399,6 @@ actors.mobs.yog$burningfist.desc=요그-제바는 고대의 신이며, 혼돈의
 actors.mobs.yog$larva.name=신의 애벌레
 actors.mobs.yog$larva.rankings_desc=요그-제바에게 잡아먹힘
 actors.mobs.yog$larva.desc=요그-제바는 고대의 신이며, 혼돈의 땅에서 온 강력한 존재입니다. 몇 세기 전, 고대 드워프들은 겨우 악마 군단과의 전쟁에서 이겼지만, 신을 죽일 순 없었습니다. 대신, 그들은 악마들이 다시 일어날 수 없을 정도로 약화되었다고 믿으며 그들을 도시 아래에 가두어 버렸습니다.
-
 actors.mobs.talulah.name=탈룰라?
 actors.mobs.talulah.notice=결론을 내리기 전에 네 목숨부터 지켜야 할 거다.
 actors.mobs.talulah.notice_ch=아무래도 내가 너희들을 대단한 착각에 빠트린 것 같군.
@@ -1638,7 +1416,6 @@ actors.mobs.talulah$infectedpatrolcaptain.name=우르수스 감염자 감시관
 actors.mobs.talulah$infectedpatrolcaptain.rankings_desc=탈룰라에게 무릎꿇음
 actors.mobs.talulah$infectedpatrolcaptain.desc=우르수스 감염자를 추격하여 체포하는 감시관. 탐욕스럽고 냉혈하다.\n탈룰라에게 포섭당한 듯 하다.
 actors.mobs.talulah$yogripper.rankings_desc=탈룰라에게 무릎꿇음
-
 actors.mobs.yogfist.invuln_warn=환영은 탈룰라 근처에 있을 때는 피해를 받지 않는다!
 actors.mobs.yogfist.rankings_desc=탈룰라에게 무릎꿇음
 actors.mobs.yogfist.desc=탈룰라가 불러낸 환영들 중 하나. 환영들은 탈룰라의 힘에 연결되어 있으며, 탈룰라와 가까이 있을 때는 모든 피해로부터 보호받을 것입니다.
@@ -1656,13 +1433,10 @@ actors.mobs.yogfist$brightfist.desc=석관에서 나타난 신비한 괴물, 당
 actors.mobs.yogfist$darkfist.name=황제의 칼날
 actors.mobs.yogfist$darkfist.teleport=황제의 칼날은 당신의 광원을 없애는 어둠의 폭발 속에서 순간이동했다!
 actors.mobs.yogfist$darkfist.desc=_탈룰라가 불러낸 과거의 환영,_이 환영은 순수한 어둠의 에너지로 이루어져 있습니다. 이 환영은 강력한 어둠 아츠의 폭발을 발사할 수 있습니다. 이 폭발들은 당신의 광원을 약하게 하며, 또한 커다란 피해를 입힙니다. 그리고 환영은 달아나기 위해 잠시동안 전투 지역을 어둠 속으로 집어삼킬 수 있습니다.\n\n하지만 이 환영은 근거리에서 사용할 수 있는 특별한 능력은 가지고 있지 않습니다.
-
 actors.mobs.mudrockzealot.name=머드락 소대원
 actors.mobs.mudrockzealot.desc=머드락의 살카즈 소대. 머드락과 생사를 넘나드는 전투 경험을 통해 독특한 전술을 습득했다.
 actors.mobs.mudrockzealot.brack=보호막 파괴
-
-
-// 탈루 추가 보스전
+# 탈루 추가 보스전
 actors.mobs.talu_blacksnake.name=불사의 검은 뱀
 actors.mobs.talu_blacksnake.desc=수없이 죽었음에도 우르수스의 대지에서 사라지지 않은 오래된 의지
 actors.mobs.talu_blacksnake.notice=덤벼라.
@@ -1674,41 +1448,31 @@ actors.mobs.talu_blacksnake.invincibility=무효화
 actors.mobs.talu_blacksnake.invincibility1=내가 곧 우르수스의 의지다.
 actors.mobs.talu_blacksnake.invincibility2=왜 미래를 보지 못하는 것이냐?
 actors.mobs.talu_blacksnake.invincibility3=너희들이 날 막을 수 있다고 생각하느냐?
-
-
-// 31~35
-
+# 31~35
 actors.mobs.infantry.name=보병
 actors.mobs.infantry.desc=초급 근거리 전투원. 근성이 넘치기때문에 일격에는 쓰러지지 않는다.
-
 actors.mobs.ergate.name=일개미
 actors.mobs.ergate.desc=엔지니어링 기술 수단을 사용하여 파괴를 감행하며, 무기를 거의 휴대하고 있지 않다. 일개미의 전투 능력은 낮지만, 상대의 무기를 강제로 떨어트린 후 도망쳐 전투를 방해한다.
-
+actors.mobs.ergate.disarm=%s을(를) 떨어뜨렸다!
 actors.mobs.piersailor.name=부두 선원장
 actors.mobs.piersailor.desc=강력한 근거리 전투원. 하지만 물 안에서는 지속해서 피해를 받는다.
-
 actors.mobs.heavyboat.name=헤비보트
 actors.mobs.heavyboat.desc=이 강력한 배는 물 위에서 강력한 전투력을 발휘하지만, 반대로 물 밖에서는 매우 약해지며 계속해서 체력을 잃습니다. 사망시 선원이 탈출하여 즉시 전투에 참여합니다.
 actors.mobs.heavyboat.bang=당신은 교통사고 당했다...
 actors.mobs.heavyboat.rankings_desc=교통사고
-
 actors.mobs.sniper.name=스나이퍼
 actors.mobs.sniper.desc=초급 스나이퍼. 초원거리에서 공격할 수 있다. 장비하고 있는 특수 저격 무기는 특수 탄약을 발사하여 아군 유닛에 기절 상태를 줄 수 있다.\n\n제자리에서 3회 연속 공격하면 대상을 마비시킵니다.
-
 actors.mobs.wavecaster.name=조류 제어술사
 actors.mobs.wavecaster.desc=이들이 사용하는 물의 아츠는 그렇게 위협적인 편은 아니지만, 물 위에 있는 적에게는 매우 치명적으로 변합니다.
-
 actors.mobs.agent.name=특공대원
 actors.mobs.agent.desc=그가 사용하는 다양한 전술 수단은 아군의 방어선을 손쉽게 무너뜨릴 수 있을 것이다.\n\n_침묵 가능_
-
 actors.mobs.schwarz.name=슈바르츠
 actors.mobs.schwarz.desc=기밀 작전, 조사, 기밀 정보 보호, 야외 생존, 크로스보우 사용 등의 기술에 매우 조예가 깊다. 주기적으로 플레이어에게 저격을 시도한다.
 actors.mobs.schwarz.snipe1=놓치지 않겠습니다.
 actors.mobs.schwarz.snipe2=딱 좋은 과녁입니다.
 actors.mobs.schwarz.snipe3=보입니다.
 actors.mobs.schwarz.parried=면역
-
-// OF-6 작전 후 대사
+# OF-6 작전 후 대사
 actors.mobs.siestaboss.name=시장 크로닌
 actors.mobs.siestaboss.desc=화람지심 다시 읽기 귀찮다
 actors.mobs.siestaboss.notice=로, 로도스 아일랜드 놈들, 왜 여기로 온 거지!
@@ -1716,78 +1480,54 @@ actors.mobs.siestaboss.skill1=인원들 싹 다 투입시켜!
 actors.mobs.siestaboss.skill2=빨리 저 녀석을 잡아!
 actors.mobs.siestaboss.phase2=너희들... 너희들...
 actors.mobs.siestaboss.defeated=젠장.. 젠장...!
-
-
-// 추가 21~24층 몬스터
+# 추가 21~24층 몬스터
 actors.mobs.empiredrone.name=제국 포화 선조자
-actors.mobs.empiredrone.desc=우르수스군의 포병 캐스터가 조종하는 드론, 두텁고 견고한 재질의 장갑으로 무장하였다. 우르수스 포병의 맹렬한 집중 포격을 유도한다.
+actors.mobs.empiredrone.desc=우르수스군의 포병 캐스터가 조종하는 드론, 두텁고 견고한 재질의 장갑으로 무장하였다. 우르수스 포병의 맹렬한 집중 포격을 유도한다. 가장 가까운 적을 우선적으로 공격한다.
 actors.mobs.empiredrone.bomb_kill=당신은 폭사했다...
 actors.mobs.empiredrone.rankings_desc=폭발사산
-
 actors.mobs.raider.name=돌격자
 actors.mobs.raider.desc=우르수스군 중 기동력과 돌파력을 겸비한 병과. 갑옷을 두르고 있으며, 무장이 부족한 상태의 적을 상대할 때 뛰어난 역량을 발휘한다.\n\n이들은 적을 강하게 찌르는 대신 밀쳐내는 공격을 가합니다.
-
 actors.mobs.striker.name=정예 선봉
 actors.mobs.striker.desc=우르수스군의 강력한 보병. 우르수스가 결성한 제국군의 침략 선봉 부대. 공수를 겸비하였으며, 근접전과 투척에 능하다. 어느 정도 대미지를 입으면 사기가 오르고 파괴력이 더 커진다.
-
 actors.mobs.strikerelite.name=백전 정예 선봉
 actors.mobs.strikerelite.desc=풍부한 실전 경험을 지닌 우르수스군의 강력한 보병. 우르수스가 결성한 제국군의 침략 선봉 부대. 공수를 겸비하였으며, 근접전과 투척에 능하다. 어느 정도 대미지를 입으면 사기가 오르고 파괴력이 더 커진다.
-
-
-// 36~40층 몹
-
+# 36~40층 몹
 actors.mobs.lavaslug.name=용암 원석충
 actors.mobs.lavaslug.desc=폼페이의 영향을 받은 감염생물. 매우 뜨겁다.
-
 actors.mobs.metalcrab.name=메탈 크랩
 actors.mobs.metalcrab.desc=야생의 감염 생물. 단단한 금속이 몸을 감싸고 있어 대다수의 일반 무기로는 피해를 입히기가 어렵다. 공격 대상의 발을 묶는 능력을 지녔다.
-
 actors.mobs.rockbreaker.name=록브레이커
 actors.mobs.rockbreaker.desc=근거리 전투원. 군용 전술 도끼로 목표에게 강력한 일격을 날려 큰 대미지를 줄 수 있다. 그들의 갑옷은 아츠 공격에 대한 효과적인 방어책이다.
-
 actors.mobs.explodeslug_a.name=고에너지 원석충α
 actors.mobs.explodeslug_a.desc=복부에 대량의 오리지늄과 동화되어 불안정한 상태인 관계로 사망 시 폭발이 발생할 수 있다.\n\n_침묵 가능_. 물폭발 주문에 매우 취약해보입니다.
 actors.mobs.explodeslug_a.explo_kill=고에너지 원석충의 에너지에 휩쓸려 폭사했다.
-
 actors.mobs.acidslug_a.name=산성 원석충α
 actors.mobs.acidslug_a.desc=강력한 산성을 띠는 감염생물. 원거리에서 산성을 부여하는 액체를 발사한다.\n\n_침묵 가능_
 actors.mobs.acidslug_a.bolt_kill=당신은 온 몸이 녹아내려 죽었다...
 actors.mobs.acidslug_a.rankings_desc=녹아내림
-
 actors.mobs.originiutant.name=오리지뉴턴트
 actors.mobs.originiutant.desc=어떤 목적 때문에 무기로 개조된 오리지늄 오리지뉴턴트 생물, 껍질이 매우 단단하다.\n\n정면으로 싸우기엔 매우 위험한 적으로, _불_에 약해보입니다.
 actors.mobs.originiutant.rankings_desc=형체조차 남지않음
-
 actors.mobs.mutantspider.name=변이 바위거미
 actors.mobs.mutantspider.desc=오리지뉴턴트에 감염되어 심각하게 변이된 거대 바위 거미. 직접적인 공격력은 낮지만, 매우 위험한 특수능력을 가졌습니다.
 actors.mobs.mutantspider.rankings_desc=감염당함
-
 actors.mobs.firecore.name=화산 심장부
 actors.mobs.firecore.desc=이 에너지체에서 심층에 있는 무언가에게 힘을 주는 것 같습니다...
 actors.mobs.firecore.on_death=화산의 힘이 줄어드는게 느껴졌다. 남은 화산 심장부 : %d
-
 actors.mobs.pompeii.name=폼페이
 actors.mobs.pompeii.desc=거대한 야생의 감염 생물. 특수한 고온 환경에서 탄생한 변이생물체다. 공포스런 외관을 갖고 있으며, 자신의 체온을 높여 사람이 가까이 접근하지 못하도록 한다.\n\n_이 생물체는 물과 독에 약해보입니다._
 actors.mobs.pompeii.skill=폼페이가 공격을 흡수해 생명력을 회복하려합니다!
-
-
-// 가비알 1챕터 몹
-
+# 가비알 1챕터 몹
 actors.mobs.tiacauhwarrior.name=전사
 actors.mobs.tiacauhwarrior.desc=아카후알라에서 가장 쉽게 볼 수 있는 전사. 단순한 장창을 사용하여 공격하지만, 근접하게 되는 경우 의외로 성가셔질지도 모른다.\n\n주위에 긴 풀들이 있다면 피해 저항을 얻습니다.
-
 actors.mobs.tiacauhfanatic.name=워몽거
 actors.mobs.tiacauhfanatic.desc=호전적인 티아카우 전사. 공격속도가 매우 빠르며, 매회 공격의 위력이 크진 않지만 자칫하면 순식간에 진영이 무너질 수도 있다.
-
 actors.mobs.tiacauhlancer.name=투창병
 actors.mobs.tiacauhlancer.desc=무기를 투척하는 법을 배웠을 뿐, 일반 전사와 별 차이는 없다. 사정거리가 짧지만 효과적인 공격을 감행한다.
-
 actors.mobs.tiacauhsniper.name=투창병 리더
 actors.mobs.tiacauhsniper.desc=거듭된 훈련을 통해 더욱 강해진 전사. 투척하는 창은 더욱 강력해졌지만, 창의 무게로 인해 사정거리는 여전히 짧다.
-
 actors.mobs.tiacauhaddict.name=버섯중독자
 actors.mobs.tiacauhaddict.desc=버섯에 중독된 티아카우 전사. 이동속도가 매우 빠르며, 적중시 대상의 공격 능력과 방어 능력을 약화시킨다.
-
 actors.mobs.tomimi.name=토미미
 actors.mobs.tomimi.desc=토미미, 아카후라 지역의 아다크리스 출신, 가비알의 어린 시절 절친한 친구이자 '가비알의 의지' 부족의 현 족장. 헬기를 터트린 주범이다.
 actors.mobs.tomimi.notice=여, 역시 전장에서 실천해보는 게 좋겠네요.
@@ -1798,94 +1538,71 @@ actors.mobs.tomimi.destroy=당신은 폭발사산했다. 나무삼!
 actors.mobs.tomimi.rankings_desc=토미미한테 뚜들겨맞음
 actors.mobs.tomimi$tomimitower.name=구조물 지지대
 actors.mobs.tomimi$tomimitower.desc=구조물 양 옆에 있는 지지대. 두 개 모두 무너트리면 건방진 토미미를 떨어트릴 수 있을 것 같습니다...
-
 actors.mobs.tiacauhripper.name=리퍼
 actors.mobs.tiacauhripper.desc=매우 호전적인 티아카우 전사. 공격속도가 매우 빠르며, 매회 공격의 위력이 크진 않지만 자칫하면 순식간에 진영이 무너질 수도 있다.
-
 actors.mobs.tiacauhritualist.name=주술사
 actors.mobs.tiacauhritualist.desc=아카후알라에서는 보기 드문 오리지늄 아츠 사용자. 종종 부족 내에서는 의사 역할을 맡기도 한다.\n\n_침묵 가능_, 허나 근접 공격은 막을 수 없습니다.
 actors.mobs.tiacauhritualistzap_kill=당신은 물리치료 당했다...
-
 actors.mobs.tiacauhshaman.name=대주술사
 actors.mobs.tiacauhshaman.desc=아카후알라에서는 굉장히 보기 드문, 오리지늄 아츠에 대해 어느 정도 조예가 있는 캐스터.\n\n_침묵 가능_, 허나 근접 공격은 막을 수 없습니다.
-
 actors.mobs.tiacauhshredder.name=디스트로이어
 actors.mobs.tiacauhshredder.desc=주마마의 정예 부하. 뛰어난 장비를 갖추고 있다. 주위에 풀이 많을 수록 공격력이 상승한다.\n\n불에 약해보입니다.
-
 actors.mobs.tiacauhbrave.name=워리어
 actors.mobs.tiacauhbrave.desc=매우 강한 티아카우 전사. 전투를 위해 태어났다 해도 과언이 아니다.\n\n방어력이 매우 높지만, 공격한 뒤에는 방어력이 감소합니다.
-
 actors.mobs.giantmushroom.name=거대 버섯
 actors.mobs.giantmushroom.desc=매우 크게 자란 거대 버섯. 주위에 지속적으로 해로운 상태이상을 부여하며, 파괴시 버섯 조각을 얻을 수 있습니다. 평범하게 파괴하긴 조금 어렵지만, 불에는 매우 약해보입니다.
-
 actors.mobs.eunectes.name=유넥티스
 actors.mobs.eunectes.desc=\n\n\n\n\n가비알의 고향인 아카후알라에 있는 어느 부족의 족장.
 actors.mobs.eunectes.notice=어떤 사냥감이라도 온 힘으로 간다!
 actors.mobs.eunectes.die=너희들은 가비알에게 미치지 못한다!
-
 actors.mobs.thebiguglything.name=거대하고 못생긴 무언가
 actors.mobs.thebiguglything.desc=\n\n\n\n\n주마마의 야심작. 쓸데없이 큰 기계 괴수, 대제사장이 조종하고 있다.\n\n불에 약해보입니다.
 actors.mobs.thebiguglything.rage=기계가 폭주한다!
 actors.mobs.thebiguglything.fire_ready=대제사장이 원거리 공격을 준비한다!
-
-
-
-※ 이하 번역 필요
-// 심해 1
+# *이하 번역 필요
+# 심해 1
 actors.mobs.searunner.name=해안의 폭주자
 actors.mobs.searunner.desc=발이 네 개 달린 시테러. 체내에 뼈가 없다.\n이들은 약하지만, 대상을 서서히 약화시킵니다.
-
 actors.mobs.floatingseadrifter.name=부해의 항해자
 actors.mobs.floatingseadrifter.desc=그들의 후대는 공기 속에서 헤엄치는데 더 능숙할 것 같다.\n이 공중형 적은 공격시 신경손상을 유발하며, _원거리_공격이 아니면 피해를 주기 어렵습니다.
-
 actors.mobs.seareaper.name=발해의 수확자
 actors.mobs.seareaper.desc=날카로운 소리를 내는 시테러\n피격당하면 각성하여 근접한 플레이어의 신경을 손상시킵니다.
-
 actors.mobs.seacapsule.name=낭해의 저항자
 actors.mobs.seacapsule.desc=불순물이 섞인 시테러. 신체 조직의 밀도가 일부 합금을 뛰어넘는다.\n물리 공격에 당할 때마다 근접한 플레이어의 신경을 손상시킵니다.\n중요한 아이템을 드롭할 것 같습니다.
-
 actors.mobs.npcs.seaobject.name=응급처치 시설
 actors.mobs.npcs.seaobject.desc=주위에 있는 로도스 대원의 신경손상을 치료해주는 시설.
-
 actors.mobs.seaboss1.name=첫 발언자
 actors.mobs.seaboss1.desc=처음으로 문명의 앞에서 인간의 말을 쓴 아름다운 생물, 시본.
-
-//심해 2
-
+# 심해 2
 actors.mobs.sea_octo.name=심해의 분출자
 actors.mobs.sea_octo.desc=명흔이 나타난 지역에서 흔히 볼 수 있는 시테러.\n공격시 신경 손상을 부여하며, 명흔 위에서 사거리가 대폭 증가합니다.
-
+actors.mobs.sea_octo$extendedrange.name=사거리 증가
+actors.mobs.sea_octo$extendedrange.desc=명흔 위에 있는 개체는 사거리가 대폭 증가합니다.
 actors.mobs.sealeef.name=심해의 열초자
 actors.mobs.sealeef.desc=명흔에서 태어난 아주 공격적인 개체. 주변 자연환경을 크게 훼손하고, 동족에 의해 개조된다.\n공격할 때마다 공격력이 상승하며, 명흔 위에서 위장 효과를 얻습니다.
-
+actors.mobs.sealeef$damagerampup.name=공격력 증가
+actors.mobs.sealeef$damagerampup.desc=공격할 때마다 공격력이 상승합니다.\n현재 보너스: +%d
 actors.mobs.netherseabrandguider.name=심해의 인도자
 actors.mobs.netherseabrandguider.desc=곧 죽어 문드러져 갈 무리에서 파생된 새로운 형태의 시테러.\n체력이 절반 이하가되면 방어력이 상승하고 자신의 위치에 명흔을 생성합니다.\n\n_침묵 가능_
-
+actors.mobs.netherseabrandguider$reinforced.name=방어력 증가
+actors.mobs.netherseabrandguider$reinforced.desc=체력이 절반 이하로 떨어져 방어력이 크게 상승했습니다. 저지 가능 수는 상승하지 않습니다.
 actors.mobs.isharmla.name=이샤믈라,부식의 마음
-actors.mobs.seaboss2.desc=\n\n \n\n \n\n더 이상 노래 부르지 않고, 위매니를 위해 목소리를 낸다. 지속적으로 근처 아군에게 실드를 부여한다.
-
-
+actors.mobs.isharmla.desc=\n\n \n\n \n\n더 이상 노래 부르지 않고, 위매니를 위해 목소리를 낸다. 지속적으로 근처 아군에게 실드를 부여한다.
 actors.mobs.isharmlaseabornhead.name=이샤믈라의 머리
 actors.mobs.isharmlaseabornhead.desc=저는 머리예요!\n\n주기적으로 입에서 파동을 방출해 발판을 파괴한다. 다른 부위가 남아 있는 한, 피해가 잘 들어가지 않는 것 같다.
-
 actors.mobs.isharmlaseabornbody.name=이샤믈라의 몸통
 actors.mobs.isharmlaseabornbody.desc=빵ㅋㅋ\n\n이샤믈라의 중심부다. 회복력이 상당히 높아 보인다.
-
 actors.mobs.isharmlaseaborntail.name=이샤믈라의 꼬리
 actors.mobs.isharmlaseaborntail.desc=쭉ㅋㅋ\n\n빠른 속도로 물 위의 적을 공격한다. 주기적으로 울림을 발생시켜 모든 적에게 고정 피해를 가하는 것 같다.
+actors.mobs.belfry.name=벨프리
+actors.mobs.belfry.desc=명흔에서 태어난 해사 생물체. 공격시 _주술_ 또는 _한기_를 부여할 수 있다.
 
-
-
-
-
-// 추가 몹
+# 추가 몹
 
 actors.mobs.sandpillar.name=오벨리스크
 actors.mobs.sandpillar.desc=우리 여동생이 제일 귀엽다고 써져있다.
-
 actors.mobs.crownslayer_shadow.name=류드밀라의 그림자
 actors.mobs.crownslayer_shadow.desc=크라운 슬레이어, 리유니온의 간부다. 뛰어난 기동력으로 기습한 뒤 도망쳐서 매우 상대하기 어렵지만, 능력을 연속으로 사용할 수는 없는 듯 하다.\n\n처치시 합성옥을 뜯을 수 있을 것 같다. 
-
 actors.mobs.miniboss.shadow.name=팬텀 로도스
 actors.mobs.miniboss.shadow$typeblaze.desc=_타입 블레이즈_ : 체력이 낮을 때 강해집니다.
 actors.mobs.miniboss.shadow$typeamiya.desc=_타입 아미야_ : 아츠 저항을 보유했습니다.
@@ -1899,11 +1616,7 @@ actors.mobs.miniboss.shadow$typejessica.desc=_타입 제시카_ : 사거리가 �
 actors.mobs.miniboss.shadow$typeskd.desc=_타입 스카디_ : 전투 능력이 높으며, 1회 부활 능력이 있습니다. _비행 판정_
 actors.mobs.miniboss.shadow$typespt.desc=_타입 스펙터_ : 피해를 적게 받으며, 재생 능력이 있습니다. 체력이 적을수록 재생력이 증가합니다.
 actors.mobs.miniboss.shadow$typegrn.desc=_타입 그라니_ : 명중, 회피, 이동속도가 높으며, 공격시 확률적으로 밀쳐냅니다.
-
-
-
-// 스페셜 몹
-
+# 스페셜 몹
 actors.mobs.miniboss.kaltsit.name=켈시
 actors.mobs.miniboss.kaltsit.desc=\n\n \n\n그런건가... 그렇군.. 그렇게 된건가...그래. 그런 일이 있었지. 네가 알 필요는 없다. 그것도 모르나? 네가 원하는 답은 해주지 않겠다. 지금은 때가 아니다. 이 이야기는 그만 하도록 하지. 
 actors.mobs.miniboss.kaltsit.burst=그런 잔재주는 통하지않아.
@@ -1911,19 +1624,57 @@ actors.mobs.miniboss.kaltsit.summon=죽여라, Mon3tr.
 actors.mobs.miniboss.kaltsit.skill1=구조 보강 명령. Mon3tr, 역할을 다해라.
 actors.mobs.miniboss.kaltsit.skill2=전술 협동 명령. 적을 배제해라, Mon3tr.
 actors.mobs.miniboss.kaltsit.skill3=용해 명령. 적을 분쇄해라, Mon3tr.
-
 actors.mobs.miniboss.mon3tr.name=mon3tr
 actors.mobs.miniboss.mon3tr.desc=켈시의 사역마로, 그녀가 만들어낸 정체불명의 괴생물이다.
-
 actors.mobs.miniboss.emperorpursuer.name=황제의 칼날
 actors.mobs.miniboss.emperorpursuer.desc=모든 근위병은 하나의 나라요, 그의 발아래의 대지는 모두 우르수스의 국토이다.\n\n강력한 능력을 지녔습니다. 먼저 공격하지 않으면 공격하지는 않을 것 같습니다.
-
 actors.mobs.miniboss.magicgolem.name=마법 거대 석상
 actors.mobs.miniboss.magicgolem.desc=살카즈의 고대 마법이 주입된 머드락의 오리지늄 아츠 피조물. 주인의 의지를 이어받아, 상당히 난해한 오리지늄 아츠의 원리로 움직인다.\n\n이 석상과 정면으로 싸우는 것은 자살행위일 것입니다. 허나 높은 위치에서 떨어졌을 때의 충격엔 대비가 안된 것 같습니다.
-
-
-
+actors.mobs.miniboss.theendspeaker.name=신탁 도살자, 위매니의 의지
+actors.mobs.miniboss.theendspeaker.desc=스툴티페라 나비스 근처에 출몰하는 소형 시본으로, 부모 세대의 피가 이 바다를 가득 채운 적이 있다. 귓가에 신탁이 전달되지 않아도, 종족의 운명은 여전히 소리 없이 흘러간다.
+actors.mobs.miniboss.theendspeaker.desc_0=\n유해를 충분히 포식하지 못해 진화를 하지 못한 것으로 보인다.
+actors.mobs.miniboss.theendspeaker.desc_1=\n유해를 소량 포식하여 제 2 형태로 진화한 모습이다.
+actors.mobs.miniboss.theendspeaker.desc_2=\n유해를 적당히 포식하여 제 3 형태로 진화한 모습이다.
+actors.mobs.miniboss.theendspeaker.desc_3=\n유해를 대량 포식하여 제 4 형태로 진화한 모습이다.
+actors.mobs.miniboss.theendspeaker.desc_sp=\n\n다음의 능력들을 보유한 모습이다:
+actors.mobs.miniboss.theendspeaker.desc_sp_spellabsorption=\n_마법 흡수_: 일정 턴 마다 마법 피해를 흡수하고 다음 공격을 강화합니다. 침묵 가능.
+actors.mobs.miniboss.theendspeaker.desc_sp_increasedrange=\n_사거리 증가_: 근접 공격 사거리가 늘어납니다.
+actors.mobs.miniboss.theendspeaker.desc_sp_rampup=\n_분노_: 피해를 입힐 때 마다 공격력이 증가합니다.
+actors.mobs.miniboss.theendspeaker.desc_sp_charge=\n_돌진_: 일정 턴 마다 준비 후 돌진하여 경로 내 생명체에게 피해를 입힙니다. 침묵 가능.
+actors.mobs.miniboss.theendspeaker.desc_sp_hardening=\n_경질화_: 체력이 25% 이하로 떨어질 경우 피해감소를 얻습니다. 침묵 가능.
+actors.mobs.miniboss.theendspeaker.desc_sp_crowdcontrolimmune=\n_제어효과 면역_: 모든 침묵을 포함한 제어효과의 영향을 받지 않습니다.
+actors.mobs.miniboss.theendspeaker.aspect_spawn=이 층에서 께름칙한 기운이 느껴진다.
+actors.mobs.miniboss.theendspeaker.aspect_die_empower=무언가가 처치한 시본의 유해를 섭취했다.
+actors.mobs.miniboss.theendspeaker.aspect_die_last=더 이상 이상한 기운이 느껴지지 않는다.
+actors.mobs.miniboss.theendspeaker.aspect_destroy=계단 위쪽에서 무언가가 먹히는 소리가 들렸다.
+actors.mobs.miniboss.theendspeaker.charge=위매니의 의지가 돌진을 준비합니다!
+actors.mobs.miniboss.theendspeaker.kill=위매니의 의지의 마법 공격으로 사망했다...
+actors.mobs.miniboss.theendspeaker$rampupstacks.name=분노
+actors.mobs.miniboss.theendspeaker$rampupstacks.desc=공격력 증가: %d 스택 (+%d%%)
+actors.mobs.miniboss.theendspeaker$spellabsorptionactive.name=마법 흡수
+actors.mobs.miniboss.theendspeaker$spellabsorptionactive.desc=마법을 흡수했습니다. 다음 공격은 마법 피해를 가합니다.
+actors.mobs.miniboss.theendspeaker$hardeningactive.name=경질화
+actors.mobs.miniboss.theendspeaker$hardeningactive.desc=받는 피해가 절반으로 감소합니다. 침묵 가능.
+actors.mobs.miniboss.theendspeaker.aspect_desc=\n\n이 시본에게선 기분 나쁜 기운이 느껴진다. 먼저 공격하지 않는 이상 가만히 있을 것 같다.
+actors.mobs.miniboss.theendspeaker$aspectsmall.empowered=\n\n유해를 먹고 강화되었다. 체력과 공격력이 증가했으며, 사거리 증가 효과가 항상 유지된다.
+actors.mobs.miniboss.theendspeaker$aspectmedium.empowered=\n\n유해를 먹고 강화되었다. 체력과 공격력이 증가했으며, 공격 속도가 빨라졌다.
+actors.mobs.miniboss.theendspeaker$aspectlarge.empowered=\n\n유해를 먹고 강화되었다. 체력과 공격력이 증가했으며, 항상 바닥에 명흔을 생성한다.
+actors.buffs.endspeakeraspect$spellabsorption.name=마법 흡수
+actors.buffs.endspeakeraspect$spellabsorption.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n마법을 흡수하고 다음 공격은 마법 데미지를 가합니다. 5턴의 쿨다운을 가집니다.
+actors.buffs.endspeakeraspect$increasedrange.name=사거리 증가
+actors.buffs.endspeakeraspect$increasedrange.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n일반 공격의 사거리가 2칸 증가합니다.
+actors.buffs.endspeakeraspect$rampup.name=분노
+actors.buffs.endspeakeraspect$rampup.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n공격해서 피해를 입힐 때 마다 공격력이 증가합니다.
+actors.buffs.endspeakeraspect$charge.name=돌진
+actors.buffs.endspeakeraspect$charge.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n대상 칸으로 돌진하여 진행 경로상 모든 적에게 피해를 입힙니다. 3턴의 쿨다운을 가집니다.
+actors.buffs.endspeakeraspect$hardening.name=경질화
+actors.buffs.endspeakeraspect$hardening.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n체력이 25% 이하로 떨어질 경우 피해감소를 얻습니다.
+actors.buffs.endspeakeraspect$crowdcontrolimmune.name=제어효과 면역
+actors.buffs.endspeakeraspect$crowdcontrolimmune.desc=처치되지 않을 경우 아래층의 포식자가 유해를 섭취하고 다음의 능력을 얻습니다:\n\n모든 제어 효과에 영향을 받지 않습니다.
+actors.buffs.endspeakeraspect$empowering.name=강화
+actors.buffs.endspeakeraspect$empowering.desc=이 적은 다른 적의 유해를 섭취하여 강화되었습니다. 같은 종류의 적에 비해 높은 스탯을 가집니다.
 actors.char.kill=%s에 의해 죽었습니다...
 actors.char.defeat=당신은 %s을/를 쓰러뜨렸다.
 actors.char.def_verb=회피
+actors.char.missed=빗나감
 actors.char.invulnerable=면역
