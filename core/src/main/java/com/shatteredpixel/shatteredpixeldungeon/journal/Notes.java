@@ -143,7 +143,7 @@ public class Notes {
 		
 		@Override
 		public String desc() {
-			return key.toString();
+			return key.desc();
 		}
 		
 		public Class<? extends Key> type(){
