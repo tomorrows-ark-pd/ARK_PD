@@ -294,6 +294,7 @@ public class NewPrisonBossLevel extends Level {
 		}
 		
 		exit = pointToCell(levelExit);
+		syncTransitionsFromFields();
 	}
 	
 	//keep track of removed items as the level is changed. Dump them back into the level at the end.
