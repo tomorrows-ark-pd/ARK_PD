@@ -61,6 +61,7 @@ public class LloydsBeacon extends Artifact {
 	public static final String AC_RETURN	= "RETURN";
 	
 	public int returnDepth	= -1;
+	public int returnBranch = 0;
 	public int returnPos;
 	
 	{
@@ -76,21 +77,24 @@ public class LloydsBeacon extends Artifact {
 	}
 	
 	private static final String DEPTH	= "depth";
+	private static final String BRANCH	= "branch";
 	private static final String POS		= "pos";
-	
+
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
 		bundle.put( DEPTH, returnDepth );
 		if (returnDepth != -1) {
+			bundle.put( BRANCH, returnBranch );
 			bundle.put( POS, returnPos );
 		}
 	}
-	
+
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle(bundle);
 		returnDepth	= bundle.getInt( DEPTH );
+		returnBranch	= bundle.getInt( BRANCH );
 		returnPos	= bundle.getInt( POS );
 	}
 	
@@ -147,6 +151,8 @@ public class LloydsBeacon extends Artifact {
 		} else if (action == AC_SET) {
 			
 			returnDepth = Dungeon.depth;
+			//only floor 0 (Rhodes Island) is branched; other depths always return to the main branch
+			returnBranch = Dungeon.depth == 0 ? Dungeon.branch : 0;
 			returnPos = hero.pos;
 			
 			hero.spend( LloydsBeacon.TIME_TO_USE );
@@ -160,7 +166,7 @@ public class LloydsBeacon extends Artifact {
 			
 		} else if (action == AC_RETURN) {
 			
-			if (returnDepth == Dungeon.depth) {
+			if (returnDepth == Dungeon.depth && returnBranch == Dungeon.branch) {
 				ScrollOfTeleportation.appear( hero, returnPos );
 				for(Mob m : Dungeon.level.mobs){
 					if (m.pos == hero.pos){
@@ -187,6 +193,7 @@ public class LloydsBeacon extends Artifact {
 
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;
 				InterlevelScene.returnDepth = returnDepth;
+				InterlevelScene.returnBranch = returnBranch;
 				InterlevelScene.returnPos = returnPos;
 				Catalog.countUse(getClass());
 				Game.switchScene( InterlevelScene.class );
