@@ -80,6 +80,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.SeaTerror;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
+import com.shatteredpixel.shatteredpixeldungeon.levels.traps.TenguDartTrap;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.ShadowCaster;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -1141,26 +1142,40 @@ public abstract class Level implements Bundlable {
 
     //public method for forcing the hard press of a cell. e.g. when an item lands on it
     public void pressCell(int cell) {
-        pressCell(cell, true);
+        pressCell(cell, true, true);
+    }
+
+    //presses a cell hit by gunfire; behaves like a normal press but never springs a TenguDartTrap,
+    //so spread/stray shots can't mass-trigger the dart traps during the Tengu fight
+    public void pressCellGunfire(int cell) {
+        boolean tenguDart = traps.get(cell) instanceof TenguDartTrap;
+        pressCell(cell, true, !tenguDart);
+    }
+
+    private void pressCell(int cell, boolean hard) {
+        pressCell(cell, hard, true);
     }
 
     //a 'soft' press ignores hidden traps
     //a 'hard' press triggers all things
-    private void pressCell(int cell, boolean hard) {
+    //triggerTraps == false skips trap activation entirely while still pressing other cell contents
+    private void pressCell(int cell, boolean hard, boolean triggerTraps) {
 
         Trap trap = null;
 
         switch (map[cell]) {
 
             case Terrain.SECRET_TRAP:
-                if (hard) {
+                if (hard && triggerTraps) {
                     trap = traps.get(cell);
                     GLog.i(Messages.get(Level.class, "hidden_trap", trap.name()));
                 }
                 break;
 
             case Terrain.TRAP:
-                trap = traps.get(cell);
+                if (triggerTraps) {
+                    trap = traps.get(cell);
+                }
                 break;
 
             case Terrain.HIGH_GRASS:

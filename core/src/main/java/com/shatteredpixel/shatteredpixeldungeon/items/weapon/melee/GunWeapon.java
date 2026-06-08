@@ -346,7 +346,7 @@ public class GunWeapon extends MeleeWeapon {
                 processGunHit(ch, 1f, true);
                 if (!ch.isAlive()) anyKill = true;
             } else {
-                Dungeon.level.pressCell(bolt.collisionPos);
+                Dungeon.level.pressCellGunfire(bolt.collisionPos);
             }
             postShotCleanup(closerRange, false, anyKill);
         } finally {

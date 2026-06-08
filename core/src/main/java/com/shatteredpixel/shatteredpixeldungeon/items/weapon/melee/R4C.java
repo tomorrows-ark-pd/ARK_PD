@@ -84,7 +84,7 @@ public class R4C extends GunWeapon {
                 processGunHit(ch, 1f, true);
                 if (!ch.isAlive()) anyKill = true;
             } else {
-                Dungeon.level.pressCell(bolt.collisionPos);
+                Dungeon.level.pressCellGunfire(bolt.collisionPos);
             }
             postShotCleanup(closerRange, pala, anyKill);
         } finally {
