@@ -2499,7 +2499,6 @@ public class Hero extends Char {
                 Certificate.specialEndingBouns();
 
                 Badges.silentValidateHappyEnd();
-                Badges.validatewill();
                 Dungeon.win(Amulet.class);
                 Dungeon.deleteGame(GamesInProgress.curSlot, true);
                 Game.switchScene(SurfaceScene.class);
