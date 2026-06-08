@@ -869,7 +869,7 @@ public class Badges {
     static {
         thirdBossSubclassBadges.put(HeroSubClass.GLADIATOR, Badge.BOSS_SLAIN_3_GLADIATOR);
         thirdBossSubclassBadges.put(HeroSubClass.BERSERKER, Badge.BOSS_SLAIN_3_BERSERKER);
-        thirdBossSubclassBadges.put(HeroSubClass.HEAT, Badge.BOSS_SLAIN_3_BATTLEMAGE);
+        thirdBossSubclassBadges.put(HeroSubClass.HEAT, Badge.BOSS_SLAIN_3_HEAT);
         thirdBossSubclassBadges.put(HeroSubClass.WARLOCK, Badge.BOSS_SLAIN_3_WARLOCK);
         thirdBossSubclassBadges.put(HeroSubClass.CHAOS, Badge.BOSS_SLAIN_3_CHAOS);
         thirdBossSubclassBadges.put(HeroSubClass.BATTLEMAGE, Badge.BOSS_SLAIN_3_BATTLEMAGE);
@@ -1310,9 +1310,11 @@ public class Badges {
             badge = firstChamionClassBadges.get(Dungeon.hero.heroClass);
         }
         if (challenges >= 3) {
+            unlock(badge);
             badge = secondChamionClassBadges.get(Dungeon.hero.heroClass);
         }
         if (challenges >= 6) {
+            unlock(badge);
             badge = thirdChamionClassBadges.get(Dungeon.hero.heroClass);
         }
 
