@@ -5,6 +5,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Camouflage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Charm;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Doom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Sleep;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Terror;
@@ -19,7 +20,7 @@ public class Dummy extends Mob {
         HP = HT = 1000;
 
         state = PASSIVE;
-        immunities.add(Corruption.class);
+        immunities.add(AllyBuff.class);
         immunities.add(Doom.class);
         immunities.add(Charm.class);
         immunities.add(Amok.class);

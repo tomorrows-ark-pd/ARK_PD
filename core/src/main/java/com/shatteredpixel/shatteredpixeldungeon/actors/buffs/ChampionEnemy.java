@@ -90,7 +90,7 @@ public abstract class ChampionEnemy extends Buff {
 	}
 
 	{
-		immunities.add(Corruption.class);
+		immunities.add(AllyBuff.class);
 	}
 
 	public static void rollForChampion(Mob m){

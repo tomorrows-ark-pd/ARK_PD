@@ -3,7 +3,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Ooze;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Slow;
@@ -26,7 +26,7 @@ public class MutantSpider extends Mob {
         loot = new StoneOfEnchantment();
         lootChance = 1f;
 
-        immunities.add(Corruption.class);
+        immunities.add(AllyBuff.class);
         immunities.add(Silence.class);
         immunities.add(Ooze.class);
         properties.add(Property.INFECTED);

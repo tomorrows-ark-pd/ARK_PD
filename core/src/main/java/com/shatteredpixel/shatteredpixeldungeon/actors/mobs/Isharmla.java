@@ -8,7 +8,7 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Drowsy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicalSleep;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
@@ -236,7 +236,7 @@ public class Isharmla extends Mob {
 
             immunities.add(Drowsy.class);
             immunities.add(MagicalSleep.class);
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
 
             //no loot or exp
             maxLvl = -5;
@@ -249,7 +249,7 @@ public class Isharmla extends Mob {
 
             immunities.add(Drowsy.class);
             immunities.add(MagicalSleep.class);
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
 
             //no loot or exp
             maxLvl = -5;
@@ -262,7 +262,7 @@ public class Isharmla extends Mob {
 
             immunities.add(Drowsy.class);
             immunities.add(MagicalSleep.class);
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
 
             //no loot or exp
             maxLvl = -5;

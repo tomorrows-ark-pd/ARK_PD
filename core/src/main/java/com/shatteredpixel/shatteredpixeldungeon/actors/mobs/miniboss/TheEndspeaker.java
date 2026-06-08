@@ -9,7 +9,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EndspeakerAspect;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NervousImpairment;
@@ -686,7 +686,7 @@ public class TheEndspeaker extends Mob {
             state = PASSIVE;
             loot = new PotionOfStrength();
             lootChance = 1f;
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
         }
 
         private boolean isEmpowered = false;
@@ -782,7 +782,7 @@ public class TheEndspeaker extends Mob {
             state = PASSIVE;
             loot = new PotionOfStrength();
             lootChance = 1f;
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
         }
 
         private boolean isEmpowered = false;
@@ -881,7 +881,7 @@ public class TheEndspeaker extends Mob {
             state = PASSIVE;
             loot = new PotionOfStrength();
             lootChance = 1f;
-            immunities.add(Corruption.class);
+            immunities.add(AllyBuff.class);
         }
 
         private boolean isEmpowered = false;

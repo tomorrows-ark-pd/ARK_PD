@@ -29,7 +29,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.CorrosiveGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PrismaticGuard;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
@@ -251,7 +251,7 @@ public class PrismaticImage extends NPC {
         immunities.add(ToxicGas.class);
         immunities.add(CorrosiveGas.class);
         immunities.add(Burning.class);
-        immunities.add(Corruption.class);
+        immunities.add(AllyBuff.class);
     }
 
     private class Wandering extends Mob.Wandering {

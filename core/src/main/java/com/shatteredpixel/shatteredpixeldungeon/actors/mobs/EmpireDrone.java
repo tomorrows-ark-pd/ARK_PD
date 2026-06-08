@@ -2,7 +2,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.TargetedCell;
@@ -34,7 +34,7 @@ public class EmpireDrone extends Mob {
 
         baseSpeed = 0.5f;
         immunities.add(Silence.class);
-        immunities.add(Corruption.class);
+        immunities.add(AllyBuff.class);
     }
 
     private int cooldown = 0;
