@@ -124,7 +124,11 @@ public class MagesStaff extends MeleeWeapon {
 	@Override
 	public void activate( Char ch ) {
 		super.activate(ch);
-		if(wand != null) wand.charge( ch, STAFF_SCALE_FACTOR );
+		applyWandChargeBuff(ch);
+	}
+
+	public void applyWandChargeBuff( Char owner ){
+		if (wand != null) wand.charge( owner, STAFF_SCALE_FACTOR );
 	}
 
 	@Override
@@ -426,7 +430,7 @@ public class MagesStaff extends MeleeWeapon {
 	public Emitter emitter() {
 		if (wand == null) return null;
 		Emitter emitter = new Emitter();
-		emitter.pos(12.5f, 3);
+		emitter.pos(8f, 3);
 		emitter.fillTarget = false;
 		emitter.pour(StaffParticleFactory, 0.1f);
 		return emitter;
