@@ -41,7 +41,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Sleep;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.ToxicImbue;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
@@ -63,6 +62,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token4;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.levels.NewCityBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -84,675 +84,680 @@ import java.util.HashSet;
 
 public class DwarfKing extends Mob {
 
-	{
-		spriteClass = MephistoSprite.class;
-
-		HP = HT = 300;
-		EXP = 40;
-		defenseSkill = 22;
-
-		properties.add(Property.BOSS);
-		properties.add(Property.INFECTED);
-		immunities.add(Sleep.class);
-	}
-
-	public DwarfKing()
-	{
-		super();
-	}
-
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 15, 25 );
-	}
-
-	@Override
-	public int attackSkill( Char target ) {
-		return 26;
-	}
-
-	@Override
-	public int drRoll() {
-		return Random.NormalIntRange(0, 10);
-	}
-
-	private int phase = 1;
-	private int summonsMade = 0;
-
-	private float summonCooldown = 0;
-	private float abilityCooldown = 0;
-	private static final int MIN_COOLDOWN = 10;
-	private static final int MAX_COOLDOWN = 14;
-
-	private int lastAbility = 0;
-	private static final int NONE = 0;
-	private static final int LINK = 1;
-	private static final int TELE = 2;
-
-	private static final String PHASE = "phase";
-	private static final String SUMMONS_MADE = "summons_made";
-
-	private static final String SUMMON_CD = "summon_cd";
-	private static final String ABILITY_CD = "ability_cd";
-	private static final String LAST_ABILITY = "last_ability";
-
-	@Override
-	public void storeInBundle(Bundle bundle) {
-		super.storeInBundle(bundle);
-		bundle.put( PHASE, phase );
-		bundle.put( SUMMONS_MADE, summonsMade );
-		bundle.put( SUMMON_CD, summonCooldown );
-		bundle.put( ABILITY_CD, abilityCooldown );
-		bundle.put( LAST_ABILITY, lastAbility );
-	}
-
-	@Override
-	public void restoreFromBundle(Bundle bundle) {
-		super.restoreFromBundle(bundle);
-		phase = bundle.getInt( PHASE );
-		summonsMade = bundle.getInt( SUMMONS_MADE );
-		summonCooldown = bundle.getFloat( SUMMON_CD );
-		abilityCooldown = bundle.getFloat( ABILITY_CD );
-		lastAbility = bundle.getInt( LAST_ABILITY );
-
-		if (phase == 2) properties.add(Property.IMMOVABLE);
-	}
-
-	@Override
-	protected boolean act() {
-		if (state == SLEEPING) state = WANDERING;
-
-		if (phase == 1) {
-
-			if (summonCooldown <= 0 && summonSubject(3)){
-				summonsMade++;
-				summonCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
-			} else if (summonCooldown > 0){
-				summonCooldown--;
-			}
-
-			if (paralysed > 0){
-				spend(TICK);
-				return true;
-			}
-
-			if (abilityCooldown <= 0){
-
-				if (lastAbility == NONE) {
-					//50/50 either ability
-					lastAbility = Random.Int(2) == 0 ? LINK : TELE;
-				} else if (lastAbility == LINK) {
-					//more likely to use tele
-					lastAbility = Random.Int(8) == 0 ? LINK : TELE;
-				} else {
-					//more likely to use link
-					lastAbility = Random.Int(8) != 0 ? LINK : TELE;
-				}
-
-				if (lastAbility == LINK && lifeLinkSubject()){
-					abilityCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
-					spend(TICK);
-					return true;
-				} else if (teleportSubject()) {
-					lastAbility = TELE;
-					abilityCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
-					spend(TICK);
-					return true;
-				}
-
-			} else {
-				abilityCooldown--;
-			}
-
-		} else if (phase == 2){
-			if (summonsMade < 4){
-				if (summonsMade == 0){
-					sprite.centerEmitter().start( Speck.factory( Speck.SCREAM ), 0.4f, 2 );
-					Sample.INSTANCE.play( Assets.Sounds.CHALLENGE );
-					yell(Messages.get(this, "wave_1"));
-				}
-				summonSubject(3, DKGhoul.class);
-				spend(3*TICK);
-				summonsMade++;
-				return true;
-			} else if (shielding() <= 200 && summonsMade < 8){
-				if (summonsMade == 4){
-					sprite.centerEmitter().start( Speck.factory( Speck.SCREAM ), 0.4f, 2 );
-					Sample.INSTANCE.play( Assets.Sounds.CHALLENGE );
-					yell(Messages.get(this, "wave_2"));
-				}
-				if (summonsMade == 7){
-					summonSubject(3, Random.Int(2) == 0 ? DKMonk.class : DKWarlock.class);
-				} else {
-					summonSubject(3, DKGhoul.class);
-				}
-				summonsMade++;
-				spend(TICK);
-				return true;
-			} else if (shielding() <= 100 && summonsMade < 12) {
-				sprite.centerEmitter().start( Speck.factory( Speck.SCREAM ), 0.4f, 2 );
-				Sample.INSTANCE.play( Assets.Sounds.CHALLENGE );
-				yell(Messages.get(this, "wave_3"));
-				summonSubject(4, DKWarlock.class);
-				summonSubject(4, DKMonk.class);
-				summonSubject(4, DKGhoul.class);
-				summonSubject(4, DKGhoul.class);
-				summonsMade = 12;
-				spend(TICK);
-				return true;
-			} else {
-				spend(TICK);
-				return true;
-			}
-		} else if (phase == 3 && buffs(Summoning.class).size() < 4){
-			if (summonSubject(3)) summonsMade++;
-		}
-
-		return super.act();
-	}
-
-	private boolean summonSubject( int delay ){
-		//4th summon is always a monk or warlock, otherwise ghoul
-		if (summonsMade % 4 == 3){
-			return summonSubject( delay, Random.Int(2) == 0 ? DKMonk.class : DKWarlock.class );
-		} else {
-			return summonSubject( delay, DKGhoul.class );
-		}
-	}
-
-	private boolean summonSubject( int delay, Class<?extends Mob> type ){
-		Summoning s = new Summoning();
-		s.pos = ((NewCityBossLevel)Dungeon.level).getSummoningPos();
-		if (s.pos == -1) return false;
-		s.summon = type;
-		s.delay = delay;
-		s.attachTo(this);
-		return true;
-	}
-
-	private HashSet<Mob> getSubjects(){
-		HashSet<Mob> subjects = new HashSet<>();
-		for (Mob m : Dungeon.level.mobs){
-			if (m.alignment == alignment && (m instanceof Ghoul || m instanceof Monk || m instanceof Warlock)){
-				subjects.add(m);
-			}
-		}
-		return subjects;
-	}
-
-	private boolean lifeLinkSubject(){
-		Mob furthest = null;
-
-		for (Mob m : getSubjects()){
-			boolean alreadyLinked = false;
-			for (LifeLink l : m.buffs(LifeLink.class)){
-				if (l.object == id()) alreadyLinked = true;
-			}
-			if (!alreadyLinked) {
-				if (furthest == null || Dungeon.level.distance(pos, furthest.pos) < Dungeon.level.distance(pos, m.pos)){
-					furthest = m;
-				}
-			}
-		}
-
-		if (furthest != null) {
-			Buff.append(furthest, LifeLink.class, 100f).object = id();
-			Buff.append(this, LifeLink.class, 100f).object = furthest.id();
-			yell(Messages.get(this, "lifelink_" + Random.IntRange(1, 2)));
-			sprite.parent.add(new Beam.HealthRay(sprite.destinationCenter(), furthest.sprite.destinationCenter()));
-			return true;
-
-		}
-		return false;
-	}
-
-	private boolean teleportSubject(){
-		if (enemy == null) return false;
-
-		Mob furthest = null;
-
-		for (Mob m : getSubjects()){
-			if (furthest == null || Dungeon.level.distance(pos, furthest.pos) < Dungeon.level.distance(pos, m.pos)){
-				furthest = m;
-			}
-		}
-
-		if (furthest != null){
-
-			float bestDist;
-			int bestPos = pos;
-
-			Ballistica trajectory = new Ballistica(enemy.pos, pos, Ballistica.STOP_TARGET);
-			int targetCell = trajectory.path.get(trajectory.dist+1);
-			//if the position opposite the direction of the hero is open, go there
-			if (Actor.findChar(targetCell) == null && !Dungeon.level.solid[targetCell]){
-				bestPos = targetCell;
-
-			//Otherwise go to the neighbour cell that's open and is furthest
-			} else {
-				bestDist = Dungeon.level.trueDistance(pos, enemy.pos);
-
-				for (int i : PathFinder.NEIGHBOURS8){
-					if (Actor.findChar(pos+i) == null
-							&& !Dungeon.level.solid[pos+i]
-							&& Dungeon.level.trueDistance(pos+i, enemy.pos) > bestDist){
-						bestPos = pos+i;
-						bestDist = Dungeon.level.trueDistance(pos+i, enemy.pos);
-					}
-				}
-			}
-
-			Actor.add(new Pushing(this, pos, bestPos));
-			pos = bestPos;
-
-			//find closest cell that's adjacent to enemy, place subject there
-			bestDist = Dungeon.level.trueDistance(enemy.pos, pos);
-			bestPos = enemy.pos;
-			for (int i : PathFinder.NEIGHBOURS8){
-				if (Actor.findChar(enemy.pos+i) == null
-						&& !Dungeon.level.solid[enemy.pos+i]
-						&& Dungeon.level.trueDistance(enemy.pos+i, pos) < bestDist){
-					bestPos = enemy.pos+i;
-					bestDist = Dungeon.level.trueDistance(enemy.pos+i, pos);
-				}
-			}
-
-			if (bestPos != enemy.pos) ScrollOfTeleportation.appear(furthest, bestPos);
-			yell(Messages.get(this, "teleport_" + Random.IntRange(1, 2)));
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void notice() {
-		super.notice();
-		if (!BossHealthBar.isAssigned()) {
-			BossHealthBar.assignBoss(this);
-			yell(Messages.get(this, "notice"));
-			for (Char ch : Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayBoss();
-				}
-			}
-		}
-	}
-
-	@Override
-	public boolean isInvulnerable(Class effect) {
-		return phase == 2 && effect != KingDamager.class;
-	}
-
-	@Override
-	public void damage(int dmg, Object src) {
-		if (isInvulnerable(src.getClass())){
-			super.damage(dmg, src);
-			return;
-		} else if (phase == 3 && !(src instanceof Viscosity.DeferedDamage)){
-			if (dmg >= 0) {
-				Viscosity.DeferedDamage deferred = Buff.affect( this, Viscosity.DeferedDamage.class );
-				if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
-				deferred.prolong( dmg / 2);}
-				else deferred.prolong( dmg );
-
-				sprite.showStatus( CharSprite.WARNING, Messages.get(Viscosity.class, "deferred", dmg) );
-			}
-			return;
-		}
-		int preHP = HP;
-		super.damage(dmg, src);
-
-		LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
-		if (lock != null && !isImmune(src.getClass())) lock.addTime(dmg/3);
-
-		if (phase == 1) {
-			int dmgTaken = preHP - HP;
-			abilityCooldown -= dmgTaken/8f;
-			summonCooldown -= dmgTaken/8f;
-			if (HP <= 50) {
-				HP = 50;
-				sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "invulnerable"));
-				ScrollOfTeleportation.appear(this, NewCityBossLevel.throne);
-				properties.add(Property.IMMOVABLE);
-				phase = 2;
-				summonsMade = 0;
-				sprite.idle();
-				Buff.affect(this, DKBarrior.class).setShield(HT);
-				for (Summoning s : buffs(Summoning.class)) {
-					s.detach();
-				}
-				Bestiary.skipCountingEncounters = true;
-				for (Mob m : Dungeon.level.mobs.toArray(new Mob[0])) {
-					if (m instanceof Ghoul || m instanceof Monk || m instanceof Warlock) {
-						m.die(null);
-					}
-				}
-				Bestiary.skipCountingEncounters = false;
-			}
-		} else if (phase == 2 && shielding() == 0) {
-			properties.remove(Property.IMMOVABLE);
-			phase = 3;
-			summonsMade = 1; //monk/warlock on 3rd summon
-			sprite.centerEmitter().start( Speck.factory( Speck.SCREAM ), 0.4f, 2 );
-			Sample.INSTANCE.play( Assets.Sounds.CHALLENGE );
-			yell(  Messages.get(this, "enraged", Dungeon.hero.heroClass.title()) );
-		} else if (phase == 3 && preHP > 20 && HP < 20){
-			yell( Messages.get(this, "losing") );
-		}
-	}
-
-	@Override
-	public boolean isAlive() {
-		return super.isAlive() || phase != 3;
-	}
-
-	@Override
-	public void die(Object cause) {
-		// 이지모드라면 플레이어 사망
-		if (Dungeon.eazymode == 1) {
-			Item item = Dungeon.hero.belongings.getItem(Ankh.class);
-			if (item != null) item.detachAll(Dungeon.hero.belongings.backpack);
-			while (Dungeon.hero.isAlive() == true) {
-				Dungeon.hero.die(Dungeon.hero);
-			}
-			GLog.h(Messages.get(Hero.class, "eazymode"));
-		} else {
-
-			Dungeon.level.drop(new Certificate(40), pos).sprite.drop(pos);
-
-			int ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
-			do {
-				ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
-			} while (!Dungeon.level.passable[pos + ofs]);
-
-			GameScene.bossSlain();
-
-			super.die(cause);
-
-			if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
-				do {
-					ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
-				} while (!Dungeon.level.passable[pos + ofs]);
-				Dungeon.level.drop(new Token4(), pos + ofs).sprite.drop(pos);
-			}
-
-			if (Dungeon.level.solid[pos]) {
-
-				Heap h = Dungeon.level.heaps.get(pos);
-				if (h != null) {
-					for (Item i : h.items) {
-						Dungeon.level.drop(i, pos + Dungeon.level.width());
-					}
-					h.destroy();
-				}
-				switch (Dungeon.hero.heroClass) {
-
-					case WARRIOR:
-						Dungeon.level.drop(new BookSBurst(), pos + ofs).sprite.drop(pos);
-						break;
-					case ROGUE:
-						Dungeon.level.drop(new BookNigetRaid(), pos + ofs).sprite.drop(pos);
-						break;
-					case MAGE:
-						Dungeon.level.drop(new BookShadowAssault(), pos + ofs).sprite.drop(pos);
-						break;
-					case HUNTRESS:
-						Dungeon.level.drop(new BookSoaringFeather(), pos + ofs).sprite.drop(pos);
-						break;
-					case ROSECAT:
-						Dungeon.level.drop(new BookYourWish(), pos + ofs).sprite.drop(pos);
-						break;
-					case NEARL:
-						Dungeon.level.drop(new BookSun(), pos+ofs ).sprite.drop( pos );
-						break;
-				}
-			} else {
-				switch (Dungeon.hero.heroClass) {
-					case WARRIOR:
-						Dungeon.level.drop(new BookSBurst(), pos + ofs).sprite.drop(pos);
-						break;
-					case ROGUE:
-						Dungeon.level.drop(new BookNigetRaid(), pos + ofs).sprite.drop(pos);
-						break;
-					case MAGE:
-						Dungeon.level.drop(new BookShadowAssault(), pos + ofs).sprite.drop(pos);
-						break;
-					case HUNTRESS:
-						Dungeon.level.drop(new BookSoaringFeather(), pos + ofs).sprite.drop(pos);
-						break;
-					case ROSECAT:
-						Dungeon.level.drop(new BookYourWish(), pos + ofs).sprite.drop(pos);
-						break;
-					case NEARL:
-						Dungeon.level.drop(new BookSun(), pos + ofs).sprite.drop(pos);
-						break;
-				}
-			}
-
-			Badges.validateBossSlain();
-
-			Dungeon.level.unseal();
-
-			Bestiary.skipCountingEncounters = true;
-			for (Mob m : getSubjects()) {
-				m.die(null);
-			}
-			Bestiary.skipCountingEncounters = false;
-
-			LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
-			if (beacon != null) {
-				beacon.upgrade();
-			}
-
-			yell(Messages.get(this, "defeated"));
-		}
-	}
-
-	@Override
-	public boolean isImmune(Class effect) {
-		//immune to damage amplification from doomed in 2nd phase or later, but it can still be applied
-		if (phase > 1 && effect == Doom.class && buff(Doom.class) != null ){
-			return true;
-		}
-		return super.isImmune(effect);
-	}
-
-	public static class DKGhoul extends Ghoul {
-		{
-			state = HUNTING;
-		}
-
-		@Override
-		protected boolean act() {
-			partnerID = -2; //no partners
-			if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1)
-			{
-				Buff.affect(this, Healing.class).setHeal(5,1f,1);
-			}
-			return super.act();
-		}
-	}
-
-	public static class DKMonk extends Monk {
-		{
-			state = HUNTING;
-		}
-
-		@Override
-		protected boolean act() {
-			if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1)
-			{
-				Buff.affect(this, Healing.class).setHeal(5,1f,1);
-			}
-			return super.act();
-		}
-	}
-
-	public static class DKWarlock extends Warlock {
-		{
-			state = HUNTING;
-		}
-
-		@Override
-		protected boolean act() {
-			if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1)
-			{
-				Buff.affect(this, Healing.class).setHeal(5,1f,1);
-			}
-			return super.act();
-		}
-	}
-
-	public static class Summoning extends Buff {
-
-		private int delay;
-		private int pos;
-		private Class<?extends Mob> summon;
-
-		private Emitter particles;
-
-		public int getPos() {
-			return pos;
-		}
-
-		@Override
-		public boolean act() {
-			delay--;
-
-			if (delay <= 0){
-
-				if (summon == DKWarlock.class){
-					particles.burst(ShadowParticle.CURSE, 10);
-					Sample.INSTANCE.play(Assets.Sounds.CURSED);
-				} else if (summon == DKMonk.class){
-					particles.burst(ElmoParticle.FACTORY, 10);
-					Sample.INSTANCE.play(Assets.Sounds.BURNING);
-				} else {
-					particles.burst(Speck.factory(Speck.BONE), 10);
-					Sample.INSTANCE.play(Assets.Sounds.BONES);
-				}
-				particles = null;
-
-				if (Actor.findChar(pos) != null){
-					ArrayList<Integer> candidates = new ArrayList<>();
-					for (int i : PathFinder.NEIGHBOURS8){
-						if (Dungeon.level.passable[pos+i] && Actor.findChar(pos+i) == null){
-							candidates.add(pos+i);
-						}
-					}
-					if (!candidates.isEmpty()){
-						pos = Random.element(candidates);
-					}
-				}
-
-				if (Actor.findChar(pos) == null) {
-					Mob m = Reflection.newInstance(summon);
-					m.pos = pos;
-					m.maxLvl = -2;
-					if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
-						Buff.affect(m, Barrier.class).incShield(12);
-						Buff.affect(m, BlobImmunity.class, 30f);
-						int rnd = Random.Int(6);
-						switch (rnd) {
-							case 0: Buff.affect(m, MagicImmune.class, 30f); break;
-							case 1: Buff.affect(m, ToxicImbue.class).set(30); break;
-							case 2: Buff.affect(m, FireImbue.class).set(30f); break;
-							default: Buff.affect(m, Barkskin.class).set(12, 30); break;
-						}
-					}
-					GameScene.add(m);
-					m.state = m.HUNTING;
-					if (((DwarfKing)target).phase == 2){
-						Buff.affect(m, KingDamager.class);
-					}
-				} else {
-					Char ch = Actor.findChar(pos);
-					ch.damage(Random.NormalIntRange(20, 40), target);
-					if (((DwarfKing)target).phase == 2){
-						target.damage(target.HT/12, new KingDamager());
-					}
-				}
-
-				detach();
-			}
-
-			spend(TICK);
-			return true;
-		}
-
-		@Override
-		public void fx(boolean on) {
-			if (on && particles == null) {
-				particles = CellEmitter.get(pos);
-
-				if (summon == DKWarlock.class){
-					particles.pour(ShadowParticle.UP, 0.1f);
-				} else if (summon == DKMonk.class){
-					particles.pour(ElmoParticle.FACTORY, 0.1f);
-				} else {
-					particles.pour(Speck.factory(Speck.RATTLE), 0.1f);
-				}
-
-			} else if (!on && particles != null) {
-				particles.on = false;
-			}
-		}
-
-		private static final String DELAY = "delay";
-		private static final String POS = "pos";
-		private static final String SUMMON = "summon";
-
-		@Override
-		public void storeInBundle(Bundle bundle) {
-			super.storeInBundle(bundle);
-			bundle.put(DELAY, delay);
-			bundle.put(POS, pos);
-			bundle.put(SUMMON, summon);
-		}
-
-		@Override
-		public void restoreFromBundle(Bundle bundle) {
-			super.restoreFromBundle(bundle);
-			delay = bundle.getInt(DELAY);
-			pos = bundle.getInt(POS);
-			summon = bundle.getClass(SUMMON);
-		}
-	}
-
-	public static class KingDamager extends Buff {
-
-		@Override
-		public boolean act() {
-			if (target.alignment != Alignment.ENEMY){
-				detach();
-			}
-			spend( TICK );
-			return true;
-		}
-
-		@Override
-		public void detach() {
-			super.detach();
-			for (Mob m : Dungeon.level.mobs){
-				if (m instanceof DwarfKing){
-					m.damage(m.HT/12, this);
-				}
-			}
-		}
-	}
-
-	public static class DKBarrior extends Barrier{
-
-		@Override
-		public boolean act() {
-			incShield();
-			return super.act();
-		}
-
-		@Override
-		public int icon() {
-			return BuffIndicator.NONE;
-		}
-	}
+    {
+        spriteClass = MephistoSprite.class;
+
+        HP = HT = 300;
+        EXP = 40;
+        defenseSkill = 22;
+
+        properties.add(Property.BOSS);
+        properties.add(Property.INFECTED);
+        immunities.add(Sleep.class);
+    }
+
+    public DwarfKing() {
+        super();
+    }
+
+    @Override
+    public int damageRoll() {
+        return Random.NormalIntRange(15, 25);
+    }
+
+    @Override
+    public int attackSkill(Char target) {
+        return 26;
+    }
+
+    @Override
+    public int drRoll() {
+        return Random.NormalIntRange(0, 10);
+    }
+
+    private int phase = 1;
+    private int summonsMade = 0;
+
+    private float summonCooldown = 0;
+    private float abilityCooldown = 0;
+    private static final int MIN_COOLDOWN = 10;
+    private static final int MAX_COOLDOWN = 14;
+
+    private int lastAbility = 0;
+    private static final int NONE = 0;
+    private static final int LINK = 1;
+    private static final int TELE = 2;
+
+    private static final String PHASE = "phase";
+    private static final String SUMMONS_MADE = "summons_made";
+
+    private static final String SUMMON_CD = "summon_cd";
+    private static final String ABILITY_CD = "ability_cd";
+    private static final String LAST_ABILITY = "last_ability";
+
+    @Override
+    public void storeInBundle(Bundle bundle) {
+        super.storeInBundle(bundle);
+        bundle.put(PHASE, phase);
+        bundle.put(SUMMONS_MADE, summonsMade);
+        bundle.put(SUMMON_CD, summonCooldown);
+        bundle.put(ABILITY_CD, abilityCooldown);
+        bundle.put(LAST_ABILITY, lastAbility);
+    }
+
+    @Override
+    public void restoreFromBundle(Bundle bundle) {
+        super.restoreFromBundle(bundle);
+        phase = bundle.getInt(PHASE);
+        summonsMade = bundle.getInt(SUMMONS_MADE);
+        summonCooldown = bundle.getFloat(SUMMON_CD);
+        abilityCooldown = bundle.getFloat(ABILITY_CD);
+        lastAbility = bundle.getInt(LAST_ABILITY);
+
+        if (phase == 2) properties.add(Property.IMMOVABLE);
+    }
+
+    @Override
+    protected boolean act() {
+        if (state == SLEEPING) state = WANDERING;
+
+        if (phase == 1) {
+
+            if (summonCooldown <= 0 && summonSubject(3)) {
+                summonsMade++;
+                summonCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
+            } else if (summonCooldown > 0) {
+                summonCooldown--;
+            }
+
+            if (paralysed > 0) {
+                spend(TICK);
+                return true;
+            }
+
+            if (abilityCooldown <= 0) {
+
+                if (lastAbility == NONE) {
+                    //50/50 either ability
+                    lastAbility = Random.Int(2) == 0 ? LINK : TELE;
+                } else if (lastAbility == LINK) {
+                    //more likely to use tele
+                    lastAbility = Random.Int(8) == 0 ? LINK : TELE;
+                } else {
+                    //more likely to use link
+                    lastAbility = Random.Int(8) != 0 ? LINK : TELE;
+                }
+
+                if (lastAbility == LINK && lifeLinkSubject()) {
+                    abilityCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
+                    spend(TICK);
+                    return true;
+                } else if (teleportSubject()) {
+                    lastAbility = TELE;
+                    abilityCooldown += Random.NormalIntRange(MIN_COOLDOWN, MAX_COOLDOWN);
+                    spend(TICK);
+                    return true;
+                }
+
+            } else {
+                abilityCooldown--;
+            }
+
+        } else if (phase == 2) {
+            if (summonsMade < 4) {
+                if (summonsMade == 0) {
+                    sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.4f, 2);
+                    Sample.INSTANCE.play(Assets.Sounds.CHALLENGE);
+                    yell(Messages.get(this, "wave_1"));
+                }
+                summonSubject(3, DKGhoul.class);
+                spend(3 * TICK);
+                summonsMade++;
+                return true;
+            } else if (shielding() <= 200 && summonsMade < 8) {
+                if (summonsMade == 4) {
+                    sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.4f, 2);
+                    Sample.INSTANCE.play(Assets.Sounds.CHALLENGE);
+                    yell(Messages.get(this, "wave_2"));
+                }
+                if (summonsMade == 7) {
+                    summonSubject(3, Random.Int(2) == 0 ? DKMonk.class : DKWarlock.class);
+                } else {
+                    summonSubject(3, DKGhoul.class);
+                }
+                summonsMade++;
+                spend(TICK);
+                return true;
+            } else if (shielding() <= 100 && summonsMade < 12) {
+                sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.4f, 2);
+                Sample.INSTANCE.play(Assets.Sounds.CHALLENGE);
+                yell(Messages.get(this, "wave_3"));
+                summonSubject(4, DKWarlock.class);
+                summonSubject(4, DKMonk.class);
+                summonSubject(4, DKGhoul.class);
+                summonSubject(4, DKGhoul.class);
+                summonsMade = 12;
+                spend(TICK);
+                return true;
+            } else {
+                spend(TICK);
+                return true;
+            }
+        } else if (phase == 3 && buffs(Summoning.class).size() < 4) {
+            if (summonSubject(3)) summonsMade++;
+        }
+
+        return super.act();
+    }
+
+    private boolean summonSubject(int delay) {
+        //4th summon is always a monk or warlock, otherwise ghoul
+        if (summonsMade % 4 == 3) {
+            return summonSubject(delay, Random.Int(2) == 0 ? DKMonk.class : DKWarlock.class);
+        } else {
+            return summonSubject(delay, DKGhoul.class);
+        }
+    }
+
+    private boolean summonSubject(int delay, Class<? extends Mob> type) {
+        Summoning s = new Summoning();
+        s.pos = ((NewCityBossLevel) Dungeon.level).getSummoningPos();
+        if (s.pos == -1) return false;
+        s.summon = type;
+        s.delay = delay;
+        s.attachTo(this);
+        return true;
+    }
+
+    private HashSet<Mob> getSubjects() {
+        HashSet<Mob> subjects = new HashSet<>();
+        for (Mob m : Dungeon.level.mobs) {
+            if (m.alignment == alignment && (m instanceof Ghoul || m instanceof Monk || m instanceof Warlock)) {
+                subjects.add(m);
+            }
+        }
+        return subjects;
+    }
+
+    private boolean lifeLinkSubject() {
+        Mob furthest = null;
+
+        for (Mob m : getSubjects()) {
+            boolean alreadyLinked = false;
+            for (LifeLink l : m.buffs(LifeLink.class)) {
+                if (l.object == id()) alreadyLinked = true;
+            }
+            if (!alreadyLinked) {
+                if (furthest == null || Dungeon.level.distance(pos, furthest.pos) < Dungeon.level.distance(pos, m.pos)) {
+                    furthest = m;
+                }
+            }
+        }
+
+        if (furthest != null) {
+            Buff.append(furthest, LifeLink.class, 100f).object = id();
+            Buff.append(this, LifeLink.class, 100f).object = furthest.id();
+            yell(Messages.get(this, "lifelink_" + Random.IntRange(1, 2)));
+            sprite.parent.add(new Beam.HealthRay(sprite.destinationCenter(), furthest.sprite.destinationCenter()));
+            return true;
+
+        }
+        return false;
+    }
+
+    private boolean teleportSubject() {
+        if (enemy == null) return false;
+
+        Mob furthest = null;
+
+        for (Mob m : getSubjects()) {
+            if (furthest == null || Dungeon.level.distance(pos, furthest.pos) < Dungeon.level.distance(pos, m.pos)) {
+                furthest = m;
+            }
+        }
+
+        if (furthest != null) {
+
+            float bestDist;
+            int bestPos = pos;
+
+            Ballistica trajectory = new Ballistica(enemy.pos, pos, Ballistica.STOP_TARGET);
+            int targetCell = trajectory.path.get(trajectory.dist + 1);
+            //if the position opposite the direction of the hero is open, go there
+            if (Actor.findChar(targetCell) == null && !Dungeon.level.solid[targetCell]) {
+                bestPos = targetCell;
+
+                //Otherwise go to the neighbour cell that's open and is furthest
+            } else {
+                bestDist = Dungeon.level.trueDistance(pos, enemy.pos);
+
+                for (int i : PathFinder.NEIGHBOURS8) {
+                    if (Actor.findChar(pos + i) == null
+                            && !Dungeon.level.solid[pos + i]
+                            && Dungeon.level.trueDistance(pos + i, enemy.pos) > bestDist) {
+                        bestPos = pos + i;
+                        bestDist = Dungeon.level.trueDistance(pos + i, enemy.pos);
+                    }
+                }
+            }
+
+            Actor.add(new Pushing(this, pos, bestPos));
+            pos = bestPos;
+
+            //find closest cell that's adjacent to enemy, place subject there
+            bestDist = Dungeon.level.trueDistance(enemy.pos, pos);
+            bestPos = enemy.pos;
+            for (int i : PathFinder.NEIGHBOURS8) {
+                if (Actor.findChar(enemy.pos + i) == null
+                        && !Dungeon.level.solid[enemy.pos + i]
+                        && Dungeon.level.trueDistance(enemy.pos + i, pos) < bestDist) {
+                    bestPos = enemy.pos + i;
+                    bestDist = Dungeon.level.trueDistance(enemy.pos + i, pos);
+                }
+            }
+
+            if (bestPos != enemy.pos) ScrollOfTeleportation.appear(furthest, bestPos);
+            yell(Messages.get(this, "teleport_" + Random.IntRange(1, 2)));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void notice() {
+        super.notice();
+        if (!BossHealthBar.isAssigned()) {
+            BossHealthBar.assignBoss(this);
+            yell(Messages.get(this, "notice"));
+            for (Char ch : Actor.chars()) {
+                if (ch instanceof DriedRose.GhostHero) {
+                    ((DriedRose.GhostHero) ch).sayBoss();
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean isInvulnerable(Class effect) {
+        return phase == 2 && effect != KingDamager.class;
+    }
+
+    @Override
+    public void damage(int dmg, Object src) {
+        if (isInvulnerable(src.getClass())) {
+            super.damage(dmg, src);
+            return;
+        } else if (phase == 3 && !(src instanceof Viscosity.DeferedDamage)) {
+            if (dmg >= 0) {
+                Viscosity.DeferedDamage deferred = Buff.affect(this, Viscosity.DeferedDamage.class);
+                if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
+                    deferred.prolong(dmg / 2);
+                } else deferred.prolong(dmg);
+
+                sprite.showStatus(CharSprite.WARNING, Messages.get(Viscosity.class, "deferred", dmg));
+            }
+            return;
+        }
+        int preHP = HP;
+        super.damage(dmg, src);
+
+        LockedFloor lock = Dungeon.hero.buff(LockedFloor.class);
+        if (lock != null && !isImmune(src.getClass())) lock.addTime(dmg / 3);
+
+        if (phase == 1) {
+            int dmgTaken = preHP - HP;
+            abilityCooldown -= dmgTaken / 8f;
+            summonCooldown -= dmgTaken / 8f;
+            if (HP <= 50) {
+                HP = 50;
+                sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "invulnerable"));
+                ScrollOfTeleportation.appear(this, NewCityBossLevel.throne);
+                properties.add(Property.IMMOVABLE);
+                phase = 2;
+                summonsMade = 0;
+                sprite.idle();
+                Buff.affect(this, DKBarrior.class).setShield(HT);
+                for (Summoning s : buffs(Summoning.class)) {
+                    s.detach();
+                }
+                Bestiary.skipCountingEncounters = true;
+                for (Mob m : Dungeon.level.mobs.toArray(new Mob[0])) {
+                    if (m instanceof Ghoul || m instanceof Monk || m instanceof Warlock) {
+                        m.die(null);
+                    }
+                }
+                Bestiary.skipCountingEncounters = false;
+            }
+        } else if (phase == 2 && shielding() == 0) {
+            properties.remove(Property.IMMOVABLE);
+            phase = 3;
+            summonsMade = 1; //monk/warlock on 3rd summon
+            sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.4f, 2);
+            Sample.INSTANCE.play(Assets.Sounds.CHALLENGE);
+            yell(Messages.get(this, "enraged", Dungeon.hero.heroClass.title()));
+        } else if (phase == 3 && preHP > 20 && HP < 20) {
+            yell(Messages.get(this, "losing"));
+        }
+    }
+
+    @Override
+    public boolean isAlive() {
+        return super.isAlive() || phase != 3;
+    }
+
+    @Override
+    public void die(Object cause) {
+        // 이지모드라면 플레이어 사망
+        if (Dungeon.eazymode == 1) {
+            for (Ankh ankh : Dungeon.hero.belongings.getAllItems(Ankh.class)) {
+                ankh.detachAll(Dungeon.hero.belongings.backpack);
+            }
+            while (Dungeon.hero.isAlive() == true) {
+                Dungeon.hero.die(Dungeon.hero);
+            }
+            GLog.h(Messages.get(Hero.class, "eazymode"));
+        } else {
+
+            Dungeon.level.drop(new Certificate(40), pos).sprite.drop(pos);
+
+            int ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+            do {
+                ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+            } while (!Dungeon.level.passable[pos + ofs]);
+
+            GameScene.bossSlain();
+
+            super.die(cause);
+
+            if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
+                do {
+                    ofs = PathFinder.NEIGHBOURS8[Random.Int(8)];
+                } while (!Dungeon.level.passable[pos + ofs]);
+                Dungeon.level.drop(new Token4(), pos + ofs).sprite.drop(pos);
+            }
+
+            if (Dungeon.level.solid[pos]) {
+
+                Heap h = Dungeon.level.heaps.get(pos);
+                if (h != null) {
+                    for (Item i : h.items) {
+                        Dungeon.level.drop(i, pos + Dungeon.level.width());
+                    }
+                    h.destroy();
+                }
+                switch (Dungeon.hero.heroClass) {
+
+                    case WARRIOR:
+                        Dungeon.level.drop(new BookSBurst(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case ROGUE:
+                        Dungeon.level.drop(new BookNigetRaid(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case MAGE:
+                        Dungeon.level.drop(new BookShadowAssault(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case HUNTRESS:
+                        Dungeon.level.drop(new BookSoaringFeather(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case ROSECAT:
+                        Dungeon.level.drop(new BookYourWish(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case NEARL:
+                        Dungeon.level.drop(new BookSun(), pos + ofs).sprite.drop(pos);
+                        break;
+                }
+            } else {
+                switch (Dungeon.hero.heroClass) {
+                    case WARRIOR:
+                        Dungeon.level.drop(new BookSBurst(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case ROGUE:
+                        Dungeon.level.drop(new BookNigetRaid(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case MAGE:
+                        Dungeon.level.drop(new BookShadowAssault(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case HUNTRESS:
+                        Dungeon.level.drop(new BookSoaringFeather(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case ROSECAT:
+                        Dungeon.level.drop(new BookYourWish(), pos + ofs).sprite.drop(pos);
+                        break;
+                    case NEARL:
+                        Dungeon.level.drop(new BookSun(), pos + ofs).sprite.drop(pos);
+                        break;
+                }
+            }
+
+            Badges.validateBossSlain();
+
+            Dungeon.level.unseal();
+
+            Bestiary.skipCountingEncounters = true;
+            for (Mob m : getSubjects()) {
+                m.die(null);
+            }
+            Bestiary.skipCountingEncounters = false;
+
+            LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
+            if (beacon != null) {
+                beacon.upgrade();
+            }
+
+            yell(Messages.get(this, "defeated"));
+        }
+    }
+
+    @Override
+    public boolean isImmune(Class effect) {
+        //immune to damage amplification from doomed in 2nd phase or later, but it can still be applied
+        if (phase > 1 && effect == Doom.class && buff(Doom.class) != null) {
+            return true;
+        }
+        return super.isImmune(effect);
+    }
+
+    public static class DKGhoul extends Ghoul {
+        {
+            state = HUNTING;
+        }
+
+        @Override
+        protected boolean act() {
+            partnerID = -2; //no partners
+            if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1) {
+                Buff.affect(this, Healing.class).setHeal(5, 1f, 1);
+            }
+            return super.act();
+        }
+    }
+
+    public static class DKMonk extends Monk {
+        {
+            state = HUNTING;
+        }
+
+        @Override
+        protected boolean act() {
+            if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1) {
+                Buff.affect(this, Healing.class).setHeal(5, 1f, 1);
+            }
+            return super.act();
+        }
+    }
+
+    public static class DKWarlock extends Warlock {
+        {
+            state = HUNTING;
+        }
+
+        @Override
+        protected boolean act() {
+            if (Dungeon.isChallenged(Challenges.SPECIAL_BOSS) && Dungeon.mboss19 == 1) {
+                Buff.affect(this, Healing.class).setHeal(5, 1f, 1);
+            }
+            return super.act();
+        }
+    }
+
+    public static class Summoning extends Buff {
+
+        private int delay;
+        private int pos;
+        private Class<? extends Mob> summon;
+
+        private Emitter particles;
+
+        public int getPos() {
+            return pos;
+        }
+
+        @Override
+        public boolean act() {
+            delay--;
+
+            if (delay <= 0) {
+
+                if (summon == DKWarlock.class) {
+                    particles.burst(ShadowParticle.CURSE, 10);
+                    Sample.INSTANCE.play(Assets.Sounds.CURSED);
+                } else if (summon == DKMonk.class) {
+                    particles.burst(ElmoParticle.FACTORY, 10);
+                    Sample.INSTANCE.play(Assets.Sounds.BURNING);
+                } else {
+                    particles.burst(Speck.factory(Speck.BONE), 10);
+                    Sample.INSTANCE.play(Assets.Sounds.BONES);
+                }
+                particles = null;
+
+                if (Actor.findChar(pos) != null) {
+                    ArrayList<Integer> candidates = new ArrayList<>();
+                    for (int i : PathFinder.NEIGHBOURS8) {
+                        if (Dungeon.level.passable[pos + i] && Actor.findChar(pos + i) == null) {
+                            candidates.add(pos + i);
+                        }
+                    }
+                    if (!candidates.isEmpty()) {
+                        pos = Random.element(candidates);
+                    }
+                }
+
+                if (Actor.findChar(pos) == null) {
+                    Mob m = Reflection.newInstance(summon);
+                    m.pos = pos;
+                    m.maxLvl = -2;
+                    if (Dungeon.isChallenged(Challenges.DECISIVE_BATTLE)) {
+                        Buff.affect(m, Barrier.class).incShield(12);
+                        Buff.affect(m, BlobImmunity.class, 30f);
+                        int rnd = Random.Int(6);
+                        switch (rnd) {
+                            case 0:
+                                Buff.affect(m, MagicImmune.class, 30f);
+                                break;
+                            case 1:
+                                Buff.affect(m, ToxicImbue.class).set(30);
+                                break;
+                            case 2:
+                                Buff.affect(m, FireImbue.class).set(30f);
+                                break;
+                            default:
+                                Buff.affect(m, Barkskin.class).set(12, 30);
+                                break;
+                        }
+                    }
+                    GameScene.add(m);
+                    m.state = m.HUNTING;
+                    if (((DwarfKing) target).phase == 2) {
+                        Buff.affect(m, KingDamager.class);
+                    }
+                } else {
+                    Char ch = Actor.findChar(pos);
+                    ch.damage(Random.NormalIntRange(20, 40), target);
+                    if (((DwarfKing) target).phase == 2) {
+                        target.damage(target.HT / 12, new KingDamager());
+                    }
+                }
+
+                detach();
+            }
+
+            spend(TICK);
+            return true;
+        }
+
+        @Override
+        public void fx(boolean on) {
+            if (on && particles == null) {
+                particles = CellEmitter.get(pos);
+
+                if (summon == DKWarlock.class) {
+                    particles.pour(ShadowParticle.UP, 0.1f);
+                } else if (summon == DKMonk.class) {
+                    particles.pour(ElmoParticle.FACTORY, 0.1f);
+                } else {
+                    particles.pour(Speck.factory(Speck.RATTLE), 0.1f);
+                }
+
+            } else if (!on && particles != null) {
+                particles.on = false;
+            }
+        }
+
+        private static final String DELAY = "delay";
+        private static final String POS = "pos";
+        private static final String SUMMON = "summon";
+
+        @Override
+        public void storeInBundle(Bundle bundle) {
+            super.storeInBundle(bundle);
+            bundle.put(DELAY, delay);
+            bundle.put(POS, pos);
+            bundle.put(SUMMON, summon);
+        }
+
+        @Override
+        public void restoreFromBundle(Bundle bundle) {
+            super.restoreFromBundle(bundle);
+            delay = bundle.getInt(DELAY);
+            pos = bundle.getInt(POS);
+            summon = bundle.getClass(SUMMON);
+        }
+    }
+
+    public static class KingDamager extends Buff {
+
+        @Override
+        public boolean act() {
+            if (target.alignment != Alignment.ENEMY) {
+                detach();
+            }
+            spend(TICK);
+            return true;
+        }
+
+        @Override
+        public void detach() {
+            super.detach();
+            for (Mob m : Dungeon.level.mobs) {
+                if (m instanceof DwarfKing) {
+                    m.damage(m.HT / 12, this);
+                }
+            }
+        }
+    }
+
+    public static class DKBarrior extends Barrier {
+
+        @Override
+        public boolean act() {
+            incShield();
+            return super.act();
+        }
+
+        @Override
+        public int icon() {
+            return BuffIndicator.NONE;
+        }
+    }
 
 }

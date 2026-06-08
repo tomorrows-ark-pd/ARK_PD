@@ -695,7 +695,8 @@ public abstract class Level implements Bundlable {
                 mob.pos = Dungeon.level.randomRespawnCell(mob);
                 if (Dungeon.hero.isAlive() && mob.pos != -1 && PathFinder.distance[mob.pos] >= 12) {
                     GameScene.add(mob);
-                    if (Statistics.amuletObtained && !Dungeon.isInRhodes()) {
+                    //no amulet-curse beckon on the bonus stage (depth 31+)
+                    if (Statistics.amuletObtained && !Dungeon.isInRhodes() && Dungeon.depth < 31) {
                         mob.beckon(Dungeon.hero.pos);
                     }
                     if (!mob.buffs(ChampionEnemy.class).isEmpty()) {
