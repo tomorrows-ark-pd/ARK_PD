@@ -52,11 +52,6 @@ public abstract class AllyBuff extends Buff {
 
 	//for when applying an ally buff should also cause that enemy to give exp/loot as if they had died
 	//consider that chars with the ally alignment do not drop items or award exp on death
-	//
-	//NOTE: this faithfully reproduces the credit block that was previously copy-pasted across
-	//the mod's corruption sources (loot guarded on alignment, the EXP > 0 && hero.lvl <= maxLvl
-	//rule). It intentionally omits upstream-only credit (Bestiary.setSeen/countEncounter,
-	//AscensionChallenge, MonkEnergy) which this mod's inlined blocks never performed.
 	public static void affectAndLoot(Mob enemy, Hero hero, Class<? extends AllyBuff> buffCls){
 		boolean droppingLoot = enemy.alignment != Char.Alignment.ALLY;
 		Buff.affect(enemy, buffCls);

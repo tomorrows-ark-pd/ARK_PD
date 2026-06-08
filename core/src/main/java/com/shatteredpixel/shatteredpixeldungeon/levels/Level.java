@@ -695,7 +695,6 @@ public abstract class Level implements Bundlable {
                 mob.pos = Dungeon.level.randomRespawnCell(mob);
                 if (Dungeon.hero.isAlive() && mob.pos != -1 && PathFinder.distance[mob.pos] >= 12) {
                     GameScene.add(mob);
-                    //no amulet-curse beckon on the bonus stage (depth 31+)
                     if (Statistics.amuletObtained && !Dungeon.isInRhodes() && Dungeon.depth < 31) {
                         mob.beckon(Dungeon.hero.pos);
                     }
@@ -1146,8 +1145,6 @@ public abstract class Level implements Bundlable {
         pressCell(cell, true, true);
     }
 
-    //presses a cell hit by gunfire; behaves like a normal press but never springs a TenguDartTrap,
-    //so spread/stray shots can't mass-trigger the dart traps during the Tengu fight
     public void pressCellGunfire(int cell) {
         boolean tenguDart = traps.get(cell) instanceof TenguDartTrap;
         pressCell(cell, true, !tenguDart);
@@ -1159,7 +1156,6 @@ public abstract class Level implements Bundlable {
 
     //a 'soft' press ignores hidden traps
     //a 'hard' press triggers all things
-    //triggerTraps == false skips trap activation entirely while still pressing other cell contents
     private void pressCell(int cell, boolean hard, boolean triggerTraps) {
 
         Trap trap = null;

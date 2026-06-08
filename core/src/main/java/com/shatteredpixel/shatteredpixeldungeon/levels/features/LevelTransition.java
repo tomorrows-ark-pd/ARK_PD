@@ -58,6 +58,18 @@ public class LevelTransition extends Rect implements Bundlable {
 		this.destDepth = destDepth;
 		this.destBranch = destBranch;
 		this.destType = destType;
+		clamp();
+	}
+
+	public static final int MAX_DEPTH = 40;
+	public static final int RHODES_DEFAULT_BRANCH = 2;
+
+	//out-of-range depths reset to Rhodes (depth 0, branch 2)
+	private void clamp(){
+		if (destDepth < 0 || destDepth > MAX_DEPTH){
+			destDepth = 0;
+			destBranch = RHODES_DEFAULT_BRANCH;
+		}
 	}
 
 	//gives default values for common transition types
@@ -78,6 +90,7 @@ public class LevelTransition extends Rect implements Bundlable {
 				destType = Type.REGULAR_ENTRANCE;
 				break;
 		}
+		clamp();
 	}
 
 	//note that the center cell isn't always the actual center.
@@ -146,5 +159,6 @@ public class LevelTransition extends Rect implements Bundlable {
 		destDepth = bundle.getInt(DEST_DEPTH);
 		destBranch = bundle.getInt(DEST_BRANCH);
 		if (bundle.contains(DEST_TYPE)) destType = bundle.getEnum(DEST_TYPE, Type.class);
+		clamp();
 	}
 }

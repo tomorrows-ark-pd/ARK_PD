@@ -151,7 +151,6 @@ public class LloydsBeacon extends Artifact {
 		} else if (action == AC_SET) {
 			
 			returnDepth = Dungeon.depth;
-			//only floor 0 (Rhodes Island) is branched; other depths always return to the main branch
 			returnBranch = Dungeon.depth == 0 ? Dungeon.branch : 0;
 			returnPos = hero.pos;
 			

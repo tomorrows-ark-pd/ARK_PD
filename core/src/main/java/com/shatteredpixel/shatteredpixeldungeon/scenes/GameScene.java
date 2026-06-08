@@ -324,7 +324,6 @@ public class GameScene extends PixelScene {
         for (Mob mob : Dungeon.level.mobs) {
             addMobSprite(mob);
             if (Statistics.amuletObtained) {
-                //no amulet-curse beckon on the bonus stage (depth 31+)
                 if (!Dungeon.isInRhodes() && Dungeon.depth < 31) mob.beckon(Dungeon.hero.pos);
             }
         }

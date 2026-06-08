@@ -207,7 +207,6 @@ public class ShotgunWeapon extends GunWeapon {
                 if (!ch.isAlive()) anyKill = true;
             }
 
-            // Press cells where no enemy was hit (grass/plants etc.); skips TenguDartTraps only
             for (int cell : emptyCells) {
                 Dungeon.level.pressCellGunfire(cell);
             }

@@ -61,7 +61,6 @@ public class AncientKin extends Skill {
 
             for (Mob Mob : Dungeon.level.mobs.toArray(new Mob[0])) {
                 if (Mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[Mob.pos]) {
-                    //Buff.affect returns null when the mob resists/is immune to Terror
                     Terror t = Buff.affect(Mob, Terror.class, Terror.DURATION);
                     if (t != null) t.object = curUser.id();
                 }
