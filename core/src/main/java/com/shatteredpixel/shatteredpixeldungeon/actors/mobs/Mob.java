@@ -34,6 +34,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Camouflage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.ChampionEnemy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Charm;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicalSight;
@@ -632,22 +633,11 @@ public abstract class Mob extends Char {
                     int chancevalue = Random.Int(HT * (55 - (Dungeon.hero.pointsInTalent(Talent.SOUL_SIPHON) * 9)));
                     boolean chance = (chancevalue < damage);
                     if (chance) {
-                        boolean droppingLoot = this.alignment != Char.Alignment.ALLY;
-                        Buff.affect(this, Corruption.class);
+                        AllyBuff.affectAndLoot(this, Dungeon.hero, Corruption.class);
 
                         if (this.buff(Corruption.class) != null) {
                             damage = 0;
                             HP = HT;
-                            if (droppingLoot) this.rollToDropLoot();
-                            Statistics.enemiesSlain++;
-                            Badges.validateMonstersSlain();
-                            Statistics.qualifiedForNoKilling = false;
-                            if (this.EXP > 0 && Dungeon.hero.lvl <= this.maxLvl) {
-                                Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "exp", this.EXP));
-                                Dungeon.hero.earnExp(this.EXP, this.getClass());
-                            } else {
-                                Dungeon.hero.earnExp(0, this.getClass());
-                            }
                         }
                     }
                 }

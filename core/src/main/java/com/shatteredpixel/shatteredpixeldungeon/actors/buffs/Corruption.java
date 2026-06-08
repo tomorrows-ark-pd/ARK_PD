@@ -21,64 +21,52 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.buffs;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 
-public class Corruption extends Buff {
+public class Corruption extends AllyBuff {
 
-	{
-		type = buffType.NEGATIVE;
-		announced = true;
-		revivePersists = true;
-	}
+    {
+        type = buffType.NEGATIVE;
+        announced = true;
+    }
 
-	private float buildToDamage = 0f;
-	
-	@Override
-	public boolean attachTo(Char target) {
-		if (super.attachTo(target)){
-			target.alignment = Char.Alignment.ALLY;
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean act() {
-		buildToDamage += target.HT/200f;
+    private float buildToDamage = 0f;
 
-		int damage = (int)buildToDamage;
-		buildToDamage -= damage;
+    @Override
+    public boolean act() {
+        buildToDamage += target.HT / 200f;
 
-		if (damage > 0)
-			target.damage(damage, this);
+        int damage = (int) buildToDamage;
+        buildToDamage -= damage;
 
-		spend(TICK);
+        if (damage > 0)
+            target.damage(damage, this);
 
-		return true;
-	}
+        spend(TICK);
 
-	@Override
-	public void fx(boolean on) {
-		if (on) target.sprite.add( CharSprite.State.DARKENED );
-		else if (target.invisible == 0) target.sprite.remove( CharSprite.State.DARKENED );
-	}
+        return true;
+    }
 
-	@Override
-	public int icon() {
-		return BuffIndicator.CORRUPT;
-	}
+    @Override
+    public void fx(boolean on) {
+        if (on) target.sprite.add(CharSprite.State.DARKENED);
+        else if (target.invisible == 0) target.sprite.remove(CharSprite.State.DARKENED);
+    }
 
-	@Override
-	public String toString() {
-		return Messages.get(this, "name");
-	}
+    @Override
+    public int icon() {
+        return BuffIndicator.CORRUPT;
+    }
 
-	@Override
-	public String desc() {
-		return Messages.get(this, "desc");
-	}
+    @Override
+    public String toString() {
+        return Messages.get(this, "name");
+    }
+
+    @Override
+    public String desc() {
+        return Messages.get(this, "desc");
+    }
 }

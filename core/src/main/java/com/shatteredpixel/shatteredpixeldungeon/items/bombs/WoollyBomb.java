@@ -22,12 +22,11 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.bombs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hex;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness;
@@ -35,8 +34,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.BArray;
 import com.watabou.noosa.audio.Sample;
@@ -63,22 +60,7 @@ public class WoollyBomb extends Bomb {
                 } else if (mob instanceof Mob) {
                     if (mob.alignment != Char.Alignment.ALLY) {
                         if (!mob.isImmune(Corruption.class)) {
-                            Buff.affect(mob, Corruption.class);
-
-                            if (mob.buff(Corruption.class) != null) {
-                                if (mob.isAlive() && !mob.isImmune(Corruption.class)) {
-                                    ((Mob) mob).rollToDropLoot();
-                                }
-                                Statistics.enemiesSlain++;
-                                Badges.validateMonstersSlain();
-                                Statistics.qualifiedForNoKilling = false;
-                                if (((Mob) mob).EXP > 0 && curUser.lvl <= ((Mob) mob).maxLvl) {
-                                    curUser.sprite.showStatus(CharSprite.POSITIVE, Messages.get(mob, "exp", ((Mob) mob).EXP));
-                                    curUser.earnExp(((Mob) mob).EXP, mob.getClass());
-                                } else {
-                                    curUser.earnExp(0, mob.getClass());
-                                }
-                            }
+                            AllyBuff.affectAndLoot((Mob) mob, curUser, Corruption.class);
                         }
                     }
                 }

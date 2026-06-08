@@ -1,42 +1,37 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK2;
 
-import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.TomorrowRogueNight;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Terror;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
-import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK1.FoodPrep;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.Skill;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CustomeSet;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfCorrupting;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Corrupting;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.BombtailSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.SeabornSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.TentacleSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.TargetHealthIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class AncientKin extends Skill {
-    public void doSkill() { GameScene.selectCell(Kin); }
+    public void doSkill() {
+        GameScene.selectCell(Kin);
+    }
 
     protected CellSelector.Listener Kin = new CellSelector.Listener() {
         public void onSelect(Integer target) {
-            if (target != null) { Char mob = Actor.findChar(target);
+            if (target != null) {
+                Char mob = Actor.findChar(target);
 
                 if (mob instanceof Mob) {
                     if (mob.alignment != Char.Alignment.ALLY) {
@@ -46,18 +41,32 @@ public class AncientKin extends Skill {
                             Seaborn seaborn = new Seaborn();
                             seaborn.pos = mob.pos;
 
-                            mob.die(Dungeon.hero);
-                            Dungeon.level.mobs.remove(mob);
-                            TargetHealthIndicator.instance.target(null);
-                            GameScene.add(seaborn);
-                            CellEmitter.get(seaborn.pos).burst(Speck.factory(Speck.WOOL), 4);
-                        } else Buff.affect(mob, Paralysis.class, 5f);}}
-                else GLog.n( Messages.get(AncientKin.class, "fail") );
+                            try {
+                                ((Mob) mob).rollToDropLoot();
+                                ((Mob) mob).destroy();
+                                if (mob.sprite != null) mob.sprite.killAndErase();
+                                TargetHealthIndicator.instance.target(null);
+                                GameScene.add(seaborn);
+                                CellEmitter.get(seaborn.pos).burst(Speck.factory(Speck.WOOL), 4);
+                            } catch (RuntimeException e) {
+                                TomorrowRogueNight.reportException(
+                                        new RuntimeException("AncientKin Seaborn conversion failed; victim="
+                                                + mob.getClass().getSimpleName(), e));
+                                throw e;
+                            }
+                        } else Buff.affect(mob, Paralysis.class, 5f);
+                    }
+                } else GLog.n(Messages.get(AncientKin.class, "fail"));
             }
 
-            for (Mob Mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+            for (Mob Mob : Dungeon.level.mobs.toArray(new Mob[0])) {
                 if (Mob.alignment != Char.Alignment.ALLY && Dungeon.level.heroFOV[Mob.pos]) {
-                    Buff.affect( Mob, Terror.class, Terror.DURATION ).object = curUser.id(); }}}
+                    //Buff.affect returns null when the mob resists/is immune to Terror
+                    Terror t = Buff.affect(Mob, Terror.class, Terror.DURATION);
+                    if (t != null) t.object = curUser.id();
+                }
+            }
+        }
 
         @Override
         public String prompt() {
@@ -65,12 +74,11 @@ public class AncientKin extends Skill {
         }
     };
 
-    public static class Seaborn extends Mob
-    {
+    public static class Seaborn extends Mob {
         {
             spriteClass = SeabornSprite.class;
 
-            HP=HT=75;
+            HP = HT = 75;
             baseSpeed = 1f;
 
             state = HUNTING;
@@ -83,10 +91,14 @@ public class AncientKin extends Skill {
         }
 
         @Override
-        public int damageRoll() { return Random.NormalIntRange( 1 + Dungeon.hero.lvl, Dungeon.hero.lvl * 2 ); }
+        public int damageRoll() {
+            return Random.NormalIntRange(1 + Dungeon.hero.lvl, Dungeon.hero.lvl * 2);
+        }
 
         @Override
-        public int drRoll() { return Random.NormalIntRange( 0, 6 + Dungeon.hero.lvl / 2 ); }
+        public int drRoll() {
+            return Random.NormalIntRange(0, 6 + Dungeon.hero.lvl / 2);
+        }
 
         @Override
         public int attackSkill(Char target) {
@@ -95,10 +107,11 @@ public class AncientKin extends Skill {
 
         @Override
         public int defenseSkill(Char enemy) {
-            CustomeSet.CustomSetBuff setBuff = Dungeon.hero.buff( CustomeSet.CustomSetBuff.class);
+            CustomeSet.CustomSetBuff setBuff = Dungeon.hero.buff(CustomeSet.CustomSetBuff.class);
             int itembuff = 0;
             if (setBuff != null) itembuff = setBuff.itemLevel();
-            return 5 +(Dungeon.hero.lvl / 2) + itembuff; }
+            return 5 + (Dungeon.hero.lvl / 2) + itembuff;
+        }
 
         @Override
         public float speed() {

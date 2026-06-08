@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Guardoper_ItermUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
@@ -70,7 +71,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vampir
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ThermiteBlade;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -157,24 +157,11 @@ abstract public class Weapon extends KindOfWeapon {
                 float Resists = 100 * enemyResist;
 
                 if (Random.Int((int)Resists) < RingOfDominate.Dominate(Dungeon.hero)) {
-                    if (defender.isAlive() && !defender.isImmune(Corruption.class) && defender.buff(Corruption.class) == null && defender.alignment != Char.Alignment.ALLY) {
-                        Buff.affect(defender, Corruption.class);
+                    if (defender instanceof Mob && defender.isAlive() && !defender.isImmune(Corruption.class)
+                            && defender.buff(Corruption.class) == null && defender.alignment != Char.Alignment.ALLY) {
                         defender.HP = defender.HT;
                         damage = 0;
-                    }
-                    if (defender instanceof Mob) {
-                        if (defender.isAlive() && !defender.isImmune(Corruption.class)) {
-                            ((Mob)defender).rollToDropLoot();
-                            Statistics.enemiesSlain++;
-                            Badges.validateMonstersSlain();
-                            Statistics.qualifiedForNoKilling = false;
-                            if (((Mob) defender).EXP > 0 && curUser.lvl <= ((Mob) defender).maxLvl) {
-                                curUser.sprite.showStatus(CharSprite.POSITIVE, Messages.get(defender, "exp", ((Mob) defender).EXP));
-                                curUser.earnExp(((Mob) defender).EXP, defender.getClass());
-                            } else {
-                                curUser.earnExp(0, defender.getClass());
-                            }
-                        }
+                        AllyBuff.affectAndLoot((Mob) defender, curUser, Corruption.class);
                     }
                 }
 			}
