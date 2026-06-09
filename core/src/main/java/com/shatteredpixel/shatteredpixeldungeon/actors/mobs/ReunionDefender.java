@@ -90,4 +90,10 @@ public class ReunionDefender extends Hound {
 
 		Ghost.Quest.process();
 	}
+
+	@Override
+	public void onConvertKilled( Object cause ) {
+		super.onConvertKilled( cause );
+		Ghost.Quest.process();
+	}
 }

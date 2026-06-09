@@ -76,4 +76,10 @@ public class FloatingSeaDrifter extends Mob {
         super.die(cause);
         Dario.Quest.process();
     }
+
+    @Override
+    public void onConvertKilled(Object cause) {
+        super.onConvertKilled(cause);
+        Dario.Quest.process();
+    }
 }

@@ -733,6 +733,15 @@ public abstract class Mob extends Char {
         }
     }
 
+    //Runs the kill-tracking bookkeeping that destroy() omits (quest progress) for mobs that are
+    //removed via ally-conversion (e.g. Seaborn) instead of a normal death. destroy() already covers
+    //Statistics/Badges/Bestiary/EXP; this fills the quest gap without re-running the victim's full
+    //die() override (which can revive, spawn gas, etc.). Subclasses with custom quest counters
+    //should override this and call super.onConvertKilled(cause).
+    public void onConvertKilled(Object cause) {
+        QuestScroll.onMobKilled(cause);
+    }
+
     @Override
     public void die(Object cause) {
 

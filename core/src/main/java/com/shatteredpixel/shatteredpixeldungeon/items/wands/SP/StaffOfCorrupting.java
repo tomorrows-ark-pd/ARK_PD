@@ -237,6 +237,7 @@ public class StaffOfCorrupting extends Wand {
             Buff.affect(seaborn, SeabornRegen.class).setLevel(buffedLvl());
             try {
                 enemy.rollToDropLoot();
+                enemy.onConvertKilled(Dungeon.hero);
                 enemy.destroy();
                 if (enemy.sprite != null) enemy.sprite.killAndErase();
                 TargetHealthIndicator.instance.target(null);

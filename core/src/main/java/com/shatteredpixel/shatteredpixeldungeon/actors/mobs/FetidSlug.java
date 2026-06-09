@@ -81,7 +81,13 @@ public class FetidSlug extends Slug {
 
 		Ghost.Quest.process();
 	}
-	
+
+	@Override
+	public void onConvertKilled( Object cause ) {
+		super.onConvertKilled( cause );
+		Ghost.Quest.process();
+	}
+
 	{
 		immunities.add( StenchGas.class );
 	}

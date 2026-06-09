@@ -43,6 +43,7 @@ public class AncientKin extends Skill {
 
                             try {
                                 ((Mob) mob).rollToDropLoot();
+                                ((Mob) mob).onConvertKilled(Dungeon.hero);
                                 ((Mob) mob).destroy();
                                 if (mob.sprite != null) mob.sprite.killAndErase();
                                 TargetHealthIndicator.instance.target(null);

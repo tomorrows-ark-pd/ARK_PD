@@ -118,6 +118,12 @@ public class GnollTrickster extends Gnoll {
 		Ghost.Quest.process();
 	}
 
+	@Override
+	public void onConvertKilled( Object cause ) {
+		super.onConvertKilled( cause );
+		Ghost.Quest.process();
+	}
+
 	private static final String COMBO = "combo";
 
 	@Override
