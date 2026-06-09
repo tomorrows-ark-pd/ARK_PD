@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Skeleton;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 public class Heamyo extends MeleeWeapon {
 
     public static final String AC_DUMMY = "DUMMY";
+    public static final String AC_POS = "POS";
 
     {
         image = ItemSpriteSheet.HEAMYO;
@@ -48,13 +50,14 @@ public class Heamyo extends MeleeWeapon {
         DLY = 0.1f; //0.67x speed
         RCH = 300;
 
-        defaultAction = AC_DUMMY;
+        defaultAction = AC_POS;
     }
 
     @Override
     public ArrayList<String> actions(Hero hero) {
         ArrayList<String> actions = super.actions(hero);
         actions.add(AC_DUMMY);
+        actions.add(AC_POS);
         return actions;
     }
 
@@ -65,6 +68,9 @@ public class Heamyo extends MeleeWeapon {
         if (action.equals(AC_DUMMY)) {
             curUser = hero;
             GameScene.selectCell(dummyPlacer);
+        } else if (action.equals(AC_POS)) {
+            curUser = hero;
+            GameScene.selectCell(posPrinter);
         }
     }
 
@@ -91,6 +97,61 @@ public class Heamyo extends MeleeWeapon {
             return "훈련인형 소환/삭제";
         }
     };
+
+    private final CellSelector.Listener posPrinter = new CellSelector.Listener() {
+        @Override
+        public void onSelect(Integer cell) {
+            if (cell == null) return;
+
+            int x = cell % Dungeon.level.width();
+            int y = cell / Dungeon.level.width();
+            int terrain = Dungeon.level.map[cell];
+            GLog.i("pos: " + cell + " (x=" + x + ", y=" + y + "), terrain: " + terrainName(terrain) + " (" + terrain + ")");
+        }
+
+        @Override
+        public String prompt() {
+            return "좌표 출력할 셀 선택";
+        }
+    };
+
+    private static String terrainName(int terrain) {
+        switch (terrain) {
+            case Terrain.CHASM:         return "CHASM";
+            case Terrain.EMPTY:         return "EMPTY";
+            case Terrain.GRASS:         return "GRASS";
+            case Terrain.EMPTY_WELL:    return "EMPTY_WELL";
+            case Terrain.WALL:          return "WALL";
+            case Terrain.DOOR:          return "DOOR";
+            case Terrain.OPEN_DOOR:     return "OPEN_DOOR";
+            case Terrain.ENTRANCE:      return "ENTRANCE";
+            case Terrain.EXIT:          return "EXIT";
+            case Terrain.EMBERS:        return "EMBERS";
+            case Terrain.LOCKED_DOOR:   return "LOCKED_DOOR";
+            case Terrain.PEDESTAL:      return "PEDESTAL";
+            case Terrain.WALL_DECO:     return "WALL_DECO";
+            case Terrain.BARRICADE:     return "BARRICADE";
+            case Terrain.EMPTY_SP:      return "EMPTY_SP";
+            case Terrain.HIGH_GRASS:    return "HIGH_GRASS";
+            case Terrain.FURROWED_GRASS:return "FURROWED_GRASS";
+            case Terrain.SECRET_DOOR:   return "SECRET_DOOR";
+            case Terrain.SECRET_TRAP:   return "SECRET_TRAP";
+            case Terrain.TRAP:          return "TRAP";
+            case Terrain.INACTIVE_TRAP: return "INACTIVE_TRAP";
+            case Terrain.EMPTY_DECO:    return "EMPTY_DECO";
+            case Terrain.LOCKED_EXIT:   return "LOCKED_EXIT";
+            case Terrain.UNLOCKED_EXIT: return "UNLOCKED_EXIT";
+            case Terrain.SIGN:          return "SIGN";
+            case Terrain.WELL:          return "WELL";
+            case Terrain.STATUE:        return "STATUE";
+            case Terrain.STATUE_SP:     return "STATUE_SP";
+            case Terrain.BOOKSHELF:     return "BOOKSHELF";
+            case Terrain.ALCHEMY:       return "ALCHEMY";
+            case Terrain.WATER:         return "WATER";
+            case Terrain.SEA_TERROR:    return "SEA_TERROR";
+            default:                    return "UNKNOWN";
+        }
+    }
 
     @Override
     public int max(int lvl) {

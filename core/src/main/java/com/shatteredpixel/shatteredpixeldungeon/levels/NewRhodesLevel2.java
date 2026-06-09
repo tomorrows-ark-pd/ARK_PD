@@ -146,8 +146,35 @@ public class NewRhodesLevel2 extends Level {
         Painter.fill(this, 26, 48, 2, 11, Terrain.EMPTY);
 
         // 맵 경계선. 못나가도록 막음
-        Painter.fill(this, 28, 42, 1, 19, Terrain.WALL);
+        Painter.fill(this, 28, 42, 1, 16, Terrain.WALL);
         map[4164] = Terrain.EMPTY;
+
+        // 확장 상점구역
+        Painter.fill(this, 29, 53, 22, 4, Terrain.EMPTY);
+        Painter.fill(this, 34, 57, 17, 6, Terrain.EMPTY);
+
+        // 확장 상점구역 선반
+        Painter.fill(this, 37, 57, 2, 1, Terrain.WALL);
+        Painter.fill(this, 37, 58, 2, 1, Terrain.STATUE);
+        Painter.fill(this, 42, 57, 2, 1, Terrain.WALL);
+        Painter.fill(this, 42, 58, 2, 1, Terrain.STATUE);
+        Painter.fill(this, 37, 60, 2, 1, Terrain.WALL);
+        Painter.fill(this, 37, 61, 2, 1, Terrain.STATUE);
+        Painter.fill(this, 42, 60, 2, 1, Terrain.WALL);
+        Painter.fill(this, 42, 61, 2, 1, Terrain.STATUE);
+
+        // 위디 옆 확장통로 벽
+        Painter.fill(this, 29, 57, 4, 1, Terrain.WALL);
+        Painter.fill(this, 30, 60, 1, 5, Terrain.WALL);
+        Painter.fill(this, 33, 57, 1, 6, Terrain.WALL);
+        Painter.fill(this, 33, 63, 18, 1, Terrain.WALL);
+        Painter.fill(this, 31, 60, 2, 6, Terrain.EMPTY);
+        Painter.fill(this, 31, 64, 23, 2, Terrain.EMPTY);
+
+        map[4319] = Terrain.EMPTY;
+        map[4332] = Terrain.EMPTY;
+        map[4587] = Terrain.EMPTY;
+        map[4588] = Terrain.EMPTY;
 
         entrance = 4015;
         exit = 3607;
