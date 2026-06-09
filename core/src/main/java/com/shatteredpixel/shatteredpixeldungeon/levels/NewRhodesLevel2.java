@@ -11,6 +11,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Firewall;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.FrostLeaf;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Jessica;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Gglow;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Mage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_PhantomShadow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
@@ -218,17 +219,19 @@ public class NewRhodesLevel2 extends Level {
 
     @Override
     protected void createItems() {
-        Closure.spawn(this, 3682);
+
+        Closure.spawn(this, 3683);
         SkinModel.spawn(this, 3751);
         Firewall.spawn(this, 3882);
-        Weedy.spawn(this, 3971);
+        Weedy.spawn(this, 4404);
         Dummy.spawn(this, 4286);
         Dummy.spawn(this, 4354);
         Jessica.spawn(this, 4295);
         Dobermann.spawn(this, 4298);
         FrostLeaf.spawn(this, 4305);
         NPC_Phantom.spawn(this, 3010);
-        NPC_Gglow.spawn(this, 3964);
+        NPC_Gglow.spawn(this, 3910);
+        NPC_Mage.spawn(this, 3202);
 
         if (Random.Int(2) == 0) Npc_Astesia.spawn(this, 3004);
         else Npc_Astesia.spawn(this, 3218);
@@ -240,15 +243,15 @@ public class NewRhodesLevel2 extends Level {
 
         // 특수 상점 관련
 
-        drop(new Closure_FoodBox(), 3692).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_PotionBox(), 3693).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_ScrollBox(), 3694).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_IdentifyBox(), 3695).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_HealingBox(), 3696).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_WandBox(), 3828).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TransBox(), 3829).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_RingBox(), 3830).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TGBox(), 3832).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_FoodBox(), 3709).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_PotionBox(), 3710).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_ScrollBox(), 3777).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_IdentifyBox(), 3778).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_HealingBox(), 3714).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_WandBox(), 3715).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TransBox(), 3782).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_RingBox(), 3783).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TGBox(), 3784).type = Heap.Type.FOR_SALE_28F;
     }
 
     @Override

@@ -28,11 +28,19 @@ public class NPC_Mage extends NPC {
     }
 
     @Override
+    public boolean interact(Char c) {
+        sprite.turnTo(pos, c.pos);
+        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "info1"));
+
+        return true;
+    }
+
+    @Override
     public void damage(int dmg, Object src) {
     }
 
     public static void spawn(Level level, int ppos) {
-        NPC_Gglow npc = new NPC_Gglow();
+        NPC_Mage npc = new NPC_Mage();
         do {
             npc.pos = ppos;
         } while (npc.pos == -1);

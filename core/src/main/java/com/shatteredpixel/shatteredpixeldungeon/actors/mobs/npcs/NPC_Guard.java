@@ -32,8 +32,16 @@ public class NPC_Guard extends NPC {
     public void damage(int dmg, Object src) {
     }
 
+    @Override
+    public boolean interact(Char c) {
+        sprite.turnTo(pos, c.pos);
+        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "hey"));
+
+        return true;
+    }
+
     public static void spawn(Level level, int ppos) {
-        NPC_Gglow npc = new NPC_Gglow();
+        NPC_Guard npc = new NPC_Guard();
         do {
             npc.pos = ppos;
         } while (npc.pos == -1);

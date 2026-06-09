@@ -541,6 +541,8 @@ public class ItemSpriteSheet {
     public static final int WAND_LAVA = WANDS + 17;
     public static final int WAND_PODENCO = WANDS + 18;
 
+    public static final int WRENCH = WANDS + 19;
+
     static {
         for (int i = WANDS; i < WANDS + 31; i++)
             assignItemRect(i, 16, 16);

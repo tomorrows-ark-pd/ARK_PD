@@ -4,6 +4,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blackperro;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Guard;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -146,6 +147,7 @@ public class NewRhodesLevel1 extends Level {
         //   if (Dungeon.hero.belongings.getItem(Amulet.class) == null) GreenCat.spawn(this, exit);
         //   SkinModel.spawn(this, 255);
         Blackperro.spawn(this, 245);
+        NPC_Guard.spawn(this, 300);
     }
 
     @Override

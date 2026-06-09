@@ -32,10 +32,10 @@ public class Pink_doggiSprite extends MobSprite {
 
         texture( Assets.Sprites.NPC_PINK );
 
-        TextureFilm frames = new TextureFilm( texture, 36, 36 );
+        TextureFilm frames = new TextureFilm( texture, 36, 40 );
 
-        idle = new Animation( 10, true );
-        idle.frames( frames, 0, 1, 2, 3, 4, 5, 6, 7 );
+        idle = new Animation( 5, true );
+        idle.frames( frames, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 );
 
         run = idle.clone();
         attack = idle.clone();

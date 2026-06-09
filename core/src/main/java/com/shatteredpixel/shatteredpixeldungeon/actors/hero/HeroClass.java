@@ -74,6 +74,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorruption;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfSilence;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Cassidy;
@@ -182,6 +183,7 @@ public enum HeroClass {
 
             new Amulet().collect();
             new Heamyo().collect();
+            new Wrench().collect();
             new PlateArmor().identify().upgrade(10).collect();
             new R4C().identify().upgrade(10).collect();
             new Cassidy().identify().collect();

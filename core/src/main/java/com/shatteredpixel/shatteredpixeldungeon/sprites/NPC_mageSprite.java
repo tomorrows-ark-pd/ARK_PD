@@ -12,8 +12,8 @@ public class NPC_mageSprite extends MobSprite {
 
         TextureFilm frames = new TextureFilm( texture, 40, 46 );
 
-        idle = new Animation( 20, true );
-        idle.frames( frames, 0);
+        idle = new Animation( 2, true );
+        idle.frames( frames, 0,1);
 
         run = new Animation( 10, true );
         run.frames( frames, 0 );
