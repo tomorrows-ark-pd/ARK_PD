@@ -27,6 +27,10 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_Scroll
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TGBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HornOfPlenty;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.UnstableSpellbook;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
+import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfMistress;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -249,9 +253,27 @@ public class NewRhodesLevel2 extends Level {
         drop(new Closure_IdentifyBox(), 3778).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_HealingBox(), 3714).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_WandBox(), 3715).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TransBox(), 3782).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_RingBox(), 3783).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TGBox(), 3784).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TransBox(), 3781).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_RingBox(), 3782).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TGBox(), 3783).type = Heap.Type.FOR_SALE_28F;
+
+        // 유물
+
+        drop(new UnstableSpellbook(), 3980).type = Heap.Type.FOR_SALE_28F;
+        drop(new UnstableSpellbook(), 3981).type = Heap.Type.FOR_SALE_28F;
+        drop(new UnstableSpellbook(), 3982).type = Heap.Type.FOR_SALE_28F;
+        drop(new UnstableSpellbook(), 3912).type = Heap.Type.FOR_SALE_28F;
+        drop(new UnstableSpellbook(), 3913).type = Heap.Type.FOR_SALE_28F;
+        drop(new UnstableSpellbook(), 3914).type = Heap.Type.FOR_SALE_28F;
+
+        // 반지
+
+        drop(new RingOfMistress(), 3985).type = Heap.Type.FOR_SALE_28F;
+        drop(new RingOfMistress(), 3986).type = Heap.Type.FOR_SALE_28F;
+        drop(new RingOfMistress(), 3987).type = Heap.Type.FOR_SALE_28F;
+        drop(new RingOfMistress(), 3917).type = Heap.Type.FOR_SALE_28F;
+        drop(new RingOfMistress(), 3918).type = Heap.Type.FOR_SALE_28F;
+        drop(new RingOfMistress(), 3919).type = Heap.Type.FOR_SALE_28F;
     }
 
     @Override
