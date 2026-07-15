@@ -183,7 +183,6 @@ public enum HeroClass {
 
             new Amulet().collect();
             new Heamyo().collect();
-            new Wrench().collect();
             new PlateArmor().identify().upgrade(10).collect();
             new R4C().identify().upgrade(10).collect();
             new Cassidy().identify().collect();
@@ -205,6 +204,7 @@ public enum HeroClass {
             new Naginata().identify().collect();
             new StoneOfAugmentation().quantity(5).collect();
             new PotionOfParalyticGas().quantity(5).collect();
+            new Wrench().identify().collect();
 
             // Catalog collection test fixtures. Uncomment one section at a time to avoid flooding inventory.
             // collectCatalogItems(Catalog.MELEE_WEAPONS.items());

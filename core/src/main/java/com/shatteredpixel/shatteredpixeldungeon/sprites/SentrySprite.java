@@ -5,7 +5,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
 import com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile;
-import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfWarding;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.TextureFilm;
@@ -52,7 +52,7 @@ public class SentrySprite extends MobSprite {
         } else {
             parent.add(new Beam.DeathRay(center(), DungeonTilemap.raisedTileCenterToWorld(pos)));
         }
-        ((WandOfWarding.Ward) ch).onZapComplete();
+        ((Wrench.Sentry) ch).onZapComplete();
     }
 
     @Override
@@ -78,8 +78,8 @@ public class SentrySprite extends MobSprite {
     @Override
     public void resetColor() {
         super.resetColor();
-        if (ch instanceof WandOfWarding.Ward) {
-            WandOfWarding.Ward ward = (WandOfWarding.Ward) ch;
+        if (ch instanceof Wrench.Sentry) {
+            Wrench.Sentry ward = (Wrench.Sentry) ch;
             if (ward.tier <= 3) {
                 brightness(Math.max(0.2f, 1f - (ward.totalZaps / (float) (2 * ward.tier - 1))));
             }
@@ -89,7 +89,7 @@ public class SentrySprite extends MobSprite {
     public void linkVisuals(Char ch) {
 
         if (ch == null) return;
-        updateTier(((WandOfWarding.Ward) ch).tier);
+        updateTier(((Wrench.Sentry) ch).tier);
 
     }
 

@@ -4,8 +4,8 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile;
@@ -22,7 +22,6 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
-import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
 public class Wrench extends Wand {
@@ -33,42 +32,42 @@ public class Wrench extends Wand {
 
     @Override
     protected int collisionProperties(int target) {
-        if (Dungeon.level.heroFOV[target])  return Ballistica.STOP_TARGET;
-        else                                return Ballistica.PROJECTILE;
+        if (Dungeon.level.heroFOV[target]) return Ballistica.STOP_TARGET;
+        else return Ballistica.PROJECTILE;
     }
 
-    private boolean wardAvailable = true;
+    private boolean sentryAvailable = true;
 
     @Override
     public boolean tryToZap(Hero owner, int target) {
 
-        int currentWardEnergy = 0;
-        for (Char ch : Actor.chars()){
-            if (ch instanceof Ward){
-                currentWardEnergy += ((Ward) ch).tier;
+        int currentSentryEnergy = 0;
+        for (Char ch : Actor.chars()) {
+            if (ch instanceof Sentry) {
+                currentSentryEnergy += ((Sentry) ch).tier;
             }
         }
 
-        int maxWardEnergy = 0;
-        for (Buff buff : curUser.buffs()){
-            if (buff instanceof Wand.Charger){
-                if (((Charger) buff).wand() instanceof WandOfWarding){
-                    maxWardEnergy += 2 + ((Charger) buff).wand().level();
+        int maxSentryEnergy = 0;
+        for (Buff buff : curUser.buffs()) {
+            if (buff instanceof Wand.Charger) {
+                if (((Charger) buff).wand() instanceof Wrench) {
+                    maxSentryEnergy += 2 + ((Charger) buff).wand().level();
                 }
             }
         }
 
-        wardAvailable = (currentWardEnergy < maxWardEnergy);
+        sentryAvailable = (currentSentryEnergy < maxSentryEnergy);
 
         Char ch = Actor.findChar(target);
-        if (ch instanceof Ward){
-            if (!wardAvailable && ((Ward) ch).tier <= 3){
-                GLog.w( Messages.get(this, "no_more_wards"));
+        if (ch instanceof Sentry) {
+            if (!sentryAvailable) {
+                GLog.w(Messages.get(this, "no_more_wards"));
                 return false;
             }
         } else {
-            if ((currentWardEnergy + 1) > maxWardEnergy){
-                GLog.w( Messages.get(this, "no_more_wards"));
+            if ((currentSentryEnergy + 1) > maxSentryEnergy) {
+                GLog.w(Messages.get(this, "no_more_wards"));
                 return false;
             }
         }
@@ -81,41 +80,37 @@ public class Wrench extends Wand {
 
         int target = bolt.collisionPos;
         Char ch = Actor.findChar(target);
-        if (ch != null && !(ch instanceof Ward)){
-            if (bolt.dist > 1) target = bolt.path.get(bolt.dist-1);
+        if (ch != null && !(ch instanceof Sentry)) {
+            if (bolt.dist > 1) target = bolt.path.get(bolt.dist - 1);
 
             ch = Actor.findChar(target);
-            if (ch != null && !(ch instanceof Ward)){
-                GLog.w( Messages.get(this, "bad_location"));
+            if (ch != null && !(ch instanceof Sentry)) {
+                GLog.w(Messages.get(this, "bad_location"));
                 Dungeon.level.pressCell(bolt.collisionPos);
                 return;
             }
         }
 
-        if (!Dungeon.level.passable[target]){
-            GLog.w( Messages.get(this, "bad_location"));
+        if (!Dungeon.level.passable[target]) {
+            GLog.w(Messages.get(this, "bad_location"));
             Dungeon.level.pressCell(target);
 
-        } else if (ch != null){
-            if (ch instanceof Ward){
-                if (wardAvailable) {
-                    ((Ward) ch).upgrade( buffedLvl() );
-                } else {
-                    ((Ward) ch).wandHeal( buffedLvl() );
-                }
-                ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, ((Ward) ch).tier);
+        } else if (ch != null) {
+            if (ch instanceof Sentry) {
+                ((Sentry) ch).upgrade(buffedLvl());
+                ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, ((Sentry) ch).tier);
             } else {
-                GLog.w( Messages.get(this, "bad_location"));
+                GLog.w(Messages.get(this, "bad_location"));
                 Dungeon.level.pressCell(target);
             }
 
         } else {
-            Ward ward = new Ward();
-            ward.pos = target;
-            ward.wandLevel = buffedLvl();
-            GameScene.add(ward, 1f);
-            Dungeon.level.occupyCell(ward);
-            ward.sprite.emitter().burst(MagicMissile.WardParticle.UP, ward.tier);
+            Sentry sentry = new Sentry();
+            sentry.pos = target;
+            sentry.wandLevel = buffedLvl();
+            GameScene.add(sentry, 1f);
+            Dungeon.level.occupyCell(sentry);
+            sentry.sprite.emitter().burst(MagicMissile.WardParticle.UP, sentry.tier);
             Dungeon.level.pressCell(target);
 
         }
@@ -129,39 +124,26 @@ public class Wrench extends Wand {
                 bolt.collisionPos,
                 callback);
 
-        if (bolt.dist > 10){
-            m.setSpeed(bolt.dist*20);
+        if (bolt.dist > 10) {
+            m.setSpeed(bolt.dist * 20);
         }
         Sample.INSTANCE.play(Assets.Sounds.ZAP);
     }
 
     @Override
     public void onHit(MagesStaff staff, Char attacker, Char defender, int damage) {
-
-        int level = Math.max( 0, staff.buffedLvl() );
-
-        // lvl 0 - 20%
-        // lvl 1 - 33%
-        // lvl 2 - 43%
-        if (Random.Int( level + 5 ) >= 4) {
-            for (Char ch : Actor.chars()){
-                if (ch instanceof Ward){
-                    ((Ward) ch).wandHeal(staff.buffedLvl());
-                    ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, ((Ward) ch).tier);
-                }
-            }
-        }
+        //sentries are single-use and cannot be healed, so there is no on-hit effect
     }
 
     @Override
     public String statsDesc() {
         if (levelKnown)
-            return Messages.get(this, "stats_desc", level()+2);
+            return Messages.get(this, "stats_desc", level() + 2);
         else
             return Messages.get(this, "stats_desc", 2);
     }
 
-    public static class Ward extends NPC {
+    public static class Sentry extends NPC {
 
         public int tier = 1;
         private int wandLevel = 1;
@@ -182,107 +164,51 @@ public class Wrench extends Wand {
 
         @Override
         public String name() {
-            return Messages.get(this, "name_" + tier );
+            return Messages.get(this, "name_" + tier);
         }
 
-        public void upgrade(int wandLevel ){
-            if (this.wandLevel < wandLevel){
+        public void upgrade(int wandLevel) {
+            if (this.wandLevel < wandLevel) {
                 this.wandLevel = wandLevel;
             }
 
-            switch (tier){
-                case 1: case 2: default:
-                    break; //do nothing
-                case 3:
-                    HT = 35;
-                    HP = 15 + (5-totalZaps)*4;
-                    break;
-                case 4:
-                    HT = 54;
-                    HP += 19;
-                    break;
-                case 5:
-                    HT = 84;
-                    HP += 30;
-                    break;
-                case 6:
-                    wandHeal(wandLevel);
-                    break;
-            }
-
-            if (tier < 6){
+            if (tier < 3) {
                 tier++;
                 viewDistance++;
-                if (sprite != null){
-                    ((SentrySprite)sprite).updateTier(tier);
+                if (sprite != null) {
+                    ((SentrySprite) sprite).updateTier(tier);
                     sprite.place(pos);
                 }
-                GameScene.updateFog(pos, viewDistance+1);
+                GameScene.updateFog(pos, viewDistance + 1);
             }
-
-        }
-
-        private void wandHeal( int wandLevel ){
-            if (this.wandLevel < wandLevel){
-                this.wandLevel = wandLevel;
-            }
-
-            int heal;
-            switch(tier){
-                default:
-                    return;
-                case 4:
-                    heal = 9;
-                    break;
-                case 5:
-                    heal = 12;
-                    break;
-                case 6:
-                    heal = 16;
-                    break;
-            }
-
-            HP = Math.min(HT, HP+heal);
-            if (sprite != null) sprite.showStatus(CharSprite.POSITIVE, Integer.toString(heal));
 
         }
 
         @Override
         public int defenseSkill(Char enemy) {
-            if (tier > 3){
-                defenseSkill = 4 + Dungeon.depth;
-            }
             return super.defenseSkill(enemy);
         }
 
         @Override
         public int drRoll() {
-            if (tier > 3){
-                return Math.round(Random.NormalIntRange(0, 3 + Dungeon.depth/2) / (7f - tier));
-            } else {
-                return 0;
-            }
+            return 0;
         }
 
         @Override
         protected float attackDelay() {
-            if (tier > 3){
-                return 1f;
-            } else {
-                return 2f;
-            }
+            return 2f;
         }
 
         @Override
-        protected boolean canAttack( Char enemy ) {
-            return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
+        protected boolean canAttack(Char enemy) {
+            return new Ballistica(pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
         }
 
         @Override
         protected boolean doAttack(Char enemy) {
             boolean visible = fieldOfView[pos] || fieldOfView[enemy.pos];
             if (visible) {
-                sprite.zap( enemy.pos );
+                sprite.zap(enemy.pos);
             } else {
                 zap();
             }
@@ -291,35 +217,22 @@ public class Wrench extends Wand {
         }
 
         private void zap() {
-            spend( 1f );
+            spend(1f);
 
             //always hits
-            int dmg = Random.NormalIntRange( 2 + wandLevel, 8 + 4*wandLevel );
-            enemy.damage( dmg, this );
-            if (enemy.isAlive()){
+            int dmg = Random.NormalIntRange(2 + wandLevel, 8 + 4 * wandLevel);
+            enemy.damage(dmg, this);
+            if (enemy.isAlive()) {
                 Wand.processSoulMark(enemy, wandLevel, 1);
             }
 
             if (!enemy.isAlive() && enemy == Dungeon.hero) {
-                Dungeon.fail( getClass() );
+                Dungeon.fail(getClass());
             }
 
             totalZaps++;
-            switch(tier){
-                case 1: case 2: case 3: default:
-                    if (totalZaps >= (2*tier-1)){
-                        die(this);
-                    }
-                    break;
-                case 4:
-                    damage(5, this);
-                    break;
-                case 5:
-                    damage(6, this);
-                    break;
-                case 6:
-                    damage(7, this);
-                    break;
+            if (totalZaps >= (2 * tier - 1)) {
+                die(this);
             }
         }
 
@@ -348,7 +261,7 @@ public class Wrench extends Wand {
         @Override
         public void updateSpriteState() {
             super.updateSpriteState();
-            ((SentrySprite)sprite).updateTier(tier);
+            ((SentrySprite) sprite).updateTier(tier);
             sprite.place(pos);
         }
 
@@ -356,7 +269,7 @@ public class Wrench extends Wand {
         public void destroy() {
             super.destroy();
             Dungeon.observe();
-            GameScene.updateFog(pos, viewDistance+1);
+            GameScene.updateFog(pos, viewDistance + 1);
         }
 
         @Override
@@ -365,20 +278,20 @@ public class Wrench extends Wand {
         }
 
         @Override
-        public boolean interact( Char c ) {
-            if (c != Dungeon.hero){
+        public boolean interact(Char c) {
+            if (c != Dungeon.hero) {
                 return true;
             }
             Game.runOnRenderThread(new Callback() {
                 @Override
                 public void call() {
-                    GameScene.show(new WndOptions( Messages.get(Ward.this, "dismiss_title"),
-                            Messages.get(Ward.this, "dismiss_body"),
-                            Messages.get(Ward.this, "dismiss_confirm"),
-                            Messages.get(Ward.this, "dismiss_cancel") ){
+                    GameScene.show(new WndOptions(Messages.get(Sentry.this, "dismiss_title"),
+                            Messages.get(Sentry.this, "dismiss_body"),
+                            Messages.get(Sentry.this, "dismiss_confirm"),
+                            Messages.get(Sentry.this, "dismiss_cancel")) {
                         @Override
                         protected void onSelect(int index) {
-                            if (index == 0){
+                            if (index == 0) {
                                 die(null);
                             }
                         }
@@ -390,11 +303,11 @@ public class Wrench extends Wand {
 
         @Override
         public String description() {
-            return Messages.get(this, "desc_" + tier, 2+wandLevel, 8 + 4*wandLevel, tier );
+            return Messages.get(this, "desc_" + tier, 2 + wandLevel, 8 + 4 * wandLevel, tier);
         }
 
         {
-            immunities.add( Corruption.class );
+            immunities.add(AllyBuff.class);
         }
 
         private static final String TIER = "tier";
