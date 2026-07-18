@@ -175,7 +175,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfMight;
-import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestScroll;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAccuracy;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfAssassin;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfDominate;
@@ -2622,7 +2622,7 @@ public class Hero extends Char {
                     if (opened == Type.CHEST
                             || opened == Type.LOCKED_CHEST
                             || opened == Type.CRYSTAL_CHEST) {
-                        QuestScroll.onChestOpened();
+                        Quests.onChestOpened();
                     }
                     spend(Key.TIME_TO_UNLOCK);
                 }

@@ -1,19 +1,15 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.TutorialQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Delivery_dronSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_AstesiaSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_mageSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.PRTS_Sprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Pink_doggiSprite;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
-import com.watabou.utils.Random;
 
 public class NPC_Mage extends NPC {
     {
@@ -30,9 +26,47 @@ public class NPC_Mage extends NPC {
     @Override
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
-        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "info1"));
 
+        TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
+
+        //quest already given this run (in any state): completed/abandoned both gate for the run
+        if (q != null) {
+            if (q.ongoing()) {
+                tell(q.objectiveDesc());   //reminder of the current objective
+            } else {
+                tell(Messages.get(this, "say2"));
+            }
+            return true;
+        }
+
+        //auto-start: create the questline and chain the intro into the go-see-Closure text
+        final TutorialQuestLine quest = new TutorialQuestLine();
+        Quests.add(quest);
+
+        final String intro = Messages.get(this, "say");
+        final String next = Messages.get(this, "quest2");
+        Game.runOnRenderThread(new Callback() {
+            @Override
+            public void call() {
+                GameScene.show(new WndQuest(NPC_Mage.this, intro) {
+                    @Override
+                    public void hide() {
+                        super.hide();
+                        GameScene.show(new WndQuest(NPC_Mage.this, next));
+                    }
+                });
+            }
+        });
         return true;
+    }
+
+    private void tell(final String text) {
+        Game.runOnRenderThread(new Callback() {
+            @Override
+            public void call() {
+                GameScene.show(new WndQuest(NPC_Mage.this, text));
+            }
+        });
     }
 
     @Override

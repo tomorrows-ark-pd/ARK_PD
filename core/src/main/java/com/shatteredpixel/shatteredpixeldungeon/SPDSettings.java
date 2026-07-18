@@ -217,7 +217,7 @@ public class SPDSettings extends GameSettings {
 	// 특수 재화 관련
 	public static void addSpecialcoin(int value) { put(KEY_COIN, getInt(KEY_COIN, 0) + value); }
 	public static int getSpecialcoin() { return getInt(KEY_COIN, 0); }
-	
+
 	//Audio
 	
 	public static final String KEY_MUSIC		= "music";

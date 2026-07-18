@@ -7,18 +7,15 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.ClosureSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_AstesiaSprite;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
-import com.watabou.utils.Random;
 
-public class Closure extends NPC {
-
-    private static final String[] LINE_KEYS = {"free1", "free2", "free3"};
-
+public class Purestream extends NPC {
     {
-        spriteClass = ClosureSprite.class;
+        //placeholder sprite
+        spriteClass = NPC_AstesiaSprite.class;
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
     }
@@ -36,27 +33,26 @@ public class Closure extends NPC {
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
 
-        //tutorial step 0: talk to Closure. Advancing drops the 25-gold reward; a single
-        //window both acknowledges completion and hands out the Purestream objective.
+        //tutorial step 1: advancing drops the 25-gold reward and hands out the next objective
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
-        if (q != null && q.at(0)) {
+        if (q != null && q.at(1)) {
             q.advance();
             final String text = Messages.get(this, "quest_next");
             Game.runOnRenderThread(new Callback() {
                 @Override
                 public void call() {
-                    GameScene.show(new WndQuest(Closure.this, text));
+                    GameScene.show(new WndQuest(Purestream.this, text));
                 }
             });
             return true;
         }
 
-        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, Random.element( LINE_KEYS )) );
+        sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "idle"));
         return true;
     }
 
     public static void spawn(Level level, int ppos) {
-        Closure npc = new Closure();
+        Purestream npc = new Purestream();
         do {
             npc.pos = ppos;
         } while (npc.pos == -1);

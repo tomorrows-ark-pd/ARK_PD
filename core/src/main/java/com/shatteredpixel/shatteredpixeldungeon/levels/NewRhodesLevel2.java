@@ -12,6 +12,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.FrostLeaf;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Jessica;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Gglow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Mage;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_PhantomShadow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
@@ -225,6 +226,8 @@ public class NewRhodesLevel2 extends Level {
     protected void createItems() {
 
         Closure.spawn(this, 3683);
+        //TODO placeholder cell — set the real position (upper-right of the shop area per npc_mage.quest3)
+        Purestream.spawn(this, 3785);
         SkinModel.spawn(this, 3751);
         Firewall.spawn(this, 3882);
         Weedy.spawn(this, 4404);

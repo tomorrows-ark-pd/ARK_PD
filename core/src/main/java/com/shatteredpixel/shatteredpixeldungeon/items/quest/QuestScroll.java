@@ -1,12 +1,8 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.quest;
 
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
-import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -15,13 +11,14 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
+@Deprecated(since = "deprecated in favor of questline impl")
 public class QuestScroll extends Item {
 
     public static final String AC_READ = "READ";
 
     private static final float TIME_TO_READ = 1f;
 
-    private static final int MAX_FLOOR_CAP = 40;
+    public static final int MAX_FLOOR_CAP = 40;
 
     {
         image = ItemSpriteSheet.QUEST_SCROLL;
@@ -105,21 +102,13 @@ public class QuestScroll extends Item {
     public void execute(Hero hero, String action) {
         super.execute(hero, action);
 
+        //inert legacy contract: report frozen state, grant nothing
         if (action.equals(AC_READ)) {
-            if (objective == null) {
-                GLog.w(Messages.get(this, "invalid"));
-                return;
-            }
-
-            if (currentProgress() >= targetValue) {
-                completed = true;
-                GLog.p(Messages.get(this, "complete"));
-                grantRewards(hero);
-                detach(hero.belongings.backpack);
+            if (objective == null || currentProgress() >= targetValue) {
+                GLog.i(Messages.get(this, "void"));
             } else {
                 GLog.i(Messages.get(this, "progress", progressText()));
             }
-
             hero.sprite.operate(hero.pos);
             hero.spendAndNext(TIME_TO_READ);
         }
@@ -138,24 +127,6 @@ public class QuestScroll extends Item {
         return Math.min(currentProgress(), targetValue) + "/" + targetValue;
     }
 
-    private void grantRewards(Hero hero) {
-        int goldAmount = objective.rewardGold(targetValue);
-        Dungeon.level.drop(new Gold(goldAmount), hero.pos).sprite.drop();
-        if (bonusReward != null) {
-            Dungeon.level.drop(bonusReward, hero.pos).sprite.drop();
-            bonusReward = null;
-        }
-    }
-
-    public String rewardText() {
-        if (objective == null) return "";
-        int goldAmount = objective.rewardGold(targetValue);
-        if (bonusReward != null) {
-            return Messages.get(this, "reward_with_bonus", goldAmount, bonusReward.title());
-        }
-        return Messages.get(this, "reward_label", goldAmount);
-    }
-
     @Override
     public String desc() {
         String desc = Messages.get(this, "desc");
@@ -164,80 +135,7 @@ public class QuestScroll extends Item {
 
         String objDesc = Messages.get(this, "obj_" + objective.name().toLowerCase(), targetValue);
         return desc + "\n\n" + objDesc
-                + "\n\n" + rewardText()
                 + "\n\n" + Messages.get(this, "progress_label", progressText());
-    }
-
-    // event hooks
-    public static QuestScroll active() {
-        if (Dungeon.hero == null || Dungeon.hero.belongings == null) return null;
-        //iterate belongings directly so progress keeps tracking even while LostInventory
-        //hides the scroll from getItem() after an unblessed ankh resurrect
-        for (Item item : Dungeon.hero.belongings) {
-            if (item instanceof QuestScroll) return (QuestScroll) item;
-        }
-        return null;
-    }
-
-    public static void onMobKilled(Object cause) {
-        QuestScroll q = active();
-        if (q == null || q.completed || q.objective == null) return;
-        switch (q.objective) {
-            case SLAY_ENEMIES:
-                if (isHeroKill(cause)) q.progress++;
-                break;
-            case RANGED_KILLS:
-                if (isRangedCause(cause)) q.progress++;
-                break;
-            default:
-        }
-    }
-
-    public static void onChestOpened() {
-        QuestScroll q = active();
-        if (q == null || q.completed || q.objective == null) return;
-        if (q.objective == QuestObjective.OPEN_CHESTS) {
-            q.progress++;
-        }
-    }
-
-    public static void onFoodEaten(Item food) {
-        QuestScroll q = active();
-        if (q == null || q.completed || q.objective == null) return;
-        if (q.objective == QuestObjective.DESCEND_RATIONLESS) {
-            q.progress = 0;
-        }
-    }
-
-    public static void onNewFloorReached() {
-        QuestScroll q = active();
-        if (q == null || q.completed || q.objective == null) return;
-        if (q.objective == QuestObjective.DESCEND_RATIONLESS) {
-            q.progress++;
-        }
-    }
-
-    public static void onGoldCollected(int amount) {
-        QuestScroll q = active();
-        if (q == null || q.completed || q.objective == null) return;
-        if (q.objective == QuestObjective.COLLECT_GOLD) {
-            q.progress += amount;
-        }
-    }
-
-    private static boolean isHeroKill(Object cause) {
-        return cause == Dungeon.hero
-                || cause instanceof Wand
-                || cause instanceof MissileWeapon;
-    }
-
-    private static boolean isRangedCause(Object cause) {
-        if (cause instanceof Wand) return true;
-        if (cause == Dungeon.hero
-                && Dungeon.hero.belongings.attackingWeapon() instanceof MissileWeapon) {
-            return true;
-        }
-        return false;
     }
 
     private static final String OBJECTIVE = "objective";
@@ -277,14 +175,5 @@ public class QuestScroll extends Item {
         if (bundle.contains(BONUS_REWARD)) {
             bonusReward = (Item) bundle.get(BONUS_REWARD);
         }
-    }
-
-    public static QuestScroll createRandom() {
-        QuestScroll scroll = new QuestScroll();
-        QuestObjective[] objectives = QuestObjective.values();
-        scroll.objective = objectives[Random.Int(objectives.length)];
-        scroll.targetValue = scroll.objective.rollTarget();
-        scroll.progress = 0;
-        return scroll;
     }
 }

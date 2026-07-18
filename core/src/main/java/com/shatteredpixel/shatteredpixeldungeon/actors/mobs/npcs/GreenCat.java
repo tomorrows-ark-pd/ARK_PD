@@ -56,6 +56,7 @@ public class GreenCat extends NPC {
             if (!seenBefore) {
                 yell( Messages.get(this, "wellcom", Dungeon.hero.heroClass.title() ) );
             }
+            //permanent: Dr. Kelsi marks the endgame amulet/doctor-saved state and is never removed
             Notes.add( Notes.Landmark.GREENCAT );
             seenBefore = true;
         } else {

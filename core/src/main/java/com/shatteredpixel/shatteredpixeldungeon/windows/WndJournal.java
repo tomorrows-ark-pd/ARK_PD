@@ -46,6 +46,8 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.QuestLine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Plant;
@@ -68,12 +70,14 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.Visual;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.RectF;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class WndJournal extends WndTabbed {
 
@@ -84,6 +88,9 @@ public class WndJournal extends WndTabbed {
     public static final int HEIGHT_L = 130;
 
     private static final int ITEM_HEIGHT = 18;
+
+    //max pixel size for a Notes-grid icon; larger icons (char sprites) are scaled to fit
+    private static final float MAX_NOTE_ICON = 15f;
 
     private GuideTab guideTab;
     private AlchemyTab alchemyTab;
@@ -186,72 +193,6 @@ public class WndJournal extends WndTabbed {
         alchemyTab.layout();
         notesTab.layout();
         catalogTab.layout();
-    }
-
-    private static class ListItem extends Component {
-
-        protected RenderedTextBlock label;
-        protected BitmapText depth;
-        protected ColorBlock line;
-        protected Image icon;
-
-        public ListItem(Image icon, String text) {
-            this(icon, text, -1);
-        }
-
-        public ListItem(Image icon, String text, int d) {
-            super();
-
-            this.icon.copy(icon);
-
-            label.text(text);
-
-            if (d >= 0) {
-                depth.text(Integer.toString(d));
-                depth.measure();
-
-                if (d == Dungeon.depth) {
-                    label.hardlight(TITLE_COLOR);
-                    depth.hardlight(TITLE_COLOR);
-                }
-            }
-        }
-
-        @Override
-        protected void createChildren() {
-            label = PixelScene.renderTextBlock(7);
-            add(label);
-
-            icon = new Image();
-            add(icon);
-
-            depth = new BitmapText(PixelScene.pixelFont);
-            add(depth);
-
-            line = new ColorBlock(1, 1, 0xFF222222);
-            add(line);
-
-        }
-
-        @Override
-        protected void layout() {
-
-            icon.y = y + 1 + (height() - 1 - icon.height()) / 2f;
-            icon.x = x + (16 - icon.width()) / 2f;
-            PixelScene.align(icon);
-
-            depth.x = icon.x + (icon.width - depth.width()) / 2f;
-            depth.y = icon.y + (icon.height - depth.height()) / 2f + 1;
-            PixelScene.align(depth);
-
-            line.size(width, 1);
-            line.x = 0;
-            line.y = y;
-
-            label.maxWidth((int) (width - 16 - 1));
-            label.setPos(17, y + 1 + (height() - label.height()) / 2f);
-            PixelScene.align(label);
-        }
     }
 
     private static class GuideTab extends Component {
@@ -518,77 +459,108 @@ public class WndJournal extends WndTabbed {
 
     private static class NotesTab extends Component {
 
-        private ScrollPane list;
+        private ScrollingGridPane grid;
 
         @Override
         protected void createChildren() {
-            list = new ScrollPane(new Component());
-            add(list);
+            grid = new ScrollingGridPane();
+            add(grid);
         }
 
         @Override
         protected void layout() {
             super.layout();
-            list.setRect(0, 0, width, height);
+            grid.setRect(x, y, width, height);
         }
 
         private void updateList() {
-            Component content = list.content();
+            grid.clear();
 
-            float pos = 0;
+            //tab title + description (centered), matching upstream's NotesTab
+            grid.addHeader("_" + Messages.get(this, "title") + "_", 9, true);
+            grid.addHeader(Messages.get(this, "desc"), 6, true);
 
-            //Keys
-            ArrayList<Notes.KeyRecord> keys = Notes.getRecords(Notes.KeyRecord.class);
-            if (!keys.isEmpty()) {
-                ColorBlock line = new ColorBlock(width(), 1, 0xFF222222);
-                line.y = pos;
-                content.add(line);
-
-                RenderedTextBlock title = PixelScene.renderTextBlock(Messages.get(this, "keys"), 9);
-                title.hardlight(TITLE_COLOR);
-                title.maxWidth((int) width() - 2);
-                title.setPos((width() - title.width()) / 2f, pos + 1 + ((ITEM_HEIGHT) - title.height()) / 2f);
-                PixelScene.align(title);
-                content.add(title);
-
-                pos += Math.max(ITEM_HEIGHT, title.height());
-            }
-            for (Notes.Record rec : keys) {
-                ListItem item = new ListItem(Icons.get(Icons.DEPTH),
-                        Messages.titleCase(rec.desc()), rec.depth());
-                item.setRect(0, pos, width(), ITEM_HEIGHT);
-                content.add(item);
-
-                pos += item.height();
-            }
-
-            //Landmarks
-            ArrayList<Notes.LandmarkRecord> landmarks = Notes.getRecords(Notes.LandmarkRecord.class);
-            if (!landmarks.isEmpty()) {
-                ColorBlock line = new ColorBlock(width(), 1, 0xFF222222);
-                line.y = pos;
-                content.add(line);
-
-                RenderedTextBlock title = PixelScene.renderTextBlock(Messages.get(this, "landmarks"), 9);
-                title.hardlight(TITLE_COLOR);
-                title.maxWidth((int) width() - 2);
-                title.setPos((width() - title.width()) / 2f, pos + 1 + ((ITEM_HEIGHT) - title.height()) / 2f);
-                PixelScene.align(title);
-                content.add(title);
-
-                pos += Math.max(ITEM_HEIGHT, title.height());
-            }
-            for (Notes.Record rec : landmarks) {
-                ListItem item = new ListItem(Icons.get(Icons.DEPTH),
-                        Messages.titleCase(rec.desc()), rec.depth());
-                item.setRect(0, pos, width(), ITEM_HEIGHT);
-                content.add(item);
-
-                pos += item.height();
+            //Ongoing quests, as a subsection at the top (only when non-empty)
+            ArrayList<QuestLine> ongoing = Quests.ongoing();
+            if (!ongoing.isEmpty()) {
+                grid.addHeader("_" + Messages.get(this, "quests") + "_");
+                for (final QuestLine q : ongoing) {
+                    final Image qIcon = q.icon();
+                    ScrollingGridPane.GridItem item = new ScrollingGridPane.GridItem(qIcon) {
+                        @Override
+                        public boolean onClick(float x, float y) {
+                            if (inside(x, y)) {
+                                GameScene.show(new WndQuestJournal(q, new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        NotesTab.this.updateList();
+                                    }
+                                }));
+                                return true;
+                            }
+                            return false;
+                        }
+                    };
+                    float qMax = Math.max(qIcon.width(), qIcon.height());
+                    if (qMax > MAX_NOTE_ICON) {
+                        item.setScale(MAX_NOTE_ICON / qMax);
+                    }
+                    grid.addItem(item);
+                }
             }
 
-            content.setSize(width(), pos);
-            list.setSize(list.width(), list.height());
+            //Landmarks & keys, grouped by floor, deepest first. Iterate the depths that
+            //actually have records (not a deepestFloor range) so the Rhodes hub at depth 0
+            //and any visited floor are always included.
+            ArrayList<Integer> depths = new ArrayList<>();
+            for (Notes.Record rec : Notes.getRecords(Notes.Record.class)) {
+                if (!depths.contains(rec.depth())) {
+                    depths.add(rec.depth());
+                }
+            }
+            Collections.sort(depths, Collections.reverseOrder());
+
+            for (int i : depths) {
+                ArrayList<Notes.Record> recs = Notes.getRecords(i);
+                if (recs.isEmpty()) continue;
+
+                String header = i == 0 ? Messages.get(this, "rhodes")
+                        : Messages.get(this, "floor_header", i);
+                if (i == Dungeon.depth) {
+                    grid.addHeader("_" + header + "_");
+                } else {
+                    grid.addHeader(header);
+                }
+
+                for (final Notes.Record rec : recs) {
+                    final Image icon = rec.icon();
+                    ScrollingGridPane.GridItem gridItem =
+                            new ScrollingGridPane.GridItem(icon) {
+                                @Override
+                                public boolean onClick(float x, float y) {
+                                    if (inside(x, y)) {
+                                        GameScene.show(new WndJournalItem(
+                                                rec.icon(),
+                                                Messages.titleCase(rec.title()),
+                                                rec.desc()));
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            };
+                    //fit oversized icons (mod landmark char sprites) into the grid cell;
+                    //small UI icons like Icons.DEPTH keep their natural size
+                    float maxDim = Math.max(icon.width(), icon.height());
+                    if (maxDim > MAX_NOTE_ICON) {
+                        gridItem.setScale(MAX_NOTE_ICON / maxDim);
+                    }
+                    Visual second = rec.secondIcon();
+                    if (second != null) gridItem.addSecondIcon(second);
+                    grid.addItem(gridItem);
+                }
+            }
+
+            grid.setRect(x, y, width, height);
         }
 
     }

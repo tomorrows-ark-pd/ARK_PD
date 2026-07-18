@@ -22,13 +22,31 @@
 package com.shatteredpixel.shatteredpixeldungeon.journal;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.AceSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.BlacksmithSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CannotSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CeylonSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.GopnikSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.GreenCatSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.Guard_operSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ShopkeeperSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.Texas_shopkeeperSprite;
+import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
+import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.Visual;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Notes {
 	
@@ -39,9 +57,21 @@ public class Notes {
 		public int depth(){
 			return depth;
 		}
-		
+
+		public Image icon() { return Icons.DEPTH.get(); }
+
+		public Visual secondIcon() { return null; }
+
+		public int quantity() { return 1; }
+
+		//short label; defaults to desc() so subclasses can override incrementally
+		public String title() { return desc(); }
+
+		//sort order within a floor
+		protected abstract int order();
+
 		public abstract String desc();
-		
+
 		@Override
 		public abstract boolean equals(Object obj);
 		
@@ -98,12 +128,58 @@ public class Notes {
 			this.landmark = landmark;
 			this.depth = depth;
 		}
-		
+
+		@Override
+		public Image icon() {
+			switch (landmark) {
+				default:
+					return Icons.DEPTH.get();
+
+				//water features -> a dewdrop stands in for the well
+				case WELL_OF_HEALTH:
+				case WELL_OF_AWARENESS:
+				case WELL_OF_TRANSMUTATION:
+				case WELL_OF_ADVANCEGUARD:
+					return new ItemSprite(ItemSpriteSheet.DEWDROP);
+				case ALCHEMY:
+					return new ItemSprite(ItemSpriteSheet.ALCH_PAGE);
+				case GARDEN:
+					return new ItemSprite(ItemSpriteSheet.SEED_SUNGRASS);
+				case LOST_PACK:
+					return Icons.BACKPACK.get();
+
+				//NPC landmarks -> the NPC's own sprite
+				case SHOP:
+					return new Image(new ShopkeeperSprite());
+				case MINI_SHOP:
+					return new Image(new Texas_shopkeeperSprite());
+				case STATUE:
+					return new Image(new GopnikSprite());
+				case GHOST:
+					return new Image(new Guard_operSprite());
+				case WANDMAKER:
+					return new Image(new AceSprite());
+				case TROLL:
+					return new Image(new BlacksmithSprite());
+				case IMP:
+					return new Image(new CannotSprite());
+				case GREENCAT:
+					return new Image(new GreenCatSprite());
+				case CEYLON:
+					return new Image(new CeylonSprite());
+			}
+		}
+
+		@Override
+		protected int order() {
+			return landmark.ordinal();
+		}
+
 		@Override
 		public String desc() {
 			return landmark.desc();
 		}
-		
+
 		@Override
 		public boolean equals(Object obj) {
 			return (obj instanceof LandmarkRecord)
@@ -140,16 +216,43 @@ public class Notes {
 		public int depth() {
 			return key.depth;
 		}
-		
+
+		@Override
+		public Image icon() {
+			return new ItemSprite(key);
+		}
+
+		@Override
+		public Visual secondIcon() {
+			if (quantity() > 1) {
+				BitmapText text = new BitmapText(Integer.toString(quantity()), PixelScene.pixelFont);
+				text.measure();
+				return text;
+			} else {
+				return null;
+			}
+		}
+
+		@Override
+		public String title() {
+			return key.title();
+		}
+
 		@Override
 		public String desc() {
 			return key.desc();
 		}
-		
+
 		public Class<? extends Key> type(){
 			return key.getClass();
 		}
-		
+
+		@Override
+		protected int order() {
+			return 1000 + Generator.Category.order(key);
+		}
+
+		@Override
 		public int quantity(){
 			return key.quantity();
 		}
@@ -199,24 +302,40 @@ public class Notes {
 	}
 	
 	public static boolean add( Landmark landmark ) {
-		LandmarkRecord l = new LandmarkRecord( landmark, Dungeon.depth );
+		return add( landmark, Dungeon.depth );
+	}
+
+	public static boolean add( Landmark landmark, int depth ) {
+		LandmarkRecord l = new LandmarkRecord( landmark, depth );
 		if (!records.contains(l)) {
-			boolean result = records.add(new LandmarkRecord(landmark, Dungeon.depth));
-			Collections.sort(records);
+			boolean result = records.add(l);
+			Collections.sort(records, comparator);
 			return result;
 		}
 		return false;
 	}
-	
-	public static boolean remove( Landmark landmark ) {
-		return records.remove( new LandmarkRecord(landmark, Dungeon.depth) );
+
+	public static boolean contains( Landmark landmark ){
+		return contains( landmark, Dungeon.depth );
 	}
-	
+
+	public static boolean contains( Landmark landmark, int depth ){
+		return records.contains( new LandmarkRecord( landmark, depth ) );
+	}
+
+	public static boolean remove( Landmark landmark ) {
+		return remove( landmark, Dungeon.depth );
+	}
+
+	public static boolean remove( Landmark landmark, int depth ) {
+		return records.remove( new LandmarkRecord(landmark, depth) );
+	}
+
 	public static boolean add( Key key ){
 		KeyRecord k = new KeyRecord(key);
 		if (!records.contains(k)){
 			boolean result = records.add(k);
-			Collections.sort(records);
+			Collections.sort(records, comparator);
 			return result;
 		} else {
 			k = (KeyRecord) records.get(records.indexOf(k));
@@ -261,9 +380,27 @@ public class Notes {
 		}
 		return filtered;
 	}
-	
+
+	public static ArrayList<Record> getRecords( int depth ){
+		ArrayList<Record> filtered = new ArrayList<>();
+		for (Record rec : records){
+			if (rec.depth() == depth){
+				filtered.add(rec);
+			}
+		}
+		Collections.sort(filtered, comparator);
+		return filtered;
+	}
+
 	public static void remove( Record rec ){
 		records.remove(rec);
 	}
-	
+
+	private static final Comparator<Record> comparator = new Comparator<Record>() {
+		@Override
+		public int compare(Record r1, Record r2) {
+			return r1.order() - r2.order();
+		}
+	};
+
 }
