@@ -125,7 +125,7 @@ public class ShopRoom extends SpecialRoom {
         //random; if that cell is occupied, one of the remaining two is tried instead.
         if (Dungeon.depth == 6 && Dungeon.branch == 0) {
             int w = level.width();
-            Integer[] candidates = new Integer[]{pos - w - 1, pos - w, pos - w + 1}; //NW, N, NE
+            Integer[] candidates = new Integer[]{pos - w - 2, pos - w, pos - w + 1}; //NW, N, NE
             Random.shuffle(candidates);
             for (int cell : candidates) {
                 if (cell >= 0 && cell < level.length()

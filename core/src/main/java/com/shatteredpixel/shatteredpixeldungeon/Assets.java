@@ -526,6 +526,7 @@ public class Assets {
 		public static final String NPC_PINK	= "sprites/pink_doggi.png";
 		public static final String NPC_IRENE	= "sprites/npc_irene.png";
 		public static final String NPC_DARIO	= "sprites/npc_dario.png";
+        public static final String NPC_PURESTREAM	= "sprites/npc_purestream.png";
         public static final String NPC_MAGE	= "sprites/npc_mage.png";
         public static final String NPC_GUARD	= "sprites/npc_guard.png";
 		public static final String TEXAS_SHOPKEEPER	= "sprites/texas_shopkeeper.png";

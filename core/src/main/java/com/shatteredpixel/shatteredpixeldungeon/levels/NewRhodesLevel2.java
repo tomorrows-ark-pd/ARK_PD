@@ -102,7 +102,7 @@ public class NewRhodesLevel2 extends Level {
         map[3617] = Terrain.EMPTY;
         map[3882] = Terrain.EMPTY;
         map[3889] = Terrain.EMPTY;
-        map[3750] = Terrain.AVOID;
+        map[3751] = Terrain.AVOID;
         map[3758] = Terrain.EMPTY;
 
         // 훈련실 구역 A2
@@ -125,6 +125,19 @@ public class NewRhodesLevel2 extends Level {
         Painter.fill(this, 2, 43, 26, 6, Terrain.EMPTY);
         Painter.fill(this, 2, 46, 26, 1, Terrain.AVOID);
         Painter.fill(this, 20, 42, 6, 4, Terrain.WALL);
+        map[3341] = Terrain.EMPTY;
+        map[3409] = Terrain.EMPTY;
+        map[3477] = Terrain.EMPTY;
+        map[3545] = Terrain.EMPTY;
+        map[3613] = Terrain.EMPTY;
+        map[3681] = Terrain.EMPTY;
+        map[3749] = Terrain.EMPTY;
+        map[3817] = Terrain.EMPTY;
+        map[3885] = Terrain.EMPTY;
+
+        map[3818] = Terrain.WALL;
+        map[3750] = Terrain.WALL;
+        map[3682] = Terrain.WALL;
 
         // 숙소 B1구역-세부
         Painter.fill(this, 2, 42, 3, 4, Terrain.AVOID);
@@ -225,10 +238,10 @@ public class NewRhodesLevel2 extends Level {
     @Override
     protected void createItems() {
 
-        Closure.spawn(this, 3683);
+        Closure.spawn(this, 3910);
         //TODO placeholder cell — set the real position (upper-right of the shop area per npc_mage.quest3)
         Purestream.spawn(this, 3785);
-        SkinModel.spawn(this, 3751);
+        SkinModel.spawn(this, 3752);
         Firewall.spawn(this, 3882);
         Weedy.spawn(this, 4404);
         Dummy.spawn(this, 4286);
@@ -237,7 +250,7 @@ public class NewRhodesLevel2 extends Level {
         Dobermann.spawn(this, 4298);
         FrostLeaf.spawn(this, 4305);
         NPC_Phantom.spawn(this, 3010);
-        NPC_Gglow.spawn(this, 3910);
+        NPC_Gglow.spawn(this, 3684);
         NPC_Mage.spawn(this, 3202);
 
         if (Random.Int(2) == 0) Npc_Astesia.spawn(this, 3004);

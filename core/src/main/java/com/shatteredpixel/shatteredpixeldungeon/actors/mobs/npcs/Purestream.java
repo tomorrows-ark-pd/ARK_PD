@@ -8,6 +8,8 @@ import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_AstesiaSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PurestreamSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.PursuerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
@@ -15,7 +17,7 @@ import com.watabou.utils.Callback;
 public class Purestream extends NPC {
     {
         //placeholder sprite
-        spriteClass = NPC_AstesiaSprite.class;
+        spriteClass = NPC_PurestreamSprite.class;
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
     }
