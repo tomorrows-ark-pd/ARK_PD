@@ -19,6 +19,7 @@ public class Quests {
 
     public static void reset() {
         quests = new ArrayList<>();
+        pendingMessages.clear();
     }
 
     public static void add(QuestLine q) {
@@ -54,42 +55,58 @@ public class Quests {
         if (Dungeon.hero == null) return;
         for (QuestLine q : ongoing()) q.onMobKilled(cause);
         notifyClaimable();
+        flushMessages();
     }
 
     public static void onGoldCollected(int amount) {
         if (Dungeon.hero == null) return;
         for (QuestLine q : ongoing()) q.onGoldCollected(amount);
         notifyClaimable();
+        flushMessages();
     }
 
     public static void onChestOpened() {
         if (Dungeon.hero == null) return;
         for (QuestLine q : ongoing()) q.onChestOpened();
         notifyClaimable();
+        flushMessages();
     }
 
     public static void onFoodEaten(Item food) {
         if (Dungeon.hero == null) return;
         for (QuestLine q : ongoing()) q.onFoodEaten(food);
         notifyClaimable();
+        flushMessages();
     }
 
     public static void onNewFloorReached() {
         if (Dungeon.hero == null) return;
         for (QuestLine q : ongoing()) q.onNewFloorReached();
+        //no flush here: fires during level transition before GameLog exists; GameScene.create() flushes instead.
         notifyClaimable();
     }
 
-    /**
-     * One-time chat nudge the moment a counter quest's objective is met.
-     */
+    // Latch completion and queue a one-time nudge when a counter objective is first met; queued so flushMessages() can log it once a GameLog is live.
     private static void notifyClaimable() {
         for (QuestLine q : ongoing()) {
+            q.refreshCompletion();
             if (q.claimable() && !q.notifiedClaimable) {
                 q.notifiedClaimable = true;
-                GLog.p(Messages.get(Quests.class, "claimable", q.name()));
+                pendingMessages.add(Messages.get(Quests.class, "claimable", q.name()));
             }
         }
+    }
+
+    // Deferred nudges: GLog has no backlog, so completions that latch off-scene queue here and flush once a log is live.
+    private static ArrayList<String> pendingMessages = new ArrayList<>();
+
+    public static void flushMessages() {
+        if (Dungeon.hero == null) {
+            pendingMessages.clear();
+            return;
+        }
+        for (String msg : pendingMessages) GLog.p(msg);
+        pendingMessages.clear();
     }
 
     // --- bundling: single "questlines" collection, like Notes.RECORDS ---

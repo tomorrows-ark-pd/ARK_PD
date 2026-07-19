@@ -123,8 +123,7 @@ public class Dobermann extends NPC {
             return Messages.get(this, "obj_" + objective.name().toLowerCase(), target);
         }
 
-        // DESCEND_RATIONLESS displays progress off-by-one from the internal counter so that
-        // eating on the final descended floor still resets progress before it counts.
+        // DESCEND_RATIONLESS trails floor count by one: credit for a floor only counts once left without eating.
         public int currentProgress() {
             if (objective == null) return 0;
             if (objective == QuestObjective.DESCEND_RATIONLESS) {
@@ -135,7 +134,9 @@ public class Dobermann extends NPC {
 
         @Override
         public String progressText() {
-            return Math.min(currentProgress(), target) + "/" + target;
+            //once latched complete, show the full bar even if a later reset knocked the counter down
+            int shown = objectiveComplete ? target : Math.min(currentProgress(), target);
+            return shown + "/" + target;
         }
 
         @Override
@@ -149,8 +150,8 @@ public class Dobermann extends NPC {
         }
 
         @Override
-        public boolean claimable() {
-            return state == State.ONGOING && currentProgress() >= target;
+        protected boolean objectiveMet() {
+            return currentProgress() >= target;
         }
 
         @Override

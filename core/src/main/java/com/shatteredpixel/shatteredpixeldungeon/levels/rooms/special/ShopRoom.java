@@ -118,15 +118,10 @@ public class ShopRoom extends SpecialRoom {
         shopkeeper.pos = pos;
         level.mobs.add(shopkeeper);
 
-        //tutorial quest 1: a delivery drone lives in the floor-6 shop.
-        //spawned unconditionally (flavor NPC even without the quest active) so it exists
-        //regardless of whether floor 6 was generated before the quest was accepted.
-        //Placed in one of the three cells above the shopkeeper (NW, N, NE), chosen at
-        //random; if that cell is occupied, one of the remaining two is tried instead.
+        //tutorial quest 1: a delivery drone lives in the floor-6 shop. spawned unconditionally
         if (Dungeon.depth == 6 && Dungeon.branch == 0) {
             int w = level.width();
-            Integer[] candidates = new Integer[]{pos - w - 2, pos - w, pos - w + 1}; //NW, N, NE
-            Random.shuffle(candidates);
+            int[] candidates = new int[]{pos - w + 1, pos + w + 1, pos + w - 1, pos - w - 1}; //NE, SE, SW, NW
             for (int cell : candidates) {
                 if (cell >= 0 && cell < level.length()
                         && level.map[cell] == Terrain.EMPTY_SP

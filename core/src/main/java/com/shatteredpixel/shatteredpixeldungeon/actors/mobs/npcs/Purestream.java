@@ -7,9 +7,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_AstesiaSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PurestreamSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.PursuerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
@@ -35,15 +33,22 @@ public class Purestream extends NPC {
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
 
-        //tutorial step 1: advancing drops the 25-gold reward and hands out the next objective
+        //tutorial step 1: chains into the next objective.
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
         if (q != null && q.at(1)) {
             q.advance();
-            final String text = Messages.get(this, "quest_next");
+            final String done = Messages.get(this, "quest_done");
+            final String next = Messages.get(this, "quest_next");
             Game.runOnRenderThread(new Callback() {
                 @Override
                 public void call() {
-                    GameScene.show(new WndQuest(Purestream.this, text));
+                    GameScene.show(new WndQuest(Purestream.this, done) {
+                        @Override
+                        public void hide() {
+                            super.hide();
+                            GameScene.show(new WndQuest(Purestream.this, next));
+                        }
+                    });
                 }
             });
             return true;

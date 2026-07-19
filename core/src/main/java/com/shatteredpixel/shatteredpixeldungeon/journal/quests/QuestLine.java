@@ -21,6 +21,7 @@ public abstract class QuestLine implements Bundlable {
     protected int step = 0;       // current step index, 0-based
     protected int progress = 0;   // generic counter for counter-style steps
     protected boolean notifiedClaimable = false;  // guards the one-time "claim me" chat message
+    protected boolean objectiveComplete = false;  // latch: once met it stays met; later events can't un-complete it
 
     public int step() {
         return step;
@@ -78,8 +79,21 @@ public abstract class QuestLine implements Bundlable {
     }
 
     // --- journal-claim support (counter quests) ---
-    public boolean claimable() {
+
+    // Live condition for a counter objective (e.g. progress >= target); override in counter quests. Only latches, never un-latches.
+    protected boolean objectiveMet() {
         return false;
+    }
+
+    // Latch objectiveComplete the first time the objective is met; called by the Quests dispatcher after every event.
+    public void refreshCompletion() {
+        if (state == State.ONGOING && objectiveMet()) {
+            objectiveComplete = true;
+        }
+    }
+
+    public boolean claimable() {
+        return state == State.ONGOING && objectiveComplete;
     }      // true => show enabled Claim button
 
     public void claim() {
@@ -116,6 +130,7 @@ public abstract class QuestLine implements Bundlable {
     private static final String STEP = "step";
     private static final String PROGRESS = "progress";
     private static final String NOTIFIED_CLAIMABLE = "notified_claimable";
+    private static final String OBJECTIVE_COMPLETE = "objective_complete";
 
     @Override
     public void storeInBundle(Bundle bundle) {
@@ -123,6 +138,7 @@ public abstract class QuestLine implements Bundlable {
         bundle.put(STEP, step);
         bundle.put(PROGRESS, progress);
         bundle.put(NOTIFIED_CLAIMABLE, notifiedClaimable);
+        bundle.put(OBJECTIVE_COMPLETE, objectiveComplete);
     }
 
     @Override
@@ -135,5 +151,6 @@ public abstract class QuestLine implements Bundlable {
         step = bundle.getInt(STEP);
         progress = bundle.getInt(PROGRESS);
         notifiedClaimable = bundle.getBoolean(NOTIFIED_CLAIMABLE);
+        objectiveComplete = bundle.getBoolean(OBJECTIVE_COMPLETE);
     }
 }

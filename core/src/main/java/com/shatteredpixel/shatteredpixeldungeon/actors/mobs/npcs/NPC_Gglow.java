@@ -316,11 +316,9 @@ public class NPC_Gglow extends NPC {
     }
 
     public static void spawn(Level level, int poss) {
-        Closure WhatYourName = new Closure();
-        do {
-            WhatYourName.pos = poss;
-        } while (WhatYourName.pos == -1);
-        level.mobs.add(WhatYourName);
+        NPC_Gglow npc = new NPC_Gglow();
+        npc.pos = poss;
+        level.mobs.add(npc);
     }
 
 }

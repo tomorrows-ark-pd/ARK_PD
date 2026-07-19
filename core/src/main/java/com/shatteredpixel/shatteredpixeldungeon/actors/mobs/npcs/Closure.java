@@ -36,22 +36,28 @@ public class Closure extends NPC {
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
 
-        //tutorial step 0: talk to Closure. Advancing drops the 25-gold reward; a single
-        //window both acknowledges completion and hands out the Purestream objective.
+        //tutorial step 0: chains into the Purestream objective.
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
         if (q != null && q.at(0)) {
             q.advance();
-            final String text = Messages.get(this, "quest_next");
+            final String done = Messages.get(this, "quest_done");
+            final String next = Messages.get(this, "quest_next");
             Game.runOnRenderThread(new Callback() {
                 @Override
                 public void call() {
-                    GameScene.show(new WndQuest(Closure.this, text));
+                    GameScene.show(new WndQuest(Closure.this, done) {
+                        @Override
+                        public void hide() {
+                            super.hide();
+                            GameScene.show(new WndQuest(Closure.this, next));
+                        }
+                    });
                 }
             });
             return true;
         }
 
-        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, Random.element( LINE_KEYS )) );
+        sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, Random.element(LINE_KEYS)));
         return true;
     }
 
