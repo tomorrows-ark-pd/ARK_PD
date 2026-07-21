@@ -5,6 +5,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blackperro;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Guard;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Shu;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -52,7 +53,7 @@ public class NewRhodesLevel1 extends Level {
     @Override
     protected boolean build() {
 
-        setSize(18, 26);
+        setSize(35, 26);
         Arrays.fill(map, Terrain.CHASM);
 
         // 0이 가장 왼쪽 ~ 위쪽임. 1 늘어날 때마다 오른쪽 / 아래쪽으로 1칸
@@ -78,16 +79,30 @@ public class NewRhodesLevel1 extends Level {
 
         // 벽 관련
         // 1. 처음 입구부분 벽
-        Painter.fill(this, 1, 19, 6, 6, Terrain.CHASM);
-        Painter.fill(this, 11, 19, 6, 6, Terrain.CHASM);
+        Painter.fill(this, 1, 19, 6, 6, Terrain.AVOID);
+        Painter.fill(this, 11, 19, 6, 6, Terrain.AVOID);
 
         // 2.
-        Painter.fill(this, 1, 18, 4, 1, Terrain.CHASM);
-        Painter.fill(this, 13, 18, 4, 1, Terrain.CHASM);
+        Painter.fill(this, 1, 18, 4, 1, Terrain.AVOID);
+        Painter.fill(this, 13, 18, 4, 1, Terrain.AVOID);
 
         // 3.
-        Painter.fill(this, 1, 17, 3, 1, Terrain.CHASM);
-        Painter.fill(this, 14, 17, 3, 1, Terrain.CHASM);
+        Painter.fill(this, 1, 17, 3, 1, Terrain.AVOID);
+        Painter.fill(this, 14, 17, 3, 1, Terrain.AVOID);
+
+
+        Painter.fill(this, 18, 0, 1, 26, Terrain.WALL);
+        Painter.fill(this, 21, 1, 13, 24, Terrain.EMPTY);
+        map[577] = Terrain.EMPTY;
+        map[578] = Terrain.DOOR;
+        map[579] = Terrain.EMPTY;
+        map[580] = Terrain.DOOR;
+
+        map[509] = Terrain.WALL;
+        map[510] = Terrain.WALL;
+        map[544] = Terrain.WALL;
+        map[614] = Terrain.WALL;
+        map[615] = Terrain.WALL;
 
         entrance = 405;
         exit = 189;
@@ -146,8 +161,9 @@ public class NewRhodesLevel1 extends Level {
     protected void createItems() {
         //   if (Dungeon.hero.belongings.getItem(Amulet.class) == null) GreenCat.spawn(this, exit);
         //   SkinModel.spawn(this, 255);
-        Blackperro.spawn(this, 245);
-        NPC_Guard.spawn(this, 300);
+        Blackperro.spawn(this, 502);
+        NPC_Guard.spawn(this, 572);
+        NPC_Shu.spawn(this, 583);
     }
 
     @Override

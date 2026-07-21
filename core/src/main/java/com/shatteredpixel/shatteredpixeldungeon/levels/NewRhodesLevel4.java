@@ -84,13 +84,13 @@ public class NewRhodesLevel4 extends Level {
         map[687] = Terrain.AVOID;
         map[752] = Terrain.AVOID;
 
-        map[863] = Terrain.AVOID;
-        map[864] = Terrain.AVOID;
-        map[865] = Terrain.AVOID;
-        map[927] = Terrain.AVOID;
-        map[928] = Terrain.AVOID;
-        map[929] = Terrain.AVOID;
-        map[930] = Terrain.AVOID;
+        map[863] = Terrain.EMPTY;
+        map[864] = Terrain.EMPTY;
+        map[865] = Terrain.EMPTY;
+        map[927] = Terrain.EMPTY;
+        map[928] = Terrain.EMPTY;
+        map[929] = Terrain.EMPTY;
+        map[930] = Terrain.EMPTY;
 
         entrance = 695;
         exit = 870;
