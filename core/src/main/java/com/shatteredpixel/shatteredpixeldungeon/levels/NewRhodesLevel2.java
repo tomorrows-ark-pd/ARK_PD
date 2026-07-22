@@ -12,13 +12,15 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.FrostLeaf;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Jessica;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Gglow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Mage;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_PhantomShadow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SkinModel;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Weedy;
+import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_FoodBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_HealingBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_IdentifyBox;
@@ -28,10 +30,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_Scroll
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TGBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HornOfPlenty;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.UnstableSpellbook;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
-import com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfMistress;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -40,6 +41,7 @@ import com.watabou.noosa.Tilemap;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
+import com.watabou.utils.Reflection;
 
 import java.util.Arrays;
 
@@ -273,23 +275,50 @@ public class NewRhodesLevel2 extends Level {
         drop(new Closure_RingBox(), 3782).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_TGBox(), 3783).type = Heap.Type.FOR_SALE_28F;
 
-        // 유물
+        // 무기 (근접, 총기 포함)
+        for (int cell : new int[]{4116, 4117, 4118, 4184, 4185, 4186}) {
+            sellShopWeapon(cell, Generator.wepTiers);
+        }
 
-        drop(new UnstableSpellbook(), 3980).type = Heap.Type.FOR_SALE_28F;
-        drop(new UnstableSpellbook(), 3981).type = Heap.Type.FOR_SALE_28F;
-        drop(new UnstableSpellbook(), 3982).type = Heap.Type.FOR_SALE_28F;
-        drop(new UnstableSpellbook(), 3912).type = Heap.Type.FOR_SALE_28F;
-        drop(new UnstableSpellbook(), 3913).type = Heap.Type.FOR_SALE_28F;
-        drop(new UnstableSpellbook(), 3914).type = Heap.Type.FOR_SALE_28F;
+        // 무기 (원거리)
+        for (int cell : new int[]{4121, 4122, 4123, 4189, 4190, 4191}) {
+            sellShopWeapon(cell, Generator.misTiers);
+        }
+
+        // 유물
+        for (int cell : new int[]{3980, 3981, 3982, 3912, 3913, 3914}) {
+            Artifact art = Generator.randomArtifact();
+            if (art != null) {
+                sellForCertificates(art, cell, ARTIFACT_PRICE);
+            }
+        }
 
         // 반지
+        for (int cell : new int[]{3985, 3986, 3987, 3917, 3918, 3919}) {
+            sellForCertificates((Ring) Generator.random(Generator.Category.RING), cell, RING_PRICE);
+        }
+    }
 
-        drop(new RingOfMistress(), 3985).type = Heap.Type.FOR_SALE_28F;
-        drop(new RingOfMistress(), 3986).type = Heap.Type.FOR_SALE_28F;
-        drop(new RingOfMistress(), 3987).type = Heap.Type.FOR_SALE_28F;
-        drop(new RingOfMistress(), 3917).type = Heap.Type.FOR_SALE_28F;
-        drop(new RingOfMistress(), 3918).type = Heap.Type.FOR_SALE_28F;
-        drop(new RingOfMistress(), 3919).type = Heap.Type.FOR_SALE_28F;
+    private static final int RING_PRICE = 150;
+    private static final int ARTIFACT_PRICE = 200;
+
+    //tier weights for the certificate shop: T1-T5
+    private static final float[] SHOP_WEAPON_TIER_PROBS = {0.15f, 0.15f, 0.2f, 0.25f, 0.25f};
+    //price scales with tier, T1 = 50 up to T5 = 100
+    private static final int[] SHOP_WEAPON_TIER_PRICE = {50, 60, 70, 85, 100};
+
+    private void sellForCertificates(Item item, int cell, int price) {
+        Heap heap = drop(item, cell);
+        heap.type = Heap.Type.FOR_SALE_28F;
+        heap.priceOverride = price;
+    }
+
+    private void sellShopWeapon(int cell, Generator.Category[] tiers) {
+        int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
+        Generator.Category c = tiers[tierIndex];
+        Weapon w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+        w.random();
+        sellForCertificates(w, cell, SHOP_WEAPON_TIER_PRICE[tierIndex]);
     }
 
     @Override

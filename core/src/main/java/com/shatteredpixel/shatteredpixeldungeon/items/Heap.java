@@ -83,6 +83,9 @@ public class Heap implements Bundlable {
     public boolean seen = false;
     public boolean haunted = false;
 
+    //overrides item.value() for FOR_SALE_28F pricing when >= 0
+    public int priceOverride = -1;
+
     public LinkedList<Item> items = new LinkedList<>();
 
     public void open(Hero hero) {

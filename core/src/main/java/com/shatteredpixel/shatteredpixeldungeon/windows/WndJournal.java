@@ -53,6 +53,7 @@ import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Plant;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.BugSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -91,6 +92,8 @@ public class WndJournal extends WndTabbed {
 
     //max pixel size for a Notes-grid icon; larger icons (char sprites) are scaled to fit
     private static final float MAX_NOTE_ICON = 15f;
+    //item sprites (keys, dewdrop, alch page...) use a smaller cap so they don't fill the cell
+    private static final float MAX_NOTE_ITEM_ICON = 12f;
 
     private GuideTab guideTab;
     private AlchemyTab alchemyTab;
@@ -548,11 +551,11 @@ public class WndJournal extends WndTabbed {
                                     return false;
                                 }
                             };
-                    //fit oversized icons (mod landmark char sprites) into the grid cell;
-                    //small UI icons like Icons.DEPTH keep their natural size
+                    //fit oversized icons into the grid cell
+                    float cap = icon instanceof ItemSprite ? MAX_NOTE_ITEM_ICON : MAX_NOTE_ICON;
                     float maxDim = Math.max(icon.width(), icon.height());
-                    if (maxDim > MAX_NOTE_ICON) {
-                        gridItem.setScale(MAX_NOTE_ICON / maxDim);
+                    if (maxDim > cap) {
+                        gridItem.setScale(cap / maxDim);
                     }
                     Visual second = rec.secondIcon();
                     if (second != null) gridItem.addSecondIcon(second);
@@ -596,8 +599,12 @@ public class WndJournal extends WndTabbed {
             }
             itemButtons[EQUIP_IDX].icon(new ItemSprite(ItemSpriteSheet.WEAPON_HOLDER));
             itemButtons[CONSUM_IDX].icon(new ItemSprite(ItemSpriteSheet.POTION_HOLDER));
-            itemButtons[BESTIARY_IDX].icon(new ItemSprite(ItemSpriteSheet.MOB_HOLDER));
-            itemButtons[LORE_IDX].icon(new ItemSprite(ItemSpriteSheet.DOCUMENT_HOLDER));
+            //bestiary -> Slug sprite (scaled)
+            Image slugIcon = new Image(new BugSprite());
+            slugIcon.scale.set(0.72f);
+            itemButtons[BESTIARY_IDX].icon(slugIcon);
+            //lore -> note/page sprite
+            itemButtons[LORE_IDX].icon(new ItemSprite(ItemSpriteSheet.GUIDE_PAGE));
 
             grid = new ScrollingGridPane() {
                 @Override
