@@ -72,6 +72,13 @@ public class NewRhodesLevel2 extends Level {
                 solid[i] = true;
             }
         }
+        //shelf decoration (WALL/STATUE) overlaps some for-sale item cells, blocking purchase; clear them
+        for (int cell : SHOP_ITEM_CELLS) {
+            map[cell] = Terrain.EMPTY;
+            passable[cell] = true;
+            avoid[cell] = false;
+            solid[cell] = false;
+        }
     }
 
     private static final int ROOM_TOP = 6;
@@ -174,16 +181,6 @@ public class NewRhodesLevel2 extends Level {
         Painter.fill(this, 29, 53, 22, 4, Terrain.EMPTY);
         Painter.fill(this, 34, 57, 17, 6, Terrain.EMPTY);
 
-        // 확장 상점구역 선반
-        Painter.fill(this, 37, 57, 2, 1, Terrain.WALL);
-        Painter.fill(this, 37, 58, 2, 1, Terrain.STATUE);
-        Painter.fill(this, 42, 57, 2, 1, Terrain.WALL);
-        Painter.fill(this, 42, 58, 2, 1, Terrain.STATUE);
-        Painter.fill(this, 37, 60, 2, 1, Terrain.WALL);
-        Painter.fill(this, 37, 61, 2, 1, Terrain.STATUE);
-        Painter.fill(this, 42, 60, 2, 1, Terrain.WALL);
-        Painter.fill(this, 42, 61, 2, 1, Terrain.STATUE);
-
         // 위디 옆 확장통로 벽
         Painter.fill(this, 29, 57, 4, 1, Terrain.WALL);
         Painter.fill(this, 30, 60, 1, 5, Terrain.WALL);
@@ -277,12 +274,12 @@ public class NewRhodesLevel2 extends Level {
 
         // 무기 (근접, 총기 포함)
         for (int cell : new int[]{4116, 4117, 4118, 4184, 4185, 4186}) {
-            sellShopWeapon(cell, Generator.wepTiers);
+            sellShopWeapon(cell, Generator.wepTiers, SHOP_WEAPON_TIER_PRICE);
         }
 
         // 무기 (원거리)
         for (int cell : new int[]{4121, 4122, 4123, 4189, 4190, 4191}) {
-            sellShopWeapon(cell, Generator.misTiers);
+            sellShopWeapon(cell, Generator.misTiers, SHOP_MISSILE_TIER_PRICE);
         }
 
         // 유물
@@ -299,13 +296,22 @@ public class NewRhodesLevel2 extends Level {
         }
     }
 
-    private static final int RING_PRICE = 150;
-    private static final int ARTIFACT_PRICE = 200;
+    private static final int[] SHOP_ITEM_CELLS = {
+            4116, 4117, 4118, 4184, 4185, 4186, //melee weapons
+            4121, 4122, 4123, 4189, 4190, 4191, //missile weapons
+            3980, 3981, 3982, 3912, 3913, 3914, //artifacts
+            3985, 3986, 3987, 3917, 3918, 3919  //rings
+    };
+
+    private static final int RING_PRICE = 500;
+    private static final int ARTIFACT_PRICE = 600;
 
     //tier weights for the certificate shop: T1-T5
-    private static final float[] SHOP_WEAPON_TIER_PROBS = {0.15f, 0.15f, 0.2f, 0.25f, 0.25f};
-    //price scales with tier, T1 = 50 up to T5 = 100
-    private static final int[] SHOP_WEAPON_TIER_PRICE = {50, 60, 70, 85, 100};
+    private static final float[] SHOP_WEAPON_TIER_PROBS = {0.1f, 0.1f, 0.2f, 0.3f, 0.3f};
+    //price scales with tier, T1 = 300 up to T5 = 700 (melee)
+    private static final int[] SHOP_WEAPON_TIER_PRICE = {300, 400, 500, 600, 700};
+    //price scales with tier, T1 = 100 up to T5 = 300 (missile)
+    private static final int[] SHOP_MISSILE_TIER_PRICE = {100, 150, 200, 250, 300};
 
     private void sellForCertificates(Item item, int cell, int price) {
         Heap heap = drop(item, cell);
@@ -313,12 +319,12 @@ public class NewRhodesLevel2 extends Level {
         heap.priceOverride = price;
     }
 
-    private void sellShopWeapon(int cell, Generator.Category[] tiers) {
+    private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices) {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
         Generator.Category c = tiers[tierIndex];
         Weapon w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
         w.random();
-        sellForCertificates(w, cell, SHOP_WEAPON_TIER_PRICE[tierIndex]);
+        sellForCertificates(w, cell, prices[tierIndex]);
     }
 
     @Override

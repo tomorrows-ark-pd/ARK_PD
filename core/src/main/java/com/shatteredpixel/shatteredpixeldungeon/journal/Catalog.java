@@ -114,6 +114,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfSuzuran;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfTime;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfVigna;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfWeedy;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK1.BookCamouflage;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK1.BookChainHook;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK1.BookCrimsonCutter;
@@ -288,7 +289,7 @@ public enum Catalog {
 				StaffOfMayer.class, StaffOfAngelina.class, StaffOfCorrupting.class,
 				StaffOfLena.class, StaffOfSnowsant.class, StaffOfSussurro.class,
 				StaffOfPodenco.class, StaffOfTime.class, StaffOfSuzuran.class,
-				StaffOfPurgatory.class
+				StaffOfPurgatory.class, Wrench.class
 		);
 
 		RINGS.addItems(Generator.Category.RING.classes);
