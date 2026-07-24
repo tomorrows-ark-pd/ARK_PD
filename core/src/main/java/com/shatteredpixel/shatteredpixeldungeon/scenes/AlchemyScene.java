@@ -372,8 +372,9 @@ public class AlchemyScene extends PixelScene {
 		if (recipe != null){
 			int cost = recipe.cost(ingredients);
 			
-			output.item(recipe.sampleOutput(ingredients));
-			output.visible = true;
+			Item sample = recipe.sampleOutput(ingredients);
+			output.item(sample);
+			output.visible = (sample != null);
 			
 			energyCost.text( Messages.get(AlchemyScene.class, "cost", cost) );
 			energyCost.setPos(

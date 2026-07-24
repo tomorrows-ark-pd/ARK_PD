@@ -33,6 +33,13 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBo
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ChenSword;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.EX42;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.NEARL_AXE;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -274,25 +281,29 @@ public class NewRhodesLevel2 extends Level {
 
         // 무기 (근접, 총기 포함)
         for (int cell : new int[]{4116, 4117, 4118, 4184, 4185, 4186}) {
-            sellShopWeapon(cell, Generator.wepTiers, SHOP_WEAPON_TIER_PRICE);
+            sellShopWeapon(cell, Generator.wepTiers, SHOP_WEAPON_TIER_PRICE, true);
         }
 
         // 무기 (원거리)
         for (int cell : new int[]{4121, 4122, 4123, 4189, 4190, 4191}) {
-            sellShopWeapon(cell, Generator.misTiers, SHOP_MISSILE_TIER_PRICE);
+            sellShopWeapon(cell, Generator.misTiers, SHOP_MISSILE_TIER_PRICE, false);
         }
 
         // 유물
         for (int cell : new int[]{3980, 3981, 3982, 3912, 3913, 3914}) {
             Artifact art = Generator.randomArtifact();
             if (art != null) {
+                //shop artifacts: no curse, no upgrade
+                art.cursed = false;
                 sellForCertificates(art, cell, ARTIFACT_PRICE);
             }
         }
 
         // 반지
         for (int cell : new int[]{3985, 3986, 3987, 3917, 3918, 3919}) {
-            sellForCertificates((Ring) Generator.random(Generator.Category.RING), cell, RING_PRICE);
+            Ring ring = (Ring) Generator.random(Generator.Category.RING);
+            applyShopQuality(ring);
+            sellForCertificates(ring, cell, RING_PRICE);
         }
     }
 
@@ -313,18 +324,47 @@ public class NewRhodesLevel2 extends Level {
     //price scales with tier, T1 = 100 up to T5 = 300 (missile)
     private static final int[] SHOP_MISSILE_TIER_PRICE = {100, 150, 200, 250, 300};
 
+    //shop-only T1 melee pool: adds hero starting weapons Generator.WEP_T1 omits/zero-weights (ChenSword, MagesStaff), without touching regular dungeon drops
+    private static final Class<?>[] SHOP_MELEE_T1_CLASSES = {
+            WornShortsword.class,
+            Gloves.class,
+            Dagger.class,
+            MagesStaff.class,
+            EX42.class,
+            NEARL_AXE.class,
+            ChenSword.class
+    };
+    private static final float[] SHOP_MELEE_T1_PROBS = {1, 1, 1, 1, 1, 1, 1};
+
     private void sellForCertificates(Item item, int cell, int price) {
         Heap heap = drop(item, cell);
         heap.type = Heap.Type.FOR_SALE_28F;
         heap.priceOverride = price;
     }
 
-    private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices) {
+    private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices, boolean rerollQuality) {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
-        Generator.Category c = tiers[tierIndex];
-        Weapon w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+        Weapon w;
+        if (rerollQuality && tierIndex == 0) {
+            w = (Weapon) Reflection.newInstance(SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)]);
+        } else {
+            Generator.Category c = tiers[tierIndex];
+            w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+        }
         w.random();
+        //shop weapons: no curse, small upgrade chance only (rest of the game keeps default odds)
+        if (rerollQuality) applyShopQuality(w);
         sellForCertificates(w, cell, prices[tierIndex]);
+    }
+
+    //strips any curse and rerolls the upgrade level to +0 85% / +1 10% / +2 5%
+    private static void applyShopQuality(Item item) {
+        if (item instanceof Weapon && ((Weapon) item).cursed) {
+            ((Weapon) item).enchant(null);
+        }
+        item.cursed = false;
+        float roll = Random.Float();
+        item.level(roll < 0.05f ? 2 : roll < 0.15f ? 1 : 0);
     }
 
     @Override
