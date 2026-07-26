@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Gamza;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.AjimuSprite;
+import com.shatteredpixel.shatteredpixeldungeon.utils.Holiday;
 
 public class RatKing extends NPC {
 
@@ -117,8 +118,8 @@ public class RatKing extends NPC {
 
     @Override
     public String description() {
-        return ((AjimuSprite) sprite).festive ?
-                Messages.get(this, "desc_festive")
+        return Holiday.getCurrentHoliday() == Holiday.WINTER_HOLIDAYS
+                ? Messages.get(this, "desc_festive")
                 : super.description();
     }
 }
