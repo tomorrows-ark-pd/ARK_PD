@@ -207,7 +207,7 @@ public class NewHallsBossLevel extends Level {
 		Dungeon.observe();
 
 		if (Dungeon.hero.belongings.weapon instanceof Firmament) {
-			((Firmament) Dungeon.hero.belongings.weapon).enchantment = new Dragonkill();
+			((Firmament) Dungeon.hero.belongings.weapon).enchant(new Dragonkill());
 			Sample.INSTANCE.play(Assets.Sounds.BURNING,2f,1f);
 			GameScene.flash(0x80FF0000);
 			GLog.n(Messages.get(Dragonkill.class, "awake"));

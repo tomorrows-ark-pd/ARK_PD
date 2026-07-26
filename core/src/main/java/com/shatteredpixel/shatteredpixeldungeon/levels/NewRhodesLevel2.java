@@ -190,7 +190,7 @@ public class NewRhodesLevel2 extends Level {
 
         // 위디 옆 확장통로 벽
         Painter.fill(this, 29, 57, 4, 1, Terrain.WALL);
-        Painter.fill(this, 30, 60, 1, 5, Terrain.WALL);
+        Painter.fill(this, 30, 61, 1, 5, Terrain.WALL);
         Painter.fill(this, 33, 57, 1, 6, Terrain.WALL);
         Painter.fill(this, 33, 63, 18, 1, Terrain.WALL);
         Painter.fill(this, 31, 60, 2, 6, Terrain.EMPTY);

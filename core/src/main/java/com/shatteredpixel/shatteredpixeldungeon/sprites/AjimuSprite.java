@@ -24,12 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.sprites;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
 
-import java.util.Calendar;
-
 public class AjimuSprite extends MobSprite {
 
-	public boolean festive;
-	
 	public AjimuSprite() {
 		super();
 

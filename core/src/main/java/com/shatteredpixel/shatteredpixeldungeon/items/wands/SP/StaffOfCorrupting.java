@@ -34,7 +34,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vulnerable;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Bee;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.King;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Piranha;
@@ -139,7 +138,7 @@ public class StaffOfCorrupting extends Wand {
                 enemyResist = (1f + Dungeon.depth / 3f) / 5f;
             } else if (ch instanceof Yog.BurningFist || ch instanceof Yog.RottingFist) {
                 enemyResist = 1 + 30;
-            } else if (ch instanceof Yog.Larva || ch instanceof King.Undead) {
+            } else if (ch instanceof Yog.Larva) {
                 enemyResist = 1 + 5;
             } else if (ch instanceof Swarm) {
                 //child swarms don't give exp, so we force this here.

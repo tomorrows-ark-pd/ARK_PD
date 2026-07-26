@@ -27,6 +27,8 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Skeleton;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
@@ -40,6 +42,8 @@ public class Heamyo extends MeleeWeapon {
 
     public static final String AC_DUMMY = "DUMMY";
     public static final String AC_POS = "POS";
+    public static final String AC_JOURNAL_REVEAL = "JOURNAL_REVEAL";
+    public static final String AC_JOURNAL_RESET = "JOURNAL_RESET";
 
     {
         image = ItemSpriteSheet.HEAMYO;
@@ -58,6 +62,8 @@ public class Heamyo extends MeleeWeapon {
         ArrayList<String> actions = super.actions(hero);
         actions.add(AC_DUMMY);
         actions.add(AC_POS);
+        actions.add(AC_JOURNAL_REVEAL);
+        actions.add(AC_JOURNAL_RESET);
         return actions;
     }
 
@@ -71,6 +77,14 @@ public class Heamyo extends MeleeWeapon {
         } else if (action.equals(AC_POS)) {
             curUser = hero;
             GameScene.selectCell(posPrinter);
+        } else if (action.equals(AC_JOURNAL_REVEAL)) {
+            Catalog.debugRevealAll();
+            Bestiary.debugRevealAll();
+            GLog.i("journal revealed");
+        } else if (action.equals(AC_JOURNAL_RESET)) {
+            Catalog.debugReset();
+            Bestiary.debugReset();
+            GLog.i("journal reset");
         }
     }
 

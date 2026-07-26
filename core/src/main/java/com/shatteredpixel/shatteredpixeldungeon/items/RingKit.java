@@ -10,6 +10,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnc
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -134,6 +135,7 @@ public class RingKit extends Item {
 
     private void upgrade(Ring item) {
         item.upgrade();
+        Catalog.countUse(item.getClass());
 
         curUser.sprite.operate(curUser.pos);
         Sample.INSTANCE.play(Assets.Sounds.EVOKE);

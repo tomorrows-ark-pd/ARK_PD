@@ -36,6 +36,7 @@ public class ChaosCatalyst extends InventorySpell{
 
         item.level(0);
         item.upgrade();
+        Catalog.countUse(item.getClass());
         Sample.INSTANCE.play(Assets.Sounds.EVOKE);
         Dungeon.hero.spendAndNext(1f);
         updateQuickslot();

@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
@@ -60,6 +61,7 @@ public class ArmorUpKit extends Item {
                     if (HeroArmor.curseInfusionBonus) level--;
                     if (level > 0) {
                         armor.upgrade(level + 1);
+                        Catalog.countUse(ScaleArmor.class);
                     } else if (level < 0) {
                         armor.degrade(-level);
                     }
@@ -78,6 +80,7 @@ public class ArmorUpKit extends Item {
                     if (HeroArmor.curseInfusionBonus) level--;
                     if (level > 0) {
                         armor.upgrade(level + 1);
+                        Catalog.countUse(PlateArmor.class);
                     } else if (level < 0) {
                         armor.degrade(-level);
                     }
@@ -90,7 +93,10 @@ public class ArmorUpKit extends Item {
                     armor.augment = HeroArmor.augment;
 
                     Dungeon.hero.belongings.armor = armor;
-                } else Dungeon.hero.belongings.armor.upgrade();
+                } else {
+                    Dungeon.hero.belongings.armor.upgrade();
+                    Catalog.countUse(Dungeon.hero.belongings.armor.getClass());
+                }
                 curUser.sprite.operate(curUser.pos);
                 Sample.INSTANCE.play(Assets.Sounds.EVOKE);
             }

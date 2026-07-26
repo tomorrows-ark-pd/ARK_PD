@@ -9,6 +9,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Wraith_donut;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CustomeSet;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
@@ -63,7 +64,7 @@ public class ImageoverForm extends MeleeWeapon {
 
 
 
-    public static class LittleInstinct extends Mob {
+    public static class LittleInstinct extends NPC {
         {
             spriteClass = ZuzaiSprite.class;
 
@@ -72,6 +73,7 @@ public class ImageoverForm extends MeleeWeapon {
             immunities.add(Silence.class);
             alignment = Alignment.ALLY;
             WANDERING = new Wandering();
+            state = WANDERING;
         }
 
         int level = 0;

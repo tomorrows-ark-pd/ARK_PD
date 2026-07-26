@@ -81,6 +81,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.IsekaiItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.MasterThievesArmband;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.SandalsOfNature;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.SealOfLight;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TimekeepersHourglass;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.UnstableSpellbook;
@@ -192,6 +193,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfFlock;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfIntuition;
 import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfShock;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfAdvanceguard;
+import com.shatteredpixel.shatteredpixeldungeon.items.stones.SuperAdvanceguard;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorrosion;
@@ -274,19 +277,27 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WintersScar;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Bolas;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.FishingSpear;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Firesteel;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ForceCube;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.HeavyBoomerang;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Javelin;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Kikitchenknife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Kunai;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.LightKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.NormalMagazine;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.PurgatoryKnife;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Ragesawblade;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Shuriken;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingClub;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingHammer;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingSpear;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingStone;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Thunderbolt;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Tomahawk;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Trident;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.UpMagazine;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Blindweed;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Dreamfoil;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Earthroot;
@@ -447,9 +458,11 @@ public class Generator {
                     StoneOfAggression.class,
                     StoneOfBlast.class,
                     StoneOfAffection.class,
-                    StoneOfAugmentation.class  //1 is sold in each shop
+                    StoneOfAugmentation.class, //1 is sold in each shop
+                    StoneOfAdvanceguard.class, //quest/event drop only, never randomly rolled
+                    SuperAdvanceguard.class    //quest/event drop only, never randomly rolled
             };
-            STONE.defaultProbs = new float[]{1, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 0};
+            STONE.defaultProbs = new float[]{1, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 0, 0, 0};
             STONE.probs = STONE.defaultProbs.clone();
 
             WAND.classes = new Class<?>[]{
@@ -572,9 +585,12 @@ public class Generator {
 
             MIS_T1.classes = new Class<?>[]{
                     ThrowingStone.class,
-                    LightKnife.class
+                    LightKnife.class,
+                    Firesteel.class,      //crafted-only, never randomly rolled
+                    PurgatoryKnife.class, //crafted-only, never randomly rolled
+                    ThrowingKnife.class   //crafted-only, never randomly rolled
             };
-            MIS_T1.probs = new float[]{6, 5};
+            MIS_T1.probs = new float[]{6, 5, 0, 0, 0};
 
             MIS_T2.classes = new Class<?>[]{
                     FishingSpear.class,
@@ -586,16 +602,21 @@ public class Generator {
             MIS_T3.classes = new Class<?>[]{
                     ThrowingSpear.class,
                     Kunai.class,
-                    Bolas.class
+                    Bolas.class,
+                    NormalMagazine.class, //crafted-only, never randomly rolled
+                    Ragesawblade.class,   //crafted-only, never randomly rolled
+                    Thunderbolt.class     //crafted-only, never randomly rolled
             };
-            MIS_T3.probs = new float[]{6, 5, 4};
+            MIS_T3.probs = new float[]{6, 5, 4, 0, 0, 0};
 
             MIS_T4.classes = new Class<?>[]{
                     Javelin.class,
                     Tomahawk.class,
-                    HeavyBoomerang.class
+                    HeavyBoomerang.class,
+                    Kikitchenknife.class, //crafted-only, never randomly rolled
+                    UpMagazine.class       //crafted-only, never randomly rolled
             };
-            MIS_T4.probs = new float[]{6, 5, 4};
+            MIS_T4.probs = new float[]{6, 5, 4, 0, 0};
 
             MIS_T5.classes = new Class<?>[]{
                     Trident.class,
@@ -648,9 +669,10 @@ public class Generator {
                     CustomeSet.class,
                     AlchemyKit.class,
                     IsekaiItem.class,
-                    WoundsofWar.class
+                    WoundsofWar.class,
+                    SealOfLight.class //Nearl hero class starting artifact, never randomly rolled
             };
-            ARTIFACT.defaultProbs = new float[]{0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1};
+            ARTIFACT.defaultProbs = new float[]{0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0};
             ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 
             SKL_T1.classes = new Class<?>[]{

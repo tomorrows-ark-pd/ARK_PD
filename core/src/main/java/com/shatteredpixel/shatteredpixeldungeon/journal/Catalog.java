@@ -25,14 +25,34 @@ import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
 import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
+import com.shatteredpixel.shatteredpixeldungeon.items.AnnihilationGear;
+import com.shatteredpixel.shatteredpixeldungeon.items.ArmorKit;
+import com.shatteredpixel.shatteredpixeldungeon.items.ArmorUpKit;
+import com.shatteredpixel.shatteredpixeldungeon.items.Bonk;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop;
+import com.shatteredpixel.shatteredpixeldungeon.items.DewVial;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Honeypot;
+import com.shatteredpixel.shatteredpixeldungeon.items.LostBackpack;
+import com.shatteredpixel.shatteredpixeldungeon.items.MerchantsBeacon;
+import com.shatteredpixel.shatteredpixeldungeon.items.Mushroomslices;
+import com.shatteredpixel.shatteredpixeldungeon.items.OriginiumShard;
+import com.shatteredpixel.shatteredpixeldungeon.items.Pombbay;
+import com.shatteredpixel.shatteredpixeldungeon.items.PortableCover;
+import com.shatteredpixel.shatteredpixeldungeon.items.RandomBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.RingKit;
+import com.shatteredpixel.shatteredpixeldungeon.items.Snowsants_Coin;
+import com.shatteredpixel.shatteredpixeldungeon.items.StaffKit;
 import com.shatteredpixel.shatteredpixeldungeon.items.Stylus;
+import com.shatteredpixel.shatteredpixeldungeon.items.TomeOfMastery;
 import com.shatteredpixel.shatteredpixeldungeon.items.Torch;
+import com.shatteredpixel.shatteredpixeldungeon.items.W0502;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CapeOfThorns;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.LloydsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.FoodBag;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
@@ -61,23 +81,33 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Pasty;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Sandvich;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.SanityPotion;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.StewedMeat;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.BeaconOfReturning;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.BlastSpell;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ChaosCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.CurseInfusion;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ForceCatalyst;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.InstantRecharge;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalArmord;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.OathofFire;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ReclaimTrap;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Recycle;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.SaltBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BladeDemon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild2;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Firmament;
@@ -165,10 +195,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK3.BookSun;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK3.BookTerminationT;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK3.BookTrueSilverSlash;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK3.BookYourWish;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ExoticScroll;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.DeviceCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -223,6 +255,14 @@ public enum Catalog {
 		}
 	}
 
+	//should only be used when initializing, to exclude specific items pulled in via addItems
+	private void removeItems( Class<?>... items){
+		for (Class<?> item : items){
+			seen.remove(item);
+			useCount.remove(item);
+		}
+	}
+
 	public String title(){
 		return Messages.get(this, name() + ".title");
 	}
@@ -259,7 +299,7 @@ public enum Catalog {
 				RhodesSword.class, Firmament.class, Gamzashield.class, Enfild2.class,
 				GoldDogSword.class, Gluttony.class, SanktaBet.class, Niansword.class,
 				PatriotSpear.class, CatGun.class, MinosFury.class, ImageoverForm.class,
-				KollamSword.class, ChenSword.class
+				KollamSword.class, ChenSword.class, BladeDemon.class
 		);
 
 		ARMOR.addItems(Generator.Category.ARMOR.classes);
@@ -295,10 +335,13 @@ public enum Catalog {
 		RINGS.addItems(Generator.Category.RING.classes);
 
 		ARTIFACTS.addItems(Generator.Category.ARTIFACT.classes);
+		//unobtainable: 0-weight in Generator.ARTIFACT with no other acquisition path
+		ARTIFACTS.removeItems(CapeOfThorns.class, AlchemistsToolkit.class, LloydsBeacon.class);
 
 		MISC_EQUIPMENT.addItems(BrokenSeal.class, SpiritBow.class, VelvetPouch.class,
 				PotionBandolier.class, ScrollHolder.class, MagicalHolster.class,
-				FoodBag.class, Amulet.class);
+				FoodBag.class, Amulet.class,
+				ArmorKit.class, ArmorUpKit.class, StaffKit.class);
 
 		SKILLBOOK.addItems(Generator.Category.SKL_T1.classes);
 		SKILLBOOK.addItems(Generator.Category.SKL_T2.classes);
@@ -315,6 +358,8 @@ public enum Catalog {
 		);
 
 		POTIONS.addItems(Generator.Category.POTION.classes);
+		//always-known, crafted-only potion — never enters the unidentified color pool
+		POTIONS.addItems(AlchemicalCatalyst.class);
 
 		SCROLLS.addItems(Generator.Category.SCROLL.classes);
 
@@ -324,7 +369,8 @@ public enum Catalog {
 
 		FOOD.addItems(Food.class, Pasty.class, MysteryMeat.class, ChargrilledMeat.class,
 				StewedMeat.class, FrozenCarpaccio.class, SmallRation.class, Berry.class,
-				Blandfruit.class, MeatPie.class, MeatCutlet.class, Sandvich.class);
+				Blandfruit.class, MeatPie.class, MeatCutlet.class, Sandvich.class,
+				SanityPotion.class);
 
 		EXOTIC_POTIONS.addItems(Generator.Category.EXOTIC_POTION.classes);
 
@@ -341,11 +387,18 @@ public enum Catalog {
 		SPELLS.addItems(WildEnergy.class, PhaseShift.class, Alchemize.class,
 				CurseInfusion.class, MagicalInfusion.class, Recycle.class,
 				ReclaimTrap.class, BeaconOfReturning.class, FeatherFall.class,
-				MagicalArmord.class);
+				MagicalArmord.class,
+				ArcaneCatalyst.class, ForceCatalyst.class, ChaosCatalyst.class,
+				OathofFire.class, InstantRecharge.class, AquaBlast.class,
+				SaltBlast.class, BlastSpell.class);
 
 		MISC_CONSUMABLES.addItems(Gold.class, Dewdrop.class,
 				IronKey.class, GoldenKey.class, CrystalKey.class, SkeletonKey.class,
-				Stylus.class, Torch.class, Honeypot.class, Ankh.class);
+				Stylus.class, Torch.class, Honeypot.class, Ankh.class,
+				DewVial.class, Mushroomslices.class, W0502.class, MerchantsBeacon.class,
+				OriginiumShard.class, Pombbay.class, PortableCover.class, Bonk.class,
+				Snowsants_Coin.class, AnnihilationGear.class, RandomBox.class,
+				TomeOfMastery.class, LostBackpack.class, RingKit.class);
 
 	}
 
@@ -408,6 +461,32 @@ public enum Catalog {
 			}
 		}
 		Badges.validateItemsIdentified();
+	}
+
+	//debug-only: marks every item in every catalog as seen, for testing the journal UI
+	public static void debugRevealAll(){
+		if (!DeviceCompat.isDebug()) return;
+		for (Catalog cat : values()){
+			for (Class<?> item : cat.items()){
+				cat.seen.put(item, true);
+			}
+		}
+		Badges.validateItemsIdentified();
+		Journal.saveNeeded = true;
+		Journal.saveGlobal();
+	}
+
+	//debug-only: clears seen/use-count state across all catalogs, for testing the journal UI
+	public static void debugReset(){
+		if (!DeviceCompat.isDebug()) return;
+		for (Catalog cat : values()){
+			for (Class<?> item : cat.items()){
+				cat.seen.put(item, false);
+				cat.useCount.put(item, 0);
+			}
+		}
+		Journal.saveNeeded = true;
+		Journal.saveGlobal();
 	}
 
 	public static int useCount(Class<?> cls){

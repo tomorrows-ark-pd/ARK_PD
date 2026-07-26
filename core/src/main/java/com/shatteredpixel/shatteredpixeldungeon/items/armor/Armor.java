@@ -430,10 +430,6 @@ public class Armor extends EquipableItem {
 	
 	public int proc( Char attacker, Char defender, int damage ) {
 
-		if (defender == Dungeon.hero) {
-			Catalog.countUse(getClass());
-		}
-
 		if (glyph != null && defender.buff(MagicImmune.class) == null) {
 			damage = glyph.proc( this, attacker, defender, damage );
 		}

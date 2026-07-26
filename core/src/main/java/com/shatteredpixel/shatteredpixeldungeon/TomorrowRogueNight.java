@@ -42,7 +42,7 @@ public class TomorrowRogueNight extends Game {
     public static final int v0_5_2 = 676;
     public static final int v0_5_2a = 677;
     public static final int v0_5_2b = 678;
-    public static final int v0_5_3 = 707;
+    public static final int v0_5_3 = 708;
 
     public TomorrowRogueNight(PlatformSupport platform) {
         super(sceneClass == null ? WelcomeScene.class : sceneClass, platform);
@@ -60,19 +60,6 @@ public class TomorrowRogueNight extends Game {
         com.watabou.utils.Bundle.addAlias(
                 com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Elemental.NewbornFireElemental.class,
                 "com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NewbornElemental");
-        com.watabou.utils.Bundle.addAlias(
-                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.OldDM300.class,
-                "com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DM300");
-        com.watabou.utils.Bundle.addAlias(
-                com.shatteredpixel.shatteredpixeldungeon.levels.OldCavesBossLevel.class,
-                "com.shatteredpixel.shatteredpixeldungeon.levels.CavesBossLevel");
-        com.watabou.utils.Bundle.addAlias(
-                com.shatteredpixel.shatteredpixeldungeon.levels.OldCityBossLevel.class,
-                "com.shatteredpixel.shatteredpixeldungeon.levels.CityBossLevel");
-        com.watabou.utils.Bundle.addAlias(
-                com.shatteredpixel.shatteredpixeldungeon.levels.OldHallsBossLevel.class,
-                "com.shatteredpixel.shatteredpixeldungeon.levels.HallsBossLevel");
-
     }
 
     @Override

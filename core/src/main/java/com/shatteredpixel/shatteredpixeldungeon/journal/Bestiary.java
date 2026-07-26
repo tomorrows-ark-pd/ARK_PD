@@ -38,6 +38,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ceylon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Closure;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dario;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.DeliveryDrone;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dobermann;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dummy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Firewall;
@@ -53,17 +54,23 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Lens;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.MiniShopkeeper;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.MirrorImage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Gglow;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Guard;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Irene;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Mage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_PhantomShadow;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Pilot;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Shu;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.PRTS;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.PRTS_corpse;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.PrismaticImage;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.RatKing;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SeaObject;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Sheep;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SkinModel;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Weedy;
 import com.shatteredpixel.shatteredpixeldungeon.items.AnnihilationGear;
@@ -75,6 +82,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfMudrock;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfRegrowth;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfWarding;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.CatGun;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.CrabGun;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Echeveria;
@@ -128,6 +136,7 @@ import com.shatteredpixel.shatteredpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.DeviceCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -208,14 +217,14 @@ public enum Bestiary {
                 Sea_Octo.class, SeaLeef.class, NetherseaBrandguider.class);
 
         BOSSES.addEntities(Goo.class,
-                NewTengu.class, OldTengu.class,
-                Pylon.class, NewDM300.class, OldDM300.class,
+                NewTengu.class,
+                Pylon.class, NewDM300.class,
                 DwarfKing.class,
                 Yog.Larva.class,
                 YogFist.BurningFist.class, YogFist.SoiledFist.class, YogFist.RottingFist.class,
                 YogFist.RustedFist.class, YogFist.BrightFist.class, YogFist.DarkFist.class,
                 Yog.class,
-                King.class, SiestaBoss.class, SeaBoss1.class,
+                SiestaBoss.class, SeaBoss1.class,
                 //mod minibosses (miniboss/ subpackage)
                 Faust.class, Shadow.class, MagicGolem.class, Mon3tr.class,
                 Sentinel.class, Kaltsit.class, BloodMagister.class, Centurion.class,
@@ -228,7 +237,7 @@ public enum Bestiary {
                 ReunionDefender.class, SandPillar.class,
                 Pompeii.class, TheBigUglyThing.class);
 
-        UNIVERSAL.addEntities(Wraith.class, Piranha.class,
+        UNIVERSAL.addEntities(Wraith.class, Fanatic.class, Piranha.class,
                 Mimic.class, GoldenMimic.class, CrystalMimic.class,
                 Statue.class, ArmoredStatue.class,
                 GuardianTrap.Guardian.class);
@@ -255,7 +264,9 @@ public enum Bestiary {
                 Dummy.class, Firewall.class, FrostLeaf.class, Gavial.class, GreenCat.class,
                 Jessica.class, NPC_Gglow.class, NPC_Irene.class, NPC_Phantom.class,
                 NPC_PhantomShadow.class, NPC_Pilot.class, Npc_Astesia.class,
-                PRTS.class, PRTS_corpse.class, Weedy.class);
+                PRTS.class, PRTS_corpse.class, Weedy.class,
+                NPC_Shu.class, NPC_Guard.class, NPC_Mage.class, Purestream.class,
+                SkinModel.class, DeliveryDrone.class, SeaObject.class);
 
         ALLY.addEntities(MirrorImage.class, PrismaticImage.class,
                 DriedRose.GhostHero.class,
@@ -269,7 +280,9 @@ public enum Bestiary {
                 Echeveria.PinkdogDrone.class, ImageoverForm.LittleInstinct.class,
                 KazemaruWeapon.KazemaruSummon.class, AnnihilationGear.EX44.class,
                 //mod skill summons
-                AncientKin.Seaborn.class, YourWish.EX43.class);
+                AncientKin.Seaborn.class, YourWish.EX43.class,
+                //mod wand summons
+                Wrench.Sentry.class);
 
         TRAP.addEntities(WornDartTrap.class, PoisonDartTrap.class, DisintegrationTrap.class,
                 ChillingTrap.class, BurningTrap.class, ShockingTrap.class, AlarmTrap.class, GrippingTrap.class,
@@ -317,9 +330,6 @@ public enum Bestiary {
         classConversions.put(Yog.BurningFist.class, YogFist.BurningFist.class);
         classConversions.put(Yog.RottingFist.class, YogFist.RottingFist.class);
 
-        //King boss summons
-        classConversions.put(King.Undead.class, King.class);
-
         //Talulah summons
         classConversions.put(Talulah.InfectedPatrolCaptain.class, Talulah.class);
         classConversions.put(Talulah.YogRipper.class, Talulah.class);
@@ -331,6 +341,11 @@ public enum Bestiary {
 
         //SiestaBoss summons
         classConversions.put(SiestaBoss.BossAgent.class, SiestaBoss.class);
+
+        //TheBigUglyThing / Pompeii boss reskins of existing regular enemies
+        classConversions.put(TheBigUglyThing.BossRipper.class, TiacauhRipper.class);
+        classConversions.put(TheBigUglyThing.BossBrave.class, TiacauhBrave.class);
+        classConversions.put(Pompeii.BossSlug.class, LavaSlug.class);
     }
 
     public static boolean isSeen(Class<?> cls) {
@@ -362,6 +377,32 @@ public enum Bestiary {
             }
         }
         return 0;
+    }
+
+    //debug-only: marks every entity in every category as seen, for testing the journal UI
+    public static void debugRevealAll(){
+        if (!DeviceCompat.isDebug()) return;
+        for (Bestiary cat : values()){
+            for (Class<?> cls : cat.entities()){
+                cat.seen.put(cls, true);
+            }
+        }
+        Badges.validateCatalogBadges();
+        Journal.saveNeeded = true;
+        Journal.saveGlobal();
+    }
+
+    //debug-only: clears seen/encounter-count state across all categories, for testing the journal UI
+    public static void debugReset(){
+        if (!DeviceCompat.isDebug()) return;
+        for (Bestiary cat : values()){
+            for (Class<?> cls : cat.entities()){
+                cat.seen.put(cls, false);
+                cat.encounterCount.put(cls, 0);
+            }
+        }
+        Journal.saveNeeded = true;
+        Journal.saveGlobal();
     }
 
     //used primarily when bosses are killed and need to clean up their minions
