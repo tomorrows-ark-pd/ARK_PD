@@ -2,50 +2,37 @@ package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret;
 
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.MiniShopkeeper;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
-import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
-import com.shatteredpixel.shatteredpixeldungeon.items.Bonk;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
-import com.shatteredpixel.shatteredpixeldungeon.items.Honeypot;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.MerchantsBeacon;
-import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
-import com.shatteredpixel.shatteredpixeldungeon.items.OriginiumShard;
 import com.shatteredpixel.shatteredpixeldungeon.items.PortableCover;
-import com.shatteredpixel.shatteredpixeldungeon.items.RandomBox;
-import com.shatteredpixel.shatteredpixeldungeon.items.Stylus;
-import com.shatteredpixel.shatteredpixeldungeon.items.Torch;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TimekeepersHourglass;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.MagicalHolster;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder;
-import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
-import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Bomb;
-import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
+import com.shatteredpixel.shatteredpixeldungeon.items.Recipe;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Catastrofe;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
-import com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfHolyFuror;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation;
-import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfWarp;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Avantgardeform;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.BeaconOfReturning;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.BlastSpell;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ChaosCatalyst;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.CurseInfusion;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.FeatherFall;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalArmord;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.OathofFire;
-import com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfAugmentation;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.PurgatoryKnife;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Ragesawblade;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.TippedDart;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.ReclaimTrap;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Recycle;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.SaltBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.WeaponTransform;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.KollamSword;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
@@ -53,113 +40,182 @@ import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 public class MiniShopRoom extends SecretRoom {
-        private ArrayList<Item> itemsToSpawn;
+    private ArrayList<Item> itemsToSpawn;
+    private Map<Item, Integer> priceOverrides = new IdentityHashMap<>();
 
-        @Override
-        public int minWidth() {
-            return Math.max(6, (int)(Math.sqrt(itemCount())+2));
+    @Override
+    public int minWidth() {
+        return Math.max(6, (int) (Math.sqrt(itemCount()) + 2));
+    }
+
+    @Override
+    public int minHeight() {
+        return Math.max(6, (int) (Math.sqrt(itemCount()) + 2));
+    }
+
+    public int itemCount() {
+        if (itemsToSpawn == null) itemsToSpawn = generateItems();
+        return itemsToSpawn.size();
+    }
+
+    public void paint(Level level) {
+
+        Painter.fill(level, this, Terrain.WALL);
+        Painter.fill(level, this, 1, Terrain.EMPTY_SP);
+
+        placeShopkeeper(level);
+
+        placeItems(level);
+
+        for (Door door : connected.values()) {
+            door.set(Door.Type.REGULAR);
         }
 
-        @Override
-        public int minHeight() {
-            return Math.max(6, (int)(Math.sqrt(itemCount())+2));
+    }
+
+    protected void placeShopkeeper(Level level) {
+
+        int pos = level.pointToCell(center());
+
+        Mob shopkeeper = new MiniShopkeeper();
+        shopkeeper.pos = pos;
+        level.mobs.add(shopkeeper);
+
+    }
+
+    protected void placeItems(Level level) {
+
+        if (itemsToSpawn == null) {
+            itemsToSpawn = generateItems();
         }
 
-        public int itemCount(){
-            if (itemsToSpawn == null) itemsToSpawn = generateItems();
-            return itemsToSpawn.size();
+        Point itemPlacement = new Point(entrance());
+        if (itemPlacement.y == top) {
+            itemPlacement.y++;
+        } else if (itemPlacement.y == bottom) {
+            itemPlacement.y--;
+        } else if (itemPlacement.x == left) {
+            itemPlacement.x++;
+        } else {
+            itemPlacement.x--;
         }
 
-        public void paint(Level level ) {
+        for (Item item : itemsToSpawn) {
 
-            Painter.fill( level, this, Terrain.WALL );
-            Painter.fill( level, this, 1, Terrain.EMPTY_SP );
-
-            placeShopkeeper( level );
-
-            placeItems( level );
-
-            for (Door door : connected.values()) {
-                door.set( Door.Type.REGULAR );
-            }
-
-        }
-
-        protected void placeShopkeeper( Level level ) {
-
-            int pos = level.pointToCell(center());
-
-            Mob shopkeeper = new MiniShopkeeper();
-            shopkeeper.pos = pos;
-            level.mobs.add( shopkeeper );
-
-        }
-
-        protected void placeItems( Level level ){
-
-            if (itemsToSpawn == null){
-                itemsToSpawn = generateItems();
-            }
-
-            Point itemPlacement = new Point(entrance());
-            if (itemPlacement.y == top){
-                itemPlacement.y++;
-            } else if (itemPlacement.y == bottom) {
+            if (itemPlacement.x == left + 1 && itemPlacement.y != top + 1) {
                 itemPlacement.y--;
-            } else if (itemPlacement.x == left){
+            } else if (itemPlacement.y == top + 1 && itemPlacement.x != right - 1) {
                 itemPlacement.x++;
+            } else if (itemPlacement.x == right - 1 && itemPlacement.y != bottom - 1) {
+                itemPlacement.y++;
             } else {
                 itemPlacement.x--;
             }
 
-            for (Item item : itemsToSpawn) {
+            int cell = level.pointToCell(itemPlacement);
 
-                if (itemPlacement.x == left+1 && itemPlacement.y != top+1){
-                    itemPlacement.y--;
-                } else if (itemPlacement.y == top+1 && itemPlacement.x != right-1){
-                    itemPlacement.x++;
-                } else if (itemPlacement.x == right-1 && itemPlacement.y != bottom-1){
-                    itemPlacement.y++;
-                } else {
-                    itemPlacement.x--;
-                }
-
-                int cell = level.pointToCell(itemPlacement);
-
-                if (level.heaps.get( cell ) != null) {
-                    do {
-                        cell = level.pointToCell(random());
-                    } while (level.heaps.get( cell ) != null || level.findMob( cell ) != null);
-                }
-
-                level.drop( item, cell ).type = Heap.Type.FOR_SALE;
+            if (level.heaps.get(cell) != null) {
+                do {
+                    cell = level.pointToCell(random());
+                } while (level.heaps.get(cell) != null || level.findMob(cell) != null);
             }
 
+            Heap heap = level.drop(item, cell);
+            heap.type = Heap.Type.FOR_SALE;
+            Integer price = priceOverrides.get(item);
+            if (price != null) heap.priceOverride = price;
         }
 
-        protected static ArrayList<Item> generateItems() {
+    }
 
-            ArrayList<Item> itemsToSpawn = new ArrayList<>();
+    //gold value of one point of alchemy energy, used to price crafted goods sold here
+    private static final int ENERGY_GOLD_VALUE = 10;
 
-            itemsToSpawn.add( new MerchantsBeacon() );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.POTION ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.SCROLL ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.RING ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.STONE ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.SEED ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.N_INGREDINETS ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.N_INGREDINETS ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.N_INGREDINETS ) );
-            itemsToSpawn.add( Generator.randomUsingDefaults( Generator.Category.N_INGREDINETS ) );
+    private static int craftedPrice(Item item, int energyCost) {
+        int augmentedValue = item.value() + energyCost * ENERGY_GOLD_VALUE;
+        int markup = Dungeon.isChallenged(Challenges.NO_HERBALISM) ? 8 : 6;
+        int price = augmentedValue * markup * (Dungeon.depth / 5 + 1);
+        return Math.round(price / 10f) * 10;
+    }
 
-            if (Random.Int(8) == 0) {
-                itemsToSpawn.add( new ScrollOfTransmutation() );
-            }
-            else itemsToSpawn.add( new PotionOfHealing() );
+    //recipes for one-off crafted goods sold here; picked from directly so the shop always
+    //stocks the exact item (and quantity) the recipe actually produces
+    private static final Recipe[] SIGNATURE_RECIPES = new Recipe[]{
+            new PhaseShift.Recipe(),
+            new ChaosCatalyst.Recipe(),
+            new AlchemicalCatalyst.Recipe(),
+            new Alchemize.Recipe(),
+            new AquaBlast.Recipe(),
+            new Avantgardeform.Recipe(),
+            new BeaconOfReturning.Recipe(),
+            new BlastSpell.Recipe(),
+            new CurseInfusion.Recipe(),
+            new FeatherFall.Recipe(),
+            new KollamSword.Recipe(),
+            new MagicalArmord.Recipe(),
+            new MagicalInfusion.Recipe(),
+            new OathofFire.Recipe(),
+            new PortableCover.Recipe(),
+            new ReclaimTrap.Recipe(),
+            new Recycle.Recipe(),
+            new SaltBlast.Recipe(),
+            new ScrollOfWarp.Recipe(),
+            new WeaponTransform.Recipe(),
+            new WildEnergy.Recipe(),
+    };
 
-            return itemsToSpawn;
-        }
+    private void addSignatureItem(ArrayList<Item> itemsToSpawn) {
+        Recipe recipe = SIGNATURE_RECIPES[Random.Int(SIGNATURE_RECIPES.length)];
+        ArrayList<Item> noIngredients = new ArrayList<>();
+        Item item = recipe.sampleOutput(noIngredients);
+        item.cursed = false;
+        item.identify();
+        priceOverrides.put(item, craftedPrice(item, recipe.cost(noIngredients)));
+        itemsToSpawn.add(item);
+    }
+
+    private void addElixirOrBrew(ArrayList<Item> itemsToSpawn) {
+        Item item = Generator.randomUsingDefaults(Generator.Category.ELIXIR_BREW);
+        priceOverrides.put(item, craftedPrice(item, 6));
+        itemsToSpawn.add(item);
+    }
+
+    private void addExotic(ArrayList<Item> itemsToSpawn, Generator.Category category) {
+        Item item = Generator.randomUsingDefaults(category);
+        priceOverrides.put(item, craftedPrice(item, 0));
+        itemsToSpawn.add(item);
+    }
+
+    protected ArrayList<Item> generateItems() {
+
+        ArrayList<Item> itemsToSpawn = new ArrayList<>();
+
+        itemsToSpawn.add(new MerchantsBeacon());
+
+        //matches how ShopRoom preps its rare-artifact roll; Catastrofe already prices like any
+        //other fresh artifact via the inherited Artifact.value() (100 base), this just guarantees
+        //it can never appear cursed/discounted
+        Item catastrofe = new Catastrofe();
+        catastrofe.cursed = false;
+        catastrofe.cursedKnown = true;
+        itemsToSpawn.add(catastrofe);
+
+        addElixirOrBrew(itemsToSpawn);
+        addElixirOrBrew(itemsToSpawn);
+        addElixirOrBrew(itemsToSpawn);
+        addExotic(itemsToSpawn, Generator.Category.EXOTIC_POTION);
+        addExotic(itemsToSpawn, Generator.Category.EXOTIC_SCROLL);
+        addSignatureItem(itemsToSpawn);
+        addSignatureItem(itemsToSpawn);
+
+        if (Random.Int(8) == 0) {
+            itemsToSpawn.add(new ScrollOfTransmutation());
+        } else itemsToSpawn.add(new PotionOfHealing());
+
+        return itemsToSpawn;
+    }
 }
