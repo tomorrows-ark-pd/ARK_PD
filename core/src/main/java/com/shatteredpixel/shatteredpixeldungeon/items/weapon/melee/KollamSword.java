@@ -45,6 +45,11 @@ public class KollamSword extends MeleeWeapon {
     }
 
     @Override
+    public int value() {
+        return super.value() + 150;
+    }
+
+    @Override
     public int proc(Char attacker, Char defender, int damage) {
         SPCharge(2);
         return super.proc(attacker, defender, damage);

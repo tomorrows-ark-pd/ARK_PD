@@ -76,6 +76,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Heamyo;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.NEARL_AXE;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Usg;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.LightKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
@@ -175,25 +176,7 @@ public enum HeroClass {
 
             new Wrench().identify().collect();
             new Catastrofe().identify().collect();
-
-            // Catalog collection test fixtures. Uncomment one section at a time to avoid flooding inventory.
-
-            // collectCatalogItems(Catalog.POTIONS.items());
-            // collectCatalogItems(Catalog.SCROLLS.items());
-            // collectCatalogItems(Catalog.SEEDS.items());
-            // collectCatalogItems(Catalog.STONES.items());
-            // collectCatalogItems(Catalog.FOOD.items());
-            // collectCatalogItems(Catalog.EXOTIC_POTIONS.items());
-            // collectCatalogItems(Catalog.EXOTIC_SCROLLS.items());
-            // collectCatalogItems(Catalog.BOMBS.items());
-            // collectCatalogItems(Catalog.TIPPED_DARTS.items());
-            // collectCatalogItems(Catalog.BREWS_ELIXIRS.items());
-            // collectCatalogItems(Catalog.SPELLS.items());
-            // collectCatalogItems(Catalog.MISC_CONSUMABLES.items());
-
-            // These catalog sections are effects rather than inventory items.
-            // markCatalogSeen(Catalog.ENCHANTMENTS.items());
-            // markCatalogSeen(Catalog.GLYPHS.items());
+            new Usg().identify().collect();
         }
 
         Dungeon.LimitedDrops.FOOD_BAG.drop();

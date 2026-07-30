@@ -135,6 +135,9 @@ public class MiniShopRoom extends SecretRoom {
     //gold value of one point of alchemy energy, used to price crafted goods sold here
     private static final int ENERGY_GOLD_VALUE = 10;
 
+    //shallow depths use at least this depth multiplier, so early-game prices aren't too cheap
+    private static final int MIN_DEPTH_MULTIPLIER = 2;
+
     private static int craftedPrice(Item item, int energyCost) {
         int augmentedValue = item.value() + energyCost * ENERGY_GOLD_VALUE;
         int markup = Dungeon.isChallenged(Challenges.NO_HERBALISM) ? 8 : 6;
@@ -142,8 +145,13 @@ public class MiniShopRoom extends SecretRoom {
         return Math.round(price / 10f) * 10;
     }
 
-    //recipes for one-off crafted goods sold here; picked from directly so the shop always
-    //stocks the exact item (and quantity) the recipe actually produces
+    // pricier at shallow depths
+    private static int staplePrice(Item item) {
+        int markup = Dungeon.isChallenged(Challenges.NO_HERBALISM) ? 7 : 5;
+        int depthMultiplier = Math.max(MIN_DEPTH_MULTIPLIER, Dungeon.depth / 5 + 1);
+        return item.value() * markup * depthMultiplier;
+    }
+
     private static final Recipe[] SIGNATURE_RECIPES = new Recipe[]{
             new PhaseShift.Recipe(),
             new ChaosCatalyst.Recipe(),
@@ -196,12 +204,12 @@ public class MiniShopRoom extends SecretRoom {
 
         itemsToSpawn.add(new MerchantsBeacon());
 
-        //matches how ShopRoom preps its rare-artifact roll; Catastrofe already prices like any
-        //other fresh artifact via the inherited Artifact.value() (100 base), this just guarantees
-        //it can never appear cursed/discounted
+        //matches how ShopRoom preps its rare-artifact roll; cursed=false/cursedKnown=true
+        //guarantees it can never appear discounted, same as ShopRoom's own rare-artifact prep
         Item catastrofe = new Catastrofe();
         catastrofe.cursed = false;
         catastrofe.cursedKnown = true;
+        priceOverrides.put(catastrofe, staplePrice(catastrofe));
         itemsToSpawn.add(catastrofe);
 
         addElixirOrBrew(itemsToSpawn);

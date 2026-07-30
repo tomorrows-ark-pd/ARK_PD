@@ -36,7 +36,9 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ZaaroSprite;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-//summoned by Catastrofe; uses its own FOV like any other mob, but that FOV is shared back to the hero (see Level.updateFieldOfView)
+//summoned by Catastrofe, which attaches a TalismanOfForesight.CharAwareness buff (same mechanic Lens/Panorama uses)
+//pointed at this Zaaro's id, giving the hero a live halo around it instead of Zaaro sharing its own FOV directly
+//(that leaked into heroFOV/visited like Ward/Lotus and caused flickering/stale fog since Zaaro moves)
 public class Zaaro extends NPC {
 
     {

@@ -22,8 +22,24 @@
 package com.shatteredpixel.shatteredpixeldungeon.journal;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Foliage;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.WaterOfAdvanceguard;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.WaterOfAwareness;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.WaterOfHealth;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.WaterOfTransmutation;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Statue;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ceylon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ghost;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.GreenCat;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.MiniShopkeeper;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
+import com.shatteredpixel.shatteredpixeldungeon.items.LostBackpack;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.AceSprite;
@@ -176,8 +192,32 @@ public class Notes {
 		}
 
 		@Override
-		public String desc() {
+		public String title() {
 			return landmark.desc();
+		}
+
+		//falls back to the landmark's name if the linked entity has no desc of its own
+		@Override
+		public String desc() {
+			switch (landmark) {
+				case WELL_OF_HEALTH:        return Messages.get(WaterOfHealth.class, "desc");
+				case WELL_OF_AWARENESS:     return Messages.get(WaterOfAwareness.class, "desc");
+				case WELL_OF_TRANSMUTATION: return Messages.get(WaterOfTransmutation.class, "desc");
+				case WELL_OF_ADVANCEGUARD:  return Messages.get(WaterOfAdvanceguard.class, "desc");
+				case ALCHEMY:                return Messages.get(Level.class, "alchemy_desc");
+				case GARDEN:                 return Messages.get(Foliage.class, "desc");
+				case STATUE:                 return Messages.get(Statue.class, "desc");
+				case SHOP:                   return Messages.get(Shopkeeper.class, "desc");
+				case MINI_SHOP:              return Messages.get(MiniShopkeeper.class, "desc");
+				case GHOST:                  return Messages.get(Ghost.class, "desc");
+				case WANDMAKER:              return Messages.get(Wandmaker.class, "desc");
+				case TROLL:                  return Messages.get(Blacksmith.class, "desc");
+				case IMP:                    return Messages.get(Imp.class, "desc");
+				case GREENCAT:               return Messages.get(GreenCat.class, "desc");
+				case CEYLON:                 return Messages.get(Ceylon.class, "desc");
+				case LOST_PACK:              return Messages.get(LostBackpack.class, "desc");
+				default:                     return landmark.desc();
+			}
 		}
 
 		@Override

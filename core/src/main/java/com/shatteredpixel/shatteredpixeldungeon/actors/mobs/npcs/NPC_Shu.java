@@ -31,7 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_ShuSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_guardSprite;
 
-public abstract class NPC_Shu extends Mob {
+public class NPC_Shu extends Mob {
     {
         spriteClass = NPC_ShuSprite.class;
         properties.add(Char.Property.IMMOVABLE);
@@ -55,8 +55,7 @@ public abstract class NPC_Shu extends Mob {
     }
 
     public static void spawn(Level level, int ppos) {
-        NPC_Shu npc = new NPC_Shu() {
-        };
+        NPC_Shu npc = new NPC_Shu();
         do {
             npc.pos = ppos;
         } while (npc.pos == -1);

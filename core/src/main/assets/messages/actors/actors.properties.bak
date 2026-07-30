@@ -1088,7 +1088,7 @@ actors.mobs.npcs.closure.quest_next=오른쪽에 있는 퓨어스트림에게도
 actors.mobs.npcs.purestream.name=퓨어스트림
 actors.mobs.npcs.purestream.desc=로도스 아일랜드의 대원.\n\n_퀘스트가 있는 NPC입니다._
 actors.mobs.npcs.purestream.idle=안녕하세요. 무슨 일이신가요?
-actors.mobs.npcs.purestream.quest_done=안녕! 여기까지 오느라 수고했어~ (장소 설명).
+actors.mobs.npcs.purestream.quest_done=안녕! 여기까지 오느라 수고했어~
 actors.mobs.npcs.purestream.quest_next=준비 다 했으면 로도스 밖에 있는 가드 오퍼레이터한테 가봐, 부탁할게 있다고 했었어. 출구는 상점 구역 나가서 오른쪽으로 쭉 가면 돼!
 # 배달 드론 (튜토리얼 퀘스트 3) - TODO: 대사 검수 필요
 actors.mobs.npcs.deliverydrone.name=배달 드론

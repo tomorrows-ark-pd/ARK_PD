@@ -36,36 +36,29 @@ public class Wrench extends Wand {
         else return Ballistica.PROJECTILE;
     }
 
-    private boolean sentryAvailable = true;
-
     @Override
     public boolean tryToZap(Hero owner, int target) {
 
-        int currentSentryEnergy = 0;
-        for (Char ch : Actor.chars()) {
-            if (ch instanceof Sentry) {
-                currentSentryEnergy += ((Sentry) ch).tier;
-            }
-        }
+        //upgrading an existing sentry no longer costs energy, only placing a new one does
+        Char ch = Actor.findChar(target);
+        if (!(ch instanceof Sentry)) {
 
-        int maxSentryEnergy = 0;
-        for (Buff buff : curUser.buffs()) {
-            if (buff instanceof Wand.Charger) {
-                if (((Charger) buff).wand() instanceof Wrench) {
-                    maxSentryEnergy += 2 + ((Charger) buff).wand().level();
+            int currentSentryEnergy = 0;
+            for (Char c : Actor.chars()) {
+                if (c instanceof Sentry) {
+                    currentSentryEnergy += ((Sentry) c).tier;
                 }
             }
-        }
 
-        sentryAvailable = (currentSentryEnergy < maxSentryEnergy);
-
-        Char ch = Actor.findChar(target);
-        if (ch instanceof Sentry) {
-            if (!sentryAvailable) {
-                GLog.w(Messages.get(this, "no_more_wards"));
-                return false;
+            int maxSentryEnergy = 0;
+            for (Buff buff : curUser.buffs()) {
+                if (buff instanceof Wand.Charger) {
+                    if (((Charger) buff).wand() instanceof Wrench) {
+                        maxSentryEnergy += 2 + ((Charger) buff).wand().level();
+                    }
+                }
             }
-        } else {
+
             if ((currentSentryEnergy + 1) > maxSentryEnergy) {
                 GLog.w(Messages.get(this, "no_more_wards"));
                 return false;
@@ -97,8 +90,14 @@ public class Wrench extends Wand {
 
         } else if (ch != null) {
             if (ch instanceof Sentry) {
-                ((Sentry) ch).upgrade(buffedLvl());
-                ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, ((Sentry) ch).tier);
+                Sentry sentry = (Sentry) ch;
+                //upgrading requires repeated zaps while at max HP, otherwise the zap just heals
+                if (sentry.HP >= sentry.HT) {
+                    sentry.registerUpgradeZap(buffedLvl());
+                } else {
+                    sentry.wandHeal(buffedLvl());
+                }
+                ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, sentry.tier);
             } else {
                 GLog.w(Messages.get(this, "bad_location"));
                 Dungeon.level.pressCell(target);
@@ -132,7 +131,17 @@ public class Wrench extends Wand {
 
     @Override
     public void onHit(MagesStaff staff, Char attacker, Char defender, int damage) {
-        //sentries are single-use and cannot be healed, so there is no on-hit effect
+
+        int level = Math.max(0, staff.buffedLvl());
+
+        if (Random.Int(level + 5) >= 4) {
+            for (Char ch : Actor.chars()) {
+                if (ch instanceof Sentry) {
+                    ((Sentry) ch).wandHeal(staff.buffedLvl());
+                    ch.sprite.emitter().burst(MagicMissile.WardParticle.UP, ((Sentry) ch).tier);
+                }
+            }
+        }
     }
 
     @Override
@@ -149,6 +158,7 @@ public class Wrench extends Wand {
         private int wandLevel = 1;
 
         public int totalZaps = 0;
+        private int upgradeProgress = 0;
 
         {
             spriteClass = SentrySprite.class;
@@ -160,6 +170,8 @@ public class Wrench extends Wand {
 
             viewDistance = 4;
             state = WANDERING;
+
+            HT = HP = 50;
         }
 
         @Override
@@ -167,36 +179,79 @@ public class Wrench extends Wand {
             return Messages.get(this, "name_" + tier);
         }
 
-        public void upgrade(int wandLevel) {
+        //upgrading requires being zapped while at max HP: twice for tier 1->2, thrice for tier 2->3
+        public void registerUpgradeZap(int wandLevel) {
             if (this.wandLevel < wandLevel) {
                 this.wandLevel = wandLevel;
             }
 
-            if (tier < 3) {
-                tier++;
-                viewDistance++;
-                if (sprite != null) {
-                    ((SentrySprite) sprite).updateTier(tier);
-                    sprite.place(pos);
-                }
-                GameScene.updateFog(pos, viewDistance + 1);
+            int threshold;
+            switch (tier) {
+                case 1: threshold = 2; break;
+                case 2: threshold = 3; break;
+                case 3: default:
+                    wandHeal(wandLevel);
+                    return;
             }
 
+            if (++upgradeProgress < threshold) return;
+            upgradeProgress = 0;
+
+            switch (tier) {
+                case 1: HT = 90; break;
+                case 2: HT = 150; break;
+            }
+            HP = HT;
+
+            tier++;
+            viewDistance++;
+            if (sprite != null) {
+                ((SentrySprite) sprite).updateTier(tier);
+                sprite.place(pos);
+            }
+            GameScene.updateFog(pos, viewDistance + 1);
+        }
+
+        private void wandHeal(int wandLevel) {
+            if (this.wandLevel < wandLevel) {
+                this.wandLevel = wandLevel;
+            }
+
+            int heal;
+            switch (tier) {
+                default:
+                    return;
+                case 1:
+                    heal = 13;
+                    break;
+                case 2:
+                    heal = 20;
+                    break;
+                case 3:
+                    heal = 30;
+                    break;
+            }
+
+            HP = Math.min(HT, HP + heal);
+            if (sprite != null) sprite.showStatus(CharSprite.POSITIVE, Integer.toString(heal));
         }
 
         @Override
         public int defenseSkill(Char enemy) {
+            defenseSkill = Dungeon.depth + 8;
             return super.defenseSkill(enemy);
         }
 
         @Override
         public int drRoll() {
-            return 0;
+            //1.5x Ward's DR roll, tiers 1-3 mapped to Ward's tier 4-6 denominators
+            return Math.round(1.5f * Random.NormalIntRange(0, 3 + Dungeon.depth / 2) / (4f - tier));
         }
 
         @Override
         protected float attackDelay() {
-            return 2f;
+            //tier 1 attacks every 3 turns, tiers 2-3 attack every turn
+            return tier <= 1 ? 3f : 1f;
         }
 
         @Override
@@ -219,21 +274,44 @@ public class Wrench extends Wand {
         private void zap() {
             spend(1f);
 
-            //always hits
-            int dmg = Random.NormalIntRange(2 + wandLevel, 8 + 4 * wandLevel);
+            //always hits, tier base range scaling with wandLevel (min +1/lvl, max +2/lvl)
+            //avg dmg at wandLevel 0 accounts for fire rate: tier 1 = 10, tier 2 = 7, tier 3 = 10
+            int dmg;
+            switch (tier) {
+                case 1: default: dmg = Random.NormalIntRange(5 + wandLevel, 15 + 2 * wandLevel); break;
+                case 2: dmg = Random.NormalIntRange(5 + wandLevel, 9 + 2 * wandLevel); break;
+                case 3: dmg = Random.NormalIntRange(wandLevel, 20 + 2 * wandLevel); break;
+            }
             enemy.damage(dmg, this);
+            //gun-style hit effect
+            enemy.sprite.burst(0xFFFFFFFF, tier + 2);
+            Sample.INSTANCE.play(Assets.Sounds.HIT, 1, Random.Float(0.87f, 1.15f));
             if (enemy.isAlive()) {
                 Wand.processSoulMark(enemy, wandLevel, 1);
+            }
+
+            totalZaps++;
+            //tier 3 knocks back every 4th attack, weaker than WandOfBlastWave
+            if (tier >= 3 && enemy.isAlive() && totalZaps % 4 == 0) {
+                Ballistica line = new Ballistica(pos, enemy.pos, Ballistica.MAGIC_BOLT);
+                if (line.path.size() > line.dist + 1) {
+                    Ballistica knockback = new Ballistica(enemy.pos, line.path.get(line.dist + 1), Ballistica.MAGIC_BOLT);
+                    WandOfBlastWave.throwChar(enemy, knockback, 2);
+                }
             }
 
             if (!enemy.isAlive() && enemy == Dungeon.hero) {
                 Dungeon.fail(getClass());
             }
 
-            totalZaps++;
-            if (totalZaps >= (2 * tier - 1)) {
-                die(this);
+            //no zap-count death limit, always takes self-damage instead
+            int selfDmg;
+            switch (tier) {
+                case 1: default: selfDmg = 20; break;
+                case 2: selfDmg = 8; break;
+                case 3: selfDmg = 10; break;
             }
+            damage(selfDmg, this);
         }
 
         public void onZapComplete() {
@@ -303,7 +381,14 @@ public class Wrench extends Wand {
 
         @Override
         public String description() {
-            return Messages.get(this, "desc_" + tier, 2 + wandLevel, 8 + 4 * wandLevel, tier);
+            int dmgMin;
+            int dmgMax;
+            switch (tier) {
+                case 1: default: dmgMin = 5 + wandLevel; dmgMax = 15 + 2 * wandLevel; break;
+                case 2: dmgMin = 5 + wandLevel; dmgMax = 9 + 2 * wandLevel; break;
+                case 3: dmgMin = wandLevel; dmgMax = 20 + 2 * wandLevel; break;
+            }
+            return Messages.get(this, "desc_" + tier, dmgMin, dmgMax, tier);
         }
 
         {
@@ -313,6 +398,7 @@ public class Wrench extends Wand {
         private static final String TIER = "tier";
         private static final String WAND_LEVEL = "wand_level";
         private static final String TOTAL_ZAPS = "total_zaps";
+        private static final String UPGRADE_PROGRESS = "upgrade_progress";
 
         @Override
         public void storeInBundle(Bundle bundle) {
@@ -320,6 +406,7 @@ public class Wrench extends Wand {
             bundle.put(TIER, tier);
             bundle.put(WAND_LEVEL, wandLevel);
             bundle.put(TOTAL_ZAPS, totalZaps);
+            bundle.put(UPGRADE_PROGRESS, upgradeProgress);
         }
 
         @Override
@@ -329,6 +416,7 @@ public class Wrench extends Wand {
             viewDistance = 3 + tier;
             wandLevel = bundle.getInt(WAND_LEVEL);
             totalZaps = bundle.getInt(TOTAL_ZAPS);
+            upgradeProgress = bundle.getInt(UPGRADE_PROGRESS);
         }
 
         {

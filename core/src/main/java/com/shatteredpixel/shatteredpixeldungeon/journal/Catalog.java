@@ -87,6 +87,25 @@ import com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.SkeletonKey;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Bottle;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.CorpseDust;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.DwarfToken;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Gamza;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.GooBlob;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.MetalShard;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Nmould;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Nullshield;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Obsidian;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCat;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Rose;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.TeaRose;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token1;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token2;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token3;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token4;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
@@ -235,7 +254,8 @@ public enum Catalog {
 	TIPPED_DARTS,
 	BREWS_ELIXIRS,
 	SPELLS,
-	MISC_CONSUMABLES;
+	MISC_CONSUMABLES,
+	INGREDIENTS;
 
 	//tracks whether an item has been collected while identified
 	private final LinkedHashMap<Class<?>, Boolean> seen = new LinkedHashMap<>();
@@ -400,6 +420,13 @@ public enum Catalog {
 				Snowsants_Coin.class, AnnihilationGear.class, RandomBox.class,
 				TomeOfMastery.class, LostBackpack.class, RingKit.class);
 
+		//items with no function of their own, only used as fuel for a recipe or a special combination
+		INGREDIENTS.addItems(MetalShard.class, Nullshield.class, Gamza.class, Nmould.class,
+				GooBlob.class, DarkGold.class, Embers.class, Bottle.class, TeaRose.class,
+				Rose.class, DwarfToken.class, Obsidian.class,
+				Token1.class, Token2.class, Token3.class, Token4.class,
+				CorpseDust.class, QuestCat.class, CeremonialCandle.class);
+
 	}
 
 	//old badges for pre-2.5
@@ -442,6 +469,7 @@ public enum Catalog {
 		consumableCatalogs.add(BREWS_ELIXIRS);
 		consumableCatalogs.add(SPELLS);
 		consumableCatalogs.add(MISC_CONSUMABLES);
+		consumableCatalogs.add(INGREDIENTS);
 	}
 
 	public static boolean isSeen(Class<?> cls){

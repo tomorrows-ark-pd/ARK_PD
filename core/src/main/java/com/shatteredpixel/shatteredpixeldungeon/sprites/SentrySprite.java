@@ -1,19 +1,18 @@
 package com.shatteredpixel.shatteredpixeldungeon.sprites;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Beam;
 import com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
-import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.tweeners.AlphaTweener;
+import com.watabou.utils.Callback;
 
 public class SentrySprite extends MobSprite {
 
-    private Animation tierIdles[] = new Animation[7];
+    private Animation tierIdles[] = new Animation[4];
 
     public SentrySprite() {
         super();
@@ -31,33 +30,35 @@ public class SentrySprite extends MobSprite {
         tierIdles[3] = new Animation(1, true);
         tierIdles[3].frames(frames, 2);
 
-        tierIdles[4] = new Animation(1, true);
-        tierIdles[4].frames(frames, 3);
-
-        tierIdles[5] = new Animation(1, true);
-        tierIdles[5].frames(frames, 4);
-
-        tierIdles[6] = new Animation(1, true);
-        tierIdles[6].frames(frames, 5);
-
     }
 
     @Override
     public void zap(int pos) {
+        turnTo(ch.pos, pos);
         idle();
         flash();
-        emitter().burst(MagicMissile.WardParticle.UP, 2);
-        if (Actor.findChar(pos) != null) {
-            parent.add(new Beam.DeathRay(center(), Actor.findChar(pos).sprite.center()));
-        } else {
-            parent.add(new Beam.DeathRay(center(), DungeonTilemap.raisedTileCenterToWorld(pos)));
-        }
-        ((Wrench.Sentry) ch).onZapComplete();
+        //gun-style shot, matches GunWeapon's fx()
+        MagicMissile.boltFromChar(parent, MagicMissile.GUN_SHOT, this, pos, new Callback() {
+            @Override
+            public void call() {
+                ((Wrench.Sentry) ch).onZapComplete();
+            }
+        });
     }
 
     @Override
     public void turnTo(int from, int to) {
-        //do nothing
+        //sprite art faces left by default, opposite of CharSprite's default assumption
+        int fx = from % Dungeon.level.width();
+        int tx = to % Dungeon.level.width();
+        if (tx > fx) {
+            flipHorizontal = true;
+        } else if (tx < fx) {
+            flipHorizontal = false;
+        }
+        //idle animations are single-frame loops, so MovieClip never re-calls frame() on its
+        //own to pick up the flip; force the vertex rebuild here instead
+        updateFrame();
     }
 
     @Override
@@ -73,17 +74,6 @@ public class SentrySprite extends MobSprite {
                 parent.erase(this);
             }
         });
-    }
-
-    @Override
-    public void resetColor() {
-        super.resetColor();
-        if (ch instanceof Wrench.Sentry) {
-            Wrench.Sentry ward = (Wrench.Sentry) ch;
-            if (ward.tier <= 3) {
-                brightness(Math.max(0.2f, 1f - (ward.totalZaps / (float) (2 * ward.tier - 1))));
-            }
-        }
     }
 
     public void linkVisuals(Char ch) {

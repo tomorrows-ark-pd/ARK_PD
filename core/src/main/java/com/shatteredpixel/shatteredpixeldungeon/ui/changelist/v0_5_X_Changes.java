@@ -10,9 +10,58 @@ import java.util.ArrayList;
 
 public class v0_5_X_Changes {
     public static void addAllChanges(ArrayList<ChangeInfo> changeInfos) {
+        add_v0_5_3_Changes(changeInfos);
         add_v0_5_2_Changes(changeInfos);
         add_v0_5_1_Changes(changeInfos);
         add_v0_5_0_Changes(changeInfos);
+    }
+
+    public static void add_v0_5_3_Changes(ArrayList<ChangeInfo> changeInfos) {
+        ChangeInfo changes = new ChangeInfo("v0.5.3", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+        changes.hardlight(Window.TITLE_COLOR);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "로도스 상점 추가",
+                "로도스 오른쪽 아래에 클로저가 새로 상점을 차렸습니다. 정보증명서를 사용하여 아이템을 구매할 수 있습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.SCROLL), "퀘스트라인",
+                "여러 목표를 연달아서 완료해야 하는 퀘스트를 추가하였습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.WEP_WOND), "렌치",
+                "특정 조합으로 얻을 수 있는 특별한 아이템입니다. 사용시 튼튼한 센트리를 소환하며, 3티어까지 강화 가능합니다. 센트리는 매 공격마다 체력을 소모하며, 렌치를 사용하서 체력을 회복 할 수 있습니다." + "\n\n" +
+                        "1티어: 3턴마다 공격합니다." + "\n\n" +
+                        "2티어: 1턴마다 공격합니다." + "\n\n" +
+                        "3티어: 1턴마다 공격합니다. 4번째 공격마다 적들을 밀쳐내는 충격파를 발사합니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARTI), "종막 - 재난",
+                "특수한 상점에서 볼 수 있는 특별한 유물입니다. 사용 시 특별한 소환수 3마리를 소환하며, 소환수들은 적을 찾아 빠른 속도로 움직이며, 처음 발견한 적에게 광역 피해를 입히고 사라집니다."));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(CharSprite.WARNING);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "도감 UI 개편",
+                "도감 페이지가 완전히 새로 개편되었습니다. 게임 내 볼수 있는 아이템들과 적들은 도감에 등록 가능합니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "노트 UI 개편",
+                "노트 페이지의 레이아웃이 개편되었습니다. 이전에 기록되던 항목들과 퀘스트들을 볼 수 있습니다." + "\n\n" +
+                        "몇몇 퀘스트는 노트 UI를 통해 완료/포기가 가능합니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "로도스 확장 공사",
+                "이제 상점 구역으로 갈 수 있습니다. 스킨 해금은 이제 골든글로우 대원을 통해 할 수 있습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그픽스",
+                "풍차 수리검이 더이상 강화되지 않습니다." + "\n\n" +
+                        "앙크 관련 버그들이 수정." + "\n\n" +
+                        "여러 뱃지 관련 (표시, 해금) 버그 수정." + "\n\n" +
+                        "이펙트 관련 크래시 버그 수정." + "\n\n" +
+                        "박사를 들고 있을 경우 보너스 스테이지 적들의 어그로가 끌리는 버그 수정."));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
+        changes.hardlight(CharSprite.POSITIVE);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "상점 변경",
+                "텍사스의 상점에 희귀한 물건들이 나오도록 변경했습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BADGES), "뱃지 조정",
+                "게임 플레이 관련 뱃지의 요구 게임플레이 횟수가 250/1000에서 100/250으로 조정되었습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.WEP), "사격무기 변경",
+                "사격 무기가 W의 함정을 발동 시키지 않도록 변경."));
+        changeInfos.add(changes);
     }
 
     public static void add_v0_5_2_Changes(ArrayList<ChangeInfo> changeInfos) {

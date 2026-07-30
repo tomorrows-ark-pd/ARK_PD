@@ -24,11 +24,13 @@ package com.shatteredpixel.shatteredpixeldungeon.items;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -47,7 +49,10 @@ public class Dewdrop extends Item {
 	
 	@Override
 	public boolean doPickUp( Hero hero ) {
-		
+
+		Catalog.setSeen(getClass());
+		Statistics.itemTypesDiscovered.add(getClass());
+
 		DewVial vial = hero.belongings.getItem( DewVial.class );
 
 		if (vial != null && !vial.isFull()) {
@@ -61,18 +66,23 @@ public class Dewdrop extends Item {
 
 			if (!consumeDew(1, hero)){
 				return false;
+			} else {
+				Catalog.countUse(getClass());
 			}
-			
+
 		}
-		
+
 		Sample.INSTANCE.play( Assets.Sounds.DEWDROP );
 		hero.spendAndNext( TIME_TO_PICK_UP );
-		
+
 		return true;
 	}
 
 
 	public boolean doPickUp_auto( Hero hero ) {
+
+			Catalog.setSeen(getClass());
+			Statistics.itemTypesDiscovered.add(getClass());
 
 			DewVial vial = hero.belongings.getItem(DewVial.class);
 
@@ -87,6 +97,8 @@ public class Dewdrop extends Item {
 
 				if (!consumeDew(1, hero)) {
 					return false;
+				} else {
+					Catalog.countUse(getClass());
 				}
 
 			}

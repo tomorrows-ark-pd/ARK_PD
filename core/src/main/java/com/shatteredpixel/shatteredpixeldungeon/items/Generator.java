@@ -282,7 +282,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.FishingSpe
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ForceCube;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.HeavyBoomerang;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Javelin;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Kikitchenknife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.Kunai;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.LightKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
@@ -614,10 +613,9 @@ public class Generator {
                     Javelin.class,
                     Tomahawk.class,
                     HeavyBoomerang.class,
-                    Kikitchenknife.class, //crafted-only, never randomly rolled
                     UpMagazine.class       //crafted-only, never randomly rolled
             };
-            MIS_T4.probs = new float[]{6, 5, 4, 0, 0};
+            MIS_T4.probs = new float[]{6, 5, 4, 0};
 
             MIS_T5.classes = new Class<?>[]{
                     Trident.class,

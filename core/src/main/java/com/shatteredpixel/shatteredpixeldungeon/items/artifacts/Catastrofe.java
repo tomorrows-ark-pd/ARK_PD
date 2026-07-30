@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.artifacts;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
@@ -58,6 +59,8 @@ public class Catastrofe extends Artifact {
     private static final int SUMMON_COUNT = 3;
     private static final int RECHARGE_TURNS = 150;
     private static final int CURSED_SPAWN_MIN_DIST = 10;
+    //effectively lasts as long as the Zaaro does; CharAwareness auto-detaches once its target is gone
+    private static final int VISION_SHARE_DURATION = 999;
 
     @Override
     public ArrayList<String> actions(Hero hero) {
@@ -108,6 +111,7 @@ public class Catastrofe extends Artifact {
             Zaaro zaaro = new Zaaro();
             GameScene.add(zaaro);
             ScrollOfTeleportation.appear(zaaro, respawnPoints.get(index));
+            Buff.append(hero, TalismanOfForesight.CharAwareness.class, VISION_SHARE_DURATION).charID = zaaro.id();
 
             respawnPoints.remove(index);
             spawned++;
