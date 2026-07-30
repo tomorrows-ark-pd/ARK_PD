@@ -608,6 +608,8 @@ public class ItemSpriteSheet {
     public static final int ARTIFACT_NEARL = ARTIFACTS + 41;
     public static final int ARTIFACT_CAMERA = ARTIFACTS + 42;
     public static final int ARTIFACT_WALLET = ARTIFACTS + 43;
+    public static final int ARTIFACT_ZAARO = ARTIFACTS + 44;
+
 
     static {
         assignItemRect(ARTIFACT_CLOAK, 16, 16);

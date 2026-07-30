@@ -43,7 +43,7 @@ public class Catastrofe extends Artifact {
 
     {
         //placeholder art; ARTIFACT_HOLDER is the generic 16x16 "empty slot" icon, swap for real art later
-        image = ItemSpriteSheet.ARTIFACT_HOLDER;
+        image = ItemSpriteSheet.ARTIFACT_ZAARO;
 
         levelCap = 0;
 
