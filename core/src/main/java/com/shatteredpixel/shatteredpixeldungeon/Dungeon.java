@@ -43,6 +43,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Jessica;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker;
 import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -312,6 +313,7 @@ public class Dungeon {
         droppedItems = new SparseArray<>();
 
         LimitedDrops.reset();
+        DropTable.reset();
 
         chapters = new HashSet<>();
 
@@ -756,6 +758,7 @@ public class Dungeon {
             Notes.storeInBundle(bundle);
             Quests.storeInBundle(bundle);
             Generator.storeInBundle(bundle);
+            DropTable.storeInBundle(bundle);
             TheEndspeaker.Status.storeInBundle(bundle);
 
             int[] bundleArr = new int[generatedLevels.size()];
@@ -836,6 +839,7 @@ public class Dungeon {
         if (fullLoad) {
 
             LimitedDrops.restore(bundle.getBundle(LIMDROPS));
+            DropTable.restoreFromBundle(bundle); //clears when the key is absent; static state must not leak between runs
 
             chapters = new HashSet<>();
             int ids[] = bundle.getIntArray(CHAPTERS);

@@ -342,6 +342,7 @@ public class NewRhodesLevel2 extends Level {
         heap.priceOverride = price;
     }
 
+    //not DropTable-masked: createItems() runs once at level creation, before the player can reach Purestream
     private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices, boolean rerollQuality) {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
         Weapon w;

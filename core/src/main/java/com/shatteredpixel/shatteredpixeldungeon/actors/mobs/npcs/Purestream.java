@@ -6,8 +6,8 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.quests.TutorialQuestLine
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PurestreamSprite;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndDropTable;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
@@ -54,7 +54,13 @@ public class Purestream extends NPC {
             return true;
         }
 
-        sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "idle"));
+        //interact() runs on the actor thread; constructing a window there trips RenderedText's thread assert
+        Game.runOnRenderThread(new Callback() {
+            @Override
+            public void call() {
+                GameScene.show(new WndDropTable());
+            }
+        });
         return true;
     }
 
