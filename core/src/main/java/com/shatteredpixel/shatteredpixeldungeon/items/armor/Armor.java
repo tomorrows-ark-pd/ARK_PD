@@ -28,7 +28,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Guardoper_ItermUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Momentum;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -394,10 +393,11 @@ public class Armor extends EquipableItem {
 	//other things can equip these, for now we assume only the hero can be affected by levelling debuffs
 	@Override
 	public int buffedLvl() {
-		DriedRose rose = Dungeon.hero.belongings.getItem(DriedRose.class);
-		if (rose != null) {
-			if (this == rose.ghostArmor())
-				return Guardoper_ItermUpgrade.bounslevel(level());
+		DriedRose.roseRecharge roseRecharge=Dungeon.hero.buff(DriedRose.roseRecharge.class);
+		if (roseRecharge!=null) {
+			if (this == roseRecharge.getRose().ghostArmor()) {
+				return roseRecharge.bonusLevel(level());
+			}
 		}
 
 		if (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this )){

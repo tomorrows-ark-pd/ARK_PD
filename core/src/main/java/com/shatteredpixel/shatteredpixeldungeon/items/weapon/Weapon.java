@@ -29,7 +29,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Guardoper_ItermUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SeethingBurst;
@@ -323,10 +322,11 @@ abstract public class Weapon extends KindOfWeapon {
 	//overrides as other things can equip these
 	@Override
 	public int buffedLvl() {
-		DriedRose rose = Dungeon.hero.belongings.getItem(DriedRose.class);
-		if (rose != null) {
-			if (this == rose.ghostWeapon())
-				return Guardoper_ItermUpgrade.bounslevel(level());
+		DriedRose.roseRecharge roseRecharge=Dungeon.hero.buff(DriedRose.roseRecharge.class);
+		if (roseRecharge!=null){
+			if (this == roseRecharge.getRose().ghostWeapon()){
+				return roseRecharge.bonusLevel(level());
+			}
 		}
 
 		if (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this )){
