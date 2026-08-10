@@ -32,6 +32,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransB
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ChenSword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
@@ -347,7 +348,11 @@ public class NewRhodesLevel2 extends Level {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
         Weapon w;
         if (rerollQuality && tierIndex == 0) {
-            w = (Weapon) Reflection.newInstance(SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)]);
+            Class<?> cls = SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)];
+            //an unimbued MagesStaff NPEs, so shop copies always ship with a wand
+            w = cls == MagesStaff.class
+                    ? new MagesStaff(new WandOfMagicMissile())
+                    : (Weapon) Reflection.newInstance(cls);
         } else {
             Generator.Category c = tiers[tierIndex];
             w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
@@ -355,6 +360,8 @@ public class NewRhodesLevel2 extends Level {
         w.random();
         //shop weapons: no curse, small upgrade chance only (rest of the game keeps default odds)
         if (rerollQuality) applyShopQuality(w);
+        //level() bypasses upgrade(), so resync the imbued wand to the staff's rolled level
+        if (w instanceof MagesStaff) ((MagesStaff) w).updateWand(false);
         sellForCertificates(w, cell, prices[tierIndex]);
     }
 
