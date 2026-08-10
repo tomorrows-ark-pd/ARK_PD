@@ -204,6 +204,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Niansword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.PatriotSpear;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.SHISHIOH;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.SanktaBet;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ShieldWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Suffering;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
@@ -1652,6 +1653,11 @@ public class Hero extends Char {
 
     @Override
     public int defenseProc(Char enemy, int damage) {
+        //pre-DR damage, and fires even on a hit the DR fully absorbs; magic never routes through here
+        if (belongings.weapon() instanceof ShieldWeapon) {
+            ((ShieldWeapon) belongings.weapon()).onMitigated(this, damage);
+        }
+
         if (RingOfDominate.Dominate_curse(this) == true) {
             if (Random.Int(HT) > HP * 3) {
                 Buff.affect(this, Corruption.class);
@@ -1837,6 +1843,15 @@ public class Hero extends Char {
         if (belongings.armor() != null && belongings.armor().hasGlyph(AntiMagic.class, this)
                 && AntiMagic.RESISTS.contains(src.getClass())) {
             dmg -= AntiMagic.drRoll(belongings.armor().buffedLvl());
+        }
+
+        //the MAGIC augment is the only way a shield weapon covers damage that never touches Char.attack()
+        if (belongings.weapon() instanceof ShieldWeapon
+                && ((ShieldWeapon) belongings.weapon()).augment == ShieldWeapon.MAGIC
+                && AntiMagic.RESISTS.contains(src.getClass())) {
+            ShieldWeapon w = (ShieldWeapon) belongings.weapon();
+            w.onMitigated(this, dmg);
+            dmg = Math.max(0, dmg - Random.NormalIntRange(0, w.defenseFactor(this)));
         }
 
         if (buff(Talent.WarriorFoodImmunity.class) != null) {

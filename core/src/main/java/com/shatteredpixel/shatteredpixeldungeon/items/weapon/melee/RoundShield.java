@@ -23,13 +23,11 @@ package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CustomeSet;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class RoundShield extends MeleeWeapon {
+public class RoundShield extends ShieldWeapon {
 
 	{
 		image = ItemSpriteSheet.ROUND_SHIELD;
@@ -37,18 +35,18 @@ public class RoundShield extends MeleeWeapon {
 		hitSoundPitch = 1f;
 
 		tier = 3;
+
+		baseDefenseFactor = 4f;         //4 extra defence, plus 2 per level
+		defenseFactorPerLvl = 2f;
+
+		capBase = 20;                   //charge ceiling 20 at +0, 95 at +15
+		capPerLvl = 5;
 	}
 
 	@Override
 	public int max(int lvl) {
 		return  Math.round(2.5f*(tier+1)) +     //10 base, down from 20
 				lvl*(tier-1);                   //+2 per level, down from +4
-	}
-
-
-	@Override
-	public int defenseFactor( Char owner ) {
-		return 4+2*buffedLvl();     //4 extra defence, plus 2 per level;
 	}
 
 	@Override
@@ -59,13 +57,5 @@ public class RoundShield extends MeleeWeapon {
 				info += "\n\n" + Messages.get( RoundShield.class, "setbouns");}
 
 		return info;
-	}
-	
-	public String statsInfo(){
-		if (isIdentified()){
-			return Messages.get(this, "stats_desc", 4+2*buffedLvl());
-		} else {
-			return Messages.get(this, "typical_stats_desc", 4);
-		}
 	}
 }

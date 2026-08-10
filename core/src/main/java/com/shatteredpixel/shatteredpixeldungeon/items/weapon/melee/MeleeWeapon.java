@@ -69,7 +69,7 @@ public class MeleeWeapon extends Weapon {
 	
 	@Override
 	public int damageRoll(Char owner) {
-		int damage = augment.damageFactor(super.damageRoll( owner ));
+		int damage = augmentDamageFactor(super.damageRoll( owner ));
 
 		if (owner instanceof Hero) {
 			int exStr = ((Hero)owner).STR() - STRReq();
@@ -87,7 +87,7 @@ public class MeleeWeapon extends Weapon {
 		String info = desc();
 
 		if (levelKnown) {
-			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_known", tier, augment.damageFactor(min()), augment.damageFactor(max()), STRReq());
+			info += "\n\n" + Messages.get(MeleeWeapon.class, "stats_known", tier, augmentDamageFactor(min()), augmentDamageFactor(max()), STRReq());
 			if (STRReq() > Dungeon.hero.STR()) {
 				info += " " + Messages.get(this, "too_heavy");
 			} else if (Dungeon.hero.STR() > STRReq()){
@@ -103,18 +103,8 @@ public class MeleeWeapon extends Weapon {
 		String statsInfo = statsInfo();
 		if (!statsInfo.equals("")) info += "\n\n" + statsInfo;
 
-		switch (augment) {
-			case SPEED:
-				info += " " + Messages.get(Weapon.class, "faster");
-				break;
-			case DAMAGE:
-				info += " " + Messages.get(Weapon.class, "stronger");
-				break;
-			case OVERLOAD:
-				info += " " + Messages.get(Weapon.class, "overload");
-				break;
-			case NONE:
-		}
+		String augmentDescKey = augmentDescKey();
+		if (augmentDescKey != null) info += " " + Messages.get(Weapon.class, augmentDescKey);
 
 		if (enchantment != null && (cursedKnown || !enchantment.curse())){
 			info += "\n\n" + Messages.get(Weapon.class, "enchanted", enchantment.name());
