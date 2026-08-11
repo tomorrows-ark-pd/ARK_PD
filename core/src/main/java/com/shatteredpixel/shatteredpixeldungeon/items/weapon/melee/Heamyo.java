@@ -108,7 +108,7 @@ public class Heamyo extends MeleeWeapon {
 
         @Override
         public String prompt() {
-            return "훈련인형 소환/삭제";
+            return Messages.get(Heamyo.class, "prompt");
         }
     };
 
@@ -125,7 +125,7 @@ public class Heamyo extends MeleeWeapon {
 
         @Override
         public String prompt() {
-            return "좌표 출력할 셀 선택";
+            return Messages.get(Heamyo.class, "pos_prompt");
         }
     };
 
