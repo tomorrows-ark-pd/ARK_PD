@@ -37,7 +37,7 @@ public class NPC_Guard extends NPC {
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
 
         //tutorial step 2: hand out the cargo and advance to the delivery step (no reward)
-        if (q != null && q.at(2)) {
+        if (q != null && q.atOrResume(2)) {
             giveCargo();
             q.advance();
             tell(Messages.get(this, "say") + "\n\n" + Messages.get(this, "quest"));
@@ -45,7 +45,7 @@ public class NPC_Guard extends NPC {
         }
 
         //tutorial step 3 (delivery): re-give the cargo if it was lost, else just remind
-        if (q != null && q.at(3)) {
+        if (q != null && q.atOrResume(3)) {
             if (Dungeon.hero.belongings.getItem(QuestCargo.class) == null) {
                 giveCargo();
             }

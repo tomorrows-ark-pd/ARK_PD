@@ -47,6 +47,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatCutlet;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfIcyTouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLevitation;
@@ -79,6 +80,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.NEARL_AXE;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RoundShield;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.LightKnife;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.NormalMagazine;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingStone;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
@@ -161,6 +163,11 @@ public enum HeroClass {
         if (DeviceCompat.isDebug()) {
             new VelvetPouch().collect();
             new MagicalHolster().collect();
+
+            //Rhodes quest turn-ins, as stacks: the turn-in must take exactly one, and find the
+            //magazines through the pouch above. See questline_port_plan.md §11.
+            new NormalMagazine().quantity(5).collect();
+            new ElixirOfIcyTouch().identify().quantity(5).collect();
 
             new PotionOfStrength().identify().quantity(40).collect();
             new PotionOfExperience().identify().quantity(40).collect();

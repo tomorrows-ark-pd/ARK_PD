@@ -2,15 +2,13 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCat;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomShadowSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class NPC_PhantomShadow extends NPC {
@@ -19,8 +17,6 @@ public class NPC_PhantomShadow extends NPC {
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
     }
-
-    public static boolean Clear = false;
 
     @Override
     public int defenseSkill(Char enemy) {
@@ -34,15 +30,32 @@ public class NPC_PhantomShadow extends NPC {
     @Override
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
-        QuestCat result = new QuestCat();
 
-        if (result.doPickUp( Dungeon.hero )) {
-            GLog.i( Messages.get(Dungeon.hero, "you_now_have", result.name()) );
-        } else {
-            Dungeon.level.drop( result, this.pos ).sprite.drop();
+        if (c != Dungeon.hero) {
+            return super.interact(c);
         }
 
-        die(this);
+        //stumbling on the cat first also starts the quest; don't build one Phantom already registered
+        PhantomCatQuestLine q = Quests.get(PhantomCatQuestLine.class);
+        if (q == null) {
+            q = new PhantomCatQuestLine();
+            Quests.add(q);
+        }
+
+        //picking her up re-accepts a quest that was declined before she was ever found
+        q.reopen();
+
+        //only hand her over while the quest is actually looking for her; otherwise leave her be
+        if (q.at(PhantomCatQuestLine.STEP_FIND)) {
+            QuestCat result = new QuestCat();
+            if (result.doPickUp(Dungeon.hero)) {
+                GLog.i(Messages.get(Dungeon.hero, "you_now_have", result.name()));
+            } else {
+                Dungeon.level.drop(result, this.pos).sprite.drop();
+            }
+            q.advance();
+            die(this);
+        }
         return true;
     }
 
@@ -70,19 +83,5 @@ public class NPC_PhantomShadow extends NPC {
             cat.pos = ppos;
         } while (cat.pos == -1);
         level.mobs.add(cat);
-    }
-
-    private static final String QUEST = "Clear";
-
-    @Override
-    public void storeInBundle( Bundle bundle ) {
-        super.storeInBundle( bundle );
-        bundle.put( QUEST, Clear );
-    }
-
-    @Override
-    public void restoreFromBundle( Bundle bundle ) {
-        super.restoreFromBundle( bundle );
-        Clear = bundle.getBoolean( QUEST );
     }
 }

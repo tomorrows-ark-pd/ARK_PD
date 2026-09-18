@@ -18,6 +18,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SkinModel;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Weedy;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -264,7 +265,7 @@ public class NewRhodesLevel2 extends Level {
         else Npc_Astesia.spawn(this, 3218);
 
 
-        if (Dungeon.QuestCatPoint == 0 && !NPC_PhantomShadow.Clear) {
+        if (Dungeon.QuestCatPoint == 0 && PhantomCatQuestLine.catStillOut()) {
             NPC_PhantomShadow.spawn(this, 0);
         }
 

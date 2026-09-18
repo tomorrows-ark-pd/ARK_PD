@@ -29,8 +29,9 @@ public class NPC_Mage extends NPC {
 
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
 
-        //quest already given this run (in any state): completed/abandoned both gate for the run
+        //quest already given this run: completed gates for the run, abandoned only declined the offer
         if (q != null) {
+            q.reopen();
             if (q.ongoing()) {
                 tell(q.objectiveDesc());   //reminder of the current objective
             } else {

@@ -38,7 +38,7 @@ public class Closure extends NPC {
 
         //tutorial step 0: chains into the Purestream objective.
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
-        if (q != null && q.at(0)) {
+        if (q != null && q.atOrResume(0)) {
             q.advance();
             final String done = Messages.get(this, "quest_done");
             final String next = Messages.get(this, "quest_next");

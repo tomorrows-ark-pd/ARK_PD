@@ -35,7 +35,7 @@ public class Purestream extends NPC {
 
         //tutorial step 1: chains into the next objective.
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
-        if (q != null && q.at(1)) {
+        if (q != null && q.atOrResume(1)) {
             q.advance();
             final String done = Messages.get(this, "quest_done");
             final String next = Messages.get(this, "quest_next");
