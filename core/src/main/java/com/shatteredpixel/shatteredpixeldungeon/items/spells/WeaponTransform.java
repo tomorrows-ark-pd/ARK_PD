@@ -9,6 +9,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Transmuting;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
@@ -92,7 +93,9 @@ public class WeaponTransform extends InventorySpell {
         }
 
         do {
-            n = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+            int i = Random.chances(DropTable.mask(c, c.probs));
+            if (i == -1) i = Random.chances(c.probs); //backstop: degrade to vanilla rather than crash
+            n = (Weapon) Reflection.newInstance(c.classes[i]);
         } while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
 
         // 무기 변환시 6.25%확률로 5티어 무기라면 사쿠라 후부키가 됩니다.

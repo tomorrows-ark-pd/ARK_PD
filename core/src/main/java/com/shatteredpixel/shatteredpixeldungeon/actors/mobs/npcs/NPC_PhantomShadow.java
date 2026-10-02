@@ -2,15 +2,14 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCat;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomShadowSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
-import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
 public class NPC_PhantomShadow extends NPC {
@@ -19,8 +18,6 @@ public class NPC_PhantomShadow extends NPC {
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
     }
-
-    public static boolean Clear = false;
 
     @Override
     public int defenseSkill(Char enemy) {
@@ -34,55 +31,49 @@ public class NPC_PhantomShadow extends NPC {
     @Override
     public boolean interact(Char c) {
         sprite.turnTo(pos, c.pos);
-        QuestCat result = new QuestCat();
 
-        if (result.doPickUp( Dungeon.hero )) {
-            GLog.i( Messages.get(Dungeon.hero, "you_now_have", result.name()) );
-        } else {
-            Dungeon.level.drop( result, this.pos ).sprite.drop();
+        if (c != Dungeon.hero) {
+            return super.interact(c);
         }
 
+        //stumbling on the cat first also starts the quest; don't build one Phantom already registered
+        PhantomCatQuestLine q = Quests.get(PhantomCatQuestLine.class);
+        if (q == null) {
+            q = new PhantomCatQuestLine();
+            Quests.add(q);
+        }
+
+        //she is the step's target, not its giver: a declined quest waits until Phantom takes it back up
+        if (!q.at(PhantomCatQuestLine.STEP_FIND)) {
+            sprite.showStatus(CharSprite.NEUTRAL, "...");
+            return true;
+        }
+
+        QuestCat result = new QuestCat();
+        if (result.doPickUp(Dungeon.hero)) {
+            GLog.i(Messages.get(Dungeon.hero, "you_now_have", result.name()));
+        } else {
+            Dungeon.level.drop(result, this.pos).sprite.drop();
+        }
+        q.advance();
         die(this);
         return true;
     }
 
-    public static void spawn(Level level, int a) {
-        int ppos = Random.Int(3);
-        switch (ppos) {
-            case 0: default:
-                if (a ==  0) ppos = 2999;
-                else if (a ==  1) ppos = 151;
-                else if (a ==  2) ppos = 1140;
-                break;
-            case 1:
-                if (a ==  0) ppos = 4220;
-                else if (a ==  1) ppos = 618;
-                else if (a ==  2) ppos = 744;
-                break;
-            case 2:
-                if (a ==  0) ppos = 3689;
-                else if (a ==  1) ppos = 273;
-                else if (a ==  2) ppos = 847;
-                break;
-        }
+    //candidate cells per Dungeon.QuestCatPoint (0 = Rhodes 2, 1 = Rhodes 3, 2 = Rhodes 4); one is rolled at generation
+    private static final int[][] CELLS = {
+            {2999, 4220, 3689},
+            {151, 618, 273},
+            {1140, 744, 847},
+    };
+
+    public static int[] candidateCells(int point) {
+        return CELLS[point].clone();
+    }
+
+    public static void spawn(Level level, int point) {
         NPC_PhantomShadow cat = new NPC_PhantomShadow();
-        do {
-            cat.pos = ppos;
-        } while (cat.pos == -1);
+        cat.pos = CELLS[point][Random.Int(3)];
         level.mobs.add(cat);
-    }
-
-    private static final String QUEST = "Clear";
-
-    @Override
-    public void storeInBundle( Bundle bundle ) {
-        super.storeInBundle( bundle );
-        bundle.put( QUEST, Clear );
-    }
-
-    @Override
-    public void restoreFromBundle( Bundle bundle ) {
-        super.restoreFromBundle( bundle );
-        Clear = bundle.getBoolean( QUEST );
     }
 }

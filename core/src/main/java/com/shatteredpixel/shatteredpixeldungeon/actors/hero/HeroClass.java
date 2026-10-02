@@ -36,7 +36,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SkillBook;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Catastrofe;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.SealOfLight;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.FoodBag;
@@ -48,6 +47,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatCutlet;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfIcyTouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfInvisibility;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLevitation;
@@ -66,19 +66,21 @@ import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfWarp;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
-import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wrench;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ChenSword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.EX42;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gamzashield;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Gloves;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Greatshield;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Heamyo;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.NEARL_AXE;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Usg;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RoundShield;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.LightKnife;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.NormalMagazine;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingStone;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
@@ -162,6 +164,11 @@ public enum HeroClass {
             new VelvetPouch().collect();
             new MagicalHolster().collect();
 
+            //Rhodes quest turn-ins, as stacks: the turn-in must take exactly one, and find the
+            //magazines through the pouch above. See questline_port_plan.md §11.
+            new NormalMagazine().quantity(5).collect();
+            new ElixirOfIcyTouch().identify().quantity(5).collect();
+
             new PotionOfStrength().identify().quantity(40).collect();
             new PotionOfExperience().identify().quantity(40).collect();
             new PotionOfHealing().identify().quantity(40).collect();
@@ -174,9 +181,9 @@ public enum HeroClass {
             Ankh ankh = new Ankh();
             ankh.collect();
 
-            new Wrench().identify().collect();
-            new Catastrofe().identify().collect();
-            new Usg().identify().collect();
+            new Greatshield().identify().collect();
+            new Gamzashield().identify().collect();
+            new RoundShield().identify().collect();
         }
 
         Dungeon.LimitedDrops.FOOD_BAG.drop();

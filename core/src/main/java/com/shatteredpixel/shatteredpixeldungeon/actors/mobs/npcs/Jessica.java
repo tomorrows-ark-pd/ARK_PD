@@ -2,47 +2,31 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
-import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
-import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.Accessories;
-import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK1.BookPowerfulStrike;
-import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
-import com.shatteredpixel.shatteredpixeldungeon.items.food.Pasty;
-import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.NormalMagazine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.QuestLine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_jessicatSprite;
-import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
-import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
-import com.watabou.utils.Bundle;
+import com.watabou.noosa.Image;
 import com.watabou.utils.Callback;
 
-import java.util.Calendar;
-import java.util.Locale;
+import java.util.ArrayList;
 
 public class Jessica extends NPC {
     {
-       spriteClass = NPC_jessicatSprite.class;
+        spriteClass = NPC_jessicatSprite.class;
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
-   }
-
-   public static boolean AnotherQuest_Jees;
-
-   static {
-       final Calendar calendar = Calendar.getInstance(Locale.KOREA);
-       if (calendar.get(Calendar.HOUR_OF_DAY) <= 8) AnotherQuest_Jees = true;
-   }
-
-   public static boolean QuestClear = false;
-    private boolean firstrun = false;
+    }
 
     @Override
     public int defenseSkill(Char enemy) {
@@ -55,77 +39,44 @@ public class Jessica extends NPC {
 
     @Override
     public boolean interact(Char c) {
-        if (AnotherQuest_Jees) JessQuest2(c);
-        else JessQuest1(c);
+        sprite.turnTo(pos, c.pos);
 
+        if (c != Dungeon.hero) {
+            return super.interact(c);
+        }
+
+        Quest q = Quests.get(Quest.class);
+
+        //first meeting: register the quest and make the offer
+        if (q == null) {
+            Quests.add(new Quest());
+            tell(Messages.get(this, "quest"));
+            return true;
+        }
+
+        //declined earlier: abandoning turns the offer down rather than using it up, so re-offer
+        if (q.reopen()) {
+            tell(Messages.get(this, "quest"));
+            return true;
+        }
+
+        if (q.ongoing()) {
+            //turn-in is all-or-nothing, so branch on it rather than pre-checking the pack
+            if (q.tryTurnIn()) tell(Messages.get(this, "result"));
+            else tell(Messages.get(this, "quest"));   //still short of the magazine; nothing consumed
+        } else {
+            sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "say"));
+        }
         return true;
     }
 
-    public void JessQuest1(Char c) {
-        if (!QuestClear) {
-            if (firstrun && Dungeon.hero.belongings.getItem(NormalMagazine.class) != null) {
-                Game.runOnRenderThread(new Callback() {
-                    @Override
-                    public void call() {
-                        GameScene.show(new WndMessage(Messages.get(Jessica.class, "result")));
-                    }
-                });
-                new Gold(800).doPickUp(Dungeon.hero);
-                NormalMagazine m = Dungeon.hero.belongings.getItem(NormalMagazine.class);
-                m.detachAll(Dungeon.hero.belongings.backpack);
-                QuestClear = true;
+    private void tell(final String text) {
+        Game.runOnRenderThread(new Callback() {
+            @Override
+            public void call() {
+                GameScene.show(new WndQuest(Jessica.this, text));
             }
-            else {
-                Game.runOnRenderThread(new Callback() {
-                    @Override
-                    public void call() {
-                        GameScene.show(new WndMessage(Messages.get(Jessica.class, "quest")));
-                    }
-                });
-                firstrun = true;
-            }
-        }
-        else {
-            sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "say"));
-        }
-    }
-
-    public void JessQuest2(Char c) {
-        if (!QuestClear) {
-            if (firstrun && Dungeon.hero.belongings.getItem(MeatPie.class) != null) {
-                Game.runOnRenderThread(new Callback() {
-                    @Override
-                    public void call() {
-                        GameScene.show(new WndMessage(Messages.get(Jessica.class, "result2")));
-                    }
-                });
-                Accessories result;
-                result = (Accessories) Generator.random(Generator.Category.ACCESSORIES);
-
-                if (result.doPickUp( Dungeon.hero )) {
-                    GLog.i( Messages.get(Dungeon.hero, "you_now_have", result.name()) );
-                } else {
-                    Dungeon.level.drop( result, this.pos ).sprite.drop();
-                }
-                new Gold(1500).doPickUp(Dungeon.hero);
-
-                MeatPie m = Dungeon.hero.belongings.getItem(MeatPie.class);
-                m.detachAll(Dungeon.hero.belongings.backpack);
-                QuestClear = true;
-            }
-            else {
-                Game.runOnRenderThread(new Callback() {
-                    @Override
-                    public void call() {
-                        GameScene.show(new WndMessage(Messages.get(Jessica.class, "quest2")));
-                    }
-                });
-                firstrun = true;
-            }
-        }
-        else {
-            sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "say"));
-        }
+        });
     }
 
     @Override
@@ -140,5 +91,41 @@ public class Jessica extends NPC {
             cat.pos = ppos;
         } while (cat.pos == -1);
         level.mobs.add(cat);
+    }
+
+    //--- journal quest: bring one standard magazine, get 800 gold ---
+    public static class Quest extends QuestLine {
+
+        private static final Class<? extends Item> REQUIRED = NormalMagazine.class;
+        private static final int REQUIRED_COUNT = 1;
+
+        /**
+         * Consume the required items and complete the step; false (and nothing consumed) if short.
+         */
+        public boolean tryTurnIn() {
+            if (!ongoing() || !consume(REQUIRED, REQUIRED_COUNT)) return false;
+            advance();
+            return true;
+        }
+
+        @Override
+        public Image icon() {
+            return new ItemSprite(ItemSpriteSheet.AMMO1);
+        }
+
+        @Override
+        protected int stepCount() {
+            return 1;
+        }
+
+        @Override
+        public String progressText() {
+            return Math.min(heldCount(REQUIRED), REQUIRED_COUNT) + "/" + REQUIRED_COUNT;
+        }
+
+        @Override
+        protected ArrayList<Reward> stepRewards(int step) {
+            return items(new Gold(800));
+        }
     }
 }

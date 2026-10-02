@@ -103,7 +103,7 @@ public class StoneOfAugmentation extends InventoryStone {
 			if (toAugment instanceof Weapon){
 				for (final Weapon.Augment aug : Weapon.Augment.values()){
 					if (((Weapon) toAugment).augment != aug){
-						RedButton btnSpeed = new RedButton( Messages.get(this, aug.name()) ) {
+						RedButton btnSpeed = new RedButton( Messages.get(this, ((Weapon) toAugment).augmentKey(aug)) ) {
 							@Override
 							protected void onClick() {
 								hide();

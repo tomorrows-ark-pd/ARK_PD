@@ -18,6 +18,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SkinModel;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Weedy;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -32,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransB
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ChenSword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
@@ -263,7 +265,7 @@ public class NewRhodesLevel2 extends Level {
         else Npc_Astesia.spawn(this, 3218);
 
 
-        if (Dungeon.QuestCatPoint == 0 && !NPC_PhantomShadow.Clear) {
+        if (Dungeon.QuestCatPoint == 0 && PhantomCatQuestLine.catStillOut()) {
             NPC_PhantomShadow.spawn(this, 0);
         }
 
@@ -342,11 +344,16 @@ public class NewRhodesLevel2 extends Level {
         heap.priceOverride = price;
     }
 
+    //not DropTable-masked: createItems() runs once at level creation, before the player can reach Purestream
     private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices, boolean rerollQuality) {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
         Weapon w;
         if (rerollQuality && tierIndex == 0) {
-            w = (Weapon) Reflection.newInstance(SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)]);
+            Class<?> cls = SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)];
+            //an unimbued MagesStaff NPEs, so shop copies always ship with a wand
+            w = cls == MagesStaff.class
+                    ? new MagesStaff(new WandOfMagicMissile())
+                    : (Weapon) Reflection.newInstance(cls);
         } else {
             Generator.Category c = tiers[tierIndex];
             w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
@@ -354,6 +361,8 @@ public class NewRhodesLevel2 extends Level {
         w.random();
         //shop weapons: no curse, small upgrade chance only (rest of the game keeps default odds)
         if (rerollQuality) applyShopQuality(w);
+        //level() bypasses upgrade(), so resync the imbued wand to the staff's rolled level
+        if (w instanceof MagesStaff) ((MagesStaff) w).updateWand(false);
         sellForCertificates(w, cell, prices[tierIndex]);
     }
 

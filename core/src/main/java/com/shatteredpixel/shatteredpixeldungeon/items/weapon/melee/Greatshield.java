@@ -22,34 +22,25 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
-public class Greatshield extends MeleeWeapon {
+public class Greatshield extends ShieldWeapon {
 
 	{
 		image = ItemSpriteSheet.GREATSHIELD;
 		hitSound = Assets.Sounds.HIT_SLASH2;
 		tier = 5;
+
+		baseDefenseFactor = 6f;         //6 extra defence, plus 3 per level
+		defenseFactorPerLvl = 3f;
+
+		capBase = 30;                   //charge ceiling 30 at +0, 135 at +15
+		capPerLvl = 7;
 	}
 
 	@Override
 	public int max(int lvl) {
 		return  Math.round(2.5f*(tier+1)) +     //15 base, down from 30
 				lvl*(tier-2);                   //+3 per level, down from +6
-	}
-
-	@Override
-	public int defenseFactor( Char owner ) {
-		return 6+3*buffedLvl();    //6 extra defence, plus 3 per level;
-	}
-	
-	public String statsInfo(){
-		if (isIdentified()){
-			return Messages.get(this, "stats_desc", 6+3*buffedLvl());
-		} else {
-			return Messages.get(this, "typical_stats_desc", 6);
-		}
 	}
 }

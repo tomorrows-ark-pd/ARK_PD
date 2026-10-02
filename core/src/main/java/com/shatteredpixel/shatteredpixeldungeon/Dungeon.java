@@ -36,13 +36,11 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.miniboss.TheEndspeak
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ceylon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Dario;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.FrostLeaf;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ghost;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Jessica;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_Phantom;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker;
 import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -52,6 +50,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.CavesLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.CityLevel;
@@ -304,14 +303,12 @@ public class Dungeon {
         extrastage_Sea = false;
         mulaCount = 0;
 
-        Jessica.QuestClear = false;
-        NPC_Phantom.QuestClear = false;
-        FrostLeaf.QuestClear = false;
-
-        QuestCatPoint = Random.Int(2);
+        //which Rhodes floor hosts the lost cat; the reward pair lives on PhantomCatQuestLine
+        QuestCatPoint = Random.Int(3);
         droppedItems = new SparseArray<>();
 
         LimitedDrops.reset();
+        DropTable.reset();
 
         chapters = new HashSet<>();
 
@@ -674,9 +671,7 @@ public class Dungeon {
     private static final String GAVIAL = "extrastage_Gavial";
     private static final String SEA = "extrastage_SeA";
     private static final String CATQUEST = "QuestCatPoint";
-    private static final String PHANTOM_QUESTCLEAR = "NPC_Phantom.QuestClear";
-    private static final String JESI_QUESTCLEAR = "Jessica.QuestClear";
-    private static final String LEAF_QUESTCLEAR = "FrostLeaf.QuestClear";
+    private static final String LEGACY_PHANTOM_QUESTCLEAR = "NPC_Phantom.QuestClear";   //read-only, <=v716 saves
 
     private static final String MULA_COUNT = "mulaCount";
 
@@ -717,10 +712,6 @@ public class Dungeon {
             bundle.put(SEA, extrastage_Sea);
             bundle.put(MULA_COUNT, mulaCount);
 
-            bundle.put(PHANTOM_QUESTCLEAR, NPC_Phantom.QuestClear);
-            bundle.put(JESI_QUESTCLEAR, Jessica.QuestClear);
-            bundle.put(LEAF_QUESTCLEAR, FrostLeaf.QuestClear);
-
             bundle.put(CATQUEST, QuestCatPoint);
 
             for (int d : droppedItems.keyArray()) {
@@ -756,6 +747,7 @@ public class Dungeon {
             Notes.storeInBundle(bundle);
             Quests.storeInBundle(bundle);
             Generator.storeInBundle(bundle);
+            DropTable.storeInBundle(bundle);
             TheEndspeaker.Status.storeInBundle(bundle);
 
             int[] bundleArr = new int[generatedLevels.size()];
@@ -836,6 +828,7 @@ public class Dungeon {
         if (fullLoad) {
 
             LimitedDrops.restore(bundle.getBundle(LIMDROPS));
+            DropTable.restoreFromBundle(bundle); //clears when the key is absent; static state must not leak between runs
 
             chapters = new HashSet<>();
             int ids[] = bundle.getIntArray(CHAPTERS);
@@ -929,9 +922,11 @@ public class Dungeon {
 
         QuestCatPoint = bundle.getInt(CATQUEST);
 
-        NPC_Phantom.QuestClear = bundle.getBoolean(PHANTOM_QUESTCLEAR);
-        Jessica.QuestClear = bundle.getBoolean(JESI_QUESTCLEAR);
-        FrostLeaf.QuestClear = bundle.getBoolean(LEAF_QUESTCLEAR);
+        //<=v716 save that already finished the cat quest: seed it COMPLETED, since the shadow is
+        //dead and the Rhodes floors are generated, so a re-offer could never be turned in
+        if (bundle.getBoolean(LEGACY_PHANTOM_QUESTCLEAR) && Quests.get(PhantomCatQuestLine.class) == null) {
+            Quests.add(PhantomCatQuestLine.alreadyCompleted());
+        }
 
         Statistics.restoreFromBundle(bundle);
         Generator.restoreFromBundle(bundle);
