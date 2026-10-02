@@ -452,6 +452,7 @@ public class Heap implements Bundlable {
     private static final String TYPE = "type";
     private static final String ITEMS = "items";
     private static final String HAUNTED = "haunted";
+    private static final String PRICE_OVERRIDE = "price_override";
 
     @SuppressWarnings("unchecked")
     @Override
@@ -473,6 +474,8 @@ public class Heap implements Bundlable {
         }
 
         haunted = bundle.getBoolean(HAUNTED);
+        //saves from before this was persisted have no key, so keep the -1 default
+        if (bundle.contains(PRICE_OVERRIDE)) priceOverride = bundle.getInt(PRICE_OVERRIDE);
 
     }
 
@@ -483,6 +486,7 @@ public class Heap implements Bundlable {
         bundle.put(TYPE, type.toString());
         bundle.put(ITEMS, items);
         bundle.put(HAUNTED, haunted);
+        bundle.put(PRICE_OVERRIDE, priceOverride);
     }
 
 }
