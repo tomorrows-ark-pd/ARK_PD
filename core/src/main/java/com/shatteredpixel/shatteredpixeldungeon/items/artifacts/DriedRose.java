@@ -431,14 +431,14 @@ public class DriedRose extends Artifact {
 			return DriedRose.this;
 		}
 
+		//ghost gear is raised to at least +1/+2/+3 at rose level 4/7/10
 		public int bonusLevel(int level){
-			int bonueLevel=0;
-			int roseLevel=itemLevel();
-			if (roseLevel==10) bonueLevel=3;
-			else if (roseLevel>=7) bonueLevel=2;
-			else if (roseLevel>=4) bonueLevel=1;
-			if (bonueLevel>level) level=bonueLevel;
-			return level;
+			int roseLevel = itemLevel();
+			int bonusLevel = 0;
+			if (roseLevel == 10)     bonusLevel = 3;
+			else if (roseLevel >= 7) bonusLevel = 2;
+			else if (roseLevel >= 4) bonusLevel = 1;
+			return Math.max(level, bonusLevel);
 		}
 	}
 	

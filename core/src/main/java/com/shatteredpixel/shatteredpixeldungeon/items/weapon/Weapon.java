@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Degrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
@@ -350,14 +351,16 @@ abstract public class Weapon extends KindOfWeapon {
 	//overrides as other things can equip these
 	@Override
 	public int buffedLvl() {
-		DriedRose.roseRecharge roseRecharge=Dungeon.hero.buff(DriedRose.roseRecharge.class);
-		if (roseRecharge!=null){
-			if (this == roseRecharge.getRose().ghostWeapon()){
-				return roseRecharge.bonusLevel(level());
-			}
+		if (Dungeon.hero == null) return level();
+
+		DriedRose.roseRecharge roseRecharge = Dungeon.hero.buff(DriedRose.roseRecharge.class);
+		if (roseRecharge != null && this == roseRecharge.getRose().ghostWeapon()){
+			return roseRecharge.bonusLevel(level());
 		}
 
-		if (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this )){
+		//Degrade check first so the render thread doesn't scan the backpack on every refresh
+		if (Dungeon.hero.buff( Degrade.class ) != null
+				&& (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this ))){
 			return super.buffedLvl();
 		} else {
 			return level();
