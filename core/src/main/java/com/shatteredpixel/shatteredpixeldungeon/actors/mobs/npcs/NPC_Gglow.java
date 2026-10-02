@@ -74,9 +74,12 @@ public class NPC_Gglow extends NPC {
     }
 
     @Override
-    public void die(Object cause) {
-        sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "die"));
-        super.die(cause);
+    public int defenseSkill(Char enemy) {
+        return INFINITE_EVASION;
+    }
+
+    @Override
+    public void damage(int dmg, Object src) {
     }
 
     @Override
