@@ -10,10 +10,44 @@ import java.util.ArrayList;
 
 public class v0_5_X_Changes {
     public static void addAllChanges(ArrayList<ChangeInfo> changeInfos) {
+        add_v0_5_4_Changes(changeInfos);
         add_v0_5_3_Changes(changeInfos);
         add_v0_5_2_Changes(changeInfos);
         add_v0_5_1_Changes(changeInfos);
         add_v0_5_0_Changes(changeInfos);
+    }
+
+    // TODO 0.5.4: replace placeholder patch notes
+    public static void add_v0_5_4_Changes(ArrayList<ChangeInfo> changeInfos) {
+        ChangeInfo changes = new ChangeInfo("v0.5.4", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+        changes.hardlight(Window.TITLE_COLOR);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_NEW_TITLE",
+                "TODO_NEW_DESC"));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(CharSprite.WARNING);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_CHANGES_TITLE",
+                "TODO_CHANGES_DESC"));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그픽스",
+                "TODO_BUGFIX_DESC"));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
+        changes.hardlight(CharSprite.POSITIVE);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_BUFFS_TITLE",
+                "TODO_BUFFS_DESC"));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "nerfs"), false, null);
+        changes.hardlight(CharSprite.NEGATIVE);
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_NERFS_TITLE",
+                "TODO_NERFS_DESC"));
+        changeInfos.add(changes);
     }
 
     public static void add_v0_5_3_Changes(ArrayList<ChangeInfo> changeInfos) {
