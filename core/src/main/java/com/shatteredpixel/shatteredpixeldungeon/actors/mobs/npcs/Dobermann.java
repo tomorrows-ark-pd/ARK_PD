@@ -62,7 +62,7 @@ public class Dobermann extends NPC {
             //declined earlier: re-offer the same bounty. Objective, target and progress are all
             //preserved, so this resumes rather than rerolls.
             if (existing != null && existing.objective != null && existing.reopen()) {
-                tell(Messages.get(this, "offer_" + existing.objective.name().toLowerCase(), existing.target));
+                tell(offerText(existing, true));
             } else {
                 sprite.showStatus(CharSprite.NEGATIVE, Messages.get(this, "has_quest"));
             }
@@ -74,8 +74,14 @@ public class Dobermann extends NPC {
         Quests.add(quest);
         questGiven = true;
 
-        tell(Messages.get(this, "offer_" + quest.objective.name().toLowerCase(), quest.target));
+        tell(offerText(quest, false));
         return true;
+    }
+
+    //the offer body is shared; only the opener differs between a fresh bounty and a resumed one
+    private String offerText(Quest q, boolean resumed) {
+        return Messages.get(this, resumed ? "resume_offer" : "new_offer") + " "
+                + Messages.get(this, "offer_" + q.objective.name().toLowerCase(), q.target);
     }
 
     private void tell(final String text) {

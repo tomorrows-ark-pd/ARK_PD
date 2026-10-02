@@ -14,7 +14,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_jessicatSprite;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.utils.Callback;
@@ -74,7 +74,7 @@ public class Jessica extends NPC {
         Game.runOnRenderThread(new Callback() {
             @Override
             public void call() {
-                GameScene.show(new WndMessage(text));
+                GameScene.show(new WndQuest(Jessica.this, text));
             }
         });
     }

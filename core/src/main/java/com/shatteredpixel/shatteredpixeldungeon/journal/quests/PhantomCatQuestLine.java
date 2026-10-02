@@ -33,6 +33,16 @@ public class PhantomCatQuestLine extends QuestLine {
     //reward pair, rolled at registration; deliberately independent of Dungeon.QuestCatPoint
     private int rewardVariant = Random.Int(2);
 
+    //has Phantom actually explained the job? false when the cat was found before ever meeting him
+    private boolean briefed = false;
+
+    /** true the first time Phantom speaks; he owes the player the premise before any payoff line. */
+    public boolean brief() {
+        if (briefed) return false;
+        briefed = true;
+        return true;
+    }
+
     /**
      * true while the cat should still be placed on its floor; drives the level spawn gate.
      */
@@ -115,16 +125,19 @@ public class PhantomCatQuestLine extends QuestLine {
     }
 
     private static final String REWARD_VARIANT = "reward_variant";
+    private static final String BRIEFED = "briefed";
 
     @Override
     public void storeInBundle(Bundle bundle) {
         super.storeInBundle(bundle);
         bundle.put(REWARD_VARIANT, rewardVariant);
+        bundle.put(BRIEFED, briefed);
     }
 
     @Override
     public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);
         rewardVariant = bundle.getInt(REWARD_VARIANT);
+        briefed = bundle.getBoolean(BRIEFED);
     }
 }

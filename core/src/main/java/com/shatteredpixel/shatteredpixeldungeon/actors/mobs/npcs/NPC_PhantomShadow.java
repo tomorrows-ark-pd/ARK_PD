@@ -7,6 +7,7 @@ import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLi
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomShadowSprite;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
@@ -42,46 +43,37 @@ public class NPC_PhantomShadow extends NPC {
             Quests.add(q);
         }
 
-        //picking her up re-accepts a quest that was declined before she was ever found
-        q.reopen();
-
-        //only hand her over while the quest is actually looking for her; otherwise leave her be
-        if (q.at(PhantomCatQuestLine.STEP_FIND)) {
-            QuestCat result = new QuestCat();
-            if (result.doPickUp(Dungeon.hero)) {
-                GLog.i(Messages.get(Dungeon.hero, "you_now_have", result.name()));
-            } else {
-                Dungeon.level.drop(result, this.pos).sprite.drop();
-            }
-            q.advance();
-            die(this);
+        //she is the step's target, not its giver: a declined quest waits until Phantom takes it back up
+        if (!q.at(PhantomCatQuestLine.STEP_FIND)) {
+            sprite.showStatus(CharSprite.NEUTRAL, "...");
+            return true;
         }
+
+        QuestCat result = new QuestCat();
+        if (result.doPickUp(Dungeon.hero)) {
+            GLog.i(Messages.get(Dungeon.hero, "you_now_have", result.name()));
+        } else {
+            Dungeon.level.drop(result, this.pos).sprite.drop();
+        }
+        q.advance();
+        die(this);
         return true;
     }
 
-    public static void spawn(Level level, int a) {
-        int ppos = Random.Int(3);
-        switch (ppos) {
-            case 0: default:
-                if (a ==  0) ppos = 2999;
-                else if (a ==  1) ppos = 151;
-                else if (a ==  2) ppos = 1140;
-                break;
-            case 1:
-                if (a ==  0) ppos = 4220;
-                else if (a ==  1) ppos = 618;
-                else if (a ==  2) ppos = 744;
-                break;
-            case 2:
-                if (a ==  0) ppos = 3689;
-                else if (a ==  1) ppos = 273;
-                else if (a ==  2) ppos = 847;
-                break;
-        }
+    //candidate cells per Dungeon.QuestCatPoint (0 = Rhodes 2, 1 = Rhodes 3, 2 = Rhodes 4); one is rolled at generation
+    private static final int[][] CELLS = {
+            {2999, 4220, 3689},
+            {151, 618, 273},
+            {1140, 744, 847},
+    };
+
+    public static int[] candidateCells(int point) {
+        return CELLS[point].clone();
+    }
+
+    public static void spawn(Level level, int point) {
         NPC_PhantomShadow cat = new NPC_PhantomShadow();
-        do {
-            cat.pos = ppos;
-        } while (cat.pos == -1);
+        cat.pos = CELLS[point][Random.Int(3)];
         level.mobs.add(cat);
     }
 }

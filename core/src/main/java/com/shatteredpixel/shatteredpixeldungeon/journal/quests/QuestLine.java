@@ -234,12 +234,11 @@ public abstract class QuestLine implements Bundlable {
     }
 
     /**
-     * Like {@link #at(int)}, but first resumes the quest if it was abandoned on that same step, so
-     * the giver of a step can pick an abandoned quest back up. No-op unless the quest is ABANDONED.
+     * Reopen only if abandoned on the given step. Call it from the NPC that handed that step out: the
+     * step's target must ignore an abandoned quest until its giver takes it back up.
      */
-    public boolean atOrResume(int step) {
-        if (state == State.ABANDONED && this.step == step) reopen();
-        return at(step);
+    public boolean resumeAt(int step) {
+        return state == State.ABANDONED && this.step == step && reopen();
     }
 
     protected void onAbandoned() {

@@ -35,7 +35,7 @@ public class Purestream extends NPC {
 
         //tutorial step 1: chains into the next objective.
         TutorialQuestLine q = Quests.get(TutorialQuestLine.class);
-        if (q != null && q.atOrResume(1)) {
+        if (q != null && q.at(1)) {
             q.advance();
             final String done = Messages.get(this, "quest_done");
             final String next = Messages.get(this, "quest_next");
@@ -49,6 +49,18 @@ public class Purestream extends NPC {
                             GameScene.show(new WndQuest(Purestream.this, next));
                         }
                     });
+                }
+            });
+            return true;
+        }
+
+        //he handed out step 2, so an abandon there is his to take back
+        if (q != null && q.resumeAt(2)) {
+            final String next = Messages.get(this, "quest_next");
+            Game.runOnRenderThread(new Callback() {
+                @Override
+                public void call() {
+                    GameScene.show(new WndQuest(Purestream.this, next));
                 }
             });
             return true;
