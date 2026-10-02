@@ -21,6 +21,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -80,6 +81,13 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
     public void detach() {
         super.detach();
         ActionIndicator.clearAction(this);
+    }
+
+    @Override
+    public void restoreFromBundle(Bundle bundle) {
+        super.restoreFromBundle(bundle);
+        // replace any stale instance left in ActionIndicator from before a reload (e.g. Amulet scene)
+        if (count() > 0) ActionIndicator.setAction(this);
     }
 
     @Override
