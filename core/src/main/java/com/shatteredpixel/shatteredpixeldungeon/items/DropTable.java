@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
@@ -67,7 +68,24 @@ public class DropTable {
         return count;
     }
 
+    public static boolean isDiscovered(Class<?> cls) {
+        return Catalog.isSeen(cls);
+    }
+
+    public static int undiscoveredCount(Generator.Category cat) {
+        int count = 0;
+        for (Class<?> cls : droppable(cat)) {
+            if (!isDiscovered(cls)) count++;
+        }
+        return count;
+    }
+
+    //each undiscovered item in the group costs one slot of the cap
     public static int disableCap(Generator.Category cat) {
+        return Math.max(0, structuralCap(cat) - undiscoveredCount(cat));
+    }
+
+    private static int structuralCap(Generator.Category cat) {
         int n = droppable(cat).size();
         if (n <= 2) return 0;
         int cap = (int) (n * DISABLE_RATIO);
@@ -113,7 +131,7 @@ public class DropTable {
             Generator.Category cat = groupOf(cls);
             if (cat == null) return;
             if (disabled.contains(cls)) return;
-            if (!canDisable(cat)) return;
+            if (!isDiscovered(cls) || !canDisable(cat)) return;
             disabled.add(cls);
         }
     }
@@ -147,7 +165,7 @@ public class DropTable {
     }
 
     //re-establishes the group-membership and cap invariants set() enforces; a save from another
-    //version may name a class that has since left its group, or hold more than the current cap
+    //version may name a class that has since left its group, or hold more than the structural cap
     @SuppressWarnings("unchecked")
     public static void restoreFromBundle(Bundle b) {
         disabled.clear();
@@ -157,7 +175,8 @@ public class DropTable {
         for (Class<?> cls : stored) {
             if (cls == null || !Item.class.isAssignableFrom(cls)) continue;
             Generator.Category cat = groupOf(cls);
-            if (cat == null || disabledCount(cat) >= disableCap(cat)) continue;
+            //structural cap: discovery only gates editing and must not alter a run in progress
+            if (cat == null || disabledCount(cat) >= structuralCap(cat)) continue;
             disabled.add((Class<? extends Item>) cls);
         }
     }

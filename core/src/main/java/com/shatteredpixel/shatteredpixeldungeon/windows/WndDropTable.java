@@ -147,14 +147,17 @@ public class WndDropTable extends Window {
                 Item item = (Item) Reflection.newInstance(cls);
                 if (item == null) continue;
 
+                boolean discovered = DropTable.isDiscovered(cls);
+
                 //anonymize keeps the true name but hides the gem sprite of an unidentified ring
                 if (item instanceof Ring) ((Ring) item).anonymize();
 
                 ToggleItem gridItem = new ToggleItem(cat, asItemClass(cls),
-                        new ItemSprite(item.image, item.glowing()), item.glowing(),
-                        Messages.titleCase(item.name()));
+                        new ItemSprite(item.image, discovered ? item.glowing() : null),
+                        discovered ? item.glowing() : null,
+                        discovered ? Messages.titleCase(item.name()) : "???", discovered);
 
-                if (item.icon != -1) {
+                if (discovered && item.icon != -1) {
                     Image secondIcon = new Image(Assets.Sprites.ITEM_ICONS);
                     secondIcon.frame(ItemSpriteSheet.Icons.film.get(item.icon));
                     gridItem.addSecondIcon(secondIcon);
@@ -235,19 +238,26 @@ public class WndDropTable extends Window {
         private final Class<? extends Item> cls;
         private final ItemSprite.Glowing glow;
         private final String name;
+        private final boolean discovered;
 
         public ToggleItem(Generator.Category cat, Class<? extends Item> cls, ItemSprite sprite,
-                          ItemSprite.Glowing glow, String name) {
+                          ItemSprite.Glowing glow, String name, boolean discovered) {
             super(sprite);
             this.cat = cat;
             this.cls = cls;
             this.glow = glow;
             this.name = name;
+            this.discovered = discovered;
             setScale(0.5f);
         }
 
-        //mirrors the journal's unseen treatment: blacked out icon over a red cell
+        //disabled: blacked out icon over a red cell; undiscovered: the journal's plain unseen silhouette
         private void applyState() {
+            if (!discovered) {
+                icon.lightness(0);
+                hardLightBG(1f, 1f, 1f);
+                return;
+            }
             boolean disabled = DropTable.isDisabled(cls);
             if (icon instanceof ItemSprite) {
                 ((ItemSprite) icon).glow(disabled ? null : glow);
@@ -270,6 +280,11 @@ public class WndDropTable extends Window {
 
             if (!editable) {
                 GameScene.show(new WndMessage(Messages.get(WndDropTable.class, "locked")));
+                return true;
+            }
+
+            if (!discovered) {
+                GameScene.show(new WndMessage(Messages.get(WndDropTable.class, "undiscovered")));
                 return true;
             }
 
