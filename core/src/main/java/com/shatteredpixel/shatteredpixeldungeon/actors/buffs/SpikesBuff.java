@@ -7,7 +7,7 @@ public class SpikesBuff extends FlavourBuff {
     public static final float DURATION = 10f;
 
     {
-        type = buffType.NEGATIVE;
+        type = buffType.POSITIVE;
         announced = true;
     }
 
