@@ -17,7 +17,6 @@ public class v0_5_X_Changes {
         add_v0_5_0_Changes(changeInfos);
     }
 
-    // TODO 0.5.4: replace placeholder patch notes
     public static void add_v0_5_4_Changes(ArrayList<ChangeInfo> changeInfos) {
         ChangeInfo changes = new ChangeInfo("v0.5.4", true, "");
         changes.hardlight(Window.TITLE_COLOR);
@@ -25,28 +24,58 @@ public class v0_5_X_Changes {
 
         changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
         changes.hardlight(Window.TITLE_COLOR);
-        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_NEW_TITLE",
-                "TODO_NEW_DESC"));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "드랍 테이블",
+                "로도스 상점 구역의 _퓨어스트림_에게 말을 걸어 이번 게임에서 등장하지 않을 _무기와 반지_를 고를 수 있습니다." + "\n\n" +
+                        "도감에 등록된 아이템만 고를 수 있으며, 등록된 아이템이 많을 수록 비활성화할수 있는 아이템의 수가 늘어납니다." + "\n\n" +
+                        "드랍 테이블은 1층 진입 이후엔 변경할 수 없습니다."));
         changeInfos.add(changes);
 
         changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
         changes.hardlight(CharSprite.WARNING);
-        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_CHANGES_TITLE",
-                "TODO_CHANGES_DESC"));
-        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그픽스",
-                "TODO_BUGFIX_DESC"));
+        changes.addButton(new ChangeButton(Icons.get(Icons.WEP), "방패 무기 리워크",
+                "_라인랩 실드_와 _애국심_이 리워크 되었습니다." + "\n\n" +
+                        "물리 공격을 받을 때마다 _충전량_이 쌓이며, 충전량 1당 방패로 가하는 피해량이 _1%_ 증가합니다. 보유한 보호막도 충전량에 더해지며, _3턴_ 동안 공격받지 않으면 충전량이 빠르게 사라집니다." + "\n\n" +
+                        "기본 피해량이 감소했습니다. (라인랩 실드 10 -> 8, 애국심 15 -> 11)" + "\n\n" +
+                        "방패 무기는 전용 증강을 사용합니다: _방어력_ (방어력/충전 최대치 증가, 피해량 감소), _공격력_ (피해량 증가, 방어력/최대치 한계 감소), _아츠 방어_ (아츠 피해 방어/충전 가능)."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.SCROLL), "로도스 퀘스트 개편",
+                "_제시카_, _프로스트리프_, _팬텀_의 퀘스트가 퀘스트라인으로 옮겨져 노트에서 진행 상황을 확인할 수 있습니다." + "\n\n" +
+                        "이제 퀘스트를 포기해도 마지막으로 퀘스트를 준 NPC에게 다시 말을 걸면 _중단한 지점부터 이어서_ 진행할 수 있습니다." + "\n\n" +
+                        "_미스 크리스틴_이 등장할 수 있는 위치가 늘어났습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "도감 확장",
+                "_특수 아이템_ 카테고리가 추가되었습니다. 총기 부착물, 클로저 보급상자, 정보증명서 등을 등록할 수 있습니다." + "\n\n" +
+                        "요리, 요리 재료 및 일부 주문서가 도감에 추가되었습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.HERO_CHANGES), "기타 변경",
+                "_도전_이 _위기 협약_으로 이름이 변경되었습니다." + "\n\n" +
+                        "_마법 거대 석상_이 등장하는 14층에 항상 낭떠러지가 생성됩니다." + "\n\n" +
+                        "로도스의 _슈_와 _골든 글로우_가 더 이상 피해를 받지 않습니다." + "\n\n" +
+                        "누락된 영문 번역이 추가되었습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 1",
+                "_청정의 물약_이 _가시_, _라그나로크_, _야생의 기운_ 등 이로운 효과를 제거하던 버그를 수정했습니다." + "\n\n" +
+                        "_방패 밀기_가 불러오기 이후 작동하지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_지배의 반지_로 아군이 된 적에게 공격의 추가 효과가 적용되던 버그를 수정했습니다." + "\n\n" +
+                        "_에케베리아_가 아군에게 막혔을 때 게임이 멈추던 버그를 수정했습니다." + "\n\n" +
+                        "_군주 인형_이 정상적으로 폭발하지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_약점 보완_ 특성 관련 크래시를 수정했습니다." + "\n\n" +
+                        "상태이상 이펙트가 사라지지 않고 남아있던 버그를 수정했습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 2",
+                "_마법 거대 석상_이 낭떠러지로 떨어질 경우 보상이 아래층으로 떨어지던 버그를 수정했습니다." + "\n\n" +
+                        "로도스 상점에서 _스태프_를 구매할 수 없거나 크래시가 발생하던 버그를 수정했습니다." + "\n\n" +
+                        "로도스 상점에서 이미 보유한 _유물_이 판매되던 버그를 수정했습니다." + "\n\n" +
+                        "_특수 매복 병사_의 상자에 스킬북 설명이 표시되지 않던 버그를 수정했습니다." + "\n\n" +
+                        "일부 적과 함정이 도감에 등록되지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_가비알_ 보스 맵 오류를 수정했습니다." + "\n\n" +
+                        "랭킹 저장 시 발생할 수 있던 크래시를 수정했습니다." + "\n\n" +
+                        "여러 텍스트 오류를 수정했습니다."));
         changeInfos.add(changes);
 
         changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
         changes.hardlight(CharSprite.POSITIVE);
-        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_BUFFS_TITLE",
-                "TODO_BUFFS_DESC"));
-        changeInfos.add(changes);
-
-        changes = new ChangeInfo(Messages.get(ChangesScene.class, "nerfs"), false, null);
-        changes.hardlight(CharSprite.NEGATIVE);
-        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "TODO_NERFS_TITLE",
-                "TODO_NERFS_DESC"));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARKPD), "로도스 상점 가격 인하",
+                "로도스 상점의 가격이 인하되었습니다." + "\n\n" +
+                        "_근접 무기_ 300~700 -> 150~550" + "\n\n" +
+                        "_투척 무기_ 100~300 -> 50~250" + "\n\n" +
+                        "_반지_ 500 -> 400, _유물_ 600 -> 500" + "\n\n" +
+                        "마법부여가 붙은 무기는 _100_의 추가 비용이 붙습니다."));
         changeInfos.add(changes);
     }
 
