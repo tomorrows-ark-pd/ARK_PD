@@ -95,7 +95,7 @@ public static Wraith_donut spawnAt( int pos ) {
         w.pos = pos;
         w.state = w.HUNTING;
         GameScene.add( w, SPAWN_DELAY );
-        Bestiary.setSeen(Wraith_donut.class);
+        if (Dungeon.level.heroFOV[pos]) Bestiary.setSeen(Wraith_donut.class);
 
         w.sprite.alpha( 0 );
         w.sprite.parent.add( new AlphaTweener( w.sprite, 1, 0.5f ) );

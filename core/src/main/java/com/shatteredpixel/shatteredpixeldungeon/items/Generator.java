@@ -859,7 +859,8 @@ public class Generator {
                 int i = Random.chances(DropTable.mask(cat, cat.probs));
                 if (i == -1) {
                     reset(cat);
-                    i = Random.chances(cat.probs);
+                    i = Random.chances(DropTable.mask(cat, cat.probs));
+                    if (i == -1) i = Random.chances(cat.probs); //backstop: degrade to vanilla rather than crash
                 }
                 if (cat.defaultProbs != null) cat.probs[i]--;
                 return ((Item) Reflection.newInstance(cat.classes[i])).random();
