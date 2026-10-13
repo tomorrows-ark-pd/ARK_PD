@@ -135,9 +135,6 @@ public class ShadowSprite extends MobSprite {
         public void link(Char ch) {
             super.link( ch );
             updateArmor( 4 );
-
-            add(State.HIKARI);
-            add(State.DARKENED);
         }
     }
 

@@ -376,6 +376,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	public void add( State state ) {
 		switch (state) {
 			case BURNING:
+				if (burning != null) burning.on = false;
 				burning = emitter();
 				burning.pour( FlameParticle.FACTORY, 0.06f );
 				if (visible) {
@@ -383,6 +384,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 				}
 				break;
 			case LEVITATING:
+				if (levitation != null) levitation.on = false;
 				levitation = emitter();
 				levitation.pour( Speck.factory( Speck.JET ), 0.02f );
 				break;
@@ -400,36 +402,46 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 				paused = true;
 				break;
 			case FROZEN:
+				if (iceBlock != null) iceBlock.killAndErase();
 				iceBlock = IceBlock.freeze( this );
 				break;
 			case ILLUMINATED:
+				if (light != null) light.putOut();
 				GameScene.effect( light = new TorchHalo( this ) );
 				break;
 			case CHILLED:
+				if (chilled != null) chilled.on = false;
 				chilled = emitter();
 				chilled.pour(SnowParticle.FACTORY, 0.1f);
 				break;
 			case DARKENED:
+				if (darkBlock != null) darkBlock.killAndErase();
 				darkBlock = DarkBlock.darken( this );
 				break;
 			case MARKED:
+				if (marked != null) marked.on = false;
 				marked = emitter();
 				marked.pour(ShadowParticle.UP, 0.1f);
 				break;
 			case HEALING:
+				if (healing != null) healing.on = false;
 				healing = emitter();
 				healing.pour(Speck.factory(Speck.HEALING), 0.5f);
 				break;
 			case SHIELDED:
+				if (shield != null) shield.killAndErase();
 				GameScene.effect( shield = new ShieldHalo( this ));
 				break;
 			case TALU_BOSS:
+				if (taluboss != null) taluboss.on = false;
+				if (taluboss2 != null) taluboss2.on = false;
 				taluboss = emitter();
 				taluboss.pour(FlameParticle.FACTORY, 0.03f);
 				taluboss2 = emitter();
 				taluboss2.pour(ShadowParticle.UP, 0.018f);
 				break;
 			case HIKARI:
+				if (hikari != null) hikari.on = false;
 				hikari = emitter();
 				hikari.pour(ElmoParticle.FACTORY, 0.03f);
 				break;
