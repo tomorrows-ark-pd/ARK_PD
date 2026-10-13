@@ -1503,7 +1503,7 @@ public class Hero extends Char {
                     damage *= 1f + (float) this.pointsInTalent(Talent.RHODES_CAT) * 0.12f;
                 }
         }
-        if (hasTalent(Talent.WEAKNESS_COVER)) {
+        if (Gear != null && hasTalent(Talent.WEAKNESS_COVER)) {
             int geardmg = Gear.level();
             geardmg *= Random.IntRange(pointsInTalent(Talent.WEAKNESS_COVER) - 1, 2);
             bonusDamage += geardmg;
