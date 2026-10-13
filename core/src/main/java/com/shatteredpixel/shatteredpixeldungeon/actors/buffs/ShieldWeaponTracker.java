@@ -42,7 +42,7 @@ public class ShieldWeaponTracker extends Buff {
 
 	private float charge;
 	private int   turnsSinceGain;
-	//cap of the weapon that last granted charge, kept so decay still has a floor after an unequip
+	//cap of the weapon that last granted charge, used as the decay floor
 	private int   cap;
 
 	public void gain(float amt, int chargeCap) {
@@ -93,7 +93,7 @@ public class ShieldWeaponTracker extends Buff {
 			liveCap = w.chargeCap();
 			bonus = (int) (w.damageBonus(target) * 100);
 		}
-		return Messages.get(this, "desc", (int) Math.min(charge, liveCap), liveCap, bonus);
+		return Messages.get(this, "desc", (int) Math.min(charge, liveCap), bonus);
 	}
 
 	private static final String CHARGE = "charge";

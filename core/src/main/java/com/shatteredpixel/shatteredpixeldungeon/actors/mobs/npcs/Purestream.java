@@ -1,6 +1,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.TutorialQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
@@ -8,6 +9,7 @@ import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PurestreamSprite;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndDropTable;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
@@ -67,10 +69,18 @@ public class Purestream extends NPC {
         }
 
         //interact() runs on the actor thread; constructing a window there trips RenderedText's thread assert
+        final String text = Messages.get(this, DropTable.locked() ? "service_locked" : "service");
         Game.runOnRenderThread(new Callback() {
             @Override
             public void call() {
-                GameScene.show(new WndDropTable());
+                GameScene.show(new WndOptions(sprite(), Messages.titleCase(name()), text,
+                        Messages.get(Purestream.class, "service_open"),
+                        Messages.get(Purestream.class, "service_leave")) {
+                    @Override
+                    protected void onSelect(int index) {
+                        if (index == 0) GameScene.show(new WndDropTable());
+                    }
+                });
             }
         });
         return true;

@@ -85,7 +85,7 @@ public class DropTable {
         return Math.max(0, structuralCap(cat) - undiscoveredCount(cat));
     }
 
-    private static int structuralCap(Generator.Category cat) {
+    public static int structuralCap(Generator.Category cat) {
         int n = droppable(cat).size();
         if (n <= 2) return 0;
         int cap = (int) (n * DISABLE_RATIO);
@@ -138,6 +138,17 @@ public class DropTable {
 
     public static void reset() {
         disabled.clear();
+    }
+
+    public static HashSet<Class<? extends Item>> snapshot() {
+        return new HashSet<>(disabled);
+    }
+
+    //skips set()'s checks, so only pass a snapshot() taken earlier in the same editing session
+    public static void restore(HashSet<Class<? extends Item>> snap) {
+        if (snap == null || locked()) return;
+        disabled.clear();
+        disabled.addAll(snap);
     }
 
     public static boolean locked() {

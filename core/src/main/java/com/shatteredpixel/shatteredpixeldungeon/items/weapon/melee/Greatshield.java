@@ -40,7 +40,7 @@ public class Greatshield extends ShieldWeapon {
 
 	@Override
 	public int max(int lvl) {
-		return  Math.round(2.5f*(tier+1)) +     //15 base, down from 30
+		return  11 +                            //11 base, down from 30 (15 pre-rework)
 				lvl*(tier-2);                   //+3 per level, down from +6
 	}
 }

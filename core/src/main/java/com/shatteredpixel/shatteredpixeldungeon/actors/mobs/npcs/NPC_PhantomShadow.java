@@ -67,10 +67,6 @@ public class NPC_PhantomShadow extends NPC {
             {1140, 744, 847},
     };
 
-    public static int[] candidateCells(int point) {
-        return CELLS[point].clone();
-    }
-
     public static void spawn(Level level, int point) {
         NPC_PhantomShadow cat = new NPC_PhantomShadow();
         cat.pos = CELLS[point][Random.Int(3)];

@@ -45,7 +45,7 @@ public class RoundShield extends ShieldWeapon {
 
 	@Override
 	public int max(int lvl) {
-		return  Math.round(2.5f*(tier+1)) +     //10 base, down from 20
+		return  8 +                             //8 base, down from 20 (10 pre-rework)
 				lvl*(tier-1);                   //+2 per level, down from +4
 	}
 

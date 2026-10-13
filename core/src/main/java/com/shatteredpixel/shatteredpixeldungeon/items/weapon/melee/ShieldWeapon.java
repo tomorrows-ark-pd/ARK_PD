@@ -25,12 +25,13 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.ShieldWeaponTracker;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
 //low base damage, high DR. mitigating hits builds a charge meter, and each point of charge boosts outgoing damage
 public class ShieldWeapon extends MeleeWeapon {
 
-	public static final float BONUS_PER_STACK = 0.02f;   //+2% damage per point of charge, at every level
+	public static final float BONUS_PER_CHARGE = 0.01f;   //+1% damage per point of charge, at every level
 
 	//DR at +0, and DR gained per upgrade
 	protected float baseDefenseFactor;
@@ -39,11 +40,6 @@ public class ShieldWeapon extends MeleeWeapon {
 	//natural charge ceiling at +0, and ceiling gained per upgrade
 	protected int capBase = 30;
 	protected int capPerLvl = 7;
-
-	//one charge per point of damage the shield absorbed
-	protected float chargePerMitigation() {
-		return 1.0f;
-	}
 
 	public int chargeCapAt(int lvl) {
 		return Math.round((capBase + capPerLvl * lvl) * augmentCapFactor());
@@ -62,11 +58,11 @@ public class ShieldWeapon extends MeleeWeapon {
 		return defenseFactorAt(buffedLvl());
 	}
 
-	//credit is the mean of the discarded drRoll, clamped to what was actually thrown at us so weak mobs can't farm it
+	//one charge per point of the mean block, clamped to what was actually thrown at us so weak mobs can't farm it
 	public void onMitigated(Char owner, int incomingPreDR) {
 		float mitigation = Math.min(incomingPreDR, defenseFactor(owner) / 2f);
 		if (mitigation <= 0) return;
-		Buff.affect(owner, ShieldWeaponTracker.class).gain(mitigation * chargePerMitigation(), chargeCap());
+		Buff.affect(owner, ShieldWeaponTracker.class).gain(mitigation, chargeCap());
 		updateQuickslot();
 	}
 
@@ -79,7 +75,17 @@ public class ShieldWeapon extends MeleeWeapon {
 	}
 
 	public float damageBonus(Char owner) {
-		return effectiveCharge(owner) * BONUS_PER_STACK;
+		return effectiveCharge(owner) * BONUS_PER_CHARGE;
+	}
+
+	//charge belongs to the shield in hand, so any unequip (a swap included) drops it
+	@Override
+	public boolean doUnequip(Hero hero, boolean collect, boolean single) {
+		if (super.doUnequip(hero, collect, single)) {
+			Buff.detach(hero, ShieldWeaponTracker.class);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -154,11 +160,11 @@ public class ShieldWeapon extends MeleeWeapon {
 
 	@Override
 	public String statsInfo() {
-		int perStack = (int) (BONUS_PER_STACK * 100);
+		int perCharge = Math.round(BONUS_PER_CHARGE * 100);
 		if (isIdentified()) {
-			return Messages.get(this, "stats_desc", defenseFactor(Dungeon.hero), perStack, chargeCap());
+			return Messages.get(this, "stats_desc", defenseFactor(Dungeon.hero), perCharge, chargeCap());
 		} else {
-			return Messages.get(this, "typical_stats_desc", defenseFactorAt(0), perStack, chargeCapAt(0));
+			return Messages.get(this, "typical_stats_desc", defenseFactorAt(0), perCharge, chargeCapAt(0));
 		}
 	}
 }

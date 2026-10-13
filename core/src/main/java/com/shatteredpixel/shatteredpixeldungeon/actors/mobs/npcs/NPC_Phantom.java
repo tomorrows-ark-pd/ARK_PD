@@ -2,7 +2,6 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCat;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
@@ -11,13 +10,10 @@ import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomSprite;
-import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
-import com.watabou.utils.DeviceCompat;
 
-import java.util.Arrays;
 
 public class NPC_Phantom extends NPC {
     {
@@ -63,8 +59,6 @@ public class NPC_Phantom extends NPC {
             return true;
         }
 
-        if (DeviceCompat.isDebug() && q.at(PhantomCatQuestLine.STEP_FIND)) logWhereSheIs();
-
         //capture before the turn-in: he owes the premise even when the payoff lands in the same breath
         boolean firstBriefing = q.brief();
 
@@ -79,25 +73,6 @@ public class NPC_Phantom extends NPC {
         if (firstBriefing) tell(Messages.get(this, "quest"), payoff);
         else tell(payoff);
         return true;
-    }
-
-    //debug builds only: her cell is rolled at generation and never stored, so name the floor and candidates
-    private static void logWhereSheIs() {
-        int point = Dungeon.QuestCatPoint;
-        int branch = point + 2;
-        boolean generated = Dungeon.levelHasBeenGenerated(0, branch);
-        GLog.w("[DEBUG] cat: Rhodes " + branch + ", cell one of " + Arrays.toString(NPC_PhantomShadow.candidateCells(point))
-                + " | floor generated: " + generated + " | spawn gate open: " + PhantomCatQuestLine.catStillOut());
-
-        if (Dungeon.branch != branch) return;
-        for (Mob m : Dungeon.level.mobs) {
-            if (!(m instanceof NPC_PhantomShadow)) continue;
-            int w = Dungeon.level.width();
-            int dx = m.pos % w - Dungeon.hero.pos % w, dy = m.pos / w - Dungeon.hero.pos / w;
-            GLog.w("[DEBUG] she is on this floor at cell " + m.pos + ": " + dx + " x, " + dy + " y from you");
-            return;
-        }
-        GLog.w("[DEBUG] this is her floor but she is not here (already picked up, or never spawned)");
     }
 
     //shows each text in turn, the next opening as the previous is dismissed

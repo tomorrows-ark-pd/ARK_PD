@@ -40,6 +40,7 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
 
 //per-run drop table editor, opened from Purestream; read-only once the run enters the dungeon
@@ -57,9 +58,11 @@ public class WndDropTable extends Window {
 
     private final boolean editable;
 
+    //edits apply live so the cap checks see them; cancel, back and tapping outside roll back to this
+    private HashSet<Class<? extends Item>> snapshot;
+
     private ScrollingGridPane grid;
     private RenderedTextBlock statusText;
-    private RenderedTextBlock countText;
 
     //grid entries are built once and reused; a refresh only re-creates the six headers
     private final ArrayList<ArrayList<ToggleItem>> groupItems = new ArrayList<>();
@@ -68,7 +71,6 @@ public class WndDropTable extends Window {
     private float gridTop;
     private float gridHeight;
     private float statusY;
-    private float countY;
 
     public WndDropTable() {
         super();
@@ -86,31 +88,56 @@ public class WndDropTable extends Window {
         PixelScene.align(title);
         add(title);
 
-        countText = PixelScene.renderTextBlock(6);
-        countText.maxWidth(w);
-        add(countText);
-
         statusText = PixelScene.renderTextBlock(6);
         statusText.maxWidth(w);
         statusText.visible = false;
         add(statusText);
 
-        countY = h - TXT_HEIGHT;
-
-        float bottom = countY;
+        float bottom = h;
         if (editable) {
+            snapshot = DropTable.snapshot();
+
+            RedButton btnConfirm = new RedButton(Messages.get(this, "confirm"), 8) {
+                @Override
+                protected void onClick() {
+                    hide();
+                }
+            };
+            btnConfirm.setRect(0, bottom - BTN_HEIGHT, (w - 1) / 2f, BTN_HEIGHT);
+            PixelScene.align(btnConfirm);
+            add(btnConfirm);
+
+            RedButton btnCancel = new RedButton(Messages.get(this, "cancel"), 8) {
+                @Override
+                protected void onClick() {
+                    onBackPressed();
+                }
+            };
+            btnCancel.setRect(btnConfirm.right() + 1, bottom - BTN_HEIGHT, w - btnConfirm.right() - 1, BTN_HEIGHT);
+            PixelScene.align(btnCancel);
+            add(btnCancel);
+
             RedButton btnEnableAll = new RedButton(Messages.get(this, "enable_all"), 8) {
                 @Override
                 protected void onClick() {
                     enableAll();
                 }
             };
-            btnEnableAll.setRect(0, bottom - 1 - BTN_HEIGHT, w, BTN_HEIGHT);
+            btnEnableAll.setRect(0, btnConfirm.top() - 1 - BTN_HEIGHT, w, BTN_HEIGHT);
             PixelScene.align(btnEnableAll);
             add(btnEnableAll);
             bottom = btnEnableAll.top() - 1;
         } else {
-            bottom -= 1;
+            RedButton btnClose = new RedButton(Messages.get(this, "confirm"), 8) {
+                @Override
+                protected void onClick() {
+                    hide();
+                }
+            };
+            btnClose.setRect(0, bottom - BTN_HEIGHT, w, BTN_HEIGHT);
+            PixelScene.align(btnClose);
+            add(btnClose);
+            bottom = btnClose.top() - 1;
         }
 
         statusY = bottom - TXT_HEIGHT;
@@ -131,7 +158,6 @@ public class WndDropTable extends Window {
 
         buildItems();
         rebuildGrid();
-        updateCount();
 
         if (!editable) {
             setStatus(Messages.get(this, "locked_notice"));
@@ -191,13 +217,6 @@ public class WndDropTable extends Window {
         grid.scrollTo(0, scrollPos);
     }
 
-    private void updateCount() {
-        countText.text(Messages.get(this, "count",
-                DropTable.totalDroppable() - DropTable.totalDisabled(), DropTable.totalDroppable()));
-        countText.setPos(0, countY);
-        PixelScene.align(countText);
-    }
-
     //RenderedTextBlock.text("") never reaches build(), so an empty line has to be hidden instead
     private void setStatus(String msg) {
         if (msg == null || msg.isEmpty()) {
@@ -220,7 +239,12 @@ public class WndDropTable extends Window {
         Sample.INSTANCE.play(Assets.Sounds.CLICK);
         setStatus(null);
         rebuildGrid();
-        updateCount();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (editable) DropTable.restore(snapshot);
+        super.onBackPressed();
     }
 
     private String catName(Generator.Category cat) {
@@ -303,7 +327,6 @@ public class WndDropTable extends Window {
 
             //safe to restructure the grid here: ScrollingGridPane.onClick breaks as soon as we return true
             rebuildGrid();
-            updateCount();
             return true;
         }
     }
