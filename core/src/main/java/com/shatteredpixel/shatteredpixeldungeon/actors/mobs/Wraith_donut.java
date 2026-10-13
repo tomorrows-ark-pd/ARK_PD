@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silence;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CustomeSet;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.I_GolemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.LurkerSprite;
@@ -94,6 +95,7 @@ public static Wraith_donut spawnAt( int pos ) {
         w.pos = pos;
         w.state = w.HUNTING;
         GameScene.add( w, SPAWN_DELAY );
+        Bestiary.setSeen(Wraith_donut.class);
 
         w.sprite.alpha( 0 );
         w.sprite.parent.add( new AlphaTweener( w.sprite, 1, 0.5f ) );

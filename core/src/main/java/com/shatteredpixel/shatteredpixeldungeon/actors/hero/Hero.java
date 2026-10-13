@@ -211,6 +211,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKn
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
+import com.shatteredpixel.shatteredpixeldungeon.levels.NewRhodesLevel2;
 import com.shatteredpixel.shatteredpixeldungeon.levels.NewHallsBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
@@ -1145,6 +1146,11 @@ public class Hero extends Char {
                     }
                 });
             } else if (heap != null && heap.type == Type.FOR_SALE_28F && heap.size() == 1) {
+                //artifact obtained elsewhere since the hub was entered: pull the duplicate listing
+                if (NewRhodesLevel2.heroOwnsArtifact(heap.peek())) {
+                    heap.destroy();
+                    return false;
+                }
                 Game.runOnRenderThread(new Callback() {
                     @Override
                     public void call() {
@@ -1484,9 +1490,13 @@ public class Hero extends Char {
 
         KindOfWeapon wep = belongings.attackingWeapon();
 
+        Alignment enemyAlignment = enemy.alignment;
         if (wep != null) damage = wep.proc(this, enemy, damage);
 
         if (buff(Bonk.BonkBuff.class) != null) Buff.detach(this, Bonk.BonkBuff.class);
+
+        //ring of dominate converted the target: no knockback, debuffs or bonus damage on the new ally
+        if (enemy.alignment != enemyAlignment && enemy.alignment == alignment) return 0;
 
         damage = Talent.onAttackProc(this, enemy, damage);
 

@@ -8,8 +8,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.ActiveOriginium;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.watabou.noosa.audio.Sample;
 
@@ -18,19 +16,9 @@ public class OriginiumTrap extends Trap {
     {
         color = 0;
         shape = SP1;
+        disarmedByActivation = false;
 
         canBeHidden = false;
-    }
-
-    @Override
-    public void trigger() {
-        if (Dungeon.level.heroFOV[pos]){
-            Sample.INSTANCE.play(Assets.Sounds.TRAP);
-        }
-        //this trap is not disarmed by being triggered
-        reveal();
-        Level.set(pos, Terrain.TRAP);
-        activate();
     }
 
     @Override

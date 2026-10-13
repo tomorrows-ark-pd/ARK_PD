@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 
@@ -57,7 +58,11 @@ public abstract class AllyBuff extends Buff {
 		Buff.affect(enemy, buffCls);
 
 		if (enemy.buff(buffCls) != null){
-			if (droppingLoot) enemy.rollToDropLoot();
+			if (droppingLoot) {
+				enemy.rollToDropLoot();
+				Bestiary.setSeen(enemy.getClass());
+				Bestiary.countEncounter(enemy.getClass());
+			}
 			Statistics.enemiesSlain++;
 			Badges.validateMonstersSlain();
 			Statistics.qualifiedForNoKilling = false;

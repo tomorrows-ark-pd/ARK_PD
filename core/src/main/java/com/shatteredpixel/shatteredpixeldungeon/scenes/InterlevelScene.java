@@ -41,6 +41,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SpecialRoom;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates;
+import com.shatteredpixel.shatteredpixeldungeon.ui.ActionIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.ui.GameLog;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
@@ -571,6 +572,8 @@ public class InterlevelScene extends PixelScene {
 
         GameLog.wipe();
 
+        // drop actions bound to the pre-reload hero; restored buffs re-register themselves
+        ActionIndicator.clearAction();
         Dungeon.loadGame(GamesInProgress.curSlot);
         if (Dungeon.depth == -1) {
             Dungeon.depth = Statistics.deepestFloor;

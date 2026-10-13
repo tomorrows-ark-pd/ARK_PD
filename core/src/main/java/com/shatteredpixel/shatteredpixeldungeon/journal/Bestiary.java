@@ -77,6 +77,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.AnnihilationGear;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK2.AncientKin;
 import com.shatteredpixel.shatteredpixeldungeon.items.Skill.SK3.YourWish;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.CorpseDust;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfMayer;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.SP.StaffOfMudrock;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth;
@@ -320,6 +321,26 @@ public enum Bestiary {
         classConversions.put(IsharmlaSeabornTail.class, Isharmla.class);
 
         classConversions.put(Centurion.CenturionMinion.class, Centurion.class);
+
+        classConversions.put(CorpseDust.DustWraith.class, Wraith.class);
+
+        //Shadow only ever spawns as one of its Type subclasses
+        classConversions.put(Shadow.TypeBlaze.class, Shadow.class);
+        classConversions.put(Shadow.TypeAmiya.class, Shadow.class);
+        classConversions.put(Shadow.TypeRed.class, Shadow.class);
+        classConversions.put(Shadow.TypeGrey.class, Shadow.class);
+        classConversions.put(Shadow.TypeRose.class, Shadow.class);
+        classConversions.put(Shadow.TypeNearl.class, Shadow.class);
+        classConversions.put(Shadow.TypeJessica.class, Shadow.class);
+        classConversions.put(Shadow.TypeSKD.class, Shadow.class);
+        classConversions.put(Shadow.TypeSPT.class, Shadow.class);
+        classConversions.put(Shadow.TypeGRN.class, Shadow.class);
+        classConversions.put(Shadow.TypeChen.class, Shadow.class);
+
+        //TheEndspeaker aspects are reskins of existing sea enemies
+        classConversions.put(TheEndspeaker.AspectSmall.class, Sea_Octo.class);
+        classConversions.put(TheEndspeaker.AspectMedium.class, SeaLeef.class);
+        classConversions.put(TheEndspeaker.AspectLarge.class, NetherseaBrandguider.class);
 
         classConversions.put(Tomimi.TomimiWarrior.class, Tomimi.class);
         classConversions.put(Tomimi.TomimiLancer.class, Tomimi.class);

@@ -7,6 +7,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
@@ -18,6 +19,10 @@ public class Certificate extends Item {
     private static final String TXT_VALUE	= "%+d";
     {
         image = ItemSpriteSheet.INFO_CERTI;
+    }
+
+    //needed for reflection (journal catalog, bundle restore)
+    public Certificate() {
     }
 
     public Certificate( int value ) {
@@ -33,6 +38,7 @@ public class Certificate extends Item {
     @Override
     public boolean doPickUp(Hero hero) {
         SPDSettings.addSpecialcoin(this.quantity);
+        Catalog.setSeen(getClass());
         GameScene.pickUp( this, hero.pos );
         hero.sprite.showStatus( CharSprite.NEUTRAL, TXT_VALUE, quantity );
         hero.spendAndNext( TIME_TO_PICK_UP );

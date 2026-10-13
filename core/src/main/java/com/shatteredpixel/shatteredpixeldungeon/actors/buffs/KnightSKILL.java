@@ -124,6 +124,7 @@ public class KnightSKILL extends Buff implements ActionIndicator.Action {
         if (bundle.contains(INITIAL_TIME))  initialComboTime = bundle.getFloat( INITIAL_TIME );
         else                                initialComboTime = 5;
 
+        if (getHighestMove() != null) ActionIndicator.setAction(this);
     }
 
     @Override

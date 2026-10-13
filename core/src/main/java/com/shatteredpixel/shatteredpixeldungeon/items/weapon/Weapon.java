@@ -185,8 +185,9 @@ abstract public class Weapon extends KindOfWeapon {
                     if (defender instanceof Mob && defender.isAlive() && !defender.isImmune(Corruption.class)
                             && defender.buff(Corruption.class) == null && defender.alignment != Char.Alignment.ALLY) {
                         defender.HP = defender.HT;
-                        damage = 0;
                         AllyBuff.affectAndLoot((Mob) defender, curUser, Corruption.class);
+                        //skip enchant/conserved damage so they can't hit the new ally
+                        if (defender.buff(Corruption.class) != null) return 0;
                     }
                 }
 			}

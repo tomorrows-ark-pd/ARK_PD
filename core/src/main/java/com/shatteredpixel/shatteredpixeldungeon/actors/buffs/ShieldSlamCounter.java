@@ -63,7 +63,9 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
 
     @Override
     public boolean act() {
-        if (count() > 0 && ActionIndicator.action == null) {
+        // also displace a stale ShieldSlamCounter left in the indicator (e.g. from before a save reload)
+        if (count() > 0 && (ActionIndicator.action == null
+                || (ActionIndicator.action instanceof ShieldSlamCounter && ActionIndicator.action != this))) {
             ActionIndicator.setAction(this);
         }
         boolean charged = isCharged();
@@ -127,6 +129,16 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
 
     @Override
     public void doAction() {
+        // a stale instance targets a discarded Hero (old pos), so canAttack always fails; redirect to the live buff
+        ShieldSlamCounter live = Dungeon.hero.buff(ShieldSlamCounter.class);
+        if (live != this) {
+            ActionIndicator.clearAction(this);
+            if (live != null) {
+                ActionIndicator.setAction(live);
+                live.doAction();
+            }
+            return;
+        }
         GameScene.selectCell(slamListener);
     }
 
