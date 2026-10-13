@@ -316,15 +316,17 @@ public class NewRhodesLevel2 extends Level {
             3985, 3986, 3987, 3917, 3918, 3919  //rings
     };
 
-    private static final int RING_PRICE = 500;
-    private static final int ARTIFACT_PRICE = 600;
+    private static final int RING_PRICE = 400;
+    private static final int ARTIFACT_PRICE = 500;
 
     //tier weights for the certificate shop: T1-T5
     private static final float[] SHOP_WEAPON_TIER_PROBS = {0.1f, 0.1f, 0.2f, 0.3f, 0.3f};
-    //price scales with tier, T1 = 300 up to T5 = 700 (melee)
-    private static final int[] SHOP_WEAPON_TIER_PRICE = {300, 400, 500, 600, 700};
-    //price scales with tier, T1 = 100 up to T5 = 300 (missile)
-    private static final int[] SHOP_MISSILE_TIER_PRICE = {100, 150, 200, 250, 300};
+    //price scales with tier, T1 = 150 up to T5 = 550 (melee)
+    private static final int[] SHOP_WEAPON_TIER_PRICE = {150, 250, 350, 450, 550};
+    //price scales with tier, T1 = 50 up to T5 = 250 (missile)
+    private static final int[] SHOP_MISSILE_TIER_PRICE = {50, 100, 150, 200, 250};
+    //flat surcharge for weapons that roll a good enchantment
+    private static final int ENCHANT_SURCHARGE = 100;
 
     //shop-only T1 melee pool: adds hero starting weapons Generator.WEP_T1 omits/zero-weights (ChenSword, MagesStaff), without touching regular dungeon drops
     private static final Class<?>[] SHOP_MELEE_T1_CLASSES = {
@@ -363,7 +365,9 @@ public class NewRhodesLevel2 extends Level {
         if (rerollQuality) applyShopQuality(w);
         //level() bypasses upgrade(), so resync the imbued wand to the staff's rolled level
         if (w instanceof MagesStaff) ((MagesStaff) w).updateWand(false);
-        sellForCertificates(w, cell, prices[tierIndex]);
+        int price = prices[tierIndex];
+        if (w.hasGoodEnchant()) price += ENCHANT_SURCHARGE;
+        sellForCertificates(w, cell, price);
     }
 
     //strips any curse and rerolls the upgrade level to +0 85% / +1 10% / +2 5%
