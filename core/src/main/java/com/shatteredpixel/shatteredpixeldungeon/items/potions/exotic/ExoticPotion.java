@@ -120,6 +120,11 @@ public class ExoticPotion extends Potion {
 	public int value() {
 		return (Reflection.newInstance(exoToReg.get(getClass())).value() + 20) * quantity;
 	}
+
+	@Override
+	public int energyVal() {
+		return (Reflection.newInstance(exoToReg.get(getClass())).energyVal() + 4) * quantity;
+	}
 	
 	public static class PotionToExotic extends Recipe{
 		

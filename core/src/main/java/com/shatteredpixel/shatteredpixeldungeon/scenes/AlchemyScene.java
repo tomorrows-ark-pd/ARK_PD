@@ -44,6 +44,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndEnergizeItem;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal;
 import com.watabou.gltextures.TextureCache;
@@ -77,7 +78,8 @@ public class AlchemyScene extends PixelScene {
 	
 	private RenderedTextBlock energyLeft;
 	private RenderedTextBlock energyCost;
-	
+	private RedButton energyAdd;
+
 	private RedButton btnCombine;
 	
 	private static final int BTN_SIZE	= 28;
@@ -154,10 +156,8 @@ public class AlchemyScene extends PixelScene {
 					protected void onClick() {
 						super.onClick();
 						if (item != null) {
-							if (!(item instanceof AlchemistsToolkit)) {
-								if (!item.collect()) {
-									Dungeon.level.drop(item, Dungeon.hero.pos);
-								}
+							if (!item.collect()) {
+								Dungeon.level.drop(item, Dungeon.hero.pos);
 							}
 							item = null;
 							slot.item(new WndBag.Placeholder(ItemSpriteSheet.SOMETHING));
@@ -297,12 +297,24 @@ public class AlchemyScene extends PixelScene {
 		btnGuide.setRect(insets.left, insets.top, 20, 20);
 		add(btnGuide);
 		
-		energyLeft = PixelScene.renderTextBlock(Messages.get(AlchemyScene.class, "energy", availableEnergy()), 9);
+		energyLeft = PixelScene.renderTextBlock(energyText(), 9);
 		energyLeft.setPos(
                 centerW - energyLeft.width()/2,
                 insets.top + h - 8 - energyLeft.height()
 		);
+		energyLeft.hardlight(0x44CCFF);
 		add(energyLeft);
+
+		energyAdd = new RedButton("+"){
+			@Override
+			protected void onClick() {
+				super.onClick();
+				WndEnergizeItem.openItemSelector();
+			}
+		};
+		energyAdd.setRect(energyLeft.right() + 2, energyLeft.top() - (16 - energyLeft.height())/2, 16, 16);
+		align(energyAdd);
+		add(energyAdd);
 		
 		energyCost = PixelScene.renderTextBlock(6);
 		add(energyCost);
@@ -338,9 +350,6 @@ public class AlchemyScene extends PixelScene {
 						if (inputs[i].item == null) {
 							if (item instanceof Dart) {
 								inputs[i].item(item.detachAll(Dungeon.hero.belongings.backpack));
-							} else if (item instanceof AlchemistsToolkit) {
-								clearSlots();
-								inputs[i].item(item);
 							} else {
 								inputs[i].item(item.detach(Dungeon.hero.belongings.backpack));
 							}
@@ -408,15 +417,13 @@ public class AlchemyScene extends PixelScene {
 		Item result = null;
 		
 		if (recipe != null){
-			provider.spendEnergy(recipe.cost(ingredients));
-			energyLeft.text(Messages.get(AlchemyScene.class, "energy", availableEnergy()));
-			RectF insets = getCommonInsets();
-			int h = (int)(Camera.main.height - insets.top - insets.bottom);
-			energyLeft.setPos(
-					centerW - energyLeft.width()/2,
-					insets.top + h - 8 - energyLeft.height()
-			);
-			
+			int cost = recipe.cost(ingredients);
+			if (toolkit != null){
+				cost = toolkit.consumeEnergy(cost);
+			}
+			Dungeon.energy -= cost;
+			createEnergy();
+
 			result = recipe.brew(ingredients);
 		}
 		
@@ -426,10 +433,8 @@ public class AlchemyScene extends PixelScene {
 			Sample.INSTANCE.play( Assets.Sounds.PUFF );
 			
 			output.item(result);
-			if (!(result instanceof AlchemistsToolkit)) {
-				if (!result.collect()){
-					Dungeon.level.drop(result, Dungeon.hero.pos);
-				}
+			if (!result.collect()){
+				Dungeon.level.drop(result, Dungeon.hero.pos);
 			}
 			
 			try {
@@ -441,7 +446,7 @@ public class AlchemyScene extends PixelScene {
 			synchronized (inputs) {
 				for (int i = 0; i < inputs.length; i++) {
 					if (inputs[i] != null && inputs[i].item != null) {
-						if (inputs[i].item.quantity() <= 0 || inputs[i].item instanceof AlchemistsToolkit) {
+						if (inputs[i].item.quantity() <= 0) {
 							inputs[i].slot.item(new WndBag.Placeholder(ItemSpriteSheet.SOMETHING));
 							inputs[i].item = null;
 						} else {
@@ -504,10 +509,8 @@ public class AlchemyScene extends PixelScene {
 		synchronized ( inputs ) {
 			for (int i = 0; i < inputs.length; i++) {
 				if (inputs[i] != null && inputs[i].item != null) {
-					if (!(inputs[i].item instanceof AlchemistsToolkit)) {
-						if (!inputs[i].item.collect()) {
-							Dungeon.level.drop(inputs[i].item, Dungeon.hero.pos);
-						}
+					if (!inputs[i].item.collect()) {
+						Dungeon.level.drop(inputs[i].item, Dungeon.hero.pos);
 					}
 					inputs[i].item(null);
 					inputs[i].slot.item(new WndBag.Placeholder(ItemSpriteSheet.SOMETHING));
@@ -575,25 +578,39 @@ public class AlchemyScene extends PixelScene {
 		}
 	}
 	
-	private static AlchemyProvider provider;
-	
-	public static void setProvider( AlchemyProvider p ){
-		provider = p;
+	public void createEnergy(){
+		energyLeft.text(energyText());
+		energyLeft.setPos(
+				centerW - energyLeft.width()/2,
+				energyLeft.top()
+		);
+		align(energyLeft);
+
+		energyAdd.setPos(energyLeft.right() + 2, energyAdd.top());
+		align(energyAdd);
+
+		updateState();
 	}
-	
+
+	private static String energyText(){
+		String text = Messages.get(AlchemyScene.class, "energy", Dungeon.energy);
+		if (toolkit != null){
+			text += "+" + toolkit.availableEnergy();
+		}
+		return text;
+	}
+
+	private static AlchemistsToolkit toolkit;
+
+	public static void assignToolkit( AlchemistsToolkit toolkit ){
+		AlchemyScene.toolkit = toolkit;
+	}
+
+	public static void clearToolkit(){
+		AlchemyScene.toolkit = null;
+	}
+
 	public static int availableEnergy(){
-		return provider == null ? 0 : provider.getEnergy();
-	}
-	
-	public static boolean providerIsToolkit(){
-		return provider instanceof AlchemistsToolkit.kitEnergy;
-	}
-	
-	public interface AlchemyProvider {
-	
-		int getEnergy();
-		
-		void spendEnergy(int reduction);
-	
+		return Dungeon.energy + (toolkit == null ? 0 : toolkit.availableEnergy());
 	}
 }

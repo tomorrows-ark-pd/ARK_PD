@@ -23,7 +23,6 @@ package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.TomorrowRogueNight;
-import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.bombs.Bomb;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Blandfruit;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.MeatPie;
@@ -188,7 +187,6 @@ public abstract class Recipe {
     //*******
 
     private static Recipe[] oneIngredientRecipes = new Recipe[]{
-            new AlchemistsToolkit.upgradeKit(),
             new Scroll.ScrollToStone(),
             new StewedMeat.oneMeat(),
             new SmokeEgg.Recipe()

@@ -142,15 +142,20 @@ public class WndBag extends WndTabbed {
 	private static Bag lastBag;
 	
 	public WndBag( Bag bag, Listener listener, Mode mode, String title ) {
-		
+		this( bag, listener, null, mode, title );
+	}
+
+	private WndBag( Bag bag, Listener listener, ItemSelector selector, Mode mode, String title ) {
+
 		super();
-		
+
 		if( INSTANCE != null ){
 			INSTANCE.hide();
 		}
 		INSTANCE = this;
-		
+
 		this.listener = listener;
+		this.selector = selector;
 		this.mode = mode;
 		this.title = title;
 		
@@ -226,8 +231,7 @@ public class WndBag extends WndTabbed {
 	}
 
 	public WndBag( Bag bag, ItemSelector selector ) {
-		this(bag, null, Mode.ALL, null);
-		this.selector = selector;
+		this( bag, null, selector, Mode.ALL, selector.textPrompt() );
 	}
 
 	public static WndBag lastBag( ItemSelector selector ) {
@@ -268,11 +272,30 @@ public class WndBag extends WndTabbed {
 		amt.y = (TITLE_HEIGHT - amt.baseLine())/2f - 1;
 		PixelScene.align(amt);
 		add(amt);
-		
+
+		float titleWidth = amt.x;
+		if (Dungeon.energy > 0) {
+			ItemSprite energy = new ItemSprite(ItemSpriteSheet.ENERGY, null);
+			energy.x = titleWidth - energy.width() - 2;
+			energy.y = (TITLE_HEIGHT - energy.height())/2f - 1;
+			PixelScene.align(energy);
+			add(energy);
+
+			BitmapText energyAmt = new BitmapText( Integer.toString(Dungeon.energy), PixelScene.pixelFont );
+			energyAmt.hardlight(0x44CCFF);
+			energyAmt.measure();
+			energyAmt.x = energy.x - energyAmt.width() - 1;
+			energyAmt.y = amt.y;
+			PixelScene.align(energyAmt);
+			add(energyAmt);
+
+			titleWidth = energyAmt.x;
+		}
+
 		RenderedTextBlock txtTitle = PixelScene.renderTextBlock(
 				title != null ? Messages.titleCase(title) : Messages.titleCase( bag.name() ), 8 );
 		txtTitle.hardlight( TITLE_COLOR );
-		txtTitle.maxWidth( (int)amt.x - 2 );
+		txtTitle.maxWidth( (int)titleWidth - 2 );
 		txtTitle.setPos(
 				1,
 				(TITLE_HEIGHT - txtTitle.height()) / 2f - 1
@@ -342,14 +365,16 @@ public class WndBag extends WndTabbed {
 	public void onBackPressed() {
 		if (listener != null) {
 			listener.onSelect( null );
+		} else if (selector != null) {
+			selector.onSelect( null );
 		}
 		super.onBackPressed();
 	}
-	
+
 	@Override
 	protected void onClick( Tab tab ) {
 		hide();
-		Game.scene().addToFront(new WndBag(((BagTab) tab).bag, listener, mode, title));
+		Game.scene().addToFront(new WndBag(((BagTab) tab).bag, listener, selector, mode, title));
 	}
 	
 	@Override
