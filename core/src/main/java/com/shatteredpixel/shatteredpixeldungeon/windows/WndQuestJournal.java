@@ -73,6 +73,11 @@ public class WndQuestJournal extends Window {
 			pos = btnClaim.bottom() + GAP;
 		}
 
+		if (!quest.abandonable()) {
+			resize(WIDTH, (int) pos - GAP);
+			return;
+		}
+
 		RedButton btnAbandon = new RedButton(Messages.get(this, "abandon")) {
 			@Override
 			protected void onClick() {

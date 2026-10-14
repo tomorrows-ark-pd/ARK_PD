@@ -79,16 +79,19 @@ public class NewRhodesLevel1 extends Level {
 
         // 벽 관련
         // 1. 처음 입구부분 벽
-        Painter.fill(this, 1, 19, 6, 6, Terrain.AVOID);
-        Painter.fill(this, 11, 19, 6, 6, Terrain.AVOID);
+        Painter.fill(this, 1, 20, 6, 5, Terrain.AVOID);
+        Painter.fill(this, 11, 20, 6, 5, Terrain.AVOID);
 
         // 2.
-        Painter.fill(this, 1, 18, 4, 1, Terrain.AVOID);
-        Painter.fill(this, 13, 18, 4, 1, Terrain.AVOID);
+        Painter.fill(this, 1, 19, 5, 1, Terrain.AVOID);
+        Painter.fill(this, 13, 19, 4, 1, Terrain.AVOID);
 
         // 3.
-        Painter.fill(this, 1, 17, 3, 1, Terrain.AVOID);
-        Painter.fill(this, 14, 17, 3, 1, Terrain.AVOID);
+        Painter.fill(this, 1, 18, 3, 1, Terrain.AVOID);
+        Painter.fill(this, 14, 18, 4, 1, Terrain.AVOID);
+
+        // 오른쪽 가장자리 바닥 (이미지상 바닥)
+        Painter.fill(this, 17, 14, 1, 4, Terrain.EMPTY);
 
 
         Painter.fill(this, 18, 0, 1, 26, Terrain.WALL);

@@ -50,6 +50,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.AmuletQuestLine;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.BonusStageQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.CavesLevel;
@@ -270,6 +272,7 @@ public class Dungeon {
         Statistics.reset();
         Notes.reset();
         Quests.reset();
+        Quests.add(new AmuletQuestLine());
 
         quickslot.reset();
         QuickSlotButton.reset();
@@ -931,6 +934,14 @@ public class Dungeon {
         Statistics.restoreFromBundle(bundle);
         Generator.restoreFromBundle(bundle);
         TheEndspeaker.Status.restoreFromBundle(bundle);
+
+        //<=v737 save: seed the run-goal quests it predates
+        if (!doctorSaved && Quests.get(AmuletQuestLine.class) == null) {
+            Quests.add(new AmuletQuestLine());
+        }
+        if (Statistics.deepestFloor > 30) {
+            BonusStageQuestLine.start();
+        }
     }
 
     public static Level loadLevel(int save) throws IOException {

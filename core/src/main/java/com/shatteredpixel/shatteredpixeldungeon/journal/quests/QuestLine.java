@@ -208,6 +208,10 @@ public abstract class QuestLine implements Bundlable {
     }
 
     // --- abandon ---
+    public boolean abandonable() {
+        return true;
+    }   // false hides the journal's Abandon button (run-goal quests)
+
     public void abandon() {
         state = State.ABANDONED;
         onAbandoned();
