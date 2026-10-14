@@ -8,7 +8,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.MerchantsBeacon;
-import com.shatteredpixel.shatteredpixeldungeon.items.PortableCover;
 import com.shatteredpixel.shatteredpixeldungeon.items.Recipe;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Catastrofe;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.AlchemicalCatalyst;
@@ -40,6 +39,7 @@ import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
@@ -133,13 +133,22 @@ public class MiniShopRoom extends SecretRoom {
     }
 
     //gold value of one point of alchemy energy, used to price crafted goods sold here
-    private static final int ENERGY_GOLD_VALUE = 10;
+    private static final int ENERGY_GOLD_VALUE = 5;
 
     //shallow depths use at least this depth multiplier, so early-game prices aren't too cheap
     private static final int MIN_DEPTH_MULTIPLIER = 2;
 
+    //per-class value used for pricing here instead of item.value(), for items whose value() is inflated for other reasons
+    private static final Map<Class<? extends Item>, Integer> VALUE_OVERRIDES = new HashMap<>();
+    static {
+        //tier 5 base (100) + 50, instead of KollamSword.value()'s full +150 bonus
+        VALUE_OVERRIDES.put(KollamSword.class, 150);
+    }
+
     private static int craftedPrice(Item item, int energyCost) {
-        int augmentedValue = item.value() + energyCost * ENERGY_GOLD_VALUE;
+        Integer valueOverride = VALUE_OVERRIDES.get(item.getClass());
+        int value = valueOverride != null ? valueOverride : item.value();
+        int augmentedValue = value + energyCost * ENERGY_GOLD_VALUE;
         int markup = Dungeon.isChallenged(Challenges.NO_HERBALISM) ? 8 : 6;
         int price = augmentedValue * markup * (Dungeon.depth / 5 + 1);
         return Math.round(price / 10f) * 10;
@@ -167,7 +176,6 @@ public class MiniShopRoom extends SecretRoom {
             new MagicalArmord.Recipe(),
             new MagicalInfusion.Recipe(),
             new OathofFire.Recipe(),
-            new PortableCover.Recipe(),
             new ReclaimTrap.Recipe(),
             new Recycle.Recipe(),
             new SaltBlast.Recipe(),

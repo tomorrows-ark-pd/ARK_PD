@@ -279,7 +279,7 @@ public class NewRhodesLevel2 extends Level {
         drop(new Closure_WandBox(), 3715).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_TransBox(), 3781).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_RingBox(), 3782).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TGBox(), 3783).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TGBox(), Closure_TGBox.SHOP_CELL).type = Heap.Type.FOR_SALE_28F;
 
         // 무기 (근접, 총기 포함)
         for (int cell : new int[]{4116, 4117, 4118, 4184, 4185, 4186}) {

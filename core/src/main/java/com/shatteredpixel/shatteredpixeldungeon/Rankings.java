@@ -130,7 +130,9 @@ public enum Rankings {
 	}
 
 	private int score( boolean win ) {
-		return (Statistics.goldCollected + Dungeon.hero.lvl * (win ? 26 : Dungeon.depth ) * 100) * (win ? 2 : 1);
+		//Rhodes is depth 0, so score deaths there by the deepest floor reached instead
+		int depth = Dungeon.isInRhodes() ? Statistics.deepestFloor : Dungeon.depth;
+		return (Statistics.goldCollected + Dungeon.hero.lvl * (win ? 26 : depth ) * 100) * (win ? 2 : 1);
 	}
 
 	public static final String HERO = "hero";

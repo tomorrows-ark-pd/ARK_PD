@@ -228,10 +228,10 @@ public enum Bestiary {
                 SiestaBoss.class, SeaBoss1.class,
                 //mod minibosses (miniboss/ subpackage)
                 Faust.class, Shadow.class, MagicGolem.class, Mon3tr.class,
-                Sentinel.class, Kaltsit.class, BloodMagister.class, Centurion.class,
+                Sentinel.class, Kaltsit.class, BloodMagister.class, Centurion.class, Centurion.CenturionMinion.class,
                 EmperorPursuer.class, TheEndspeaker.class,
                 //mod story bosses
-                Talulah.class, Talu_BlackSnake.class, Tomimi.class,
+                Talulah.class, Talulah.InfectedPatrolCaptain.class, Talu_BlackSnake.class, Tomimi.class,
                 Isharmla.class, Eunectes.class, Schwarz.class,
                 //mod miscellaneous bosses/minibosses
                 Cannot.class, DemonSpawner.class, FireCore.class,
@@ -320,8 +320,6 @@ public enum Bestiary {
         classConversions.put(IsharmlaSeabornBody.class, Isharmla.class);
         classConversions.put(IsharmlaSeabornTail.class, Isharmla.class);
 
-        classConversions.put(Centurion.CenturionMinion.class, Centurion.class);
-
         classConversions.put(CorpseDust.DustWraith.class, Wraith.class);
 
         //Shadow only ever spawns as one of its Type subclasses
@@ -342,26 +340,25 @@ public enum Bestiary {
         classConversions.put(TheEndspeaker.AspectMedium.class, SeaLeef.class);
         classConversions.put(TheEndspeaker.AspectLarge.class, NetherseaBrandguider.class);
 
-        classConversions.put(Tomimi.TomimiWarrior.class, Tomimi.class);
-        classConversions.put(Tomimi.TomimiLancer.class, Tomimi.class);
-        classConversions.put(Tomimi.TomimiFanatic.class, Tomimi.class);
-        classConversions.put(Tomimi.TomimiTower.class, Tomimi.class);
+        classConversions.put(Tomimi.TomimiWarrior.class, TiacauhWarrior.class);
+        classConversions.put(Tomimi.TomimiLancer.class, TiacauhLancer.class);
+        classConversions.put(Tomimi.TomimiFanatic.class, TiacauhFanatic.class);
 
         //Yog inner-class fists (legacy classes spawned during the Yog fight)
         classConversions.put(Yog.BurningFist.class, YogFist.BurningFist.class);
         classConversions.put(Yog.RottingFist.class, YogFist.RottingFist.class);
 
+        //summons count under the regular mob they reskin, never the boss (matches upstream DKGhoul->Ghoul etc.)
         //Talulah summons
-        classConversions.put(Talulah.InfectedPatrolCaptain.class, Talulah.class);
-        classConversions.put(Talulah.YogRipper.class, Talulah.class);
+        classConversions.put(Talulah.YogRipper.class, RipperDemon.class);
 
         //Isharmla summons
-        classConversions.put(Isharmla.SummonRunner.class, Isharmla.class);
-        classConversions.put(Isharmla.SummonOcto.class, Isharmla.class);
-        classConversions.put(Isharmla.SummonLeef.class, Isharmla.class);
+        classConversions.put(Isharmla.SummonRunner.class, SeaRunner.class);
+        classConversions.put(Isharmla.SummonOcto.class, Sea_Octo.class);
+        classConversions.put(Isharmla.SummonLeef.class, SeaLeef.class);
 
         //SiestaBoss summons
-        classConversions.put(SiestaBoss.BossAgent.class, SiestaBoss.class);
+        classConversions.put(SiestaBoss.BossAgent.class, Agent.class);
 
         //TheBigUglyThing / Pompeii boss reskins of existing regular enemies
         classConversions.put(TheBigUglyThing.BossRipper.class, TiacauhRipper.class);

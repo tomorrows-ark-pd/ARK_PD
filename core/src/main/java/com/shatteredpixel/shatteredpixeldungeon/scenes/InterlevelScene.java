@@ -159,12 +159,13 @@ public class InterlevelScene extends PixelScene {
                 scrollSpeed = returnDepth > Dungeon.depth ? 15 : -15;
                 break;
         }
-        if (loadingDepth <= 5) loadingAsset = Assets.Interfaces.LOADING_SEWERS;
+        //Rhodes floors live at depth 0 (branches 1-4)
+        if (loadingDepth == 0) loadingAsset = Assets.Interfaces.LOADING_RHODOS;
+        else if (loadingDepth <= 5) loadingAsset = Assets.Interfaces.LOADING_SEWERS;
         else if (loadingDepth <= 10) loadingAsset = Assets.Interfaces.LOADING_PRISON;
         else if (loadingDepth <= 15) loadingAsset = Assets.Interfaces.LOADING_CAVES;
         else if (loadingDepth <= 20) loadingAsset = Assets.Interfaces.LOADING_CITY;
         else if (loadingDepth <= 26) loadingAsset = Assets.Interfaces.LOADING_HALLS;
-        else if (loadingDepth <= 30) loadingAsset = Assets.Interfaces.LOADING_RHODOS;
         else if (loadingDepth <= 35) loadingAsset = Assets.Interfaces.LOADING_SIESTA;
         else loadingAsset = Assets.Interfaces.SHADOW;
 

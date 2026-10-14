@@ -55,11 +55,13 @@ public class v0_5_X_Changes {
                         "_미스 크리스틴_이 등장할 수 있는 위치가 늘어났습니다."));
         changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.MASTERY)), "도감 확장",
                 "_특수 아이템_ 카테고리가 추가되었습니다. 총기 부착물, 클로저 보급상자, 정보증명서 등을 등록할 수 있습니다." + "\n\n" +
-                        "요리, 요리 재료 및 일부 주문서가 도감에 추가되었습니다."));
+                        "요리, 요리 재료 및 일부 주문서가 도감에 추가되었습니다." + "\n\n" +
+                        "_무명의 살카즈 용병_과 _우르수스 감염자 감시관_이 별도 항목으로 추가되었습니다."));
         changes.addButton(new ChangeButton(Icons.get(Icons.PREFS), "기타 변경",
                 "_마법 거대 석상_이 등장하는 14층에 항상 낭떠러지가 생성됩니다." + "\n\n" +
                         "로도스의 _슈_와 _골든 글로우_가 더 이상 피해를 받지 않습니다." + "\n\n" +
-                        "누락된 영문 번역이 추가되었습니다."));
+                        "누락된 영문 번역이 추가되었습니다." + "\n\n" +
+                        "_휴대용 엄폐물_이 더 이상 텍사스의 상점에 등장하지 않습니다."));
         changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 1",
                 "_청정의 물약_이 _가시_, _라그나로크_, _야생의 기운_ 등 이로운 효과를 제거하던 버그를 수정했습니다." + "\n\n" +
                         "_방패 밀기_가 불러오기 이후 작동하지 않던 버그를 수정했습니다." + "\n\n" +
@@ -76,6 +78,13 @@ public class v0_5_X_Changes {
                         "일부 적과 함정이 도감에 등록되지 않던 버그를 수정했습니다." + "\n\n" +
                         "_가비알_ 보스 맵 오류를 수정했습니다." + "\n\n" +
                         "여러 텍스트 오류를 수정했습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 3",
+                "_용살_ 마법부여가 _적소_ 이외의 무기에 부여될 수 있던 버그를 수정했습니다." + "\n\n" +
+                        "_클로저의 변환 상자 EX_가 사용 후 잘못된 위치에 다시 생성되던 버그를 수정했습니다." + "\n\n" +
+                        "도감의 보스 처치 수에 보스가 소환한 적이 포함되던 버그를 수정했습니다." + "\n\n" +
+                        "로도스로 이동할 때 잘못된 로딩 화면이 표시되던 버그를 수정했습니다." + "\n\n" +
+                        "로도스에서 사망 시 점수가 낮게 계산되던 버그를 수정했습니다." + "\n\n" +
+                        "_가드 오퍼레이터 근로 계약서_ 관련 크래시를 수정했습니다."));
         changeInfos.add(changes);
 
         changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
@@ -86,6 +95,11 @@ public class v0_5_X_Changes {
                         "_투척 무기_ 100~300 -> 50~250" + "\n\n" +
                         "_반지_ 500 -> 400, _유물_ 600 -> 500" + "\n\n" +
                         "마법부여가 붙은 무기는 _100_의 추가 비용이 붙습니다."));
+        changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.GOLD)), "텍사스의 상점 가격 인하",
+                "텍사스의 상점에서 판매하는 조합 아이템의 가격이 인하되었습니다. (19층 기준)" + "\n\n" +
+                        "_콜람의 패검_ 6000 -> 3600" + "\n\n" +
+                        "_아방가르드한 변환_ 8230 -> 4630" + "\n\n" +
+                        "_영약_ 3600 -> 2880"));
         changeInfos.add(changes);
     }
 

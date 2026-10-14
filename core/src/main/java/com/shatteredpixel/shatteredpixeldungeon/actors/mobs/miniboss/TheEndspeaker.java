@@ -22,6 +22,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Sea_Octo;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Pushing;
 import com.shatteredpixel.shatteredpixeldungeon.effects.TargetedCell;
 import com.shatteredpixel.shatteredpixeldungeon.items.Ankh;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
@@ -1134,9 +1135,14 @@ public class TheEndspeaker extends Mob {
                     toDestroy.add(mob);
                 }
             }
-            for (Mob mob : toDestroy) {
-                mob.EXP = 0;
-                mob.destroy();
+            Bestiary.skipCountingEncounters = true;
+            try {
+                for (Mob mob : toDestroy) {
+                    mob.EXP = 0;
+                    mob.destroy();
+                }
+            } finally {
+                Bestiary.skipCountingEncounters = false;
             }
         }
 

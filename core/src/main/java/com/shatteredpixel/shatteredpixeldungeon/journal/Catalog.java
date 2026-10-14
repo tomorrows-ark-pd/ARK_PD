@@ -157,6 +157,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.WeaponTransform;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Dragonkill;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BladeDemon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild2;
@@ -359,6 +360,8 @@ public enum Catalog {
 		ENCHANTMENTS.addItems(Weapon.Enchantment.common);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.uncommon);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.rare);
+		//scripted-only (Firmament), kept out of the random pool
+		ENCHANTMENTS.addItems(Dragonkill.class);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.curses);
 
 		GLYPHS.addItems(Armor.Glyph.common);

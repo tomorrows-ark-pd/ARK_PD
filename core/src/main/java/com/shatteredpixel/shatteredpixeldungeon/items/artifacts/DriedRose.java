@@ -720,7 +720,7 @@ public class DriedRose extends Artifact {
 		@Override
 		public int drRoll() {
 			int block = 0;
-			int plusblock = rose.level();
+			int plusblock = rose != null ? rose.level() : 0;
 			if (rose != null && rose.armor != null){
 				block += Random.NormalIntRange( rose.armor.DRMin(), rose.armor.DRMax());
 			}
