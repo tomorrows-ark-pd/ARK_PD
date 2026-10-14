@@ -55,6 +55,7 @@ public class ItemSlot extends Button {
 	protected BitmapText extra;
 	protected Image      itemIcon;
 	protected BitmapText level;
+	protected BitmapText subStatus;
 	
 	private static final String TXT_STRENGTH	= ":%d";
 	private static final String TXT_TYPICAL_STR	= "%d?";
@@ -108,6 +109,9 @@ public class ItemSlot extends Button {
 		
 		level = new BitmapText( PixelScene.pixelFont);
 		add(level);
+
+		subStatus = new BitmapText( PixelScene.pixelFont);
+		add(subStatus);
 	}
 	
 	@Override
@@ -164,6 +168,20 @@ public class ItemSlot extends Button {
             PixelScene.align(level);
         }
 
+        if (subStatus != null) {
+            subStatus.measure();
+            float levelW = (level != null && level.width() > 0) ? level.width() + 1 : 0;
+            float targetW = width - (margin.left + margin.right) - levelW;
+            if (subStatus.width > targetW){
+                subStatus.scale.set(PixelScene.align(Math.max(0.6f, targetW / subStatus.width)));
+            } else {
+                subStatus.scale.set(1f);
+            }
+            subStatus.x = x + margin.left;
+            subStatus.y = y + (height - subStatus.baseLine() - 1) - margin.bottom;
+            PixelScene.align(subStatus);
+        }
+
 	}
 
     public void alpha( float value ){
@@ -173,6 +191,7 @@ public class ItemSlot extends Button {
         if (status != null)     status.alpha(value);
         if (itemIcon != null)   itemIcon.alpha(value);
         if (level != null)      level.alpha(value);
+        if (subStatus != null)  subStatus.alpha(value);
     }
 
     public void clear(){
@@ -219,13 +238,14 @@ public class ItemSlot extends Button {
 		}
 
 		if (item == null){
-			status.visible = extra.visible = level.visible = false;
+			status.visible = extra.visible = level.visible = subStatus.visible = false;
 			return;
 		} else {
-			status.visible = extra.visible = level.visible = true;
+			status.visible = extra.visible = level.visible = subStatus.visible = true;
 		}
 
 		status.text( item.status() );
+		subStatus.text( item.subStatus() );
 
 		if (item.icon != -1 && (item.isIdentified() || (item instanceof Ring && ((Ring) item).isKnown()))){
 			extra.text( null );
@@ -284,6 +304,7 @@ public class ItemSlot extends Button {
 		status.alpha( alpha );
 		extra.alpha( alpha );
 		level.alpha( alpha );
+		subStatus.alpha( alpha );
 		if (itemIcon != null) itemIcon.alpha( alpha );
 	}
 
@@ -301,10 +322,12 @@ public class ItemSlot extends Button {
             add(status);
             add(extra);
             add(level);
+            add(subStatus);
         } else {
             remove(status);
             remove(extra);
             remove(level);
+            remove(subStatus);
         }
     }
 

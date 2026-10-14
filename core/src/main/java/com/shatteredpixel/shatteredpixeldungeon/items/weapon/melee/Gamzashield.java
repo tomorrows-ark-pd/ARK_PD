@@ -31,7 +31,7 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public class Gamzashield extends MeleeWeapon {
+public class Gamzashield extends ShieldWeapon {
     public static final String AC_ZAP = "ZAP";
 
     {
@@ -43,6 +43,12 @@ public class Gamzashield extends MeleeWeapon {
 
         tier = 3;
 
+        baseDefenseFactor = 4f;         //4 extra defence, plus 2 per level
+        defenseFactorPerLvl = 2f;
+
+        capBase = 15;                   //charge ceiling 15 at +0, 75 at +15; lower than RoundShield to pay for the zap
+        capPerLvl = 4;
+
         defaultAction = AC_ZAP;
     }
 
@@ -50,8 +56,8 @@ public class Gamzashield extends MeleeWeapon {
 
     @Override
     public int max(int lvl) {
-        return Math.round(2.5f * (tier + 1)) +     //10 base, down from 20
-                lvl * (tier - 1);                   //+2 per level, down from +4
+        return  8 +                             //8 base, down from 20 (10 pre-rework)
+                lvl * (tier - 1);               //+2 per level, down from +4
     }
 
     @Override
@@ -80,19 +86,6 @@ public class Gamzashield extends MeleeWeapon {
         }
     }
 
-
-    @Override
-    public int defenseFactor(Char owner) {
-        return 4 + 2 * buffedLvl();     //4 extra defence, plus 2 per level;
-    }
-
-    public String statsInfo() {
-        if (isIdentified()) {
-            return Messages.get(this, "stats_desc", 4 + 2 * buffedLvl());
-        } else {
-            return Messages.get(this, "typical_stats_desc", 4);
-        }
-    }
 
     @Override
     public String status() {

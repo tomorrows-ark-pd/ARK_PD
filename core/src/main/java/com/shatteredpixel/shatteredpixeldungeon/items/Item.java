@@ -579,6 +579,11 @@ public class Item implements Bundlable {
         return quantity != 1 ? Integer.toString(quantity) : null;
     }
 
+    //secondary readout drawn in the slot's bottom-left corner
+    public String subStatus() {
+        return null;
+    }
+
     public static void updateQuickslot() {
         GameScene.updateItemDisplays = true;
     }

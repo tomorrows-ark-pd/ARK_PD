@@ -152,8 +152,9 @@ public class ShieldWeapon extends MeleeWeapon {
 		return null;
 	}
 
+	//drawn bottom-left so subclasses with a skill can keep the top-left SP readout
 	@Override
-	public String status() {
+	public String subStatus() {
 		if (Dungeon.hero == null || !isEquipped(Dungeon.hero)) return null;
 		return Messages.format("+%d%%", (int) (damageBonus(Dungeon.hero) * 100));
 	}
