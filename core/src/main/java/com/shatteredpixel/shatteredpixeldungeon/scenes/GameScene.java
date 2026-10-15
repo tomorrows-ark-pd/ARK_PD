@@ -56,6 +56,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Journal;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
@@ -1304,8 +1305,10 @@ public class GameScene extends PixelScene {
             GameScene.show(new WndInfoItem((Heap) o));
         } else if (o instanceof Plant) {
             GameScene.show(new WndInfoPlant((Plant) o));
+            Bestiary.setSeen(o.getClass());
         } else if (o instanceof Trap) {
             GameScene.show(new WndInfoTrap((Trap) o));
+            Bestiary.setSeen(o.getClass());
         } else {
             GameScene.show(new WndMessage(Messages.get(GameScene.class, "dont_know")));
         }

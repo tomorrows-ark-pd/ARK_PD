@@ -26,6 +26,10 @@ public class Quests {
         quests.add(q);
     }
 
+    public static void remove(QuestLine q) {
+        quests.remove(q);
+    }
+
     /**
      * first quest of the given class in any state; used for once-per-run gating.
      */

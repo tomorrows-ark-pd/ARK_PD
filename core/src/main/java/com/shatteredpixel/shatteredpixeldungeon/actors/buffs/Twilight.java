@@ -5,7 +5,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 
 public class Twilight extends FlavourBuff {
     {
-        type = buffType.NEGATIVE;
+        type = buffType.POSITIVE;
         announced = true;
     }
 

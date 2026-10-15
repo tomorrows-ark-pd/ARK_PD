@@ -28,10 +28,8 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.CorrosiveGas;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Guardoper_ItermUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LockedFloor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
@@ -57,7 +55,6 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Guard_operHeroSprite;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.Guard_operSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar;
@@ -160,7 +157,6 @@ public class DriedRose extends Artifact {
 
 					hero.spend(1f);
 					hero.busy();
-					Buff.affect(hero, Guardoper_ItermUpgrade.class);
 					hero.sprite.operate(hero.pos);
 
 					if (!firstSummon) {
@@ -429,6 +425,20 @@ public class DriedRose extends Artifact {
 			updateQuickslot();
 
 			return true;
+		}
+
+		public DriedRose getRose() {
+			return DriedRose.this;
+		}
+
+		//ghost gear is raised to at least +1/+2/+3 at rose level 4/7/10
+		public int bonusLevel(int level){
+			int roseLevel = itemLevel();
+			int bonusLevel = 0;
+			if (roseLevel == 10)     bonusLevel = 3;
+			else if (roseLevel >= 7) bonusLevel = 2;
+			else if (roseLevel >= 4) bonusLevel = 1;
+			return Math.max(level, bonusLevel);
 		}
 	}
 	
@@ -710,7 +720,7 @@ public class DriedRose extends Artifact {
 		@Override
 		public int drRoll() {
 			int block = 0;
-			int plusblock = rose.level();
+			int plusblock = rose != null ? rose.level() : 0;
 			if (rose != null && rose.armor != null){
 				block += Random.NormalIntRange( rose.armor.DRMin(), rose.armor.DRMax());
 			}

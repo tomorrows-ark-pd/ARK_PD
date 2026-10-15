@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Transmuting;
 import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -54,10 +55,14 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndBag;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
 
 public class Closure_TGBox extends ClosuresBox {
+
+    //shop cell in NewRhodesLevel2, shared by the initial spawn and the post-use respawn
+    public static final int SHOP_CELL = 3783;
 
     private static final int[] PRICES = {80, 120, 175, 250, 400};
 
@@ -129,7 +134,18 @@ public class Closure_TGBox extends ClosuresBox {
             box.detach(curUser.belongings.backpack);
             Closure_TGBox next = new Closure_TGBox();
             next.priceTier = Math.min(box.priceTier + 1, PRICES.length - 1);
-            Dungeon.level.drop(next, 3832).type = Heap.Type.FOR_SALE_28F;
+            int cell = SHOP_CELL;
+            if (Dungeon.level.heaps.get(cell) != null) {
+                for (int n : PathFinder.NEIGHBOURS8) {
+                    if (Dungeon.level.passable[SHOP_CELL + n] && Dungeon.level.heaps.get(SHOP_CELL + n) == null) {
+                        cell = SHOP_CELL + n;
+                        break;
+                    }
+                }
+            }
+            //never mark a merged heap for sale, or the player's own items would become shop stock
+            Heap heap = Dungeon.level.drop(next, cell);
+            if (heap.size() == 1) heap.type = Heap.Type.FOR_SALE_28F;
         }
     };
 
@@ -230,7 +246,9 @@ public class Closure_TGBox extends ClosuresBox {
             c = Generator.misTiers[((MissileWeapon) w).tier - 1];
         }
         do {
-            n = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+            int i = Random.chances(DropTable.mask(c, c.probs));
+            if (i == -1) i = Random.chances(c.probs); //backstop: degrade to vanilla rather than crash
+            n = (Weapon) Reflection.newInstance(c.classes[i]);
         } while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
 
         int level = w.level();

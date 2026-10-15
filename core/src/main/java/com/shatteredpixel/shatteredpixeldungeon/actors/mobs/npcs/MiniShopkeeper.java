@@ -3,6 +3,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.ElmoParticle;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ShopkeeperSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Texas_shopkeeperSprite;
@@ -18,6 +19,7 @@ public class MiniShopkeeper extends Shopkeeper {
 
         if (Dungeon.level.heroFOV[pos]){
             Notes.add(Notes.Landmark.MINI_SHOP);
+            Bestiary.setSeen(getClass());
         }
 
         sprite.turnTo( pos, Dungeon.hero.pos );

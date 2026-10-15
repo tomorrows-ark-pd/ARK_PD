@@ -7,6 +7,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.BonusStageQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
@@ -59,6 +60,7 @@ public class WndPilot extends Window {
 
     private void move() {
         hide();
+        BonusStageQuestLine.start();
         InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.BRANCH_EXIT);
         InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
         Game.switchScene(InterlevelScene.class);

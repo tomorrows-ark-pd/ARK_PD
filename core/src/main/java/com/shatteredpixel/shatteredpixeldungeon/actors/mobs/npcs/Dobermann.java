@@ -23,6 +23,8 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Dobermann extends NPC {
     {
         spriteClass = DobermannSprite.class;
@@ -55,8 +57,15 @@ public class Dobermann extends NPC {
         }
 
         //once-per-run: gate on questGiven, plus a belt-and-suspenders check for old saves
-        if (questGiven || Quests.get(Quest.class) != null) {
-            sprite.showStatus(CharSprite.NEGATIVE, Messages.get(this, "has_quest"));
+        Quest existing = Quests.get(Quest.class);
+        if (questGiven || existing != null) {
+            //declined earlier: re-offer the same bounty. Objective, target and progress are all
+            //preserved, so this resumes rather than rerolls.
+            if (existing != null && existing.objective != null && existing.reopen()) {
+                tell(offerText(existing, true));
+            } else {
+                sprite.showStatus(CharSprite.NEGATIVE, Messages.get(this, "has_quest"));
+            }
             return true;
         }
 
@@ -65,14 +74,23 @@ public class Dobermann extends NPC {
         Quests.add(quest);
         questGiven = true;
 
-        final String offerText = Messages.get(this, "offer_" + quest.objective.name().toLowerCase(), quest.target);
+        tell(offerText(quest, false));
+        return true;
+    }
+
+    //the offer body is shared; only the opener differs between a fresh bounty and a resumed one
+    private String offerText(Quest q, boolean resumed) {
+        return Messages.get(this, resumed ? "resume_offer" : "new_offer") + " "
+                + Messages.get(this, "offer_" + q.objective.name().toLowerCase(), q.target);
+    }
+
+    private void tell(final String text) {
         Game.runOnRenderThread(new Callback() {
             @Override
             public void call() {
-                GameScene.show(new WndQuest(Dobermann.this, offerText));
+                GameScene.show(new WndQuest(Dobermann.this, text));
             }
         });
-        return true;
     }
 
     private static final String QUEST_GIVEN = "quest_given";
@@ -145,8 +163,8 @@ public class Dobermann extends NPC {
         }
 
         @Override
-        protected Item stepReward(int step) {
-            return new Gold(objective.rewardGold(target));
+        protected ArrayList<Reward> stepRewards(int step) {
+            return items(new Gold(objective.rewardGold(target)));
         }
 
         @Override

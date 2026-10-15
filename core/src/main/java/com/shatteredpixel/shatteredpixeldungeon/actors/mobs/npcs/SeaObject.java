@@ -1,8 +1,10 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Burning;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NervousImpairment;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.BelfrySprite;
 import com.watabou.utils.PathFinder;
 
@@ -31,6 +33,9 @@ public class SeaObject extends NPC{
 
     @Override
     protected boolean act() {
+        if (Dungeon.level.heroFOV[pos]){
+            Bestiary.setSeen(getClass());
+        }
         spend(TICK);
         return true;
     }

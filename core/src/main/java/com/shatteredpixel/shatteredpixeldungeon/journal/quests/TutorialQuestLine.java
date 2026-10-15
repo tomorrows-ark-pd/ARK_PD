@@ -1,12 +1,12 @@
 package com.shatteredpixel.shatteredpixeldungeon.journal.quests;
 
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
-import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCargo;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.noosa.Image;
+
+import java.util.ArrayList;
 
 /**
  * The Rhodes onboarding questline. Fixed order, repeatable per run, run-level only.
@@ -33,23 +33,17 @@ public class TutorialQuestLine extends QuestLine {
 	}
 
 	@Override
-	protected Item stepReward(int step) {
+	protected ArrayList<Reward> stepRewards(int step) {
 		switch (step) {
-			case 0: return new Gold(25);
-			case 1: return new Gold(25);
-			case 3: return new Gold(50);
-			default: return null;
+			case 0: case 1: return items(new Gold(25));
+			case 3:         return items(new Gold(50));
+			default:        return items();
 		}
 	}
 
 	@Override
 	protected void onAbandoned() {
 		//remove the delivery cargo; one left on a floor heap is an inert dud (see its desc)
-		if (Dungeon.hero != null) {
-			QuestCargo cargo = Dungeon.hero.belongings.getItem(QuestCargo.class);
-			if (cargo != null) {
-				cargo.detachAll(Dungeon.hero.belongings.backpack);
-			}
-		}
+		consumeAll(QuestCargo.class);
 	}
 }

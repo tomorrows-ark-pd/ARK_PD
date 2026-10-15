@@ -64,6 +64,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ExitRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FloodingRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.FloodingRoom2;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.GavialStanardRoom;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.GolemPitRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.StandardRoom;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.Vocan_1Room;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.Vocan_2Room;
@@ -147,7 +148,11 @@ public abstract class RegularLevel extends Level {
         }
 
         if (Dungeon.depth == 13) initRooms.add(new RoseRoom());
-        if (Dungeon.depth == 14) initRooms.add(new MagicGloemRoom());
+        if (Dungeon.depth == 14) {
+            initRooms.add(new MagicGloemRoom());
+            // MagicGolem can only be killed by falling, so always provide a chasm
+            initRooms.add(new GolemPitRoom());
+        }
         if (Dungeon.depth == 24) initRooms.add(new PursuerRoom());
 
         if (Dungeon.extrastage_Gavial) {

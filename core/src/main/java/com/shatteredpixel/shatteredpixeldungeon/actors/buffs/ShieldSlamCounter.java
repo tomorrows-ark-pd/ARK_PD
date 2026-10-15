@@ -21,6 +21,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
@@ -62,7 +63,9 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
 
     @Override
     public boolean act() {
-        if (count() > 0 && ActionIndicator.action == null) {
+        // also displace a stale ShieldSlamCounter left in the indicator (e.g. from before a save reload)
+        if (count() > 0 && (ActionIndicator.action == null
+                || (ActionIndicator.action instanceof ShieldSlamCounter && ActionIndicator.action != this))) {
             ActionIndicator.setAction(this);
         }
         boolean charged = isCharged();
@@ -80,6 +83,13 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
     public void detach() {
         super.detach();
         ActionIndicator.clearAction(this);
+    }
+
+    @Override
+    public void restoreFromBundle(Bundle bundle) {
+        super.restoreFromBundle(bundle);
+        // replace any stale instance left in ActionIndicator from before a reload (e.g. Amulet scene)
+        if (count() > 0) ActionIndicator.setAction(this);
     }
 
     @Override
@@ -119,6 +129,16 @@ public class ShieldSlamCounter extends CounterBuff implements ActionIndicator.Ac
 
     @Override
     public void doAction() {
+        // a stale instance targets a discarded Hero (old pos), so canAttack always fails; redirect to the live buff
+        ShieldSlamCounter live = Dungeon.hero.buff(ShieldSlamCounter.class);
+        if (live != this) {
+            ActionIndicator.clearAction(this);
+            if (live != null) {
+                ActionIndicator.setAction(live);
+                live.doAction();
+            }
+            return;
+        }
         GameScene.selectCell(slamListener);
     }
 

@@ -46,7 +46,7 @@ public class GavialBossLevel2 extends Level {
     @Override
     protected boolean build() {
 
-        setSize(21, 19);
+        setSize(21, 20);
         Arrays.fill( map, Terrain.EMPTY );
 
         feeling = Feeling.NONE;
@@ -86,6 +86,7 @@ public class GavialBossLevel2 extends Level {
             W, S, S, S, S, S, S, S, e, e, E, e, e, S, S, S, S, S, S, S, W,
             W, S, S, S, S, S, S, S, e, e, E, e, e, S, S, S, S, S, S, S, W,
             W, S, S, S, S, S, S, S, e, e, E, e, e, S, S, S, S, S, S, S, W,
+            W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W,
     };
 
     public static class CustomeMap extends CustomTilemap {

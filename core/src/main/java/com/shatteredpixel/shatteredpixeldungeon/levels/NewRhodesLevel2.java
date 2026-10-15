@@ -18,6 +18,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Npc_Astesia;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Purestream;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.SkinModel;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Weedy;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -32,6 +33,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransB
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ChenSword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger;
@@ -263,7 +265,7 @@ public class NewRhodesLevel2 extends Level {
         else Npc_Astesia.spawn(this, 3218);
 
 
-        if (Dungeon.QuestCatPoint == 0 && !NPC_PhantomShadow.Clear) {
+        if (Dungeon.QuestCatPoint == 0 && PhantomCatQuestLine.catStillOut()) {
             NPC_PhantomShadow.spawn(this, 0);
         }
 
@@ -277,7 +279,7 @@ public class NewRhodesLevel2 extends Level {
         drop(new Closure_WandBox(), 3715).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_TransBox(), 3781).type = Heap.Type.FOR_SALE_28F;
         drop(new Closure_RingBox(), 3782).type = Heap.Type.FOR_SALE_28F;
-        drop(new Closure_TGBox(), 3783).type = Heap.Type.FOR_SALE_28F;
+        drop(new Closure_TGBox(), Closure_TGBox.SHOP_CELL).type = Heap.Type.FOR_SALE_28F;
 
         // 무기 (근접, 총기 포함)
         for (int cell : new int[]{4116, 4117, 4118, 4184, 4185, 4186}) {
@@ -290,6 +292,8 @@ public class NewRhodesLevel2 extends Level {
         }
 
         // 유물
+        //listing must not consume the run's artifact deck; purchase removes it instead (WndTradeItem.buy_sp)
+        float[] artifactDeck = Generator.Category.ARTIFACT.probs.clone();
         for (int cell : new int[]{3980, 3981, 3982, 3912, 3913, 3914}) {
             Artifact art = Generator.randomArtifact();
             if (art != null) {
@@ -298,6 +302,7 @@ public class NewRhodesLevel2 extends Level {
                 sellForCertificates(art, cell, ARTIFACT_PRICE);
             }
         }
+        Generator.Category.ARTIFACT.probs = artifactDeck;
 
         // 반지
         for (int cell : new int[]{3985, 3986, 3987, 3917, 3918, 3919}) {
@@ -314,15 +319,17 @@ public class NewRhodesLevel2 extends Level {
             3985, 3986, 3987, 3917, 3918, 3919  //rings
     };
 
-    private static final int RING_PRICE = 500;
-    private static final int ARTIFACT_PRICE = 600;
+    private static final int RING_PRICE = 400;
+    private static final int ARTIFACT_PRICE = 500;
 
     //tier weights for the certificate shop: T1-T5
     private static final float[] SHOP_WEAPON_TIER_PROBS = {0.1f, 0.1f, 0.2f, 0.3f, 0.3f};
-    //price scales with tier, T1 = 300 up to T5 = 700 (melee)
-    private static final int[] SHOP_WEAPON_TIER_PRICE = {300, 400, 500, 600, 700};
-    //price scales with tier, T1 = 100 up to T5 = 300 (missile)
-    private static final int[] SHOP_MISSILE_TIER_PRICE = {100, 150, 200, 250, 300};
+    //price scales with tier, T1 = 150 up to T5 = 550 (melee)
+    private static final int[] SHOP_WEAPON_TIER_PRICE = {150, 250, 350, 450, 550};
+    //price scales with tier, T1 = 50 up to T5 = 250 (missile)
+    private static final int[] SHOP_MISSILE_TIER_PRICE = {50, 100, 150, 200, 250};
+    //flat surcharge for weapons that roll a good enchantment
+    private static final int ENCHANT_SURCHARGE = 100;
 
     //shop-only T1 melee pool: adds hero starting weapons Generator.WEP_T1 omits/zero-weights (ChenSword, MagesStaff), without touching regular dungeon drops
     private static final Class<?>[] SHOP_MELEE_T1_CLASSES = {
@@ -342,11 +349,16 @@ public class NewRhodesLevel2 extends Level {
         heap.priceOverride = price;
     }
 
+    //not DropTable-masked: createItems() runs once at level creation, before the player can reach Purestream
     private void sellShopWeapon(int cell, Generator.Category[] tiers, int[] prices, boolean rerollQuality) {
         int tierIndex = Random.chances(SHOP_WEAPON_TIER_PROBS);
         Weapon w;
         if (rerollQuality && tierIndex == 0) {
-            w = (Weapon) Reflection.newInstance(SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)]);
+            Class<?> cls = SHOP_MELEE_T1_CLASSES[Random.chances(SHOP_MELEE_T1_PROBS)];
+            //an unimbued MagesStaff NPEs, so shop copies always ship with a wand
+            w = cls == MagesStaff.class
+                    ? new MagesStaff(new WandOfMagicMissile())
+                    : (Weapon) Reflection.newInstance(cls);
         } else {
             Generator.Category c = tiers[tierIndex];
             w = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
@@ -354,7 +366,27 @@ public class NewRhodesLevel2 extends Level {
         w.random();
         //shop weapons: no curse, small upgrade chance only (rest of the game keeps default odds)
         if (rerollQuality) applyShopQuality(w);
-        sellForCertificates(w, cell, prices[tierIndex]);
+        //level() bypasses upgrade(), so resync the imbued wand to the staff's rolled level
+        if (w instanceof MagesStaff) ((MagesStaff) w).updateWand(false);
+        int price = prices[tierIndex];
+        if (w.hasGoodEnchant()) price += ENCHANT_SURCHARGE;
+        sellForCertificates(w, cell, price);
+    }
+
+    //drops certificate-shop artifact listings whose class the hero already owns, so a duplicate can't be bought
+    public void removeOwnedArtifactListings() {
+        if (Dungeon.hero == null) return;
+        for (Heap heap : heaps.valueList()) {
+            if (heap.type == Heap.Type.FOR_SALE_28F && heroOwnsArtifact(heap.peek())) heap.destroy();
+        }
+    }
+
+    public static boolean heroOwnsArtifact(Item listing) {
+        if (!(listing instanceof Artifact) || Dungeon.hero == null) return false;
+        for (Item i : Dungeon.hero.belongings) {
+            if (i.getClass() == listing.getClass()) return true;
+        }
+        return false;
     }
 
     //strips any curse and rerolls the upgrade level to +0 85% / +1 10% / +2 5%
@@ -385,6 +417,8 @@ public class NewRhodesLevel2 extends Level {
 
     @Override
     public Group addVisuals() {
+        //runs on every GameScene build (enter/load), before heap sprites are added
+        removeOwnedArtifactListings();
         super.addVisuals();
         HallsLevel.addHallsVisuals(this, visuals);
         return visuals;

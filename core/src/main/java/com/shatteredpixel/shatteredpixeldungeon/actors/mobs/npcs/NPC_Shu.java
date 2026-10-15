@@ -31,19 +31,20 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_ShuSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_guardSprite;
 
-public class NPC_Shu extends Mob {
+public class NPC_Shu extends NPC {
     {
         spriteClass = NPC_ShuSprite.class;
         properties.add(Char.Property.IMMOVABLE);
         properties.add(Property.NPC);
     }
 
-    {
-        HP = HT = 100;
-        EXP = 0;
+    @Override
+    public int defenseSkill(Char enemy) {
+        return INFINITE_EVASION;
+    }
 
-        alignment = Alignment.NEUTRAL;
-        state = PASSIVE;
+    @Override
+    public void damage(int dmg, Object src) {
     }
 
     @Override

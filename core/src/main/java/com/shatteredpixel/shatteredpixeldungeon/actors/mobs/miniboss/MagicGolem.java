@@ -11,8 +11,11 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfSacrifice;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.Red_golemSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.S_GolemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.utils.BArray;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 public class MagicGolem extends Mob {
@@ -65,7 +68,22 @@ public class MagicGolem extends Mob {
     public void die(Object cause) {
         super.die(cause);
 
-        Dungeon.level.drop(new ScrollOfSacrifice(), pos).sprite.drop(pos);
-        Dungeon.level.drop(new Certificate(1), pos).sprite.drop(pos);
+        int dropPos = Dungeon.level.pit[pos] ? nearestLandCell(pos) : pos;
+        Dungeon.level.drop(new ScrollOfSacrifice(), dropPos).sprite.drop(dropPos);
+        Dungeon.level.drop(new Certificate(1), dropPos).sprite.drop(dropPos);
+    }
+
+    // keeps the reward on this floor when the golem dies by falling into a chasm
+    private static int nearestLandCell(int from) {
+        Level level = Dungeon.level;
+        PathFinder.buildDistanceMap(from, BArray.or(level.passable, level.pit, null));
+        int best = from;
+        for (int i = 0; i < level.length(); i++) {
+            if (level.passable[i] && !level.pit[i] && PathFinder.distance[i] != Integer.MAX_VALUE
+                    && (best == from || PathFinder.distance[i] < PathFinder.distance[best])) {
+                best = i;
+            }
+        }
+        return best;
     }
 }

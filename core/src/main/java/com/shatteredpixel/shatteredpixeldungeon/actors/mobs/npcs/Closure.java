@@ -57,6 +57,18 @@ public class Closure extends NPC {
             return true;
         }
 
+        //she handed out step 1, so an abandon there is hers to take back
+        if (q != null && q.resumeAt(1)) {
+            final String next = Messages.get(this, "quest_next");
+            Game.runOnRenderThread(new Callback() {
+                @Override
+                public void call() {
+                    GameScene.show(new WndQuest(Closure.this, next));
+                }
+            });
+            return true;
+        }
+
         sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, Random.element(LINE_KEYS)));
         return true;
     }
