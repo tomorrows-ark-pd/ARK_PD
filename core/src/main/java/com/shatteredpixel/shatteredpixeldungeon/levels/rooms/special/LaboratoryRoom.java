@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Alchemy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.Egg;
@@ -63,7 +64,14 @@ public class LaboratoryRoom extends SpecialRoom {
 		Painter.set( level, pot, Terrain.ALCHEMY );
 		
 		int chapter = 1 + Dungeon.depth/5;
-		Blob.seed( pot.x + level.width() * pot.y, 1 + chapter*10 + Random.NormalIntRange(0, 10), Alchemy.class, level );
+		Blob.seed( pot.x + level.width() * pot.y, 1, Alchemy.class, level );
+
+		//energy that the pot used to hold now drops as crystals
+		int crystalPos;
+		do {
+			crystalPos = level.pointToCell(random());
+		} while (level.map[crystalPos] != Terrain.EMPTY_SP || level.heaps.get( crystalPos ) != null);
+		level.drop( new EnergyCrystal( chapter*10 + Random.NormalIntRange(0, 10) ), crystalPos );
 		
 		int n = Random.NormalIntRange( 1, 3 );
 		for (int i=0; i < n; i++) {

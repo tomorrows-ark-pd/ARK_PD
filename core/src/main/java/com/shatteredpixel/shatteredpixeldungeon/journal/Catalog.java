@@ -31,6 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.ArmorUpKit;
 import com.shatteredpixel.shatteredpixeldungeon.items.Bonk;
 import com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal;
 import com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop;
+import com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal;
 import com.shatteredpixel.shatteredpixeldungeon.items.DewVial;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
@@ -450,7 +451,7 @@ public enum Catalog {
 				SaltBlast.class, BlastSpell.class,
 				Avantgardeform.class, WeaponTransform.class);
 
-		MISC_CONSUMABLES.addItems(Gold.class, Dewdrop.class,
+		MISC_CONSUMABLES.addItems(Gold.class, EnergyCrystal.class, Dewdrop.class,
 				IronKey.class, GoldenKey.class, CrystalKey.class, SkeletonKey.class,
 				Stylus.class, Torch.class, Honeypot.class, Ankh.class,
 				DewVial.class, Mushroomslices.class, W0502.class, MerchantsBeacon.class,

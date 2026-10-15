@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Alchemy;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
+import com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfExperience;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfFrost;
@@ -71,7 +72,14 @@ public class SecretLaboratoryRoom extends SecretRoom {
 		Point pot = center();
 		Painter.set( level, pot, Terrain.ALCHEMY );
 		
-		Blob.seed( pot.x + level.width() * pot.y, 1+Random.NormalIntRange(20, 30), Alchemy.class, level );
+		Blob.seed( pot.x + level.width() * pot.y, 1, Alchemy.class, level );
+
+		//energy that the pot used to hold now drops as crystals
+		int crystalPos;
+		do {
+			crystalPos = level.pointToCell(random());
+		} while (level.map[crystalPos] != Terrain.EMPTY_SP || level.heaps.get( crystalPos ) != null);
+		level.drop( new EnergyCrystal( Random.NormalIntRange(20, 30) ), crystalPos );
 		
 		int n = Random.IntRange( 2, 3 );
 		HashMap<Class<? extends Potion>, Float> chances = new HashMap<>(potionChances);
