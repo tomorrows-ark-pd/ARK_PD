@@ -20,6 +20,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.PurpleParticle;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.WaterParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.BonusStageQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Platform;
@@ -119,6 +120,7 @@ public class IsharmlaSeabornHead extends Mob {
 
                 Badges.silentValidateHappyEnd();
                 Badges.validateiberia2();
+                BonusStageQuestLine.complete(BonusStageQuestLine.SeaQuestLine.class);
                 Dungeon.win(Amulet.class);
                 Dungeon.deleteGame(GamesInProgress.curSlot, true);
                 Game.switchScene(SurfaceScene.class);

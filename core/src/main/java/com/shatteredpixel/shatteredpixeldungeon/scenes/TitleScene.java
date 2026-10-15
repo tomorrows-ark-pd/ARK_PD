@@ -262,7 +262,7 @@ public class TitleScene extends PixelScene {
         @Override
         protected void onClick() {
             TomorrowRogueNight.scene().addToFront(new WndOptions(
-                    Messages.get(this, "versioned_title") + "ver0.5.3",
+                    Messages.get(this, "versioned_title") + "ver0.5.4",
                     Messages.get(this, "desc"),
                     Messages.get(this, "update"),
                     Messages.get(this, "changes")

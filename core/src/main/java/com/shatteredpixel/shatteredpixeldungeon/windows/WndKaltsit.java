@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.GreenCat;
 import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.AmuletQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.SurfaceScene;
@@ -91,6 +92,7 @@ public class WndKaltsit extends Window {
     private void completeRun() {
         Badges.silentValidateHappyEnd();
         if (Dungeon.isPray) Badges.validatepray();
+        AmuletQuestLine.complete();
         Dungeon.win(Amulet.class);
         Dungeon.deleteGame(GamesInProgress.curSlot, true);
         Game.switchScene(SurfaceScene.class);
@@ -102,6 +104,7 @@ public class WndKaltsit extends Window {
         Badges.silentValidateHappyEnd();
         if (Dungeon.isPray) Badges.validatepray();
         Dungeon.doctorSaved = true;
+        AmuletQuestLine.dismiss();
         if (doctor != null) {
             doctor.detachAll(Dungeon.hero.belongings.backpack);
         }

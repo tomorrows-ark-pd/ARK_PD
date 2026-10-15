@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Flare;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.AmuletQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
@@ -67,6 +68,7 @@ public class AmuletScene extends PixelScene {
 		RedButton btnExit = new RedButton( Messages.get(this, "exit") ) {
 			@Override
 			protected void onClick() {
+				AmuletQuestLine.complete();
 				Dungeon.win( Amulet.class );
 				Dungeon.deleteGame( GamesInProgress.curSlot, true );
 				Game.switchScene( RankingsScene.class );

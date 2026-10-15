@@ -98,7 +98,9 @@ public class RandomBox extends Item {
         else                  tier = 1;
 
         Generator.Category c = Generator.wepTiers[tier];
-        Weapon n = (MeleeWeapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
+        int i = Random.chances(DropTable.mask(c, c.probs));
+        if (i == -1) i = Random.chances(c.probs); //backstop: degrade to vanilla rather than crash
+        Weapon n = (MeleeWeapon) Reflection.newInstance(c.classes[i]);
 
         //determine upgrade level based on depth + armor
         int upChance = Random.IntRange(0, 25);

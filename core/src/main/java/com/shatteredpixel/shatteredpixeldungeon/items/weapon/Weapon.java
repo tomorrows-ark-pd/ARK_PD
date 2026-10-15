@@ -27,9 +27,9 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Degrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AllyBuff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corruption;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Guardoper_ItermUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SeethingBurst;
@@ -58,7 +58,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blocki
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blooming;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Corrupting;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Dragonkill;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Elastic;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Grim;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic;
@@ -135,6 +134,34 @@ abstract public class Weapon extends KindOfWeapon {
 
 	public Augment augment = Augment.NONE;
 
+	//subclasses may reinterpret the shared augments, so the factors and text go through these rather than the enum
+	public int augmentDamageFactor( int dmg ){
+		return augment.damageFactor(dmg);
+	}
+
+	public float augmentDelayFactor( float dly ){
+		return augment.delayFactor(dly);
+	}
+
+	public float augmentAccFactor( float acc ){
+		return augment.accFactor(acc);
+	}
+
+	//message key for the StoneOfAugmentation button offering this augment
+	public String augmentKey( Augment aug ){
+		return aug.name();
+	}
+
+	//Weapon.class message key for the line info() prints, or null for no line
+	public String augmentDescKey(){
+		switch (augment) {
+			case SPEED:    return "faster";
+			case DAMAGE:   return "stronger";
+			case OVERLOAD: return "overload";
+			default:       return null;
+		}
+	}
+
 	private static final int USES_TO_ID = 20;
 	private float usesLeftToID = USES_TO_ID;
 	private float availableUsesToID = USES_TO_ID/2f;
@@ -157,8 +184,9 @@ abstract public class Weapon extends KindOfWeapon {
                     if (defender instanceof Mob && defender.isAlive() && !defender.isImmune(Corruption.class)
                             && defender.buff(Corruption.class) == null && defender.alignment != Char.Alignment.ALLY) {
                         defender.HP = defender.HT;
-                        damage = 0;
                         AllyBuff.affectAndLoot((Mob) defender, curUser, Corruption.class);
+                        //skip enchant/conserved damage so they can't hit the new ally
+                        if (defender.buff(Corruption.class) != null) return 0;
                     }
                 }
 			}
@@ -264,7 +292,7 @@ abstract public class Weapon extends KindOfWeapon {
 		if (hasEnchant(Wayward.class, owner))
 			encumbrance = Math.max(2, encumbrance+2);
 
-		float ACC = augment.accFactor(this.ACC);
+		float ACC = augmentAccFactor(this.ACC);
 		return encumbrance > 0 ? (float)(ACC / Math.pow( 1.5, encumbrance )) : ACC;
 	}
 
@@ -276,7 +304,7 @@ abstract public class Weapon extends KindOfWeapon {
 			encumbrance = STRReq() - ((Hero)owner).STR();
 		}
 
-		float DLY = augment.delayFactor(this.DLY);
+		float DLY = augmentDelayFactor(this.DLY);
 
 		DLY *= RingOfFuror.attackDelayMultiplier(owner);
 		return (encumbrance > 0 ? (float)(DLY * Math.pow( 1.2, encumbrance )) : DLY);
@@ -323,13 +351,16 @@ abstract public class Weapon extends KindOfWeapon {
 	//overrides as other things can equip these
 	@Override
 	public int buffedLvl() {
-		DriedRose rose = Dungeon.hero.belongings.getItem(DriedRose.class);
-		if (rose != null) {
-			if (this == rose.ghostWeapon())
-				return Guardoper_ItermUpgrade.bounslevel(level());
+		if (Dungeon.hero == null) return level();
+
+		DriedRose.roseRecharge roseRecharge = Dungeon.hero.buff(DriedRose.roseRecharge.class);
+		if (roseRecharge != null && this == roseRecharge.getRose().ghostWeapon()){
+			return roseRecharge.bonusLevel(level());
 		}
 
-		if (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this )){
+		//Degrade check first so the render thread doesn't scan the backpack on every refresh
+		if (Dungeon.hero.buff( Degrade.class ) != null
+				&& (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this ))){
 			return super.buffedLvl();
 		} else {
 			return level();
@@ -500,7 +531,7 @@ abstract public class Weapon extends KindOfWeapon {
 				Lucky.class, Projecting.class, Unstable.class, Penetrate.class, Overeating.class};
 
 		public static final Class<?>[] rare = new Class<?>[]{
-				Corrupting.class, Grim.class, Vampiric.class, Dragonkill.class};
+				Corrupting.class, Grim.class, Vampiric.class};
 
 		private static final float[] typeChances = new float[]{
 				50, //12.5% each

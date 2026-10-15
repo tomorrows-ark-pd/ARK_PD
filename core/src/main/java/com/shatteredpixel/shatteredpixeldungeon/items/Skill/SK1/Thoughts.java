@@ -96,7 +96,7 @@ public class Thoughts extends Skill {
                 CellEmitter.center(target).burst(BlastParticle.FACTORY, 6);
                 Sample.INSTANCE.play(Assets.Sounds.HIT_WALL1);
                 AnnihilationGear Gear = Dungeon.hero.belongings.getItem(AnnihilationGear.class);
-                if (Dungeon.hero.belongings.getItem(AnnihilationGear.class) != null & Gear.charge < Gear.chargeCap) {
+                if (Dungeon.hero.belongings.getItem(AnnihilationGear.class) != null && Gear.charge < Gear.chargeCap) {
                     Gear.SPCharge(1);
                 }
             }

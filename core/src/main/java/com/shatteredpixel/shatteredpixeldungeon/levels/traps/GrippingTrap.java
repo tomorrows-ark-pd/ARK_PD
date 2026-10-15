@@ -21,7 +21,6 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels.traps;
 
-import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -29,28 +28,15 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bleeding;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Wound;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
-import com.watabou.noosa.audio.Sample;
 
 public class GrippingTrap extends Trap {
 
 	{
 		color = GREY;
 		shape = DOTS;
+		disarmedByActivation = false;
 	}
 	
-	@Override
-	public void trigger() {
-		if (Dungeon.level.heroFOV[pos]){
-			Sample.INSTANCE.play(Assets.Sounds.TRAP);
-		}
-		//this trap is not disarmed by being triggered
-		reveal();
-		Level.set(pos, Terrain.TRAP);
-		activate();
-	}
-
 	@Override
 	public void activate() {
 

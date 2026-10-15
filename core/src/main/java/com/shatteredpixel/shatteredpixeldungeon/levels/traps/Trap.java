@@ -24,6 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.levels.traps;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.watabou.noosa.audio.Sample;
@@ -60,6 +62,7 @@ public abstract class Trap implements Bundlable {
 
 	public boolean visible;
 	public boolean active = true;
+	public boolean disarmedByActivation = true;
 	
 	public boolean canBeHidden = true;
 	public boolean canBeSearched = true;
@@ -90,7 +93,8 @@ public abstract class Trap implements Bundlable {
 			if (Dungeon.level.heroFOV[pos]) {
 				Sample.INSTANCE.play(Assets.Sounds.TRAP);
 			}
-			disarm();
+			if (disarmedByActivation) disarm();
+			else Level.set(pos, Terrain.TRAP);
 			reveal();
 			Bestiary.setSeen(getClass());
 			Bestiary.countEncounter(getClass());

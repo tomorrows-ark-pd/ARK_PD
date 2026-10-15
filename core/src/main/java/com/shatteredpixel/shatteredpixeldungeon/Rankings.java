@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
+import com.shatteredpixel.shatteredpixeldungeon.items.DropTable;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
@@ -129,7 +130,9 @@ public enum Rankings {
 	}
 
 	private int score( boolean win ) {
-		return (Statistics.goldCollected + Dungeon.hero.lvl * (win ? 26 : Dungeon.depth ) * 100) * (win ? 2 : 1);
+		//Rhodes is depth 0, so score deaths there by the deepest floor reached instead
+		int depth = Dungeon.isInRhodes() ? Statistics.deepestFloor : Dungeon.depth;
+		return (Statistics.goldCollected + Dungeon.hero.lvl * (win ? 26 : depth ) * 100) * (win ? 2 : 1);
 	}
 
 	public static final String HERO = "hero";
@@ -214,6 +217,7 @@ public enum Rankings {
 		Dungeon.hero = null;
 		Dungeon.level = null;
 		Generator.fullReset();
+		DropTable.reset();
 		Notes.reset();
 		Quests.reset();
 		Dungeon.quickslot.reset();

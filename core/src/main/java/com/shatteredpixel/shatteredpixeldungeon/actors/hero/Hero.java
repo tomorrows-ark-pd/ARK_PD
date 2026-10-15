@@ -204,12 +204,14 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Niansword;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.PatriotSpear;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.SHISHIOH;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.SanktaBet;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ShieldWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Suffering;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
+import com.shatteredpixel.shatteredpixeldungeon.levels.NewRhodesLevel2;
 import com.shatteredpixel.shatteredpixeldungeon.levels.NewHallsBossLevel;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm;
@@ -1144,6 +1146,11 @@ public class Hero extends Char {
                     }
                 });
             } else if (heap != null && heap.type == Type.FOR_SALE_28F && heap.size() == 1) {
+                //artifact obtained elsewhere since the hub was entered: pull the duplicate listing
+                if (NewRhodesLevel2.heroOwnsArtifact(heap.peek())) {
+                    heap.destroy();
+                    return false;
+                }
                 Game.runOnRenderThread(new Callback() {
                     @Override
                     public void call() {
@@ -1483,9 +1490,13 @@ public class Hero extends Char {
 
         KindOfWeapon wep = belongings.attackingWeapon();
 
+        Alignment enemyAlignment = enemy.alignment;
         if (wep != null) damage = wep.proc(this, enemy, damage);
 
         if (buff(Bonk.BonkBuff.class) != null) Buff.detach(this, Bonk.BonkBuff.class);
+
+        //ring of dominate converted the target: no knockback, debuffs or bonus damage on the new ally
+        if (enemy.alignment != enemyAlignment && enemy.alignment == alignment) return 0;
 
         damage = Talent.onAttackProc(this, enemy, damage);
 
@@ -1502,7 +1513,7 @@ public class Hero extends Char {
                     damage *= 1f + (float) this.pointsInTalent(Talent.RHODES_CAT) * 0.12f;
                 }
         }
-        if (hasTalent(Talent.WEAKNESS_COVER)) {
+        if (Gear != null && hasTalent(Talent.WEAKNESS_COVER)) {
             int geardmg = Gear.level();
             geardmg *= Random.IntRange(pointsInTalent(Talent.WEAKNESS_COVER) - 1, 2);
             bonusDamage += geardmg;
@@ -1652,6 +1663,11 @@ public class Hero extends Char {
 
     @Override
     public int defenseProc(Char enemy, int damage) {
+        //pre-DR damage, and fires even on a hit the DR fully absorbs; magic never routes through here
+        if (belongings.weapon() instanceof ShieldWeapon) {
+            ((ShieldWeapon) belongings.weapon()).onMitigated(this, damage);
+        }
+
         if (RingOfDominate.Dominate_curse(this) == true) {
             if (Random.Int(HT) > HP * 3) {
                 Buff.affect(this, Corruption.class);
@@ -1837,6 +1853,15 @@ public class Hero extends Char {
         if (belongings.armor() != null && belongings.armor().hasGlyph(AntiMagic.class, this)
                 && AntiMagic.RESISTS.contains(src.getClass())) {
             dmg -= AntiMagic.drRoll(belongings.armor().buffedLvl());
+        }
+
+        //the MAGIC augment is the only way a shield weapon covers damage that never touches Char.attack()
+        if (belongings.weapon() instanceof ShieldWeapon
+                && ((ShieldWeapon) belongings.weapon()).augment == ShieldWeapon.MAGIC
+                && AntiMagic.RESISTS.contains(src.getClass())) {
+            ShieldWeapon w = (ShieldWeapon) belongings.weapon();
+            w.onMitigated(this, dmg);
+            dmg = Math.max(0, dmg - Random.NormalIntRange(0, w.defenseFactor(this)));
         }
 
         if (buff(Talent.WarriorFoodImmunity.class) != null) {
@@ -2130,7 +2155,8 @@ public class Hero extends Char {
                     break;
                 case FOR_SALE:
                 case FOR_SALE_28F:
-                    curAction = heap.size() == 1 && heap.peek().value() > 0 ?
+                    //priceOverride must count too, e.g. MagesStaff has value() 0 but a Rhodes shop price
+                    curAction = heap.size() == 1 && (heap.priceOverride > 0 || heap.peek().value() > 0) ?
                             new HeroAction.Buy(cell) :
                             new HeroAction.PickUp(cell);
                     break;

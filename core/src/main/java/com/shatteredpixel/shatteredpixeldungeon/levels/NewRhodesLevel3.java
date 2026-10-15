@@ -6,6 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.GreenCat;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.NPC_PhantomShadow;
+import com.shatteredpixel.shatteredpixeldungeon.journal.quests.PhantomCatQuestLine;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap;
@@ -134,7 +135,7 @@ public class NewRhodesLevel3 extends Level {
         //   SkinModel.spawn(this, 255);
         GreenCat.spawn(this, 162);
 
-        if (Dungeon.QuestCatPoint == 1 && !NPC_PhantomShadow.Clear) {
+        if (Dungeon.QuestCatPoint == 1 && PhantomCatQuestLine.catStillOut()) {
             NPC_PhantomShadow.spawn(this, 1);
         }
     }

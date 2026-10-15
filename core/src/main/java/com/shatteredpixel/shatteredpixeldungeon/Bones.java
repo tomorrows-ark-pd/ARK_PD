@@ -51,7 +51,7 @@ public class Bones {
 		depth = Dungeon.depth;
 
 		//heroes which have won the game, who die far above their farthest depth, or who are challenged drop no bones.
-		if (Statistics.amuletObtained || (Statistics.deepestFloor - 5) >= depth || Dungeon.challenges > 0) {
+		if (Statistics.amuletObtained || (Statistics.deepestFloor - 5) >= depth || Dungeon.challenges > 0 || Dungeon.isInRhodes()) {
 			depth = -1;
 			return;
 		}

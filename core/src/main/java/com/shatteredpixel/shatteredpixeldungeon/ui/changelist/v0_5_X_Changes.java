@@ -3,17 +3,105 @@ package com.shatteredpixel.shatteredpixeldungeon.ui.changelist;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.ChangesScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PhantomSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.NPC_PurestreamSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
+import com.watabou.noosa.Image;
 
 import java.util.ArrayList;
 
 public class v0_5_X_Changes {
     public static void addAllChanges(ArrayList<ChangeInfo> changeInfos) {
+        add_v0_5_4_Changes(changeInfos);
         add_v0_5_3_Changes(changeInfos);
         add_v0_5_2_Changes(changeInfos);
         add_v0_5_1_Changes(changeInfos);
         add_v0_5_0_Changes(changeInfos);
+    }
+
+    //static first frame of a 32px sprite, shrunk to fit the 16px button slot
+    private static Image halfSize(Image sprite) {
+        Image icon = new Image(sprite);
+        icon.scale.set(0.5f);
+        return icon;
+    }
+
+    public static void add_v0_5_4_Changes(ArrayList<ChangeInfo> changeInfos) {
+        ChangeInfo changes = new ChangeInfo("v0.5.4", true, "");
+        changes.hardlight(Window.TITLE_COLOR);
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "new"), false, null);
+        changes.hardlight(Window.TITLE_COLOR);
+        changes.addButton(new ChangeButton(halfSize(new NPC_PurestreamSprite()), "드랍 테이블",
+                "로도스 상점 구역의 _퓨어스트림_에게 말을 걸어 이번 게임에서 등장하지 않을 _무기와 반지_를 고를 수 있습니다." + "\n\n" +
+                        "도감에 등록된 아이템만 고를 수 있으며, 등록된 아이템이 많을 수록 비활성화할수 있는 아이템의 수가 늘어납니다." + "\n\n" +
+                        "드랍 테이블은 1층 진입 이후엔 변경할 수 없습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.ARROW), "계단 이동 버튼",
+                "화면 오른쪽에 _올라가는 계단_과 _내려가는 계단_ 버튼이 추가되었습니다." + "\n\n" +
+                        "계단을 발견하면 버튼이 나타나며, 누르면 해당 계단으로 이동합니다."));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "changes"), false, null);
+        changes.hardlight(CharSprite.WARNING);
+        changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.GREATSHIELD)), "방패 무기 리워크",
+                "_라인랩 실드_, _애국심_, _G52 전술 섬광 방패_가 리워크 되었습니다." + "\n\n" +
+                        "물리 공격을 받을 때마다 _충전량_이 쌓이며, 충전량 1당 방패로 가하는 피해량이 _1%_ 증가합니다. 보유한 보호막도 충전량에 더해지며, _3턴_ 동안 공격받지 않으면 충전량이 빠르게 사라집니다. 충전량은 아이콘 _왼쪽 아래_에 표시됩니다." + "\n\n" +
+                        "기본 피해량이 감소했습니다. (라인랩 실드 10 -> 8, 애국심 15 -> 11, G52 전술 섬광 방패 10 -> 8)" + "\n\n" +
+                        "_G52 전술 섬광 방패_는 섬광 스킬을 유지하는 대신 충전 최대치가 라인랩 실드보다 낮습니다." + "\n\n" +
+                        "방패 무기는 전용 증강을 사용합니다: _방어력_ (방어력/충전 최대치 증가, 피해량 감소), _공격력_ (피해량 증가, 방어력/최대치 한계 감소), _아츠 방어_ (아츠 피해 방어/충전 가능)."));
+        changes.addButton(new ChangeButton(halfSize(new NPC_PhantomSprite()), "로도스 퀘스트 개편",
+                "_제시카_, _프로스트리프_, _팬텀_의 퀘스트가 퀘스트라인으로 옮겨져 노트에서 진행 상황을 확인할 수 있습니다." + "\n\n" +
+                        "이제 퀘스트를 포기해도 마지막으로 퀘스트를 준 NPC에게 다시 말을 걸면 _중단한 지점부터 이어서_ 진행할 수 있습니다." + "\n\n" +
+                        "_미스 크리스틴_이 등장할 수 있는 위치가 늘어났습니다."));
+        changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.MASTERY)), "도감 확장",
+                "_특수 아이템_ 카테고리가 추가되었습니다. 총기 부착물, 클로저 보급상자, 정보증명서 등을 등록할 수 있습니다." + "\n\n" +
+                        "요리, 요리 재료 및 일부 주문서가 도감에 추가되었습니다." + "\n\n" +
+                        "_무명의 살카즈 용병_과 _우르수스 감염자 감시관_이 별도 항목으로 추가되었습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.PREFS), "기타 변경",
+                "_마법 거대 석상_이 등장하는 14층에 항상 낭떠러지가 생성됩니다." + "\n\n" +
+                        "로도스의 _슈_와 _골든 글로우_가 더 이상 피해를 받지 않습니다." + "\n\n" +
+                        "누락된 영문 번역이 추가되었습니다." + "\n\n" +
+                        "_휴대용 엄폐물_이 더 이상 텍사스의 상점에 등장하지 않습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 1",
+                "_청정의 물약_이 _가시_, _라그나로크_, _야생의 기운_ 등 이로운 효과를 제거하던 버그를 수정했습니다." + "\n\n" +
+                        "_방패 밀기_가 불러오기 이후 작동하지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_지배의 반지_로 아군이 된 적에게 공격의 추가 효과가 적용되던 버그를 수정했습니다." + "\n\n" +
+                        "_에케베리아_가 아군에게 막혔을 때 게임이 멈추던 버그를 수정했습니다." + "\n\n" +
+                        "_군주 인형_이 정상적으로 폭발하지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_약점 보완_ 특성 관련 크래시를 수정했습니다." + "\n\n" +
+                        "상태이상 이펙트가 사라지지 않고 남아있던 버그를 수정했습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 2",
+                "_마법 거대 석상_이 낭떠러지로 떨어질 경우 보상이 아래층으로 떨어지던 버그를 수정했습니다." + "\n\n" +
+                        "로도스 상점에서 _스태프_를 구매할 수 없거나 크래시가 발생하던 버그를 수정했습니다." + "\n\n" +
+                        "로도스 상점에서 이미 보유한 _유물_이 판매되던 버그를 수정했습니다." + "\n\n" +
+                        "_특수 매복 병사_의 상자에 스킬북 설명이 표시되지 않던 버그를 수정했습니다." + "\n\n" +
+                        "일부 적과 함정이 도감에 등록되지 않던 버그를 수정했습니다." + "\n\n" +
+                        "_가비알_ 보스 맵 오류를 수정했습니다." + "\n\n" +
+                        "여러 텍스트 오류를 수정했습니다."));
+        changes.addButton(new ChangeButton(Icons.get(Icons.BUG_KILL), "버그 수정 3",
+                "_용살_ 마법부여가 _적소_ 이외의 무기에 부여될 수 있던 버그를 수정했습니다." + "\n\n" +
+                        "_클로저의 변환 상자 EX_가 사용 후 잘못된 위치에 다시 생성되던 버그를 수정했습니다." + "\n\n" +
+                        "도감의 보스 처치 수에 보스가 소환한 적이 포함되던 버그를 수정했습니다." + "\n\n" +
+                        "로도스로 이동할 때 잘못된 로딩 화면이 표시되던 버그를 수정했습니다." + "\n\n" +
+                        "로도스에서 사망 시 점수가 낮게 계산되던 버그를 수정했습니다." + "\n\n" +
+                        "_가드 오퍼레이터 근로 계약서_ 관련 크래시를 수정했습니다."));
+        changeInfos.add(changes);
+
+        changes = new ChangeInfo(Messages.get(ChangesScene.class, "buffs"), false, null);
+        changes.hardlight(CharSprite.POSITIVE);
+        changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.INFO_CERTI)), "로도스 상점 가격 인하",
+                "로도스 상점의 가격이 인하되었습니다." + "\n\n" +
+                        "_근접 무기_ 300~700 -> 150~550" + "\n\n" +
+                        "_투척 무기_ 100~300 -> 50~250" + "\n\n" +
+                        "_반지_ 500 -> 400, _유물_ 600 -> 500" + "\n\n" +
+                        "마법부여가 붙은 무기는 _100_의 추가 비용이 붙습니다."));
+        changes.addButton(new ChangeButton(halfSize(new ItemSprite(ItemSpriteSheet.GOLD)), "텍사스의 상점 가격 인하",
+                "텍사스의 상점에서 판매하는 조합 아이템의 가격이 인하되었습니다."));
+        changeInfos.add(changes);
     }
 
     public static void add_v0_5_3_Changes(ArrayList<ChangeInfo> changeInfos) {

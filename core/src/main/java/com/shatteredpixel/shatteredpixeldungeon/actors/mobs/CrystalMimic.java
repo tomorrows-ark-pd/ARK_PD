@@ -81,6 +81,9 @@ public class CrystalMimic extends Mimic {
 				} else if (i instanceof Wand){
 					desc = Messages.get(Heap.class, "crystal_chest_desc", Messages.get(Heap.class, "wand"));
 					break;
+				} else {
+					desc = Messages.get(Heap.class, "crystal_chest_desc", Messages.get(Heap.class, "skl"));
+					break;
 				}
 			}
 			if (desc == null) {

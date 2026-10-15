@@ -28,6 +28,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper;
 import com.shatteredpixel.shatteredpixeldungeon.items.EquipableItem;
+import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
@@ -39,6 +40,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_RingBo
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_ScrollBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.MasterThievesArmband;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
@@ -284,6 +286,9 @@ public class WndTradeItem extends WndInfoItem {
 
 		int price = heap.priceOverride >= 0 ? heap.priceOverride : item.value();
 		SPDSettings.addSpecialcoin(price * -1);
+
+		//Rhodes shop artifacts aren't taken from the deck until bought
+		if (item instanceof Artifact) Generator.removeArtifact(((Artifact) item).getClass());
 
 		if (!item.doPickUp( Dungeon.hero )) {
 			Dungeon.level.drop( item, heap.pos ).sprite.drop();

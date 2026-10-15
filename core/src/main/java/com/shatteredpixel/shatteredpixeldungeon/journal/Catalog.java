@@ -34,10 +34,26 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop;
 import com.shatteredpixel.shatteredpixeldungeon.items.DewVial;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.C_Mag;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.DotSight;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.GunScope;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.GunScope_II;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.Ironsight;
+import com.shatteredpixel.shatteredpixeldungeon.items.Gunaccessories.Muzzlebrake;
 import com.shatteredpixel.shatteredpixeldungeon.items.Honeypot;
 import com.shatteredpixel.shatteredpixeldungeon.items.LostBackpack;
 import com.shatteredpixel.shatteredpixeldungeon.items.MerchantsBeacon;
 import com.shatteredpixel.shatteredpixeldungeon.items.Mushroomslices;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Certificate;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_FoodBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_HealingBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_IdentifyBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_PotionBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_RingBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_ScrollBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TGBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_TransBox;
+import com.shatteredpixel.shatteredpixeldungeon.items.NewGameItem.Closure_WandBox;
 import com.shatteredpixel.shatteredpixeldungeon.items.OriginiumShard;
 import com.shatteredpixel.shatteredpixeldungeon.items.Pombbay;
 import com.shatteredpixel.shatteredpixeldungeon.items.PortableCover;
@@ -83,6 +99,18 @@ import com.shatteredpixel.shatteredpixeldungeon.items.food.Sandvich;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SmallRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SanityPotion;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.StewedMeat;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.FRY_EGG;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.FRY_GAMZA;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.Glassate;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.HoneyBread;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.NotBarFood;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.SmokeEgg;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.cooking.Yukjeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.BlackPepper;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.Egg;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.Potato;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.Salt;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.ingredients.SugarFlower;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey;
@@ -99,6 +127,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.quest.MetalShard;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Nmould;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Nullshield;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Obsidian;
+import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCargo;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCat;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Rose;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.TeaRose;
@@ -109,6 +138,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.quest.Token4;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Alchemize;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.AquaBlast;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ArcaneCatalyst;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.Avantgardeform;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.BeaconOfReturning;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.BlastSpell;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ChaosCatalyst;
@@ -123,9 +153,11 @@ import com.shatteredpixel.shatteredpixeldungeon.items.spells.PhaseShift;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.ReclaimTrap;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.Recycle;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.SaltBlast;
+import com.shatteredpixel.shatteredpixeldungeon.items.spells.WeaponTransform;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.WildEnergy;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Dragonkill;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BladeDemon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Enfild2;
@@ -255,7 +287,8 @@ public enum Catalog {
 	BREWS_ELIXIRS,
 	SPELLS,
 	MISC_CONSUMABLES,
-	INGREDIENTS;
+	INGREDIENTS,
+	MISC;
 
 	//tracks whether an item has been collected while identified
 	private final LinkedHashMap<Class<?>, Boolean> seen = new LinkedHashMap<>();
@@ -327,6 +360,8 @@ public enum Catalog {
 		ENCHANTMENTS.addItems(Weapon.Enchantment.common);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.uncommon);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.rare);
+		//scripted-only (Firmament), kept out of the random pool
+		ENCHANTMENTS.addItems(Dragonkill.class);
 		ENCHANTMENTS.addItems(Weapon.Enchantment.curses);
 
 		GLYPHS.addItems(Armor.Glyph.common);
@@ -390,7 +425,9 @@ public enum Catalog {
 		FOOD.addItems(Food.class, Pasty.class, MysteryMeat.class, ChargrilledMeat.class,
 				StewedMeat.class, FrozenCarpaccio.class, SmallRation.class, Berry.class,
 				Blandfruit.class, MeatPie.class, MeatCutlet.class, Sandvich.class,
-				SanityPotion.class);
+				SanityPotion.class,
+				FRY_EGG.class, FRY_GAMZA.class, Glassate.class, HoneyBread.class,
+				NotBarFood.class, SmokeEgg.class, Yukjeon.class);
 
 		EXOTIC_POTIONS.addItems(Generator.Category.EXOTIC_POTION.classes);
 
@@ -410,7 +447,8 @@ public enum Catalog {
 				MagicalArmord.class,
 				ArcaneCatalyst.class, ForceCatalyst.class, ChaosCatalyst.class,
 				OathofFire.class, InstantRecharge.class, AquaBlast.class,
-				SaltBlast.class, BlastSpell.class);
+				SaltBlast.class, BlastSpell.class,
+				Avantgardeform.class, WeaponTransform.class);
 
 		MISC_CONSUMABLES.addItems(Gold.class, Dewdrop.class,
 				IronKey.class, GoldenKey.class, CrystalKey.class, SkeletonKey.class,
@@ -425,7 +463,16 @@ public enum Catalog {
 				GooBlob.class, DarkGold.class, Embers.class, Bottle.class, TeaRose.class,
 				Rose.class, DwarfToken.class, Obsidian.class,
 				Token1.class, Token2.class, Token3.class, Token4.class,
-				CorpseDust.class, QuestCat.class, CeremonialCandle.class);
+				CorpseDust.class, QuestCat.class, CeremonialCandle.class,
+				SugarFlower.class, Salt.class, Potato.class, Egg.class, BlackPepper.class);
+
+		//gun accessories and obtainable quest/story items
+		MISC.addItems(Ironsight.class, DotSight.class, Muzzlebrake.class,
+				GunScope.class, GunScope_II.class, C_Mag.class,
+				QuestCargo.class, Certificate.class,
+				Closure_FoodBox.class, Closure_HealingBox.class, Closure_IdentifyBox.class,
+				Closure_PotionBox.class, Closure_RingBox.class, Closure_ScrollBox.class,
+				Closure_TGBox.class, Closure_TransBox.class, Closure_WandBox.class);
 
 	}
 
@@ -470,6 +517,7 @@ public enum Catalog {
 		consumableCatalogs.add(SPELLS);
 		consumableCatalogs.add(MISC_CONSUMABLES);
 		consumableCatalogs.add(INGREDIENTS);
+		consumableCatalogs.add(MISC);
 	}
 
 	public static boolean isSeen(Class<?> cls){

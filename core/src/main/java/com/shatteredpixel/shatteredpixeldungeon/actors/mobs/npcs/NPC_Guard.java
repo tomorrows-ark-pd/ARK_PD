@@ -2,6 +2,8 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
+import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.QuestCargo;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.Quests;
 import com.shatteredpixel.shatteredpixeldungeon.journal.quests.TutorialQuestLine;
@@ -44,9 +46,10 @@ public class NPC_Guard extends NPC {
             return true;
         }
 
-        //tutorial step 3 (delivery): re-give the cargo if it was lost, else just remind
-        if (q != null && q.at(3)) {
-            if (Dungeon.hero.belongings.getItem(QuestCargo.class) == null) {
+        //tutorial step 3 (delivery): he handed it out, so he also takes it back after an abandon.
+        //re-give the cargo if it was lost (abandoning destroys it), else just remind
+        if (q != null && (q.resumeAt(3) || q.at(3))) {
+            if (!cargoExists()) {
                 giveCargo();
             }
             tell(Messages.get(this, "quest"));
@@ -56,6 +59,15 @@ public class NPC_Guard extends NPC {
         //quest not at this NPC's step: idle status line ("too early")
         sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "hey"));
         return true;
+    }
+
+    //only a genuinely lost parcel is replaced: one in the pack (LostInventory included) or on this floor still counts
+    private static boolean cargoExists() {
+        for (Item i : Dungeon.hero.belongings) if (i instanceof QuestCargo) return true;
+        for (Heap h : Dungeon.level.heaps.valueList()) {
+            for (Item i : h.items) if (i instanceof QuestCargo) return true;
+        }
+        return false;
     }
 
     private void giveCargo() {
